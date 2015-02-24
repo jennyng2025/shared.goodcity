@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="small-12 columns ui">
+    <label>{{t "register.districts"}}</label>
+    <ul class="radio-buttons">
+      <li class="radio active" id="all" {{action 'findDistrictbyTerritory'
+      on="click"}}>All</li>
+      {{#each allTerritory as |territory|}}
+        <li class="radio" {{action "findDistrictbyTerritory" territory on="click"}}>
+          {{territory.name}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns ui">
+    <label>
+      {{view "select"
+        contentBinding='districtsByTerritory'
+        optionLabelPath='content.name'
+        optionValuePath='content.id'
+        selectionBinding='currentSelected'
+        value=''
+        promptBinding='selectDistrictLabel'
+        optionClassPath='dropdowncls'
+        required='true'}}
+    </label>
+  </div>
+</div>

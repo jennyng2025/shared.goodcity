@@ -1,0 +1,32 @@
+<div class="input_container">
+
+    {{#if view.isTextArea}}
+
+      {{textarea
+        viewName="inputControl"
+        valueBinding="view.value"
+        nameBinding="view.name"
+        placeholderBinding="view.placeholder"
+        maxlengthBinding="view.maxlength"
+        rowsBinding="view.rows"
+        requiredBinding="view.required"
+        }}
+
+    {{else}}
+
+      {{input
+        viewName="inputControl"
+        nameBinding="view.name"
+        valueBinding="view.value"
+        placeholderBinding="view.placeholder"
+        maxlengthBinding="view.maxlength"
+        requiredBinding="view.required"
+        }}
+
+    {{/if}}
+
+  <span {{bind-attr class="view.isMaxCharLengthReached :char-count :right"}}>
+    {{view.message}}
+  </span>
+  {{view.label}}
+</div>
