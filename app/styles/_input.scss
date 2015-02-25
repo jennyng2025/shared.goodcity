@@ -1,0 +1,38 @@
+.ui {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  input, textarea, select, input[type="text"][readonly] {
+    border: none;
+    background: white;
+    box-shadow: none;
+    -webkit-box-sizing: none;
+    -moz-box-sizing: none;
+    box-sizing: none;
+    transition: none;
+    margin: 0rem;
+    height: 100%;
+    padding: 0.4rem 0.2rem;
+  }
+  input, textarea, select, label {
+    @media #{$small-only} {
+    font-size: 0.8rem;
+    }
+  }
+  input[type="radio"] {
+    margin: 0.8rem 0.5rem;
+    padding: 1rem 0.2rem;
+    height: 1rem;
+    @media #{$small-only} {
+      margin: 0.4rem 0.5rem;
+    }
+  }
+  textarea{
+    margin: 0rem 1rem;
+    max-width: 95%;
+  }
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,19 @@
+/* can't use 'loading' since link-to uses it http://emberjs.com/api/classes/Ember.LinkView.html#property_loadingClass */
+.loading-indicator {
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  > div {
+    position:fixed;
+    top:50%;
+    left:0px;
+    width: 100%;
+    margin-top: -20px;
+    text-align:center;
+    font-size: 2.0em;
+    color: white;
+  }
+}

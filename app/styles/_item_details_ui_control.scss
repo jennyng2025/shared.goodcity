@@ -1,0 +1,43 @@
+.detail_container {
+  color: black;
+  background-color: white;
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: $medium-blue;
+  .top{
+    border-right: solid 1px $medium-blue;
+    height: 100%;
+    .head {
+      span {
+        top: 1rem;
+        font-size: 1rem;
+        font-family: Museo700;
+        font-weight: normal;
+        font-style: normal;
+      }
+    }
+   }
+}
+.icon {
+    color: $coral-red;
+    text-align: right;
+    padding-top: 0.4rem;
+  }
+.bottom {
+  height: 100%;
+  border-top: solid 1px $medium-blue;
+  border-right: solid 1px $medium-blue;
+  .inner {
+    border-top: none;
+    border-right: solid 1px $medium-blue;
+    padding: 0rem;
+  }
+}
+.icon, .bottom {
+  @media #{$small-only} {
+    font-size: 0.8rem;
+  }
+}
+.is-hide{
+  display: none
+}

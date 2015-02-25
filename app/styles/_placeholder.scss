@@ -1,0 +1,19 @@
+input {
+  &::-webkit-input-placeholder {
+    color: $medium-blue;
+  }
+  &::-moz-placeholder {
+    color: $medium-blue;
+  }
+  &::-moz-p {
+    color: $medium-blue;
+  }
+  &:-ms-input-placeholder {
+    color: $medium-blue;
+  }
+}
+
+textarea:-ms-input-placeholder {
+  color: $medium-blue;
+  opacity: 0.5;
+}

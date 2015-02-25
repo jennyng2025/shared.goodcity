@@ -1,0 +1,59 @@
+#home-btm {
+  text-align: center;
+  > div {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.intro.intro-home {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+#status {
+  position: fixed;
+  bottom: 0.2rem;
+  right: 0.2rem;
+  background-color: $black;
+  font-size: 0.6rem;
+  color: white;
+  padding: 0.3rem;
+  z-index: 9999;
+  border-radius: 0.2rem;
+
+  span {
+    vertical-align: text-bottom;
+  }
+
+  i {
+    font-size: 0.9rem;
+    margin-right: 0.3rem;
+  }
+}
+
+.online {
+  i { color: $bar-green; }
+}
+
+.offline {
+  i { color: $dark-red; }
+}
+
+#ws-status {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: $ghost;
+  font-size: 9px;
+  color: $black;
+  padding: 2px;
+  z-index: 9999;
+  border-top: 1px solid $black;
+  border-right: 1px solid $black;
+}
+
+#lightGallery {
+  cursor: pointer;
+}

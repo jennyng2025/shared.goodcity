@@ -1,0 +1,403 @@
+body{
+  @media #{$small-only} {
+    font-size: 0.7rem;
+  }
+}
+
+h2{
+  @media #{$small-only} {
+      font-size: 0.9rem;
+  }
+}
+.title, .back, .button, h3, ul, .link > a {
+  @media #{$small-only} {
+    font-size: 0.8rem !important; }
+}
+
+.tabs-content {
+  .message_box {
+    background-color: $white;
+    color: black;
+    a {
+      color: black !important; }
+  }
+}
+
+.tour_slides {
+  text-align: center;
+  img {
+    display: inline-block; }
+  .slick-dots {
+    display: block;
+    position: inherit;
+    margin: 0;
+    bottom: 0; }
+  .slick-list {
+    min-height: 19rem; }
+  .slick-slide {
+    padding: 0.1rem; }
+  .register-button {
+    margin-top: 2rem; }
+}
+
+.reject_label {
+  width: 100%; }
+
+// hide spinner from number-input
+input[type=number] {-moz-appearance: textfield;}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.icon-center {
+  vertical-align: middle;
+  text-align: center;
+  margin-right: -1rem;
+}
+
+.icon-text {
+  padding-top: 0.4rem;
+}
+
+.link-blue {
+  color: $dark-blue;
+  text-decoration: underline;
+  padding-left: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.icon-center {
+  vertical-align: middle;
+}
+
+.icon-text {
+  padding-top: 0.4rem;
+}
+
+.book-timeslot {
+  ul {
+    list-style-type: none;
+    list-style-position: outside;
+    li {
+      margin-right: -5%;
+      display: block;
+      border-bottom: 1px solid $mid-blue;
+      padding: 2% 0 2% 12%;
+      margin-left: -15%; }
+  }
+  input[type="radio"] {
+    display: inline-block !important;
+    margin-right: 4%;
+    vertical-align: top;
+    margin-top: 2% }
+  label, .schedule-info {
+    display: inline-block;
+    font-size: 0.8rem;
+    .schdule-date {
+      font-weight: bolder;
+      font-size: 0.85rem;
+      color: white; }
+    }
+  .schedule-info {
+    border-bottom: 1px solid $mid-blue;
+    padding: 0 2% 2% 15%;
+    margin-left: -12%;
+    width: 117%; }
+  input[type="radio"]:checked + label {
+    border: none;
+    background: inherit; }
+}
+
+.right-small {
+  border: none;
+  a {
+    float: right;
+  }
+}
+
+.unread_message_count {
+  border: none;
+  display: block;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  height: 45px;
+  line-height: 45px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 80px;
+  z-index: 1;
+}
+/**************Styles to truncate the text using and show ellipses**********/
+.vcenter {
+  -webkit-transform: translateY(20%);
+  -ms-transform: translateY(20%);
+  transform: translateY(20%);
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  line-height: 1.5;    /* fallback */
+  word-break: break-word;
+}
+.one-line-ellipsis {
+  max-height: 1.4rem;  /* fallback */
+  -webkit-line-clamp: 1; /* number of lines to show */
+}
+.two-line-ellipsis {
+  max-height: 2.9rem;
+  -webkit-line-clamp: 2; /* number of lines to show */
+}
+.three-line-ellipsis {
+  max-height: 4.5rem;
+  -webkit-line-clamp: 3; /* number of lines to show */
+}
+/***********************************************************/
+/*********************** TABS ******************************/
+.tabs {
+  margin-bottom: 0 !important;
+  margin-left: 0;
+}
+.tabs:before, .tabs:after {
+  content: " ";
+  display: table;
+}
+.tabs:after {
+  clear: both;
+}
+.tabs dd {
+  a:focus {
+    outline: -webkit-focus-ring-color none;
+  }
+  a i, a div {
+    color: $medium-blue;
+  }
+}
+.tabs dd.active {
+  a i, a div {
+    color: $white;
+  }
+}
+
+.tabs dd, .tabs .tab-title {
+  position: relative;
+  margin-bottom: 0 !important;
+  list-style: none;
+  float: left;
+}
+
+.tabs dd > a, .tabs .tab-title > a {
+  display: block;
+  background-color: $dark-blue;
+  color: $light-black;
+  padding: 0.5rem 0rem;
+  @media #{$small-only} {
+    font-size: 0.67rem;
+  }
+}
+
+.tabs dd > a:hover, .tabs .tab-title > a:hover {
+  background-color: $dark-blue;
+  color: $light-black;
+}
+
+.tabs dd.active a:before {
+  margin-left: -11px;
+  border-width: 11px;
+}
+
+.tabs dd.active a, .tabs .tab-title.active a {
+  color: $light-black;
+  background-color: $dark-blue;
+}
+
+.tabs dd.active a:after, .tabs dd.active a:before {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: solid transparent;
+  content: '';
+  pointer-events: none;
+}
+.tabs dd.active a:after {
+  margin-left: -10px;
+  border-width: 10px;
+  border-top-color: $dark-blue;
+}
+.tabs-content {
+  background-color: $light-grey;
+  color: $light-black;
+  padding: 1rem;
+  .tabs-content > .content {
+    padding: 0.2125rem 0;
+  }
+}
+/*********************** TABS ******************************/
+.inner-wrap {
+  min-height:100vh
+}
+
+input[type="radio"] + label {
+  vertical-align: middle;
+}
+
+.radio-buttons {
+  border-spacing: 0.1rem;
+  color: white;
+  display: table;
+  table-layout: fixed !important;
+  width: 100%;
+  height: 3.2rem;
+  @media #{$small-only} {
+    height: 2.7rem;
+  }
+  .active {
+    background: $coral-red;
+    border: 1px solid $coral-red;
+  }
+  li {
+    border: solid 1px white;
+    vertical-align: middle;
+    text-align: center;
+    @media #{$small-only} {
+      margin: 0.1rem;
+      padding: 0.1rem;
+      font-size: 0.68rem !important;
+    }
+
+    .radio {
+      vertical-align: middle;
+      text-align: center;
+      padding: 0.335rem;
+    }
+  }
+}
+
+.message_count {
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+  margin-left: 35%;
+}
+
+.current_image {
+  margin-right: 1%;
+}
+
+.loader_image {
+  margin-bottom: -1%;
+  display: none;
+}
+
+.item_name {
+  display: block;
+  font-weight: bold;
+  margin-bottom: -3%;
+  text-decoration: none;
+}
+
+textarea {
+  resize: none;
+  display: inline;
+}
+
+.fav_image {
+  vertical-align: top;
+}
+
+.right-small {
+  margin-right: 2%;
+  width: 5rem;
+}
+
+.row .top-bottom-margin {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.icon-empty-items {
+  width: 70px;
+  height: 70px;
+  color: $ghost;
+  background-size: 70px 70px;
+  margin: 0px auto;
+  display: block;
+}
+
+/* cloudinary images */
+.thumb {
+  border: 2px solid grey;
+  border-radius: 2px;
+}
+
+.thumb.small {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+/* helper */
+.center-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  /* needed by IE11 although there's a fix planned */
+  align-items: center;
+}
+
+.center-item {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+/* layout */
+body > .ember-view {
+  position: relative;
+  min-height: 100%;
+}
+
+.btm {
+  height: 60px;
+  margin: 0 auto;
+  text-align: center;
+  > div {
+    background-color: $dark-blue;
+    position: fixed;
+    bottom: 0;
+    max-width: 768px;
+    width: 100%;
+    .button {
+      margin: 10px 0;
+    }
+  }
+}
+
+.btm, .row {
+  max-width: 768px;
+}
+.fontawe-icons {
+  padding: 0rem 0.2rem 0rem 0.7rem;
+  @media #{$small-only} {
+    font-size: 1.0rem;
+  }
+}
+
+a.disabled{
+  cursor: default;
+  i{
+    color: $body-font-color;
+  }
+}

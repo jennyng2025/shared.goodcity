@@ -1,0 +1,14 @@
+.input_container{
+  background: $ghost;
+  border: solid 0.15rem $dark-blue;
+  margin-bottom: 0px;
+  textarea{
+    border: none;
+    box-shadow: 0px 0px;
+  }
+  span{
+   margin-top: -1.3rem;
+   padding: 0 0.3rem 0.3rem 0.3rem;
+   color: green;
+  }
+}

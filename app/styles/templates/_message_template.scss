@@ -1,0 +1,96 @@
+.message_bubble_box {
+  background-color: $white;
+  color: black;
+  width: 80%;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  position: relative;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+
+  @media #{$small-only} {
+    font-size: 0.7rem;
+  }
+
+  .message_details {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+
+    @media #{$small-only} {
+      font-size: 0.6rem;
+    }
+  }
+
+  .item_message {
+    float: right;
+    margin-top: -5%;
+  }
+}
+
+.my_message {
+  @extend .message_bubble_box;
+  background-color: $light-yellow;
+  float: right;
+}
+
+.received_message {
+  @extend .message_bubble_box;
+  float: left;
+}
+
+.message_arrow {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0.5rem 0.5rem 0;
+  border-color: $white transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  bottom: -0.4rem;
+}
+
+.received_message:after
+{
+  @extend .message_arrow;
+  left: 1.5rem;
+}
+
+.my_message:after
+{
+  @extend .message_arrow;
+  right: 1.5rem;
+  border-color: $light-yellow transparent;
+}
+
+.message-section {
+  .icon-empty-items {
+    color: $body-font-color;
+  }
+}
+
+.message-form {
+  margin-bottom: 2rem;
+
+  div {
+    background-color: $light-grey;
+    padding-top: 0.2rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    z-index: 10;
+  }
+
+  button {
+    padding: 0.7rem;
+    border-radius: 0.2rem;
+    line-height: 1.2rem;
+    width: 5rem;
+
+    @media #{$small-only} {
+      font-size: 0.9rem;
+      width: 4rem;
+    }
+  }
+}
