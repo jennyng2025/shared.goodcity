@@ -1,0 +1,25 @@
+<section class="main-section">
+  <div class="row">
+    <div class="small-12 columns intro intro-home">
+      <p><span class="icon-home"></span></p>
+      <p>{{t "index.title"}}</p>
+      <p><img src="/assets/images/logo.png" alt=""></p>
+    </div>
+  </div>
+</section>
+
+<div id="home-btm">
+  <div>
+    <p>{{t "index.donate_goods"}}</p>
+    <div class="row">
+      <div class="small-6 columns">
+        {{#link-to 'tour' classNames="button expand secondary"}}{{t "index.how"}}{{/link-to}}
+      </div>
+      <div class="small-6 columns">
+        {{#link-to 'register' classNames="button expand"}}{{t "index.start"}}{{/link-to}}
+      </div>
+    </div>
+    {{ language-switcher currentLanguage=currentLanguage action="setLang"}}
+  </div>
+</div>
+

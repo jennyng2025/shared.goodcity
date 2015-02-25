@@ -1,0 +1,55 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'index' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "index.how"}}</h1>
+  </section>
+
+  <section id="camera_delete_bar" class="right-small">
+    {{#link-to 'login'}}{{t "application.login"}}{{/link-to}}
+  </section>
+</nav>
+
+<section class="main-section ui tour_page">
+  <div class="row">
+    <div class="small-12 columns intro">
+      <div class="tour_slides">
+
+        <ul class="list-intro">
+          <li>
+            <span><i class="fa fa-camera"></i></span>
+            <div class='strong'>{{t "tour.step1.title"}}</div>
+            <div class='info'>{{t "tour.quality_items"}} {{#link-to ''class='info_link'}}{{t "tour.we_receive"}}{{/link-to}} </div>
+          </li>
+          <li>
+            <span><i class="fa fa-comments-o"></i></span>
+            <div class='strong'>{{t "tour.step2.title"}}</div>
+            <div class='info'>{{t "tour.chat_questions"}}</div>
+          </li>
+          <li>
+            <span><i class="fa fa-truck"></i></span>
+            <div class='strong'>{{t "tour.step3.title"}}</div>
+            <div class='info'>{{t "tour.accepted_items"}} {{#link-to ''class='info_link'}}{{t "tour.quick_easy"}}{{/link-to}}.</div>
+          </li>
+          <li>
+            <span><i class="fa fa-users"></i></span>
+            <div class='strong'>{{t "tour.step4.title"}}</div>
+            <div class='info'>{{#link-to ''class='info_link'}}{{t "tour.make_goodcity"}}{{/link-to}}</div>
+          </li>
+        </ul>
+
+        <div class="row register-button">
+          <div class="small-10 small-offset-1 columns">
+            {{#link-to 'register' classNames="button expand"}}
+              {{t "index.start"}}
+            {{/link-to}}
+            {{#link-to ''class='info_link'}}{{t "tour.faq"}}{{/link-to}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

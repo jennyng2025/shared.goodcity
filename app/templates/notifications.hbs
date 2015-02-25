@@ -1,0 +1,24 @@
+<div class="contain-to-grid sticky">
+  <nav class="top-bar" data-topbar role="navigation">
+    <div class="row">
+      <a {{action 'view'}} class='notification_box'>
+        <div class="small-2 large-1 columns image-item">
+          {{#if controller.showItemImage}}
+            <img {{bind-attr src=itemImageUrl}} alt="">
+          {{/if}}
+        </div>
+        <div class="small-8 large-10 columns msg-with-arrow">
+          <div class="notification-text ellipsis one-line-ellipsis">
+            {{t "notifications.text" text=nextNotification.text}}
+          </div>
+          <div class="arrow-icon">
+            <i class="fa fa-arrow-circle-right"></i>
+          </div>
+        </div>
+        <div class="small-2 large-1 columns">
+          {{view 'custom-img-tag' src=senderImageUrl class="user-avatar"}}
+        </div>
+      </a>
+    </div>
+  </nav>
+</div>

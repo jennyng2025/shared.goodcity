@@ -1,0 +1,40 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'tour' classNames='back'}}{{t "application.tour"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "authenticate.input_code"}}</h1>
+  </section>
+</nav>
+
+<section class="main-section">
+  <div class="small-12 columns">
+    {{#validatable-form class="form-horizontal" action="authenticateUser" on="submit"}}
+      <div class="row">
+        <div class="small-12 columns">
+          <label class="form-label">{{t "_verification_pin.input_code"}}</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-8 columns">
+          {{view 'numeric-input' value=pin name="pin" id="pin" maxlength="4" placeholder="XXXX" required='true' pattern=".{4,}"}}
+        </div>
+        <div class="small-4 columns">
+          <button id="submit_pin" type="submit" class="button expand">{{t "ok"}}</button>
+        </div>
+      </div>
+    {{/validatable-form}}
+
+    <div class="row">
+      <div class="small-8 columns">
+        <label class="form-label">{{t "_resend.no_sms"}}</label>
+        <label class="form-label">{{t "_resend.please_wait"}}</label>
+      </div>
+      <div class="small-4 columns">
+        <a href="#" {{action "resendPin" }} id="resend-pin" class="button secondary expand">{{t "_resend.resend"}}</a>
+      </div>
+    </div>
+  </div>
+</section>
