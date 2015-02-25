@@ -1,0 +1,100 @@
+<div class = 'row delivery-details'>
+  <div class="small-12 columns">
+    <h3>
+    {{#if delivery.isAlternate}}
+      {{t 'offer.offer_details.is_collection'}}
+    {{else if delivery.isDropOff}}
+      {{t 'offer.offer_details.is_drop_off'}}
+    {{else if delivery.isGogovan}}
+      {{t 'offer.offer_details.is_gogovan'}}
+    {{/if}}
+
+    : {{schedule-date delivery.schedule.scheduledAt}}
+    </h3>
+
+    <div class="row">
+      <div class="small-12 columns">
+        {{t 'offer.transport_details.accepted_items'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns items_list">
+         {{#each item in model.approvedItems}}
+           <img {{bind-attr src="item.displayImageUrl"}} class="thumb" />
+         {{/each}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="small-6 columns">
+        {{t 'offer.transport_details.time'}}
+      </div>
+      <div class="small-6 columns right strong">
+        {{delivery.schedule.slotName}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="small-6 columns">
+        {{t 'offer.transport_details.name'}}
+      </div>
+      <div class="small-6 columns right strong">
+        {{userName}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="small-6 columns">
+        {{t 'offer.transport_details.phone'}}
+      </div>
+      <div class="small-6 columns right strong">
+        {{userMobile}}
+      </div>
+    </div>
+
+    {{#if delivery.noDropOff}}
+      <hr>
+      <div class="row">
+        <div class="small-6 columns">
+          {{t 'offer.transport_details.address'}}
+        </div>
+        <div class="small-6 columns right strong">
+          {{{delivery.contact.address.fullAddress}}}
+        </div>
+      </div>
+    {{/if}}
+
+    <hr>
+    <div class="row">
+      <div class="small-6 columns">
+        {{t 'offer.transport_details.district'}}
+      </div>
+      <div class="small-6 columns right strong">
+        {{district}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="small-6 columns">
+        {{t 'offer.transport_details.charity_sale'}}
+      </div>
+      <div class="small-6 columns right strong">
+        {{model.isCharitableSale}}
+      </div>
+    </div>
+
+    <hr>
+    <div class="row transport-buttons">
+      <div class="small-5 columns">
+        {{#link-to '' classNames='button expand'}}{{t 'offer.transport_details.modify'}}{{/link-to}}
+      </div>
+      <div class="small-7 columns">
+        <a href="#" class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
+      </div>
+    </div>
+  </div>
+</div>

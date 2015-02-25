@@ -1,0 +1,13 @@
+<div {{bind-attr class=":offer-status item.isSubmitted item.isUnderReview item.isAccepted item.isRejected"}}>
+  <div class='status-message'>
+    {{#if item.isSubmitted}}
+      {{t "item.submitted_status"}}
+    {{else if item.isUnderReview}}
+      {{t "item.in_review_status"}}
+    {{else if item.isAccepted}}
+      {{t "item.accepted_status"}}
+    {{else if item.isRejected}}
+      {{t "item.rejected_status"}}
+    {{/if}}
+  </div>
+</div>

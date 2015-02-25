@@ -1,0 +1,179 @@
+.offer_details, .offer-index {
+  margin-bottom: 1.5rem;
+
+  dl.tabs {
+    margin-top: -1rem;
+    border-bottom: 1px solid $light-blue;
+
+    @media #{$small-only} {
+      margin-right: -0.4rem;
+      margin-left: -0.4rem;
+    }
+
+    span.tab_title {
+      margin-left: 0.3rem;
+      vertical-align: sub;
+      display: inline-block;
+      text-align: left;
+      width: 3rem;
+    }
+
+    i.unread {
+      vertical-align: top;
+      color: $alert-color;
+      font-size: 0.7rem;
+
+      @media #{$small-only} {
+        font-size: 0.5rem;
+      }
+    }
+  }
+
+  .tabs dd.active a:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-top-color: $dark-blue ;
+    border-width: 8px;
+    margin-left: -8px;
+  }
+  .tabs dd.active a:before {
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color:$light-blue;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+
+  .tabs-content.item-content {
+    background-color: inherit;
+    padding: 0;
+
+    ul {
+      @media #{$small-only} {
+        font-size: 0.7rem !important
+      }
+    }
+
+    .list-offer-items {
+      a {
+        background: none;
+        padding-right: 0;
+      }
+
+      li {
+        border-bottom: 1px solid $light-blue;
+        padding: 1rem 0 1rem 0;
+        margin-bottom: 0;
+
+        @media #{$small-only} {
+          margin-right: -0.7rem;
+          margin-left: -1.1rem;
+          padding-right: 1rem;
+          padding-left: 1rem;
+        }
+
+        .info {
+          vertical-align: top;
+          .item-name {
+            font-weight: bold;
+            color: white;
+          }
+          i {
+            color: $alert-color;
+            float: right;
+            margin-top: 0.7rem;
+            font-size: 1rem;
+          }
+          span.count {
+            position: absolute;
+            margin-top: 0.7rem;
+            margin-left: 0.2rem;
+            color: black;
+            font-weight: bold;
+          }
+          .message-text{
+            @media #{$small-only} {
+              margin-left: 0.5rem;
+            }
+          }
+        }
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+
+      li:first-child {
+        border-top: 1px solid $light-blue;
+      }
+
+    }
+  }
+}
+
+.offer_details_title.tab-bar {
+  &.non-draft {
+  margin-bottom: 0; }
+}
+
+.message-time {
+  text-align: right;
+  @media #{$small-only} {
+    font-weight: normal;
+    font-size: 0.6rem;
+  }
+}
+
+.item-image {
+  width: 4rem;
+  padding-right: 1rem;
+
+  .status_badge {
+    color: white;
+    font-weight: bold;
+    font-size: 0.5rem;
+    text-align: center;
+    margin-top: -0.7rem;
+    position: absolute;
+    width: 3rem;
+  }
+
+  .accept_badge {
+    @extend .status_badge;
+    background-color: $bar-green;
+  }
+
+  .reject_badge {
+    @extend .status_badge;
+    background-color: $alert-color;
+  }
+
+  i {
+    background-color: $alert-color;
+    padding: 0.4rem;
+    color: white;
+    font-size: 2rem;
+  }
+}
+
+.unread_length {
+  @media #{$small-only} {
+    line-height: 0.9rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    font-size: 0.6rem;
+  }
+
+  line-height: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 1rem;
+
+  display: block;
+  color: $dark-blue;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 50%;
+  background: $bright-red;
+  font-weight: bold;
+  margin-top: 0.2rem;
+  float: inherit;
+}
