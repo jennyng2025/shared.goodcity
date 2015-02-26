@@ -50,12 +50,6 @@ export default Ember.Route.extend({
         outlet: 'notifications', // the name of the outlet in that template
         controller: 'notifications'   // the controller to use for the template
       });
-
-      this.render('messages/unreadMessageCount', {
-        into: 'application',
-        outlet: 'unreadMessageCount',
-        controller: 'messages/unread'
-      });
     }
   },
 
