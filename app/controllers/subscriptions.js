@@ -103,7 +103,10 @@ export default Ember.Controller.extend({
     this.store.pushPayload(data.sender);
 
     var type = Object.keys(data.item)[0];
-    var item = this.store.normalize(type, data.item[type]);
+    // use extend to make a copy of data.item[type] so object is not normalized for use by
+    // messagesUtil in mark message read code below
+    var item = Ember.$.extend({}, data.item[type]);
+    this.store.normalize(type, item);
 
     if (type === "address") {
       item.addressable = item.addressable_id;

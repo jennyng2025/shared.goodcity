@@ -9,8 +9,8 @@ export default {
 
   getRoute: function(container, message) {
     var isDonor = container.lookup("session:main").get("currentUser.isDonor");
-    var offerId = message.get ? message.get("offer.id") : (message.offer_id || message.offer.id);
-    var itemId = message.get ? message.get("item.id") : (message.item_id || message.item.id);
+    var offerId = message.get ? message.get("offer.id") : message.offer_id;
+    var itemId = message.get ? message.get("item.id") : message.item_id;
     var isPrivate = message.get ? message.get("isPrivate") : message.is_private;
 
     if (isDonor) {

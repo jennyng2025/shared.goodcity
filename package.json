@@ -11,7 +11,10 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": {
+    "url": "https://github.com/crossroads/ember-goodcity.git",
+    "private": true
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
