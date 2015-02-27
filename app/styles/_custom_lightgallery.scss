@@ -1,0 +1,8 @@
+#lightGallery-next, #lightGallery-prev, #lightGallery-close {
+  width: 30px !important;
+  height: 30px !important;
+  &:after, &:before {
+    font-size: 1rem;
+    font-weight: bolder;
+  }
+}
