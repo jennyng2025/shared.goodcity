@@ -31,7 +31,9 @@ export default DS.Model.extend({
       width: width,
       crop: crop === true ? 'fill' : 'fit',
       flags: "progressive",
-      id: id
+      id: id,
+      secure: true,
+      protocol: 'https:'
     });
   }
 });

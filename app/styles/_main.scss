@@ -83,7 +83,7 @@ hr {
   float: left;
 
   &:before {
-    background: url("/assets/images/icon-back.png") no-repeat right center;
+    background: url("images/icon-back.png") no-repeat right center;
     background-size: 13px 16px;
     vertical-align: middle;
     content: "";
@@ -261,7 +261,7 @@ ul.off-canvas-list li a:hover  {
   }
 
   &.list-items a {
-    background: url("/assets/images/icon-more.png") no-repeat right center;
+    background: url("images/icon-more.png") no-repeat right center;
     background-size: 12px 21px;
   }
 
@@ -505,7 +505,7 @@ input[type="radio"]:checked + label  {
   border: 2px solid $bright-green;
   color: $light-purple;
   text-transform: uppercase;
-  background: $white url(/assets/images/arrow.png) no-repeat 97%;
+  background: $white url(images/arrow.png) no-repeat 97%;
   font-size: rem-calc(21);
   font-family: 'museo_sans300';
 
@@ -544,40 +544,40 @@ select {
   display: block;
   width: 160px;
   height: 160px;
-  background: url("/assets/images/logo-art.png") no-repeat;
+  background: url("images/logo-art.png") no-repeat;
   background-size: 160px 160px;
   margin: 0 auto;
 }
 
 .icon-photograph {
   display: block; width: 35px; height: 30px;
-  background: url("/assets/images/icon-photograph.png") no-repeat; background-size: 35px 30px;
+  background: url("images/icon-photograph.png") no-repeat; background-size: 35px 30px;
 }
 .icon-describe {
   display: block; width: 25px; height: 30px;
-  background: url("/assets/images/icon-describe.png") no-repeat; background-size: 25px 30px;
+  background: url("images/icon-describe.png") no-repeat; background-size: 25px 30px;
 }
 .icon-repeat {
   display: block; width: 30px; height: 30px;
-  background: url("/assets/images/icon-repeat.png") no-repeat; background-size: 30px 30px;
+  background: url("images/icon-repeat.png") no-repeat; background-size: 30px 30px;
 }
 .icon-confirmed {
   display: block; width: 33px; height: 33px;
-  background: url("/assets/images/icon-confirmed.png") no-repeat; background-size: 33px 33px;
+  background: url("images/icon-confirmed.png") no-repeat; background-size: 33px 33px;
 }
 
 .icon-rush {
   display: block;
   width: 35px;
   height: 36px;
-  background: url("/assets/images/icon-rush.png") no-repeat;
+  background: url("images/icon-rush.png") no-repeat;
   background-size: 35px 36px;
 }
 .icon-wait {
   display: block;
   width: 33px;
   height: 33px;
-  background: url("/assets/images/icon-wait.png") no-repeat;
+  background: url("images/icon-wait.png") no-repeat;
   background-size: 33px 33px;
 }
 
@@ -585,13 +585,13 @@ select {
   display: block;
   width: 38px;
   height: 31px;
-  background: url("/assets/images/icon-drop-off.png") no-repeat;
+  background: url("images/icon-drop-off.png") no-repeat;
   background-size: 38px 31px;
 }
 
 .icon-no-items {
   width: 70px; height: 70px;
-  background: url("/assets/images/icon-no-items.png") no-repeat;
+  background: url("images/icon-no-items.png") no-repeat;
   background-size: 70px 70px;
   margin: 0px auto;
   display: block;
@@ -599,7 +599,7 @@ select {
 .icon-add {
   display: inline-block;
   margin-right: 10px;
-  background: url("/assets/images/icon-photo.png") no-repeat;
+  background: url("images/icon-photo.png") no-repeat;
   background-size: 17px 16px;
   vertical-align: middle;
   width: 17px;
@@ -611,7 +611,7 @@ select {
   width: 144px;
   height: 123px;
   margin: 0 auto;
-  background: url("/assets/images/icon-step-register.png") no-repeat;
+  background: url("images/icon-step-register.png") no-repeat;
   background-size: 144px 123px;
 }
 
@@ -619,7 +619,7 @@ select {
   display: inline-block;
   width: 15px;
   height: 17px;
-  background: url("/assets/images/icon-previous.png") no-repeat;
+  background: url("images/icon-previous.png") no-repeat;
   background-size: 15px 17px;
 
    margin-top: 14px;
@@ -628,7 +628,7 @@ select {
   display: inline-block;
   width: 15px;
   height: 17px;
-  background: url("/assets/images/icon-next.png") no-repeat;
+  background: url("images/icon-next.png") no-repeat;
   background-size: 15px 17px;
 
   margin-top: 14px;
@@ -638,7 +638,7 @@ select {
   width: 15px;
   height: 15px;
   display: block;
-  background: url("/assets/images/icon-star.png") no-repeat;
+  background: url("images/icon-star.png") no-repeat;
   background-size: 15px 15px;
   position: absolute;
   left: 100%;

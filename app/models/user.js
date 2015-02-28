@@ -25,7 +25,7 @@ export default Addressable.extend({
   }.property('permission'),
 
   displayImageUrl: function() {
-    return this.get('image.thumbImageUrl') || "/assets/images/default_user_image.jpg";
+    return this.get('image.thumbImageUrl') || "assets/images/default_user_image.jpg";
   }.property('image'),
 
   hasImage: function(key, value){
