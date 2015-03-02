@@ -19,12 +19,25 @@ export default Ember.Controller.extend({
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
-    var status = online ? "Online" : "Offline";
-    status += " - " + this.session.get("currentUser.fullName");
-    if (socket && socket.io.engine) {
-      status += " (" + socket.io.engine.transport.name + ")";
+
+    var status = Ember.$("#status");
+    status.attr("class", (online ? "online" : "offline"));
+
+    var statusText;
+    if(online) {
+      if(config.environment === 'production') {
+        status.attr("class", "hide");
+      } else {
+        statusText = "Online - " + this.session.get("currentUser.fullName");
+        if (socket && socket.io.engine) {
+          statusText += " (" + socket.io.engine.transport.name + ")";
+        }
+      }
+    } else {
+      statusText = "Attempting to connect to app.goodcity.hk...";
     }
-    Ember.$("#ws-status").text(status);
+    Ember.$("#status span").text(statusText);
+
     this.set("online", online);
   }.observes("socket"),
 
