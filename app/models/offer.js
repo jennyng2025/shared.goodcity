@@ -83,7 +83,7 @@ export default DS.Model.extend({
   }.property('items.@each.state', 'needReview'),
 
   displayImageUrl: function(){
-    return this.get("items.firstObject.displayImageUrl") || "/assets/images/default_item.jpg";
+    return this.get("items.firstObject.displayImageUrl") || "assets/images/default_item.jpg";
   }.property('items.@each.displayImageUrl'),
 
   isCharitableSale: function() {

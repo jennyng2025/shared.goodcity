@@ -46,7 +46,7 @@ export default DS.Model.extend({
   }.property('images.@each.favourite'),
 
   displayImageUrl: function() {
-    return this.get('displayImage.thumbImageUrl') || "/assets/images/default_item.jpg";
+    return this.get('displayImage.thumbImageUrl') || "assets/images/default_item.jpg";
   }.property('displayImage'),
 
   imageCount: Ember.computed.alias("images.length"),

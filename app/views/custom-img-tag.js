@@ -7,7 +7,7 @@ export default Ember.View.extend({
 
   didInsertElement: function(){
     var _this = this;
-    var default_image = "/assets/images/default_user_image.jpg";
+    var default_image = "assets/images/default_user_image.jpg";
     var state = _this.get("controller.model.state");
 
     this.$().on('error', function(){
