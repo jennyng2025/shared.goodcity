@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
         }
       }
     } else {
-      statusText = "Attempting to connect to app.goodcity.hk...";
+      statusText = Ember.I18n.t("offline_error");
     }
     Ember.$("#status span").text(statusText);
 
