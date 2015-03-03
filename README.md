@@ -1,25 +1,7 @@
-# Ember-goodcity
+# Ember-goodcity [![Circle CI](https://circleci.com/gh/crossroads/ember-goodcity.svg?style=svg)](https://circleci.com/gh/crossroads/ember-goodcity)
 
-This README outlines the details of collaborating on this Ember addon.
-
-## Installation
-
-* `git clone` this repository
-* `npm install`
-* `bower install`
-
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
+This Ember addon forms the shared code for the [GoodCity Admin](https://github.com/crossroads/goodcity.admin) and [GoodCity Donor](https://github.com/crossroads/goodcity.donor) projects.
 
 ## Running Tests
 
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+* `npm test`
