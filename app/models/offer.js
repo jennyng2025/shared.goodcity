@@ -52,6 +52,7 @@ export default DS.Model.extend({
 
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
+  submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
   isDraft: Ember.computed.equal("state", "draft"),
   isSubmitted: Ember.computed.equal("state", "submitted"),
   isScheduled: Ember.computed.equal("state", "scheduled"),
