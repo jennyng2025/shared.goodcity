@@ -1,8 +1,11 @@
+*::-ms-backdrop, .notification_box { display: inline !important; }
+
 .notification_box {
   top: 0;
   color: $white;
   display: table;
   width: 100%;
+
   div {
     display: table-cell;
     vertical-align: middle;
@@ -11,7 +14,8 @@
     display: inline-flex;
     display: -webkit-inline-flex;
     .arrow-icon{
-      margin: -0.4rem 0 0 0.3rem
+      margin: 0.5rem 0 0 0.3rem;
+      display: inline-flex;
     }
   }
   i {
@@ -22,9 +26,12 @@
 
   .notification-text {
     display: -webkit-box;
+    display: -moz-box;
+    display: -ms-inline-flexbox;
     padding-left: 5px;
     margin-top: 0.2rem;
     @media #{$small-only} {
+      line-height: 1.55;
       margin-top: 0.5rem;
     }
   }
