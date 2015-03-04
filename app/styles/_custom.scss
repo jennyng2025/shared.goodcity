@@ -116,20 +116,6 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-.unread_message_count {
-  border: none;
-  display: block;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: normal;
-  height: 45px;
-  line-height: 45px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 80px;
-  z-index: 1;
-}
 /**************Styles to truncate the text using and show ellipses**********/
 .vcenter {
   -webkit-transform: translateY(20%);
