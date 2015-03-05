@@ -4,7 +4,7 @@
     <ul class="radio-buttons">
       <li class="radio active" id="all" {{action 'findDistrictbyTerritory'
       on="click"}}>All</li>
-      {{#each allTerritory as |territory|}}
+      {{#each territory in allTerritory}}
         <li class="radio" {{action "findDistrictbyTerritory" territory on="click"}}>
           {{territory.name}}
         </li>
