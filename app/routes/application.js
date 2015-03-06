@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
+import logger from '../utils/logger';
 
 export default Ember.Route.extend({
   beforeModel: function (transition) {
@@ -72,11 +73,8 @@ export default Ember.Route.extend({
           this.transitionTo('login');
         }
       } else {
-        console.log(reason);
         alert('Something went wrong');
-        if(config.environment === "production") {
-          Airbrake.push({error: reason });
-        }
+        logger.error(reason);
       }
     }
   }

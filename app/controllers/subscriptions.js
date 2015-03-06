@@ -1,6 +1,7 @@
 import Ember from "ember";
 import config from "../config/environment";
 import messagesUtil from "../utils/messages";
+import logger from "../utils/logger";
 
 function run(func) {
   if (func) {
@@ -71,7 +72,12 @@ export default Ember.Controller.extend({
         socket.io.engine.on("upgrade", updateStatus);
       });
       socket.on("disconnect", updateStatus);
-      socket.on("error", Ember.run.bind(this, function(data) { throw new Error("websocket: " + data); }));
+      socket.on("error", Ember.run.bind(this, function(reason) {
+        // ignore xhr post error related to no internet connection
+        if (typeof reason !== "object" || reason.type !== "TransportError" && reason.message !== "xhr post error") {
+          logger.error(reason);
+        }
+      }));
       socket.on("notification", Ember.run.bind(this, this.notification));
       socket.on("update_store", Ember.run.bind(this, this.update_store));
       socket.on("_batch", Ember.run.bind(this, this.batch));
