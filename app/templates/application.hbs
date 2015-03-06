@@ -1,4 +1,7 @@
 {{outlet "notifications"}}
 {{outlet}}
 
-<div id="status" class="online"><i class="fa fa-dot-circle-o"></i><span></span></div>
+<div id="status" {{bind-attr class="controllers.subscriptions.online"}} style="display:none;">
+  <i class="fa fa-dot-circle-o"></i>
+  <span></span>
+</div>

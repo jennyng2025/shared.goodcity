@@ -20,24 +20,17 @@ export default Ember.Controller.extend({
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
-
-    var status = Ember.$("#status");
-    status.attr("class", (online ? "online" : "offline"));
+    var statusVisible = online || config.environment !== "production" && this.get("controllers.application.isLoggedIn");
 
     var statusText;
-    if(online) {
-      if(config.environment === 'production') {
-        status.attr("class", "hide");
-      } else {
-        statusText = "Online - " + this.session.get("currentUser.fullName");
-        if (socket && socket.io.engine) {
-          statusText += " (" + socket.io.engine.transport.name + ")";
-        }
-      }
+    if (online) {
+      statusText = "Online - " + this.session.get("currentUser.fullName")
+        + " (" + socket.io.engine.transport.name + ")";
     } else {
       statusText = Ember.I18n.t("offline_error");
     }
-    Ember.$("#status span").text(statusText);
+
+    Ember.$("#status").toggle(statusVisible).children("span").text(statusText);
 
     this.set("online", online);
   }.observes("socket"),
