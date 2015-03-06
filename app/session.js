@@ -5,6 +5,7 @@ export default Ember.Object.extend({
   authToken: Ember.computed.localStorage(),
   otpAuthKey: Ember.computed.localStorage(),
   language: Ember.computed.localStorage(),
+  isLoggedIn: Ember.computed.notEmpty("authToken"),
 
   currentUser: function() {
     var store = this.container.lookup('store:main');

@@ -10,7 +10,7 @@ function run(func) {
 }
 
 export default Ember.Controller.extend({
-  needs: ["notifications", "application"],
+  needs: ["notifications"],
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
-    var statusVisible = online || config.environment !== "production" && this.get("controllers.application.isLoggedIn");
+    var statusVisible = online || config.environment !== "production" && this.session.get("isLoggedIn");
 
     var statusText;
     if (online) {
