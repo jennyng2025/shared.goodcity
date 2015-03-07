@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
+import logger from '../utils/logger';
 
 export default Ember.Route.extend({
   beforeModel: function (transition) {
@@ -44,7 +45,7 @@ export default Ember.Route.extend({
 
   renderTemplate: function() {
     this.render(); // default template
-    if(this.controllerFor('application').get("isLoggedIn")){
+    if (this.session.get("isLoggedIn")){
       this.render('notifications', {   // the template to render
         into: 'application',      // the template to render into
         outlet: 'notifications', // the name of the outlet in that template
@@ -64,19 +65,15 @@ export default Ember.Route.extend({
     },
     error: function(reason) {
       if (reason.status === 401) {
-        var controller = this.controllerFor("application");
-        if (controller.get('isLoggedIn')) {
-          controller.send('logMeOut');
+        if (this.session.get('isLoggedIn')) {
+          this.controllerFor("application").send('logMeOut');
         }
         else {
           this.transitionTo('login');
         }
       } else {
-        console.log(reason);
         alert('Something went wrong');
-        if(config.environment === "production") {
-          Airbrake.push({error: reason });
-        }
+        logger.error(reason);
       }
     }
   }

@@ -2,12 +2,12 @@
   <div class='status-message'>
     {{#if item.isSubmitted}}
       {{t "item.submitted_status"}}
-    {{else}} {{#if item.isUnderReview}}
+    {{else if item.isUnderReview}}
       {{t "item.in_review_status"}}
-    {{else}} {{#if item.isAccepted}}
+    {{else if item.isAccepted}}
       {{t "item.accepted_status"}}
-    {{else}} {{#if item.isRejected}}
+    {{else if item.isRejected}}
       {{t "item.rejected_status"}}
-    {{/if}}{{/if}}{{/if}}{{/if}}
+    {{/if}}
   </div>
 </div>

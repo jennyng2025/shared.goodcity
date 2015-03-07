@@ -3,11 +3,11 @@
     <h3>
     {{#if delivery.isAlternate}}
       {{t 'offer.offer_details.is_collection'}}
-    {{else}} {{#if delivery.isDropOff}}
+    {{else if delivery.isDropOff}}
       {{t 'offer.offer_details.is_drop_off'}}
-    {{else}} {{#if delivery.isGogovan}}
+    {{else if delivery.isGogovan}}
       {{t 'offer.offer_details.is_gogovan'}}
-    {{/if}}{{/if}}{{/if}}
+    {{/if}}
 
     : {{schedule-date delivery.schedule.scheduledAt}}
     </h3>

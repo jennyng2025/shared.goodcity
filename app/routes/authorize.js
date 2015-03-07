@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-var AuthorizeRoute =  Ember.Route.extend({
+export default Ember.Route.extend({
   beforeModel: function(transition) {
-    if (!this.controllerFor('application').get('isLoggedIn')) {
+    if (!this.session.get('isLoggedIn')) {
       alert('You must log in!');
       var loginController = this.controllerFor('login');
       loginController.set('attemptedTransition', transition);
@@ -10,5 +10,3 @@ var AuthorizeRoute =  Ember.Route.extend({
     }
   },
 });
-
-export default AuthorizeRoute;

@@ -4,19 +4,18 @@ import config from '../config/environment';
 export default Ember.ObjectController.extend({
   needs: ['subscriptions'],
 
-  isLoggedIn: Ember.computed.notEmpty('session.authToken'),
   currentLanguage: Ember.computed.readOnly('Ember.I18n.translations.language'),
 
   initSubscriptions: function() {
-    if (this.get("isLoggedIn")) {
+    if (this.session.get("isLoggedIn")) {
       this.send('setSubscriptions');
     }
   }.on("init"),
 
   actions: {
     logMeOut: function(){
+      this.session.clear(); // this should be first since it updates isLoggedIn status
       this.get('controllers.subscriptions').send('unwire');
-      this.session.clear();
       this.store.init();
       var _this = this;
       config.APP.PRELOAD_TYPES.forEach(function(type) {
