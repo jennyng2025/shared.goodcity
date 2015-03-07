@@ -1,7 +1,9 @@
 {{outlet "notifications"}}
 {{outlet}}
 
-<div id="status" {{bind-attr class="controllers.subscriptions.online"}} style="display:none;">
+{{#with controllers.subscriptions.status as status}}
+<div id="status" {{bind-attr class="status.online status.hidden"}}>
   <i class="fa fa-dot-circle-o"></i>
-  <span></span>
+  <span>{{status.text}}</span>
 </div>
+{{/with}}

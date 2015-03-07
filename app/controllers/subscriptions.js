@@ -14,25 +14,21 @@ export default Ember.Controller.extend({
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
-  online: true,
   deviceId: Math.random().toString().substring(2),
+  status: {
+    online: false,
+    hidden: true,
+    text: Ember.I18n.t("offline_error")
+  },
 
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
-    var statusVisible = online || config.environment !== "production" && this.session.get("isLoggedIn");
+    var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production");
+    var text = !online ? Ember.I18n.t("offline_error") :
+      "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
 
-    var statusText;
-    if (online) {
-      statusText = "Online - " + this.session.get("currentUser.fullName")
-        + " (" + socket.io.engine.transport.name + ")";
-    } else {
-      statusText = Ember.I18n.t("offline_error");
-    }
-
-    Ember.$("#status").toggle(statusVisible).children("span").text(statusText);
-
-    this.set("online", online);
+    this.set("status", {"online": online, "hidden": hidden, "text": text});
   }.observes("socket"),
 
   // resync if offline longer than deviceTtl
