@@ -2,14 +2,16 @@ import DS from 'ember-data';
 import Addressable from './addressable';
 
 var attr = DS.attr,
-  belongsTo = DS.belongsTo;
+  belongsTo = DS.belongsTo,
+  hasMany = DS.hasMany;
 
 export default Addressable.extend({
   firstName:   attr('string'),
   lastName:    attr('string'),
-  image:       belongsTo('image'),
 
-  permission:  DS.belongsTo('permission'),
+  image:          belongsTo('image'),
+  permission:     belongsTo('permission'),
+  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
 
   nameInitial: function() {
     return this.get('firstName').charAt(0).capitalize();
