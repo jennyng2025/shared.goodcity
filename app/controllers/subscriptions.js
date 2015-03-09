@@ -1,6 +1,7 @@
 import Ember from "ember";
 import config from "../config/environment";
 import messagesUtil from "../utils/messages";
+import logger from "../utils/logger";
 
 function run(func) {
   if (func) {
@@ -9,36 +10,25 @@ function run(func) {
 }
 
 export default Ember.Controller.extend({
-  needs: ["notifications", "application"],
+  needs: ["notifications"],
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
-  online: true,
   deviceId: Math.random().toString().substring(2),
+  status: {
+    online: false,
+    hidden: true,
+    text: Ember.I18n.t("offline_error")
+  },
 
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
+    var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
+    var text = !online ? Ember.I18n.t("offline_error") :
+      "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
 
-    var status = Ember.$("#status");
-    status.attr("class", (online ? "online" : "offline"));
-
-    var statusText;
-    if(online) {
-      if(config.environment === 'production') {
-        status.attr("class", "hide");
-      } else {
-        statusText = "Online - " + this.session.get("currentUser.fullName");
-        if (socket && socket.io.engine) {
-          statusText += " (" + socket.io.engine.transport.name + ")";
-        }
-      }
-    } else {
-      statusText = Ember.I18n.t("offline_error");
-    }
-    Ember.$("#status span").text(statusText);
-
-    this.set("online", online);
+    this.set("status", {"online": online, "hidden": hidden, "text": text});
   }.observes("socket"),
 
   // resync if offline longer than deviceTtl
@@ -71,7 +61,12 @@ export default Ember.Controller.extend({
         socket.io.engine.on("upgrade", updateStatus);
       });
       socket.on("disconnect", updateStatus);
-      socket.on("error", Ember.run.bind(this, function(data) { throw new Error("websocket: " + data); }));
+      socket.on("error", Ember.run.bind(this, function(reason) {
+        // ignore xhr post error related to no internet connection
+        if (typeof reason !== "object" || reason.type !== "TransportError" && reason.message !== "xhr post error") {
+          logger.error(reason);
+        }
+      }));
       socket.on("notification", Ember.run.bind(this, this.notification));
       socket.on("update_store", Ember.run.bind(this, this.update_store));
       socket.on("_batch", Ember.run.bind(this, this.batch));
