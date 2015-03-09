@@ -76,6 +76,26 @@ export default DS.Model.extend({
     return this.get('messages').sortBy('createdAt').get('lastObject');
   }.property('messages.[]'),
 
+  //return privateMessages with argument true else return public messages
+  privateOrPublicMessage: function(type) {
+    var messages = this.get('messages').filterBy('isPrivate', type).sortBy('createdAt');
+    return messages.get('length') > 0 ? messages.get('lastObject') : null;
+  }.property('messages.[]'),
+
+  lastPrivateMessage: function() {
+    return  this.get("privateOrPublicMessage", true);
+  }.property('privateOrPublicMessage'),
+
+  lastPublicMessage: function() {
+    return this.get("privateOrPublicMessage", false);
+  }.property('privateOrPublicMessage'),
+
+  myNotificationsSort: function(){
+    var privateThread = this.get("private");
+    var value = privateThread ? this.get('lastPrivateMessage.createdAt') : this.get('lastPublicMessage.createdAt');
+    return value;
+  }.property('lastPrivateMessage', 'lastPublicMessage'),
+
   // to sort on offer-details page for updated-item and latest-message
   latestUpdatedTime: function(){
     var value;

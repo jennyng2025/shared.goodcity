@@ -148,6 +148,26 @@ export default DS.Model.extend({
     return messages.get('length') > 0 ? messages.get('lastObject') : null;
   }.property('messages.[]'),
 
+  //return privateMessages with argument true else return public messages
+  privateOrPublicMessage: function(type) {
+    var messages = this.get('messages').filterBy('item', null).filterBy('isPrivate', type).sortBy('createdAt');
+    return messages.get('length') > 0 ? messages.get('lastObject') : null;
+  }.property('messages.[]'),
+
+  lastPrivateMessage: function() {
+    return  this.get("privateOrPublicMessage", true);
+  }.property('privateOrPublicMessage'),
+
+  lastPublicMessage: function() {
+    return this.get("privateOrPublicMessage", false);
+  }.property('privateOrPublicMessage'),
+
+  myNotificationsSort: function(){
+    var privateThread = this.get("private");
+    var value = privateThread ? this.get('lastPrivateMessage.createdAt') : this.get('lastPublicMessage.createdAt');
+    return value;
+  }.property('lastPrivateMessage', 'lastPublicMessage'),
+
   hasCrossroadsTransport: function(){
     return this.get('crossroadsTransport') && this.get('crossroadsTransport.name') !== Ember.I18n.t("offer.disable");
   }.property('crossroadsTransport'),
