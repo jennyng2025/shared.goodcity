@@ -16,8 +16,8 @@ export default Ember.View.extend({
       Ember.$.timeago.settings.strings.hours = "%dh";
       Ember.$.timeago.settings.strings.day = "1d";
       Ember.$.timeago.settings.strings.days = "%dd";
-      Ember.$.timeago.settings.strings.month = "1m";
-      Ember.$.timeago.settings.strings.months = "%dm";
+      Ember.$.timeago.settings.strings.month = "1mths";
+      Ember.$.timeago.settings.strings.months = "%dmths";
       Ember.$.timeago.settings.strings.year = "1y";
       Ember.$.timeago.settings.strings.years = "%dy";
     }
