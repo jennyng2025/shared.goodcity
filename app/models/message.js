@@ -14,7 +14,11 @@ export default DS.Model.extend({
   sender:      belongsTo('user'),
   item:        belongsTo('item'),
   offer:       belongsTo('offer'),
-  myMessage:   false,
+
+  myMessage: function() {
+    var session = this.container.lookup("session:current");
+    return this.get("sender.id") === session.get("currentUser.id");
+  }.property(),
 
   itemImageUrl: Ember.computed.alias("item.displayImageUrl")
 });
