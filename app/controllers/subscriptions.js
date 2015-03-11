@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
   updateStatus: function() {
     var socket = this.get("socket");
     var online = socket && socket.connected && navigator.onLine;
-    var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production");
+    var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
     var text = !online ? Ember.I18n.t("offline_error") :
       "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
 
