@@ -44,9 +44,9 @@ export default Ember.Controller.extend({
               if (currentUser.get('isStaff')) {
                 var myOffers = _this.store.all('offer').filterBy('reviewedBy.id', currentUser.get('id'));
                 if(myOffers.get('length') > 0) {
-                  _this.transitionToRoute('inbox.my_list');
+                  _this.transitionToRoute('offers.my_list');
                 } else {
-                  _this.transitionToRoute('inbox');
+                  _this.transitionToRoute('offers');
                 }
               } else {
                 _this.transitionToRoute('/offers');

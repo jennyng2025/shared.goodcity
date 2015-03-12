@@ -52,6 +52,7 @@ export default DS.Model.extend({
 
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
+  submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
   isDraft: Ember.computed.equal("state", "draft"),
   isSubmitted: Ember.computed.equal("state", "submitted"),
   isScheduled: Ember.computed.equal("state", "scheduled"),
@@ -59,6 +60,9 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
+
+  // removedAt:      attr('date'),
+  // isRemoved: Ember.computed.notEmpty("removedAt"),
 
   isReviewing: function(){
     return this.get('isUnderReview') || this.get('isReviewed');
