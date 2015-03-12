@@ -19,7 +19,6 @@ export default DS.Model.extend({
   state_event:    attr('string'),
   reviewedAt:     attr('date'),
   receivedAt:     attr('date'),
-  removedAt:      attr('date'),
   reviewCompletedAt: attr('date'),
 
   gogovanTransport:    belongsTo('gogovan_transport'),
@@ -61,7 +60,9 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
-  isRemoved: Ember.computed.notEmpty("removedAt"),
+
+  // removedAt:      attr('date'),
+  // isRemoved: Ember.computed.notEmpty("removedAt"),
 
   isReviewing: function(){
     return this.get('isUnderReview') || this.get('isReviewed');
