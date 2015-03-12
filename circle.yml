@@ -1,6 +1,12 @@
-dependencies:
+machine:
   pre:
-    - "bower install"
+    - curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | bash
+  node:
+    version: 0.12
+
+dependencies:
+  post:
+    - "./node_modules/ember-cli/node_modules/bower/bin/bower install"
   cache_directories:
     - "bower_components"    # relative to the build directory
 

@@ -37,4 +37,8 @@ export default Addressable.extend({
       return this.get('image.thumbImageUrl');
     }
   }.property('image'),
+
+  fullName: function(){
+    return (this.get('firstName') + " " + this.get('lastName'));
+  }.property('firstName', 'lastName')
 });
