@@ -2,5 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'shared.goodcity'
+  name: 'shared.goodcity',
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
