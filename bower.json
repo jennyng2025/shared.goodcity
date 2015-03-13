@@ -1,5 +1,5 @@
 {
-  "name": "ember-goodcity",
+  "name": "shared.goodcity",
   "dependencies": {
     "jquery": "^2.1.3",
     "ember": "1.10.0",

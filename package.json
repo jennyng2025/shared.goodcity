@@ -1,5 +1,5 @@
 {
-  "name": "ember-goodcity",
+  "name": "shared.goodcity",
   "version": "0.0.1",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
@@ -12,7 +12,7 @@
     "test": "ember test"
   },
   "repository": {
-    "url": "https://github.com/crossroads/ember-goodcity.git",
+    "url": "https://github.com/crossroads/shared.goodcity.git",
     "private": true
   },
   "engines": {
