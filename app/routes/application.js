@@ -71,6 +71,10 @@ export default Ember.Route.extend({
         else {
           this.transitionTo('login');
         }
+      } else if (reason.status === 0) {
+        // status 0 means request was aborted, this could be due to connection failure
+        // but can also mean request was manually cancelled
+        alert(Ember.I18n.t("offline_error"));
       } else {
         alert('Something went wrong');
         logger.error(reason);
