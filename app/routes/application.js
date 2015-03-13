@@ -15,7 +15,10 @@ export default Ember.Route.extend({
     };
 
     Ember.RSVP.on('error', function(error) {
-      _this.send("error", error);
+      // request abort failures seem to also be handled in Ember.onerror so ignore here
+      if (error.status !== 0) {
+        _this.send("error", error);
+      }
     });
 
     window.onerror = function(error){
