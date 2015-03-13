@@ -35,6 +35,9 @@
     "ember-data": "1.0.0-beta.15",
     "ember-export-application-global": "^1.0.2"
   },
+  "dependencies": {
+    "ember-cli-coffeescript": "^0.10.0"
+  },
   "keywords": [
     "ember-addon",
     "goodcity"

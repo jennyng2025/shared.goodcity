@@ -5,3 +5,7 @@ This Ember addon forms the shared code for the [GoodCity Admin](https://github.c
 ## Running Tests
 
 * `npm test`
+
+## Development Notes
+
+* Preprocessor addons like coffeescript need to be installed under dependencies if developing an addon, they will not work if installed under devDependencies
