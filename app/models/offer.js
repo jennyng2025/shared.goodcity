@@ -64,6 +64,10 @@ export default DS.Model.extend({
   // removedAt:      attr('date'),
   // isRemoved: Ember.computed.notEmpty("removedAt"),
 
+  activeItems: function(){
+    return this.get('items').rejectBy("state", "draft");
+  }.property('items.@each.state'),
+
   isReviewing: function(){
     return this.get('isUnderReview') || this.get('isReviewed');
   }.property('isUnderReview', 'isReviewed'),
@@ -77,17 +81,17 @@ export default DS.Model.extend({
   }.property('items.@each'),
 
   allItemsReviewed: function(){
-    var reviewedItems = this.get('items').rejectBy("state", "draft").filterBy('state', 'submitted');
+    var reviewedItems = this.get('activeItems').filterBy('state', 'submitted');
     return this.get('needReview') && reviewedItems.get('length') === 0;
   }.property('items.@each.state', 'needReview'),
 
   allItemsRejected: function(){
-    var rejectedItems = this.get('items').rejectBy("state", "draft").filterBy('state', 'rejected');
+    var rejectedItems = this.get('activeItems').filterBy('state', 'rejected');
     return this.get('needReview') && (rejectedItems.get('length') === this.get('itemCount'));
   }.property('items.@each.state', 'needReview'),
 
   displayImageUrl: function(){
-    return this.get("items.firstObject.displayImageUrl") || "assets/images/default_item.jpg";
+    return this.get("activeItems.firstObject.displayImageUrl") || "assets/images/default_item.jpg";
   }.property('items.@each.displayImageUrl'),
 
   isCharitableSale: function() {
