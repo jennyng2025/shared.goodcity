@@ -1,0 +1,25 @@
+@import "settings";
+@import "bower_components/foundation/scss/foundation"; //load all components
+@import "fonts";
+@import "main";
+@import "custom";
+@import "input";
+@import "input_ui_control_with_counter";
+@import "item_details_ui_control";
+@import "custom_checkbox";
+@import "custom_lightgallery";
+@import "select2";
+@import "validations";
+@import "placeholder";
+@import "avatar";
+
+/* template specific */
+@import "templates/loading";
+@import "templates/notifications";
+@import "templates/index";
+@import "templates/tour";
+@import "templates/message_template";
+@import "templates/sticky_bottom";
+@import "templates/offer/offer_details";
+@import "templates/offer/status_message";
+@import "templates/offer/transport_details";
