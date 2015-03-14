@@ -41,6 +41,10 @@ export default Ember.Route.extend({
     }
 
     return Ember.RSVP.all(promises).catch(function(error) {
+      if (error.status === 0) {
+        _this.transitionTo("offline");
+        return;
+      }
       //will get error if you use _this instead of transition
       transition.send("error", error);
     });
