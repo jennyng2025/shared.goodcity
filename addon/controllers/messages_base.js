@@ -10,14 +10,18 @@ export default Ember.ArrayController.extend({
 
   actions: {
     sendMessage: function() {
+      var _this = this;
       var values = this.getProperties("body", "offer", "item", "isPrivate");
       values.createdAt = new Date();
       values.sender = this.store.getById("user", this.get("session.currentUser.id"));
 
       var message = this.store.createRecord("message", values);
-      message.save();
+      message.save().then(function() {
+        _this.set("body", "");
+      }, function() {
+        _this.store.unloadRecord(message);
+      });
 
-      this.set("body", "");
       Ember.$("body").animate({ scrollTop: Ember.$(document).height() }, 1000);
     }
   }
