@@ -11,6 +11,7 @@ export default Addressable.extend({
 
   image:          belongsTo('image'),
   permission:     belongsTo('permission'),
+  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
 
   nameInitial: function() {
     return this.get('firstName').charAt(0).capitalize();
