@@ -10,6 +10,7 @@ export default Addressable.extend({
   mobile:      attr('string'),
 
   permission:  DS.belongsTo('permission'),
+  reviewedOffers: DS.hasMany('offers', { inverse: 'reviewedBy' }),
 
   isDonor: Ember.computed.empty("permission.name"),
   isStaff: Ember.computed.notEmpty("permission.name"),
