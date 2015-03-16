@@ -68,8 +68,9 @@ export default Ember.Controller.extend({
       var _this = this;
       var mobile = this.get('mobile');
       var loadingView = this.container.lookup('view:loading').append();
+      var appType = config.APP.TYPE;
 
-      new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
+      new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile, app: appType})
         .then(function(data) {
           _this.set('session.otpAuthKey', data.otp_auth_key);
           _this.setProperties({pin:null});
