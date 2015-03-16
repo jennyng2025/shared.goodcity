@@ -2,12 +2,14 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import Addressable from './addressable';
 
-var attr = DS.attr;
+var attr = DS.attr,
+  hasMany = DS.hasMany;;
 
 export default Addressable.extend({
   firstName:   attr('string'),
   lastName:    attr('string'),
   mobile:      attr('string'),
+  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
 
   permission:  DS.belongsTo('permission'),
 
