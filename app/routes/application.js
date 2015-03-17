@@ -35,7 +35,10 @@ export default Ember.Route.extend({
     if (_this.session.get('authToken')) {
       promises.push(
         new AjaxPromise("/auth/current_user_profile", "GET", _this.session.get("authToken"))
-          .then(function(data) { _this.store.pushPayload(data); })
+          .then(function(data) {
+            _this.store.pushPayload(data);
+            _this.store.push('user', data.user_profile);
+          })
       );
       promises = promises.concat(retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));
     }
