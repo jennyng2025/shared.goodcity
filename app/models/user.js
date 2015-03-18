@@ -13,11 +13,14 @@ export default Addressable.extend({
   permission:     belongsTo('permission'),
   reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
 
+  isDefault: Ember.computed.empty("mobile"),
+
   nameInitial: function() {
     return this.get('firstName').charAt(0).capitalize();
   }.property('firstName'),
 
   roleInitials: function(){
+    if(this.get('isDefault')) { return ""; }
     if(this.get('isDonor')) {
       return "(D)";
     } else {
@@ -40,5 +43,9 @@ export default Addressable.extend({
 
   fullName: function(){
     return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName')
+  }.property('firstName', 'lastName'),
+
+  lName: function(){
+    return this.get('lastName') || "";
+  }.property('lastName'),
 });
