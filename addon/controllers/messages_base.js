@@ -15,9 +15,13 @@ export default Ember.ArrayController.extend({
       values.sender = this.store.getById("user", this.get("session.currentUser.id"));
 
       var message = this.store.createRecord("message", values);
-      message.save();
+      message.save()
+        .then(() => this.set("body", ""))
+        .catch(error => {
+          this.store.unloadRecord(message);
+          throw error;
+        });
 
-      this.set("body", "");
       Ember.$("body").animate({ scrollTop: Ember.$(document).height() }, 1000);
     }
   }
