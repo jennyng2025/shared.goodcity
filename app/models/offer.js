@@ -28,7 +28,7 @@ export default DS.Model.extend({
   saleable:       attr('boolean'),
 
   items:          hasMany('item'),
-  messages:       hasMany('message', { async: true }),
+  messages:       hasMany('message'),
 
   delivery:       belongsTo('delivery'),
   createdBy:      belongsTo('user'),
