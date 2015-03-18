@@ -9,7 +9,6 @@ export default Addressable.extend({
   firstName:   attr('string'),
   lastName:    attr('string'),
   mobile:      attr('string'),
-  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
 
   permission:  DS.belongsTo('permission'),
 
