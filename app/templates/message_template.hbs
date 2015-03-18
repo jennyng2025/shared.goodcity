@@ -15,7 +15,7 @@
                 {{t "messages.owner" }}
               {{else}}
                 {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
-                {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lName}}
                 {{message.sender.roleInitials}}
               {{/if}}
               →
