@@ -3,5 +3,6 @@ I18nTranslationsEn =
   "offline_error": "Unable to complete action, please check your internet connection."
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
+  "send": "Send"
 
 `export default I18nTranslationsEn`
