@@ -11,12 +11,13 @@ import Ember from "ember";
 export default Ember.View.extend(Ember.ViewTargetActionSupport, {
   tagName: "button",
   attributeBindings: ["disabled"],
-  disabled: (() => !navigator.onLine).property(),
+  disabled: false,
 
   updateDisabled: null,
 
   didInsertElement: function() {
     this.updateDisabled = Ember.run.bind(this, () => this.set("disabled", !navigator.onLine));
+    this.updateDisabled();
     window.addEventListener("online", this.updateDisabled);
     window.addEventListener("offline", this.updateDisabled);
   },

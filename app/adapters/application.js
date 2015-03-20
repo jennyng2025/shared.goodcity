@@ -15,10 +15,10 @@ export default DS.ActiveModelAdapter.extend({
     };
   }.property("session.authToken"),
 
-  ajaxError: function(jqXHR){
-    if (jqXHR && jqXHR.status === 500) {
-      alert("Server Error. Please try again later.");
-    }
+  // without this, error is wrapped like this {__reason_with_error_thrown__:jqXHR,message:"",stack:""}
+  // it does add a stacktrace that would otherwise be missing but only relates to adapter
+  // instead of calling code so not that useful
+  ajaxError: function(jqXHR) {
     return this._super(jqXHR);
   }
 });
