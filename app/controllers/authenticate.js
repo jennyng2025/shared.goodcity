@@ -65,23 +65,23 @@ export default Ember.Controller.extend({
     },
 
     resendPin: function() {
-      var _this = this;
       var mobile = this.get('mobile');
       var loadingView = this.container.lookup('view:loading').append();
 
       new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
-        .then(function(data) {
-          _this.set('session.otpAuthKey', data.otp_auth_key);
-          _this.setProperties({pin:null});
-          _this.transitionToRoute('/authenticate');
+        .then(data => {
+          this.set('session.otpAuthKey', data.otp_auth_key);
+          this.setProperties({pin:null});
+          this.transitionToRoute('/authenticate');
         })
-        .catch(function() {
-          Ember.$('#mobile').closest('.mobile').addClass('error');
+        .catch(error => {
+          if (error.status === 422) {
+            Ember.$('#mobile').closest('.mobile').addClass('error');
+            return;
+          }
+          throw error;
         })
-        .finally(function() {
-          loadingView.destroy();
-        });
+        .finally(() => loadingView.destroy());
     }
   }
-
 });
