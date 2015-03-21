@@ -1,10 +1,12 @@
+import logger from './logger';
+
 export default {
   markRead: function(container, message) {
     var adapter = container.lookup("adapter:application");
     var url = adapter.buildURL("message", message.id) + "/mark_read";
-    adapter.ajax(url, "PUT").then(function(response) {
-      message.setProperties(response.message);
-    });
+    adapter.ajax(url, "PUT")
+      .then(data => message.setProperties(data.message))
+      .catch(logger.error);
   },
 
   getRoute: function(container, message) {
