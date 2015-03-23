@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('districts');
 
   this.resource('tour');
+  this.route('not-found', { path: '/*path' });
 });
 
 export default Router;

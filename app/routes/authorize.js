@@ -16,6 +16,7 @@ export default Ember.Route.extend({
       var message = Ember.I18n.t("resource_not_found", {resource: resource});
       Ember.$("#errorMessage").text(message);
       Ember.$('#errorModal').foundation('reveal', 'open');
+      Ember.$(".loading-indicator").hide();
     }
   }
 });
