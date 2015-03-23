@@ -25,6 +25,7 @@ I18nTranslationsEn =
   "index.start" : "Start Now"
   "full_name" : "{{firstName}} {{lastName}}"
   "select_district" : "Select a district"
+  "resource_not_found": "The {{resource}} you were looking for could not be found."
 
   "application":
     "home" : "Home"
