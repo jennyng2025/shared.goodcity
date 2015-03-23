@@ -1,0 +1,44 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'offer.transport_details' model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Cancel Booking</h1>
+  </section>
+</nav>
+
+
+<section class="main-section cancel_offer">
+  <div class="row info">
+    <div class="small-12 columns">
+
+      <div><i class="fa fa-exclamation-triangle"></i>  Unfortunately we cannot cancel a confirmed GoGoVan boking for you.</div>
+
+      <div>Please cancel your GoGoVan booking:</div>
+
+      <ul>
+        {{#if driverContact}}
+          <li>call the driver on {{driverContact}} or</li>
+        {{/if}}
+        <li>call GoGoVan on 3590 3399</li>
+      </ul>
+
+      <div>Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking.</div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+    {{#link-to 'offer.transport_details' model.offer classNames="button secondary expand"}}
+        Go Back
+      {{/link-to}}
+    </div>
+
+    <div class="small-7 columns">
+      <a href="#" {{action 'cancelBooking'}} class="button secondary expand" {{bind-attr disabled=canCancel}}>
+        Cancel Booking
+      </a>
+    </div>
+  </div>
+</section>

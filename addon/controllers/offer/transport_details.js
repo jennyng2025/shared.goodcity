@@ -3,6 +3,8 @@ import Ember from 'ember';
 var transportDetails =  Ember.ObjectController.extend({
   delivery: Ember.computed.alias('model.delivery'),
 
+  hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
+
   user: function(){
     var userId = this.session.get("currentUser.id");
     return this.store.getById('user_profile', userId);
@@ -23,6 +25,25 @@ var transportDetails =  Ember.ObjectController.extend({
   actions: {
     handleBrokenImage: function() {
       this.get("reviewedBy").set("hasImage", null);
+    },
+
+    cancelDelivery: function(){
+      if(this.get('hasActiveGGVOrder')) {
+        this.transitionToRoute('delivery.cancel_booking', this.get('delivery'));
+      } else {
+        this.send('removeDelivery', this.get('delivery'));
+      }
+    },
+
+    removeDelivery: function(delivery){
+      if(confirm("Are you sure? This cannot be undone.")) {
+        var loadingView = this.container.lookup('view:loading').append();
+        var offer = delivery.get('offer');
+
+        delivery.destroyRecord()
+          .then(() => this.transitionToRoute('offer.offer_details', offer))
+          .finally(() => loadingView.destroy());
+        }
     }
   }
 });

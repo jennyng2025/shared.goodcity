@@ -7,6 +7,7 @@
           <h3><i class="fa fa-exclamation-triangle"></i> Awaiting Driver Confirmation</h3>
 
           Driver & vehicle details will appear here once a driver accepts your booking.
+          <hr>
         {{else if delivery.gogovanOrder.isActive}}
           <h3>Booking Confirmed</h3>
 
@@ -48,11 +49,11 @@
               {{delivery.gogovanOrder.price}}
             </div>
           </div>
+          <hr>
         {{/if}}
       </div>
     </div>
 
-    <hr>
     <div class="row">
       <div class="small-12 columns">
         {{t 'offer.transport_details.accepted_items'}}
@@ -134,13 +135,16 @@
         {{#link-to '' classNames='button expand' disabled=true}}{{t 'offer.transport_details.modify'}}{{/link-to}}
       </div>
       <div class="small-7 columns">
-        {{#if delivery.isGogovan}}
-          {{#link-to 'offer.cancel' delivery.offer class="button secondary expand"}}
+        {{!-- {{#if delivery.isGogovan}}
+          {{#link-to 'delivery.cancel_booking' delivery class="button secondary expand"}}
             {{t 'offer.transport_details.cancel_booking'}}
           {{/link-to}}
         {{else}}
         <a href="#" class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
-        {{/if}}
+        {{/if}} --}}
+
+        <a href="#" {{action 'cancelDelivery'}}class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
+
       </div>
     </div>
   </div>
