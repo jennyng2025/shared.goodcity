@@ -42,11 +42,10 @@
             {{textarea type='text' value=body name="body" rows=1 cols=20 required='true'}}
           </div>
           <div class="small-3 large-2 medium-2 columns">
-            <button>Send</button>
+            {{#view "online-button"}}{{t "send"}}{{/view}}
           </div>
         </div>
       {{/validatable-form}}
     </div>
   </div>
 </div>
-
