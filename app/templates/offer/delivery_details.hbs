@@ -1,17 +1,58 @@
 <div class = 'row delivery-details'>
   <div class="small-12 columns">
-    <h3>
-    {{#if delivery.isAlternate}}
-      {{t 'offer.offer_details.is_collection'}}
-    {{else if delivery.isDropOff}}
-      {{t 'offer.offer_details.is_drop_off'}}
-    {{else if delivery.isGogovan}}
-      {{t 'offer.offer_details.is_gogovan'}}
-    {{/if}}
 
-    : {{schedule-date delivery.schedule.scheduledAt}}
-    </h3>
+    <div class="row gogovan_status">
+      <div class="small-12 columns">
+        {{#if delivery.gogovanOrder.isPending}}
+          <h3><i class="fa fa-exclamation-triangle"></i> Awaiting Driver Confirmation</h3>
 
+          Driver & vehicle details will appear here once a driver accepts your booking.
+        {{else if delivery.gogovanOrder.isActive}}
+          <h3>Booking Confirmed</h3>
+
+          <div class="row">
+            <div class="small-6 columns">
+              Driver
+            </div>
+            <div class="small-6 columns right strong">
+              {{delivery.gogovanOrder.driverName}}
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="small-6 columns">
+              Driver contact
+            </div>
+            <div class="small-6 columns right strong">
+              {{delivery.gogovanOrder.driverMobile}}
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="small-6 columns">
+              Vehicle registration
+            </div>
+            <div class="small-6 columns right strong">
+              {{delivery.gogovanOrder.driverLicense}}
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="small-6 columns">
+              Base fee
+            </div>
+            <div class="small-6 columns right strong">
+              {{delivery.gogovanOrder.price}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <hr>
     <div class="row">
       <div class="small-12 columns">
         {{t 'offer.transport_details.accepted_items'}}
@@ -90,10 +131,16 @@
     <hr>
     <div class="row transport-buttons">
       <div class="small-5 columns">
-        {{#link-to '' classNames='button expand'}}{{t 'offer.transport_details.modify'}}{{/link-to}}
+        {{#link-to '' classNames='button expand' disabled=true}}{{t 'offer.transport_details.modify'}}{{/link-to}}
       </div>
       <div class="small-7 columns">
+        {{#if delivery.isGogovan}}
+          {{#link-to 'offer.cancel' delivery.offer class="button secondary expand"}}
+            {{t 'offer.transport_details.cancel_booking'}}
+          {{/link-to}}
+        {{else}}
         <a href="#" class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
+        {{/if}}
       </div>
     </div>
   </div>
