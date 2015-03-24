@@ -26,7 +26,8 @@ I18nTranslationsZhTw =
   "index.start" : "Start Now"
   "full_name" : "{{lastName}} {{firstName}}"
   "select_district" : "Select a district"
-  "resource_not_found": "The {{resource}} you were looking for could not be found."
+  "offer_not_found": "The offer you were looking for could not be found."
+  "item_not_found": "The item you were looking for could not be found."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
 
