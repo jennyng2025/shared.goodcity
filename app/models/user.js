@@ -43,6 +43,6 @@ export default Addressable.extend({
 
   fullName: function(){
     return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName'),
+  }.property('firstName', 'lastName')
 
 });
