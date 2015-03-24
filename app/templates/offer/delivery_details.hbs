@@ -135,16 +135,7 @@
         {{#link-to '' classNames='button expand' disabled=true}}{{t 'offer.transport_details.modify'}}{{/link-to}}
       </div>
       <div class="small-7 columns">
-        {{!-- {{#if delivery.isGogovan}}
-          {{#link-to 'delivery.cancel_booking' delivery class="button secondary expand"}}
-            {{t 'offer.transport_details.cancel_booking'}}
-          {{/link-to}}
-        {{else}}
-        <a href="#" class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
-        {{/if}} --}}
-
         <a href="#" {{action 'cancelDelivery'}}class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
-
       </div>
     </div>
   </div>
