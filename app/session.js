@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import './computed/local-storage';
+import config from './config/environment';
 
 export default Ember.Object.extend({
   authToken: Ember.computed.localStorage(),
@@ -15,5 +16,9 @@ export default Ember.Object.extend({
   clear: function() {
     this.set("authToken", null);
     this.set("otpAuthKey", null);
-  }
+  },
+
+  isAdmin: function(){
+    return config.APP.NAME === 'admin.goodcity';
+  }.property(),
 });
