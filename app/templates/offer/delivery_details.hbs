@@ -4,16 +4,16 @@
     <div class="row gogovan_status">
       <div class="small-12 columns">
         {{#if delivery.gogovanOrder.isPending}}
-          <h3><i class="fa fa-exclamation-triangle"></i> Awaiting Driver Confirmation</h3>
+          <h3><i class="fa fa-exclamation-triangle"></i> {{t 'offer.transport_details.waiting'}}</h3>
 
-          Driver & vehicle details will appear here once a driver accepts your booking.
+          {{t 'offer.transport_details.display_driver_details'}}
           <hr>
         {{else if delivery.gogovanOrder.isActive}}
-          <h3>Booking Confirmed</h3>
+          <h3>{{t 'offer.transport_details.booked'}}</h3>
 
           <div class="row">
             <div class="small-6 columns">
-              Driver
+              {{t 'offer.transport_details.driver'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverName}}
@@ -23,7 +23,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              Driver contact
+              {{t 'offer.transport_details.driver_contact'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverMobile}}
@@ -33,7 +33,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              Vehicle registration
+              {{t 'offer.transport_details.vehicle_reg'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverLicense}}
@@ -43,7 +43,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              Base fee
+              {{t 'offer.transport_details.fee'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.price}}
