@@ -4,16 +4,16 @@
     <div class="row gogovan_status">
       <div class="small-12 columns">
         {{#if delivery.gogovanOrder.isPending}}
-          <h3><i class="fa fa-exclamation-triangle"></i> {{t 'offer.transport_details.waiting'}}</h3>
+          <h3><i class="fa fa-exclamation-triangle"></i> {{t 'delivery_details.waiting'}}</h3>
 
-          {{t 'offer.transport_details.display_driver_details'}}
+          {{t 'delivery_details.display_driver_details'}}
           <hr>
         {{else if delivery.gogovanOrder.isActive}}
-          <h3>{{t 'offer.transport_details.booked'}}</h3>
+          <h3>{{t 'delivery_details.booked'}}</h3>
 
           <div class="row">
             <div class="small-6 columns">
-              {{t 'offer.transport_details.driver'}}
+              {{t 'delivery_details.driver'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverName}}
@@ -23,7 +23,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              {{t 'offer.transport_details.driver_contact'}}
+              {{t 'delivery_details.driver_contact'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverMobile}}
@@ -33,7 +33,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              {{t 'offer.transport_details.vehicle_reg'}}
+              {{t 'delivery_details.vehicle_reg'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.driverLicense}}
@@ -43,7 +43,7 @@
 
           <div class="row">
             <div class="small-6 columns">
-              {{t 'offer.transport_details.fee'}}
+              {{t 'delivery_details.fee'}}
             </div>
             <div class="small-6 columns right strong">
               {{delivery.gogovanOrder.price}}
@@ -56,7 +56,7 @@
 
     <div class="row">
       <div class="small-12 columns">
-        {{t 'offer.transport_details.accepted_items'}}
+        {{t 'delivery_details.accepted_items'}}
       </div>
     </div>
     <div class="row">
@@ -70,7 +70,7 @@
     <hr>
     <div class="row">
       <div class="small-6 columns">
-        {{t 'offer.transport_details.time'}}
+        {{t 'delivery_details.time'}}
       </div>
       <div class="small-6 columns right strong">
         {{delivery.schedule.slotName}}
@@ -80,7 +80,7 @@
     <hr>
     <div class="row">
       <div class="small-6 columns">
-        {{t 'offer.transport_details.name'}}
+        {{t 'delivery_details.name'}}
       </div>
       <div class="small-6 columns right strong">
         {{userName}}
@@ -90,7 +90,7 @@
     <hr>
     <div class="row">
       <div class="small-6 columns">
-        {{t 'offer.transport_details.phone'}}
+        {{t 'delivery_details.phone'}}
       </div>
       <div class="small-6 columns right strong">
         {{userMobile}}
@@ -101,7 +101,7 @@
       <hr>
       <div class="row">
         <div class="small-6 columns">
-          {{t 'offer.transport_details.address'}}
+          {{t 'delivery_details.address'}}
         </div>
         <div class="small-6 columns right strong">
           {{{delivery.contact.address.fullAddress}}}
@@ -112,7 +112,7 @@
     <hr>
     <div class="row">
       <div class="small-6 columns">
-        {{t 'offer.transport_details.district'}}
+        {{t 'delivery_details.district'}}
       </div>
       <div class="small-6 columns right strong">
         {{district}}
@@ -122,7 +122,7 @@
     <hr>
     <div class="row">
       <div class="small-6 columns">
-        {{t 'offer.transport_details.charity_sale'}}
+        {{t 'delivery_details.charity_sale'}}
       </div>
       <div class="small-6 columns right strong">
         {{model.isCharitableSale}}
@@ -132,10 +132,10 @@
     <hr>
     <div class="row transport-buttons">
       <div class="small-5 columns">
-        {{#link-to '' classNames='button expand' disabled=true}}{{t 'offer.transport_details.modify'}}{{/link-to}}
+        {{#link-to '' classNames='button expand' disabled=true}}{{t 'delivery_details.modify'}}{{/link-to}}
       </div>
       <div class="small-7 columns">
-        <a href="#" {{action 'cancelDelivery'}}class="button secondary expand">{{t 'offer.transport_details.cancel_booking'}}</a>
+        <a href="#" {{action 'cancelDelivery'}}class="button secondary expand">{{t 'delivery_details.cancel_booking'}}</a>
       </div>
     </div>
   </div>

@@ -110,19 +110,22 @@ I18nTranslationsZhTw =
       "cancel_booking": "Cancel Booking"
       "confirm_ggv_cancel": "Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking."
 
-  "offer":
-    "transport_details":
-      "name": "Contact Name"
-      "phone": "Contact Phone"
-      "address": "Address"
-      "district": "District"
-      "charity_sale": "Charity sale ok?"
-      "driver": "Driver"
-      "driver_contact": "Driver contact"
-      "vehicle_reg": "Vehicle registration"
-      "fee": "Base fee"
-      "booked": "Booking Confirmed"
-      "waiting": "Awaiting Driver Confirmation"
-      "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
+  "delivery_details":
+    "name": "Contact Name"
+    "phone": "Contact Phone"
+    "address": "Address"
+    "district": "District"
+    "driver": "Driver"
+    "driver_contact": "Driver contact"
+    "vehicle_reg": "Vehicle registration"
+    "fee": "Base fee"
+    "booked": "Booking Confirmed"
+    "waiting": "Awaiting Driver Confirmation"
+    "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
+    "time": "Booking Time"
+    "modify": "Modify"
+    "cancel_booking": "Cancel Booking"
+    "accepted_items": "Accepted items to be transported"
+    "charity_sale": "Charity sale ok?"
 
 `export default I18nTranslationsZhTw`
