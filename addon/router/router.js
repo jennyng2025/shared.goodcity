@@ -5,8 +5,6 @@ var Router = Ember.Router.extend();
 Router.map(function() {
   this.resource('i18n', { path: '/i18n' });
   this.resource('logout', { path: '/logout' });
-
-  this.route('register');
   this.route('login');
   this.route('resend');
   this.route('offline');
@@ -14,7 +12,6 @@ Router.map(function() {
   this.route('territories');
   this.route('districts');
 
-  this.resource('tour');
   this.route('not-found', { path: '/*path' });
 });
 

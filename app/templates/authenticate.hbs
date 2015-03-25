@@ -1,7 +1,11 @@
 <nav class="tab-bar">
   <section class="left-small">
-    {{#link-to 'tour' classNames='back'}}{{t "application.tour"}}{{/link-to}}
-  </section>
+    {{#if session.isAdmin}}
+      {{#link-to 'login' classNames='back'}}{{t "application.login"}}{{/link-to}}
+    {{else}}
+      {{#link-to 'tour' classNames='back'}}{{t "application.tour"}}{{/link-to}}
+    {{/if}}
+    </section>
 
   <section class="middle tab-bar-section">
     <h1 class="title">{{t "authenticate.input_code"}}</h1>
