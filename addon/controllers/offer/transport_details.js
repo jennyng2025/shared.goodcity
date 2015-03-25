@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+
 var transportDetails =  Ember.ObjectController.extend({
   delivery: Ember.computed.alias('model.delivery'),
 
@@ -39,9 +40,13 @@ var transportDetails =  Ember.ObjectController.extend({
       if(confirm("Are you sure? This cannot be undone.")) {
         var loadingView = this.container.lookup('view:loading').append();
         var offer = delivery.get('offer');
+        var _this = this;
 
         delivery.destroyRecord()
-          .then(() => this.transitionToRoute('offer.offer_details', offer))
+          .then(function() {
+            var route = _this.get('session.isAdmin') ? 'review_offer' : 'offer.offer_details';
+            _this.transitionToRoute(route, offer);
+          })
           .finally(() => loadingView.destroy());
         }
     }
