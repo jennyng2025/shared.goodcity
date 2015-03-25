@@ -9,7 +9,7 @@ export default DS.Model.extend({
   width:           attr('number'),
   height:          attr('number'),
   notes:           attr('string'),
-  state:           attr('string'),
+  state:           attr('string', {defaultValue:'expecting'}),
   receivedAt:      attr('date'),
   rejectedAt:      attr('date'),
   createdAt:       attr('date'),
@@ -22,13 +22,19 @@ export default DS.Model.extend({
   }.property('packageType'),
 
   packageTypeObject: function() {
-     var packageTypeContent = this.get('packageType');
-     var packageTypeObj = {};
-     packageTypeObj.id = parseInt(packageTypeContent.get("id"));
-     packageTypeObj.itemTypeId = parseInt(packageTypeContent.get("id"));
-     packageTypeObj.name = packageTypeContent.get("name");
-     packageTypeObj.isItemTypeNode = packageTypeContent.get("isItemTypeNode");
-     packageTypeObj.parentId = packageTypeContent.get("parentId");
-     return packageTypeObj;
-  }.property('packageType')
+    var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode', 'parentId');
+    obj.id = obj.itemTypeId = parseInt(obj.id);
+    return obj;
+  }.property('packageType'),
+
+  dimensions: function() {
+    var res = '';
+    var append = val => {
+      if (val) { res += !res ? val : ' x ' + val; }
+    }
+    append(this.get('width'));
+    append(this.get('height'));
+    append(this.get('length'));
+    return !res ? '' : res + 'cm';
+  }.property('width', 'height', 'length')
 });

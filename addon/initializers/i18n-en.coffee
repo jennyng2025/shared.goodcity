@@ -31,7 +31,6 @@ I18nTranslationsEn =
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
 
-
   "application":
     "home" : "Home"
     "all_offers" : "All Offers"
