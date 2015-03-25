@@ -6,12 +6,8 @@ export default Ember.ObjectController.extend({
   needs: ['offer/transport_details'],
 
   canCancel: Ember.computed.alias('model.gogovanOrder.isCancelled'),
-
   driverContact: Ember.computed.alias('model.gogovanOrder.driverMobile'),
-
-  isAdmin: function(){
-    return config.APP.NAME === 'admin.goodcity';
-  }.property(),
+  gogovanContact: config.APP.GOGOVAN_CONTACT,
 
   actions: {
     cancelBooking: function() {
