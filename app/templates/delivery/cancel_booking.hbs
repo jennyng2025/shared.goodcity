@@ -8,7 +8,7 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Cancel Booking</h1>
+    <h1 class="title">{{t 'delivery.cancel.title'}}</h1>
   </section>
 </nav>
 
@@ -16,33 +16,33 @@
   <div class="row info">
     <div class="small-12 columns">
 
-      <div><i class="fa fa-exclamation-triangle"></i>  Unfortunately we cannot cancel a confirmed GoGoVan boking for you.</div>
+      <div><i class="fa fa-exclamation-triangle"></i>  {{t 'delivery.cancel.no_ggv_cancel'}}</div>
 
-      <div>Please cancel your GoGoVan booking:</div>
+      <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
 
       <ul>
         {{#if driverContact}}
-          <li>call the driver on {{driverContact}} or</li>
+          <li>{{t 'delivery.cancel.call_driver'}} {{driverContact}} or</li>
         {{/if}}
-        <li>call GoGoVan on 3590 3399</li>
+        <li>{{t 'delivery.cancel.call_ggv'}} 3590 3399</li>
       </ul>
 
-      <div>Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking.</div>
+      <div>{{t 'delivery.cancel.confirm_ggv_cancel'}}</div>
 
     </div>
   </div>
   <div class="row">
     <div class="small-5 columns">
       {{#if isAdmin}}
-        {{#link-to "review_offer.logistics" model.offer classNames="button secondary expand"}}Go Back{{/link-to}}
+        {{#link-to "review_offer.logistics" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
       {{else}}
-        {{#link-to "offer.transport_details" model.offer classNames="button secondary expand"}}Go Back{{/link-to}}
+        {{#link-to "offer.transport_details" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
       {{/if}}
     </div>
 
     <div class="small-7 columns">
       <a href="#" {{action 'cancelBooking'}} {{bind-attr class=" :button :secondary :expand canCancel::disabled"}}>
-        Cancel Booking
+        {{t 'delivery.cancel.cancel_booking'}}
       </a>
     </div>
   </div>

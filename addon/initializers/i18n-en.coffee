@@ -100,4 +100,16 @@ I18nTranslationsEn =
     "text" : "{{text}}"
     "view": "View"
 
+  "delivery":
+    "cancel":
+      "title": "Cancel Booking"
+      "no_ggv_cancel": "Unfortunately we cannot cancel a confirmed GoGoVan boking for you."
+      "cancel_ggv": "Please cancel your GoGoVan booking:"
+      "call_driver": "call the driver on"
+      "call_ggv": "call GoGoVan on"
+      "back": "Go Back"
+      "cancel_booking": "Cancel Booking"
+      "confirm_ggv_cancel": "Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking."
+
+
 `export default I18nTranslationsEn`
