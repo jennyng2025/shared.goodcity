@@ -1,0 +1,49 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#if session.isAdmin}}
+      {{#link-to "review_offer.logistics" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
+    {{else}}
+      {{#link-to "offer.transport_details" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
+    {{/if}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t 'delivery.cancel.title'}}</h1>
+  </section>
+</nav>
+
+<section class="main-section cancel_offer">
+  <div class="row info">
+    <div class="small-12 columns">
+
+      <div><i class="fa fa-exclamation-triangle"></i>  {{t 'delivery.cancel.no_ggv_cancel'}}</div>
+
+      <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
+
+      <ul>
+        {{#if driverContact}}
+          <li>{{t 'delivery.cancel.call_driver'}} {{driverContact}} or</li>
+        {{/if}}
+        <li>{{t 'delivery.cancel.call_ggv'}} {{gogovanContact}}</li>
+      </ul>
+
+      <div>{{t 'delivery.cancel.confirm_ggv_cancel'}}</div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      {{#if session.isAdmin}}
+        {{#link-to "review_offer.logistics" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
+      {{else}}
+        {{#link-to "offer.transport_details" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
+      {{/if}}
+    </div>
+
+    <div class="small-7 columns">
+      <a href="#" {{action 'cancelBooking'}} {{bind-attr class=" :button :secondary :expand canCancel::disabled"}}>
+        {{t 'delivery.cancel.cancel_booking'}}
+      </a>
+    </div>
+  </div>
+</section>

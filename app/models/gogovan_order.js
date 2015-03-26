@@ -20,5 +20,15 @@ export default DS.Model.extend({
   needCarry:     attr('boolean'),
   baseFee:       attr('string'),
 
+  price:         attr('number'),
+  driverName:    attr('string'),
+  driverMobile:  attr('string'),
+  driverLicense: attr('string'),
+
   delivery:      belongsTo('delivery'),
+
+  isPending: Ember.computed.equal("status", "pending"),
+  isActive: Ember.computed.equal("status", "active"),
+  isCompleted: Ember.computed.equal("status", "completed"),
+  isCancelled: Ember.computed.equal("status", "cancelled"),
 });
