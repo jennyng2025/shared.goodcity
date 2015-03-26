@@ -1,7 +1,9 @@
 <nav class="tab-bar">
-  <section class="left-small">
-    {{#link-to 'register' classNames='back'}}Register{{/link-to}}
-  </section>
+  {{#unless session.isAdmin}}
+    <section class="left-small">
+      {{#link-to 'register' classNames='back'}}Register{{/link-to}}
+    </section>
+  {{/unless}}
 
   <section class="middle tab-bar-section">
     <h1 class="title">Login</h1>
