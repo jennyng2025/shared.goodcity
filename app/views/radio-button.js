@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.View.extend({
   tagName: "input",
   type: "radio",
-  attributeBindings: [ "name", "type", "value", "checked:checked:", "labelText" ],
+  attributeBindings: [ "name", "type", "value", "checked", "labelText" ],
 
   click: function() {
     this.set("selection", this.$().val());
@@ -19,4 +19,9 @@ export default Ember.View.extend({
     return this.get("value") === this.get("selection");
   }.property('selection'),
 
+  onInit: function() {
+    if (this.get("value") == this.get("selection")) {
+      this.set("checked", true);
+    }
+  }.on("init")
 });

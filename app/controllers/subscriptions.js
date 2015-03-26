@@ -97,7 +97,7 @@ export default Ember.Controller.extend({
   },
 
   resync: function() {
-    window.location = window.location.href;
+    window.location.reload();
   },
 
   notification: function(data, success) {
