@@ -20,9 +20,5 @@ export default Ember.Object.extend({
   clear: function() {
     this.set("authToken", null);
     this.set("otpAuthKey", null);
-  },
-
-  isAdmin: function(){
-    return config.APP.NAME === 'admin.goodcity';
-  }.property(),
+  }
 });
