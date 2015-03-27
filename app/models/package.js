@@ -10,6 +10,7 @@ export default DS.Model.extend({
   height:          attr('number'),
   notes:           attr('string'),
   state:           attr('string', {defaultValue:'expecting'}),
+  state_event:     attr('string'),
   receivedAt:      attr('date'),
   rejectedAt:      attr('date'),
   createdAt:       attr('date'),
