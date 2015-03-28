@@ -31,7 +31,6 @@ I18nTranslationsEn =
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
 
-
   "application":
     "home" : "Home"
     "all_offers" : "All Offers"
@@ -107,5 +106,15 @@ I18nTranslationsEn =
     "cancel_booking": "Cancel Booking"
     "accepted_items": "Accepted items to be transported"
     "charity_sale": "Charity sale ok?"
+
+  "edit_images":
+    "add_photo" : "Add photo"
+    "delete_confirm" : "Are you sure you want to delete this image?"
+    "cant_delete_last_image" : "You must have at least one image"
+    "donating_what" : "What are you donating?"
+    "take_photos" : "Take some photos"
+    "fullscreen_tooltip" : "toggle fullscreen"
+    "favourite_tooltip" : "set as cover image"
+    "delete_tooltip" : "delete image"
 
 `export default I18nTranslationsEn`
