@@ -17,6 +17,7 @@ export default DS.Model.extend({
   updatedAt:       attr('date'),
   item:            belongsTo('item', { async: true }),
   packageType:     belongsTo('item_type', { async: true }),
+  imageId:         attr('number'),
 
   packageName: function() {
     return this.get('packageType.name');
@@ -37,5 +38,13 @@ export default DS.Model.extend({
     append(this.get('height'));
     append(this.get('length'));
     return !res ? '' : res + 'cm';
-  }.property('width', 'height', 'length')
+  }.property('width', 'height', 'length'),
+
+  image: function() {
+    return this.store.getById("image", this.get("imageId"));
+  }.property("imageId"),
+
+  displayImageUrl: function() {
+    return this.get("image") ? this.get("image.thumbImageUrl") : this.get("item.displayImageUrl");
+  }.property("image", "item.displayImageUrl")
 });
