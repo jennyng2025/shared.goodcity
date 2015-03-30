@@ -106,16 +106,33 @@ export default DS.Model.extend({
     var state = this.get('state');
     var status;
     switch(state) {
-      case 'draft': status = 'Draft'; break;
-      case 'under_review' : status = 'In review'; break;
-      case 'submitted' : status = 'Submitted'; break;
-      case 'reviewed' : status = 'Collection'; break;
-      case 'scheduled' : status = 'Collection'; break;
-      case 'closed' : status = 'Closed'; break;
-      case 'received' : status = 'Received'; break;
+      case 'draft': return this.locale('offers.index.complete_offer');
+      case 'under_review' : return this.locale('offers.index.in_review');
+      case 'submitted' : return this.locale('offers.index.awaiting_review');
+      case 'reviewed' : return this.locale('offers.index.arrange_transport');
+      case 'scheduled' : return this.scheduled_status();
+      case 'closed' : return this.locale('offers.index.closed');
+      case 'received' : return this.locale('offers.index.received');
     }
     return status;
   }.property('state'),
+
+  locale: function(text) {
+    return Ember.I18n.t(text);
+  },
+
+  status_text: function(){
+    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " items)")
+  }.property('status'),
+
+  scheduled_status: function(){
+    var deliveryType = this.get("delivery.deliveryType")
+    switch(deliveryType) {
+      case "Gogovan" : return this.locale("offers.index.van_booked");
+      case "Drop Off" : return this.locale("offers.index.drop_off");
+      case "Alternate" : return this.locale("offers.index.alternate");
+    }
+  },
 
   isOffer: function() {
     return this.get('constructor.typeKey') === 'offer';
