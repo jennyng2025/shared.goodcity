@@ -26,9 +26,12 @@ export default Ember.Route.extend({
 
   actions: {
     error: function(error, transition) {
+      var route = this;
       if(error.status === 404) {
         var view = this.container.lookup('view:alert').append();
-        Ember.run.schedule("afterRender", () => this.showAlertPopup(error.message));
+        Ember.run.schedule("afterRender", function(){
+          route.showAlertPopup(error.message || Ember.I18n.t("404_error"));
+        });
       } else {
         return true;
       }
