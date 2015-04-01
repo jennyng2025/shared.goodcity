@@ -92,7 +92,10 @@ export default Ember.Route.extend({
         alert(Ember.I18n.t("offline_error"));
       } else {
         alert('Something went wrong');
-        logger.error(reason);
+
+        var userName = this.session.get("currentUser.fullName");
+        var userId = this.session.get("currentUser.id");
+        logger.error(reason, userName, userId);
       }
     }
   }
