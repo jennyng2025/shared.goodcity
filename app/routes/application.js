@@ -57,6 +57,12 @@ export default Ember.Route.extend({
     }
   },
 
+  showAlertPopup: function(message){
+    Ember.$("#errorMessage").text(message);
+    Ember.$('#errorModal').foundation('reveal', 'open');
+    Ember.$(".loading-indicator").hide();
+  },
+
   actions: {
     setLang: function(language) {
       this.session.set("language", language);
@@ -67,6 +73,7 @@ export default Ember.Route.extend({
       this.router.one('didTransition', view, 'destroy');
     },
     error: function(reason) {
+      var route = this;
       if (reason.status === 401) {
         if (this.session.get('isLoggedIn')) {
           this.controllerFor("application").send('logMeOut');
@@ -74,6 +81,11 @@ export default Ember.Route.extend({
         else {
           this.transitionTo('login');
         }
+      } else if (reason.status === 404) {
+        var view = this.container.lookup('view:alert').append();
+        Ember.run.schedule("afterRender", function(){
+          route.showAlertPopup(reason.message || Ember.I18n.t("404_error"));
+        });
       } else if (reason.status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled
