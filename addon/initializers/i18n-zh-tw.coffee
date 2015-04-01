@@ -31,6 +31,7 @@ I18nTranslationsZhTw =
   "404_error" : "Unfortunately, the details that you are looking for is not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
+  "save": "Save"
 
   "application":
     "home" : "首頁"

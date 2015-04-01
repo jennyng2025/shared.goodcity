@@ -18,6 +18,7 @@ export default DS.Model.extend({
   item:            belongsTo('item', { async: true }),
   packageType:     belongsTo('item_type', { async: true }),
   imageId:         attr('number'),
+  offerId:         attr('number'),
 
   packageName: function() {
     return this.get('packageType.name');
