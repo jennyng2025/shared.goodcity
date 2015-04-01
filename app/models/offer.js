@@ -128,11 +128,20 @@ export default DS.Model.extend({
   scheduled_status: function(){
     var deliveryType = this.get("delivery.deliveryType")
     switch(deliveryType) {
-      case "Gogovan" : return this.locale("offers.index.van_booked");
+      case "Gogovan" : return this.get("gogovan_status");
       case "Drop Off" : return this.locale("offers.index.drop_off");
       case "Alternate" : return this.locale("offers.index.alternate");
     }
   },
+
+  gogovan_status: function(){
+    if(this.get("delivery.gogovanOrder.isPending")){
+      return this.locale("offers.index.van_booked");
+    }
+    else{
+      return this.locale("offers.index.van_confirmed");
+    }
+  }.property("delivery.gogovanOrder.status"),
 
   isOffer: function() {
     return this.get('constructor.typeKey') === 'offer';
