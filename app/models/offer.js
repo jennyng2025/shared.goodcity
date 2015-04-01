@@ -20,6 +20,7 @@ export default DS.Model.extend({
   reviewedAt:     attr('date'),
   receivedAt:     attr('date'),
   reviewCompletedAt: attr('date'),
+  deliveredBy:    attr('string'),
 
   gogovanTransport:    belongsTo('gogovan_transport'),
   crossroadsTransport: belongsTo('crossroads_transport'),
@@ -42,13 +43,19 @@ export default DS.Model.extend({
     return this.get('crossroadsTransport.cost');
   }.property('crossroadsTransport'),
 
-  offersCount: function() {
-    return this.store.all("offer").get("length");
-  }.property(''),
+  _offers: function() {
+    return this.store.get("offer");
+  }.property(),
+
+  offersCount: Ember.computed.alias("_offers.length"),
 
   itemCount: function() {
     return this.get("items").rejectBy("state", "draft").length;
   }.property('items.@each.state'),
+
+  packages: function() {
+    return this.store.filter("package", p => p.get("offerId") === parseInt(this.get("id")));
+  }.property(),
 
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
