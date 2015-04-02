@@ -16,7 +16,7 @@ export default DS.Model.extend({
   offer:       belongsTo('offer'),
 
   myMessage: function() {
-    var session = this.container.lookup("session:current");
+    var session = this.container.lookup("service:session");
     return this.get("sender.id") === session.get("currentUser.id");
   }.property(),
 

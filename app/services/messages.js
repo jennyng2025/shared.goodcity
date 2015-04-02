@@ -1,16 +1,19 @@
-import logger from './logger';
+import Ember from "ember";
 
-export default {
-  markRead: function(container, message) {
-    var adapter = container.lookup("adapter:application");
+export default Ember.Service.extend({
+  logger: Ember.inject.service(),
+  session: Ember.inject.service(),
+
+  markRead: function(message) {
+    var adapter = this.container.lookup("adapter:application");
     var url = adapter.buildURL("message", message.id) + "/mark_read";
     adapter.ajax(url, "PUT")
       .then(data => message.setProperties(data.message))
-      .catch(logger.error);
+      .catch(error => this.get("logger").error(error));
   },
 
-  getRoute: function(container, message) {
-    var isDonor = container.lookup("session:main").get("currentUser.isDonor");
+  getRoute: function( message) {
+    var isDonor = this.get("session.currentUser.isDonor");
     var offerId = message.get ? message.get("offer.id") : message.offer_id;
     var itemId = message.get ? message.get("item.id") : message.item_id;
     var isPrivate = message.get ? message.get("isPrivate") : message.is_private;
@@ -35,4 +38,4 @@ export default {
       }
     }
   }
-};
+});

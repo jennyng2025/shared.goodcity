@@ -1,9 +1,9 @@
 import AuthorizeRoute from './authorize';
-import messagesUtil from '../utils/messages';
 
 export default AuthorizeRoute.extend({
+  messagesUtil: Ember.inject.service("messages"),
+
   afterModel: function(messages) {
-    var markRead = messagesUtil.markRead.bind(this, this.container);
-    messages.filterBy('state', 'unread').forEach(markRead);
+    messages.filterBy('state', 'unread').forEach(m => this.get("messagesUtil").markRead(m));
   }
 });

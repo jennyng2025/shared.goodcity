@@ -1,9 +1,9 @@
 import Ember from "ember";
-import messagesUtil from "../utils/messages";
 
 export default Ember.ArrayController.extend({
   sortProperties: ["date"],
   sortAscending: true,
+  messagesUtil: Ember.inject.service("messages"),
 
   nextNotification: function() {
     //retrieveNotification is not implemented here because it needs to call itself
@@ -50,7 +50,7 @@ export default Ember.ArrayController.extend({
 
   setRoute: function(notification) {
     if (notification.entity_type === "message") {
-      notification.route = messagesUtil.getRoute(this.container, notification.entity);
+      notification.route = this.get("messagesUtil").getRoute(notification.entity);
     } else if (notification.entity_type === "offer") {
       var routeName = this.get("session.currentUser.isDonor") ? "offer" : "review_offer";
       notification.route = [routeName, notification.entity.id];

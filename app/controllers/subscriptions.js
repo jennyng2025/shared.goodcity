@@ -1,7 +1,5 @@
 import Ember from "ember";
 import config from "../config/environment";
-import messagesUtil from "../utils/messages";
-import logger from "../utils/logger";
 
 function run(func) {
   if (func) {
@@ -15,6 +13,8 @@ export default Ember.Controller.extend({
   lastOnline: Date.now(),
   deviceTtl: 0,
   deviceId: Math.random().toString().substring(2),
+  logger: Ember.inject.service(),
+  messagesUtil: Ember.inject.service("messages"),
   status: {
     online: false,
     hidden: true,
@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
       socket.on("error", Ember.run.bind(this, function(reason) {
         // ignore xhr post error related to no internet connection
         if (typeof reason !== "object" || reason.type !== "TransportError" && reason.message !== "xhr post error") {
-          logger.error(reason);
+          this.get("logger").error(reason);
         }
       }));
       socket.on("notification", Ember.run.bind(this, this.notification));
@@ -146,12 +146,12 @@ export default Ember.Controller.extend({
     if (type === "message") {
       var router = this.get("target");
       var currentUrl = router.get("url");
-      var messageRoute = messagesUtil.getRoute(this.container, data.item[type]);
+      var messageRoute = this.get("messagesUtil").getRoute(data.item[type]);
       var messageUrl = router.generate.apply(router, messageRoute);
 
       if (currentUrl === messageUrl) {
         var message = this.store.getById("message", item.id);
-        messagesUtil.markRead(this.container, message);
+        this.get("messagesUtil").markRead(message);
       }
     }
   }

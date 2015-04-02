@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
-import logger from '../utils/logger';
 
 export default Ember.Route.extend({
   beforeModel: function (transition) {
@@ -63,6 +62,8 @@ export default Ember.Route.extend({
     Ember.$(".loading-indicator").hide();
   },
 
+  logger: Ember.inject.service(),
+
   actions: {
     setLang: function(language) {
       this.session.set("language", language);
@@ -92,10 +93,7 @@ export default Ember.Route.extend({
         alert(Ember.I18n.t("offline_error"));
       } else {
         alert('Something went wrong');
-
-        var userName = this.session.get("currentUser.fullName");
-        var userId = this.session.get("currentUser.id");
-        logger.error(reason, userName, userId);
+        this.get("logger").error(reason);
       }
     }
   }

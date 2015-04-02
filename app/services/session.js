@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import './computed/local-storage';
-import config from './config/environment';
+import '../computed/local-storage';
+import config from '../config/environment';
 
-export default Ember.Object.extend({
+export default Ember.Service.extend({
   authToken: Ember.computed.localStorage(),
   otpAuthKey: Ember.computed.localStorage(),
   language: Ember.computed.localStorage(),
