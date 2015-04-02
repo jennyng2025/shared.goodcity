@@ -14,6 +14,7 @@ export default Ember.Component.extend({
   attributeBindings: [ "name", "type", "value", "data-cloudinary-field",
     "data-url", "data-form-data", "disabled", "style", "accept"],
   events: ["submit","progress","always","fail","done"],
+  alert: Ember.inject.service(),
 
   didInsertElement: function() {
     var _this = this;
@@ -27,7 +28,7 @@ export default Ember.Component.extend({
       disableImageResize: false,
 
       fail: function() {
-        alert(Ember.I18n.t('upload-image.upload_error'));
+        this.get("alert").show(Ember.I18n.t('upload-image.upload_error'));
       }
     };
 

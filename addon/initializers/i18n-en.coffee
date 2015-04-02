@@ -32,6 +32,8 @@ I18nTranslationsEn =
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "save": "Save"
+  "must_login": "You must login!"
+  "unexpected_error": "Something went wrong"
 
   "application":
     "home" : "Home"

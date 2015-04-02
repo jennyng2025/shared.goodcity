@@ -4,6 +4,7 @@ import config from '../config/environment';
 
 export default Ember.Controller.extend({
   needs: ['application'],
+  alert: Ember.inject.service(),
 
   mobile: function() {
     return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
@@ -58,7 +59,7 @@ export default Ember.Controller.extend({
         .catch(function(jqXHR) {
           Ember.$('#pin').closest('div').addClass('error');
           if (jqXHR.status === 422 && jqXHR.responseJSON.errors && jqXHR.responseJSON.errors.pin) {
-            alert(jqXHR.responseJSON.errors.pin);
+            _this.get("alert").show(jqXHR.responseJSON.errors.pin);
           }
           console.log("Unable to authenticate");
         });

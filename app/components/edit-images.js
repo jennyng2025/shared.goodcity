@@ -2,6 +2,7 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
+  alert: Ember.inject.service(),
   offerId: null,
   itemId: null,
   packageId: null,
@@ -110,7 +111,7 @@ export default Ember.Component.extend({
 
     deleteImage: function() {
       if (this.get("item.images.length") === 1) {
-        window.alert(Ember.I18n.t("edit_images.cant_delete_last_image"));
+        this.get("alert").show(Ember.I18n.t("edit_images.cant_delete_last_image"));
         return;
       }
       if (window.confirm(Ember.I18n.t("edit_images.delete_confirm"))) {
