@@ -1,11 +1,16 @@
 import AuthorizeRoute from './../authorize';
 
 export default AuthorizeRoute.extend({
-  beforeModel: function() {
+
+  queryParams: {
+    modify: false
+  },
+
+  beforeModel: function(params) {
     var offerId = this.modelFor('offer').get('id');
     var offer = this.store.getById('offer', offerId);
 
-    if (offer.get('isScheduled')) {
+    if (offer.get('isScheduled') && !params.queryParams.modify) {
       if(this.get('session.isAdmin')) {
         this.transitionTo('review_offer.logistics', offer);
       } else {

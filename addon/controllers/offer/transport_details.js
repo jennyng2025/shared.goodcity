@@ -36,6 +36,10 @@ var transportDetails =  Ember.ObjectController.extend({
       }
     },
 
+    modifyBooking: function(){
+      this.transitionToRoute('offer.plan_delivery', this.get('delivery.offer'), {queryParams: {modify: true}})
+    },
+
     removeDelivery: function(delivery){
       if(confirm("Are you sure? This cannot be undone.")) {
         var loadingView = this.container.lookup('view:loading').append();
