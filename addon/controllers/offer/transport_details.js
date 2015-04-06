@@ -37,7 +37,7 @@ var transportDetails =  Ember.ObjectController.extend({
     },
 
     modifyBooking: function(){
-      this.transitionToRoute('offer.plan_delivery', this.get('delivery.offer'), {queryParams: {modify: true}})
+      this.transitionToRoute('offer.plan_delivery', this.get('delivery.offer'), {queryParams: {modify: true}});
     },
 
     removeDelivery: function(delivery){
