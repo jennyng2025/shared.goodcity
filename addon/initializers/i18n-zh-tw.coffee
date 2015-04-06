@@ -119,4 +119,103 @@ I18nTranslationsZhTw =
     "favourite_tooltip" : "set as cover image"
     "delete_tooltip" : "delete image"
 
+
+  "plan_delivery":
+    "title" : "計劃交付"
+    "fastest" :
+      "title" : "最快"
+      "booking_button" : "前往預訂"
+      "info" : "Hire a vehicle with a few clicks.<br/>Recommended!"
+      "cost" : "From ${{cost}}"
+      "learn_more": "Learn More"
+      "gogovan_charges": "Gogovan Bookings"
+
+    "alternate" :
+      "title" : "另類"
+      "info" : "Wait 14+ days until our team<br/>can collect from your area."
+      "cost" : "Fee ${{cost}}"
+      "booking_button" : "前往預訂"
+      "collection_charges": "Collection Charges"
+
+    "crossroads" :
+      "title" : "交付给我们"
+      "info" : "Drop off at Tuen Mun during<br/>our hours of operation."
+      "free" : "免費"
+      "booking_button" : "詳情及預訂"
+
+  "collection_charges":
+      "info": '''
+        Crossroads' collection service is staffed partially by volunteers and partially by a social enterprise partner who is helping people get back into the workforce.
+
+        We seek corporate sponsors to cover labour and vehicles (purchase / depreciation, insurance etc.) We ask donors to contribute the variable costs (fuel, parking, tolls, maintenance etc.) Our variable costs average $600 per collection day so, depending on how much of the truck your donation fills up, we ask for a contribution of between $75 and $600.
+
+        If you have ways to handle the vehicle hire and labour yourself we are always very grateful and it could save you time. Our collection service is very popular so donors typically have to wait weeks for a booking. Sorry!
+
+        If you or your company are interested in being a vehicle sponsor we'd love to hear from you! We could provide faster service and help more people if we had the sponsorship to expand our collection service. We'd love to display your corporate logo on our truck to show Hong Kong how you are making a difference. Please email {{email}}
+        '''
+
+  "gogovan_charges":
+    "info": '''
+      We partner with GoGoVan so you can hire a van or truck from within GoodCity!
+
+      Quotes are live, based on your location and the type of vehicle your donation requires. Our reviewers have already indicated if you will need a van or a truck so your quotes will be based on that.
+
+      GoGoVan quotes do not include labour, tunnel tolls or other charges. You need to agree these with the driver before you finalise your booking.
+
+      Labour charges:<br/>In our experience, labour will typically cost about $100 per worker, per hour. You will often need two labourers to safely move large items.
+
+      Independent drivers use GoGoVan to get transport bookings, they are not employed by GoGoVan. Different drivers will have different skills and expectations when asked to provide "removal services". They won't ordinarily come prepared to disassemble items for you or put loose items into boxes. You can do all this in advance to keep things fast and simple or you can chat to the driver about your needs in detail so he can quote for the work.
+
+      Also, please be up-front and clear about any challenges associated with your location (such as stairs, parking, footpaths or other obstacles) so the driver can charge for labour accordingly. If you're in a tricky location, please note that some drivers may not be able to take the job.
+      '''
+
+  "gogovan":
+    "porterage":
+      "title" : "Porterage Charges"
+      "driver" : "This needs to be negotiated with driver."
+      "price_factors" : "The price will vary based on many factors, including"
+      "item_count_size" : "How many items of what size"
+      "obstacles" : "Stairs or obstacles"
+      "park_van" : "Ability to park van unattended"
+      "help" : "If you or a friend can help"
+      "unwilling_driver" : "If you have large furniture and/or challenging needs you may find drivers are unwilling to take the job or require a significant price."
+      "thanks" : "Got it, thank you!"
+
+    "confirm_van" :
+      "title" : "Confirm Van"
+      "base_fee" : "Base fee"
+      "porterage" : "Porterage"
+      "speak_english" : "Speak English"
+      "trolley" : "Borrow trolley(s)"
+      "details" : "Details"
+      "other" : "Other"
+      "confirm_with_drivar" : "Please confirm total price with driver before loading."
+      "name" : "Your Name"
+      "phone" : "Phone"
+      "book_delivery" : "Confirm & Book"
+
+    "book_van" :
+      "title" : "Book Van"
+      "location" : "Location"
+      "select_day" : "Preferred day/time"
+      "crossroads_time" : "Limited to Crossroads' operating hours"
+      "requirements" : "Extra Requirements"
+      "speak_english" : "Speak English"
+      "trolly_cost" : "Borrow trolley(s) + $20/piece"
+      "porterage" : "Porterage/go up(negotiate with drivers)"
+      "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
+      "get_quote" : "Get Quote"
+
+  "drop-off":
+    "expect_delivery": "When can we expect your delivery?"
+    "find_crossroads": "How to find crossroads"
+    "open_new_tab": "will open in new tab"
+    "message_map_link": "We will also message you a link to our map location so you have it handy when you need it!"
+    "arrive_on_time": "Please arrive during our operating hours to ensure we can successfully receive your kind donation."
+    "book_schedule": "Book Schedule"
+
+  "crossroads_truck":
+        "book_time": "Book Time"
+        "show_more": "Show More"
+
 `export default I18nTranslationsZhTw`

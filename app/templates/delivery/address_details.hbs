@@ -1,0 +1,22 @@
+<div class="small-6 columns">
+  {{view "select"
+    content=territories
+    optionValuePath="content.id"
+    optionLabelPath="content.name"
+    selectionBinding='selectedTerritory'
+    valueBinding='territoryId'
+    prompt="All"
+    classNames='selectAddress'
+    required='true' }}
+</div>
+<div class="small-6 columns">
+  {{view "select"
+    contentBinding='districtsByTerritory'
+    optionValuePath="content.id"
+    optionLabelPath="content.name"
+    selectionBinding='selectedDistrict'
+    valueBinding="districtId"
+    prompt="Select District"
+    classNames='selectAddress district'
+    required='true' }}
+</div>

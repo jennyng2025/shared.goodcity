@@ -1,0 +1,110 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'delivery.book_van' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "gogovan.confirm_van.title"}}</h1>
+  </section>
+</nav>
+
+{{#validatable-form class="form-horizontal" action="confirmOrder" on="submit"}}
+  <section class="main-section confirm-van">
+    <div class="row ui">
+      <div class="small-12 columns">
+
+        <div class="row delivery-details">
+          {{display-date-time orderDetails.pickupTime}}<br/>
+          {{districtName}} → {{t 'crossroads'}}<br/>
+          {{#if orderDetails.needEnglish}}
+            {{t "gogovan.confirm_van.speak_english"}},
+          {{/if}}
+          {{#if orderDetails.needCarry}}
+            {{t "gogovan.confirm_van.porterage"}},
+          {{/if}}
+          {{#if orderDetails.needCart}}
+            {{t "gogovan.confirm_van.trolley"}}
+          {{/if}}
+        </div>
+        <hr>
+
+        <div class = 'charges-details'>
+          <div class="row">
+            <div class="small-3 columns heading">
+              {{t "gogovan.confirm_van.base_fee"}}
+            </div>
+            <div class="small-9 columns">
+              ${{orderDetails.baseFee}}
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="small-3 columns heading">
+              {{t "gogovan.confirm_van.porterage"}}
+            </div>
+            <div class="small-6 columns">
+              {{#if orderDetails.needCarry}}
+                {{t "gogovan.confirm_van.negotiate" }}
+              {{else}}
+                {{t "gogovan.confirm_van.no_porterage" }}
+              {{/if}}
+            </div>
+            <div class="small-3 columns">
+              {{#link-to 'delivery.porterage_charges' }}{{t "gogovan.confirm_van.details"}}{{/link-to}}
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="small-3 columns heading">
+              {{t "gogovan.confirm_van.other"}}
+            </div>
+            <div class="small-6 columns">
+              Tolls, parking, etc.
+              not included
+            </div>
+            <div class="small-3 columns">
+              <a href="#">{{t "gogovan.confirm_van.details"}}</a>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="row user-details">
+          <div class='confirm'>{{t "gogovan.confirm_van.confirm_with_drivar"}}</div>
+
+          <div class="row">
+            <div class="small-3 columns input-label">
+              <span>{{t "gogovan.confirm_van.name"}}</span>
+            </div>
+            <div class="small-9 columns">
+              {{view 'full-name-input' user=user name='userName' id='userName' required='true' pattern="^[\S ]*[\S][\S ]*$" }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-3 columns input-label">
+              <span>{{t "gogovan.confirm_van.phone"}}</span>
+            </div>
+            <div class="small-9 columns">
+              <div class='input_with_prefix'>
+                <div class='mobile-prefix'>+852</div>
+                {{view 'numeric-input' value=mobileNumber name="mobile" id="mobile" maxlength="8" required='true' pattern=".{8,}" }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="btm sticky-bottom">
+    <div class="row">
+      <div class="small-10 small-offset-1 columns">
+        <button class='button expand'>{{t "gogovan.confirm_van.book_delivery"}}</button>
+      </div>
+    </div>
+  </div>
+{{/validatable-form}}

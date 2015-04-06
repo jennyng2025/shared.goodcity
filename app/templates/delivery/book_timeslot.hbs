@@ -1,0 +1,41 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'offer.plan_delivery' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Select Time</h1>
+  </section>
+</nav>
+
+<section class="main-section book-timeslot">
+  <div class="row">
+    <div class="small-12 columns">
+
+      <div class='schedule-info'>Pick preferred date/time. First available times listed below.</div>
+
+      <ul>
+        {{#each item in availableSlots}}
+          <li>
+            {{view 'radio-button' name="timeslot" selection=controller.isSelected value=item.id id=item.id}}
+            <label {{bind-attr for=id}}>
+              <label class='schdule-date' {{bind-attr for=item.id}}>{{display-date item.scheduledAt}}</label><br/>
+              {{item.slotName}}
+            </label>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="btm">
+  <div class="row">
+    <div class="small-6 columns">
+      {{#view "online-button" action="assignSchedule" classNames="button expand"}}{{t "crossroads_truck.book_time"}}{{/view}}
+    </div>
+    <div class="small-6 columns">
+      {{#view "online-button" action="" classNames="button secondary expand"}}{{t "crossroads_truck.show_more"}}{{/view}}
+    </div>
+  </div>
+</div>

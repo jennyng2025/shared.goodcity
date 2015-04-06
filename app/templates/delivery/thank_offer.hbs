@@ -1,0 +1,25 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'delivery.contact_details' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Thank you</h1>
+  </section>
+</nav>
+
+<section class="main-section ui contact_details">
+  <div class="row">
+    <div class="small-12 columns">
+      Our staff will call {{contact.name}} on {{contact.mobile}} next Friday to confirm.
+    </div>
+  </div>
+</section>
+
+<div class="btm">
+  <div class="row">
+    <div class="small-10 small-offset-1 columns">
+      <button {{action 'done'}} class="button expand submitForm">{{t "contact.done"}}</button>
+    </div>
+  </div>
+</div>
