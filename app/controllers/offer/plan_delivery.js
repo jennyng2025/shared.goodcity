@@ -1,0 +1,58 @@
+import Ember from 'ember';
+import AjaxPromise from '../../utils/ajax-promise';
+import logger from '../../utils/logger';
+
+export default Ember.ObjectController.extend({
+  needs: ["offer"],
+
+  offerId: Ember.computed.alias('controllers.offer.id'),
+
+  offer: function(){
+    return this.store.getById('offer', this.get('offerId'));
+  }.property('offerId'),
+
+  gogovanPrice: function(key, value) {
+    if (arguments.length > 1) {
+      return value;
+    } else {
+      var params = {
+        districtId: this.session.get('currentUser.address.district.id'),
+        offerId: this.get("offerId")
+      };
+
+      new AjaxPromise("/gogovan_orders/calculate_price", "POST", this.session.get('authToken'), params)
+        .then(data => this.set("gogovanPrice", data.base))
+        .catch(logger.error);
+
+      return "";
+    }
+  }.property('offerId'),
+
+  gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
+
+  actions: {
+    startDelivery: function(delivery_type) {
+      var offerId = this.get('controllers.offer').get('id');
+      var delivery = this.store.createRecord('delivery', {
+        offer: this.store.getById('offer', offerId),
+        deliveryType: delivery_type
+      });
+
+      delivery.save()
+        .then(delivery => {
+          var route;
+          switch(delivery_type) {
+            case 'Alternate': route = 'delivery.book_timeslot'; break;
+            case 'Gogovan':   route = 'delivery.book_van'; break;
+            case 'Drop Off':  route = 'delivery.drop_off_schedule'; break;
+          }
+
+          this.transitionToRoute(route, delivery, {queryParams: {placeOrder: true}});
+        })
+        .catch(error => {
+          delivery.unloadRecord();
+          throw error;
+        });
+    }
+  }
+});
