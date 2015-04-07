@@ -82,8 +82,10 @@ I18nTranslationsZhTw =
 
   "delivery":
     "cancel":
-      "title": "Cancel Booking"
+      "cancel_title": "Cancel Booking"
+      "modify_title": "Modify Booking"
       "no_ggv_cancel": "Unfortunately we cannot cancel a confirmed GoGoVan boking for you."
+      "no_ggv_modify": "Unfortunately we cannot modify a confirmed GoGoVan boking for you."
       "cancel_ggv": "Please cancel your GoGoVan booking:"
       "call_driver": "call the driver on"
       "call_ggv": "call GoGoVan on"

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 
-
 var transportDetails =  Ember.ObjectController.extend({
   delivery: Ember.computed.alias('model.delivery'),
 
@@ -30,14 +29,22 @@ var transportDetails =  Ember.ObjectController.extend({
 
     cancelDelivery: function(){
       if(this.get('hasActiveGGVOrder')) {
-        this.transitionToRoute('delivery.cancel_booking', this.get('delivery'));
+        this.set('cancelBooking', true);
+        this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
+          .then(newRoute => newRoute.controller.set('isCancel', true));
       } else {
         this.send('removeDelivery', this.get('delivery'));
       }
     },
 
     modifyBooking: function(){
-      this.transitionToRoute('offer.plan_delivery', this.get('delivery.offer'), {queryParams: {modify: true}});
+      if(this.get('hasActiveGGVOrder')) {
+        this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
+          .then(newRoute => newRoute.controller.set('isCancel', false));
+
+      } else {
+        this.transitionToRoute('offer.plan_delivery', this.get('delivery.offer'), {queryParams: {modify: true}});
+      }
     },
 
     removeDelivery: function(delivery){
