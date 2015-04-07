@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import VerifyOfferStateRoute from './verify_offer_state';
 
-export default Ember.Route.extend({
+export default VerifyOfferStateRoute.extend({
+
   model: function(){
     return this.store.all('gogovan_order').get('lastObject');
   },

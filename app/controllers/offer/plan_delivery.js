@@ -40,17 +40,14 @@ export default Ember.ObjectController.extend({
 
       delivery.save()
         .then(delivery => {
+          var route;
           switch(delivery_type) {
-            case 'Alternate':
-              this.transitionToRoute('delivery.book_timeslot', delivery);
-              break;
-            case 'Gogovan':
-              this.transitionToRoute('delivery.book_van', delivery);
-              break;
-            case 'Drop Off':
-              this.transitionToRoute('delivery.drop_off_schedule', delivery);
-              break;
+            case 'Alternate': route = 'delivery.book_timeslot'; break;
+            case 'Gogovan':   route = 'delivery.book_van'; break;
+            case 'Drop Off':  route = 'delivery.drop_off_schedule'; break;
           }
+
+          this.transitionToRoute(route, delivery, {queryParams: {placeOrder: true}});
         })
         .catch(error => {
           delivery.unloadRecord();
