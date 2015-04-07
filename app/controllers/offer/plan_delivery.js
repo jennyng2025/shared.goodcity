@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import AjaxPromise from '../../utils/ajax-promise';
-import logger from '../../utils/logger';
 
 export default Ember.ObjectController.extend({
   needs: ["offer"],
+  logger: Ember.inject.service(),
 
   offerId: Ember.computed.alias('controllers.offer.id'),
 
@@ -22,7 +22,7 @@ export default Ember.ObjectController.extend({
 
       new AjaxPromise("/gogovan_orders/calculate_price", "POST", this.session.get('authToken'), params)
         .then(data => this.set("gogovanPrice", data.base))
-        .catch(logger.error);
+        .catch(error => this.get("logger").error(error));
 
       return "";
     }
