@@ -56,7 +56,7 @@ export default Ember.Component.extend({
     if (image) {
       this.send("setPreview", image);
     }
-  }.on("init"),
+  }.observes("package", "item").on("init"),
 
   //css related
   previewImageBgCss: function() {
