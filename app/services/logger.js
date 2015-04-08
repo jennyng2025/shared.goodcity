@@ -12,8 +12,11 @@ export default Ember.Service.extend({
     if (config.environment === "production") {
       var userName = this.get("session.currentUser.fullName");
       var userId = this.get("session.currentUser.id");
+      var error = reason instanceof Error || typeof reason != "object" ?
+          reason : JSON.stringify(reason);
+
       Airbrake.push({
-        error: reason,
+        error: error,
         context: { userId: userId, userName: userName }
       });
     }
