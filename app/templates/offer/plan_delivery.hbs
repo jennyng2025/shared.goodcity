@@ -1,0 +1,69 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#if session.isAdmin}}
+      {{#link-to 'review_offer.logistics' classNames="back"}}{{t "back"}}{{/link-to}}
+    {{else}}
+      {{#link-to 'offer.transport_details' classNames="back"}}{{t "back"}}{{/link-to}}
+    {{/if}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "plan_delivery.title"}}</h1>
+  </section>
+</nav>
+
+<section class="main-section plan_delivery">
+  <div class="row">
+    <div class="small-12 columns">
+
+      {{#if hasGogovanTransport}}
+        <div class="row">
+          <div class="small-8 columns left">
+            <h3>{{t "plan_delivery.fastest.title"}} <i class="fa fa-check-circle"></i></h3>
+            {{t "plan_delivery.fastest.info"}}<br/>
+            {{#view "online-button" action="startDelivery" actionArgs="Gogovan" classNames="button"}}{{t "plan_delivery.fastest.booking_button"}}{{/view}}
+          </div>
+          <div class="small-4 columns right">
+            {{#if gogovanPriceCalculated}}
+              <div class="cost">{{t "plan_delivery.fastest.cost" cost=gogovanPrice}}</div>
+            {{else}}
+              <i class="fa fa-spinner fa-spin"></i><br/>
+            {{/if}}
+            {{#link-to 'offer.gogovan_charges' class='learn_more'}}{{t "plan_delivery.fastest.learn_more"}}{{/link-to}}<br/>
+            <img src="assets/images/gogo-van.jpg" class='delivery-image'/>
+          </div>
+        </div>
+        <hr/>
+      {{/if}}
+
+      {{#if offer.hasCrossroadsTransport}}
+        <div class="row">
+          <div class="small-8 columns left">
+            <h3>{{t "plan_delivery.alternate.title"}}</h3>
+            {{t "plan_delivery.alternate.info"}}<br/>
+            {{#view "online-button" action="startDelivery" actionArgs="Alternate" classNames="button"}}{{t "plan_delivery.alternate.booking_button"}}{{/view}}
+          </div>
+          <div class="small-4 columns right">
+            <div class="cost">{{t "plan_delivery.alternate.cost" cost=offer.crossroadsTruckCost}}</div>
+            {{#link-to 'offer.collection_charges' class='learn_more'}}{{t "plan_delivery.fastest.learn_more"}}{{/link-to}}<br/>
+            <img src="assets/images/alternate-delivery.jpg" class='delivery-image'/>
+          </div>
+        </div>
+        <hr/>
+      {{/if}}
+
+      <div class="row">
+        <div class="small-8 columns left">
+          <h3>{{t "plan_delivery.crossroads.title"}}</h3>
+          {{t "plan_delivery.crossroads.info"}}<br/>
+          {{#view "online-button" action="startDelivery" actionArgs="Drop Off" classNames="button"}}{{t "plan_delivery.crossroads.booking_button"}}{{/view}}
+        </div>
+        <div class="small-4 columns right">
+          <div class="cost">{{t "plan_delivery.crossroads.free"}}</div>
+          <img src="assets/images/PlanTransport_DropOff.jpg" class='delivery-image'/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

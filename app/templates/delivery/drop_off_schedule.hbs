@@ -1,0 +1,76 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'offer.plan_delivery' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">Select Schedule</h1>
+  </section>
+</nav>
+
+{{#if available_dates}}
+  {{#validatable-form class="form-horizontal" action="bookSchedule" on="submit"}}
+    <section class="main-section drop_off ui">
+      <div class="row">
+        <div class="small-12 columns">
+
+          <div class="row">
+            <h3>{{t "drop-off.expect_delivery"}}</h3>
+            <div class='description'>{{t "gogovan.book_van.crossroads_time"}}</div>
+          </div>
+
+          <div class="row">
+            <div class="small-7 columns date_selector">
+              {{view "month-calender"
+                name='selectedDate'
+                id='selectedDate'
+                value=''
+                selectionBinding='selectedDate'
+                required='true'
+                placeholder='Date'
+                available=available_dates
+                pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
+              <i class="fa fa-calendar calender_icon"></i>
+            </div>
+
+            <div class="small-5 columns time_selector">
+              {{view "select"
+                contentBinding='slots'
+                optionLabelPath='content.name'
+                optionValuePath='content.id'
+                selectionBinding='selectedId'
+                prompt='Time'
+                required='true'}}
+              <i class="fa fa-clock-o time_icon"></i>
+            </div>
+          </div>
+
+          <div class="row schedule_info">
+            <div class='description'>
+              <a href="https://maps.google.com/?saddr=Current+Location&amp;daddr=Crossroads+Foundation,+2+Castle+Peak+Road+-+So+Kwun+Wat,+Hong+Kong" target="_blank">{{t "drop-off.find_crossroads"}}</a> ({{t "drop-off.open_new_tab"}})
+            </div>
+
+            <div class='description'>
+              {{t "drop-off.message_map_link"}}
+            </div>
+
+            <div class='description'>
+              {{t "drop-off.arrive_on_time"}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="btm">
+      <div class="row">
+        <div class="small-10 small-offset-1 columns">
+          {{#view "online-button" classNames="button expand drop_off"}}{{t "drop-off.book_schedule"}}{{/view}}
+        </div>
+      </div>
+    </div>
+  {{/validatable-form}}
+{{else}}
+  {{partial 'loading'}}
+{{/if}}

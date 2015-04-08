@@ -1,0 +1,18 @@
+// more common styles are in drop_off.scss file
+.book-van {
+  .location-dropdown {
+    margin-left: -1rem !important;
+    margin-right: -1.5rem !important;
+    select {
+      position: inherit;
+    }
+  }
+
+  .time_inputs {
+    height: 2.5rem;
+  }
+
+  .time_heading {
+    margin-top: 0.8rem !important;
+  }
+}
