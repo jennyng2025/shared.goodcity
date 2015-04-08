@@ -8,7 +8,13 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">{{t 'delivery.cancel.title'}}</h1>
+    <h1 class="title">
+    {{#if isCancel}}
+      {{t 'delivery.cancel.cancel_title'}}
+    {{else}}
+      {{t 'delivery.cancel.modify_title'}}
+    {{/if}}
+    </h1>
   </section>
 </nav>
 
@@ -16,7 +22,15 @@
   <div class="row info">
     <div class="small-12 columns">
 
-      <div><i class="fa fa-exclamation-triangle"></i>  {{t 'delivery.cancel.no_ggv_cancel'}}</div>
+      <div>
+      <i class="fa fa-exclamation-triangle">  </i>
+      {{#if isCancel}}
+        {{t 'delivery.cancel.no_ggv_cancel'}}
+      {{else}}
+        {{t 'delivery.cancel.no_ggv_modify'}}
+      {{/if}}
+
+      </div>
 
       <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
 
@@ -32,7 +46,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="small-5 columns">
+    <div class="small-10 small-offset-1 columns">
       {{#if session.isAdmin}}
         {{#link-to "review_offer.logistics" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
       {{else}}
@@ -40,10 +54,10 @@
       {{/if}}
     </div>
 
-    <div class="small-7 columns">
+    {{!-- <div class="small-7 columns">
       <a href="#" {{action 'cancelBooking'}} {{bind-attr class=" :button :secondary :expand canCancel::disabled"}}>
         {{t 'delivery.cancel.cancel_booking'}}
       </a>
-    </div>
+    </div> --}}
   </div>
 </section>

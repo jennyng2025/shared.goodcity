@@ -1,0 +1,86 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'delivery.book_timeslot' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "contact.title"}}</h1>
+  </section>
+</nav>
+
+
+{{#validatable-form class="form-horizontal" action="saveContactDetails" on="submit"}}
+  <section class="main-section ui contact_details">
+    <div class="row">
+      <div class="small-12 columns">
+
+        {{t "contact.confirm_location"}}
+
+        <div class='row detail_row'>
+          <div class="small-3 columns">
+            <label>{{t "contact.name"}}</label>
+          </div>
+          <div class="small-9 columns">
+            {{view 'full-name-input' id='userName' user=user required='true' pattern="^[\S ]*[\S][\S ]*$" }}
+          </div>
+        </div>
+
+        <div class='row detail_row'>
+          <div class="small-3 columns">
+            <label>{{t "contact.phone"}}</label>
+          </div>
+          <div class="small-9 columns">
+            <div class='input_with_prefix'>
+              <div class='mobile-prefix'>+852</div>
+              {{view 'numeric-input' value=user.mobile name="mobile" id="mobile" maxlength="8" required='true' pattern=".{8,}" }}
+            </div>
+          </div>
+        </div>
+
+        <div class='row detail_row'>
+          {{t "contact.address"}}
+        </div>
+
+        <div class='row detail_row'>
+          {{partial 'delivery/address_details'}}
+        </div>
+
+        <div class='row detail_row'>
+          <div class="small-3 columns">
+            <label>{{t "contact.street"}}</label>
+          </div>
+          <div class="small-9 columns">
+            {{input type="text" value=street name="street" id="street" required='true' pattern="^[\S ]*[\S][\S ]*$"}}
+          </div>
+        </div>
+
+        <div class='row detail_row'>
+          <div class="small-3 columns">
+            <label>{{t "contact.building"}}</label>
+          </div>
+          <div class="small-9 columns">
+            {{input type="text" value=building name="building" id="building" required='true' pattern="^[\S ]*[\S][\S ]*$"}}
+          </div>
+        </div>
+
+        <div class='row detail_row'>
+          <div class="small-3 columns">
+            <label>{{t "contact.flat"}}</label>
+          </div>
+          <div class="small-9 columns">
+            {{input type="text" value=flat name="flat" id="flat" required='true' pattern="^[\S ]*[\S][\S ]*$"}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="btm">
+    <div class="row">
+      <div class="small-10 small-offset-1 columns">
+        <button class="button expand submitForm">{{t "contact.done"}}</button>
+      </div>
+    </div>
+  </div>
+{{/validatable-form}}

@@ -10,11 +10,11 @@ export default Ember.Route.extend({
     Ember.I18n.translations = Ember.I18n.translation_store[language];
 
     Ember.onerror = function(error) {
-      _this.send("error", error);
+      transition.send("error", error);
     };
 
     window.onerror = function(error){
-      _this.send("error", error);
+      transition.send("error", error);
     };
 
     //preload data
@@ -77,7 +77,6 @@ export default Ember.Route.extend({
           this.transitionTo('login');
         }
       } else if (reason.status === 404) {
-        console.log("404");
         this.get("alert").show(Ember.I18n.t("404_error"));
       } else if (reason.status === 0) {
         // status 0 means request was aborted, this could be due to connection failure

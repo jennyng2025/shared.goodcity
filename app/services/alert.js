@@ -6,11 +6,14 @@ export default Ember.Service.extend({
     var alertView = this.container.lookup("view:alert").append();
     Ember.run.schedule("afterRender", function() {
       Ember.$("#errorMessage").text(message);
+      Ember.$("#errorModal").removeClass("open"); // workaround https://github.com/zurb/foundation/issues/5721
       Ember.$("#errorModal").foundation("reveal", "open");
       Ember.$(".loading-indicator").hide();
       Ember.$("#errorModal .button").click(() => {
-        Ember.$("#errorModal").foundation("reveal", "close");
-        alertView.destroy();
+        Ember.run.next(function() {
+          Ember.$("#errorModal").foundation("reveal", "close");
+          alertView.destroy();
+        })
       });
     });
   }

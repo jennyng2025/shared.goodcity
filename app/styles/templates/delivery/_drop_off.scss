@@ -1,0 +1,94 @@
+.drop_off, .book-van {
+
+  .date_selector, .time_selector {
+    .picker__holder {
+      margin-top: 2.5rem;
+      @media #{$small-only} {
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  padding-left: 0.8rem;
+  padding-right: 1.5rem;
+
+  .date_selector {
+    padding-left: 0 !important;
+  }
+
+  .time_selector {
+    padding-right: 0 !important;
+  }
+
+  .schedule_info {
+    margin-top: 2rem !important;
+  }
+
+  .description {
+    text-align: justify;
+    a {
+      text-decoration: underline;
+      color: inherit !important;
+    }
+  }
+
+  .input_icon:before {
+    position: absolute;
+  }
+
+  .input_icon {
+    float: right;
+    display: inline;
+    color: #FFA3A3;
+  }
+
+  .time_icon {
+    @extend .input_icon;
+    font-size: 1.7rem;
+    margin-right: 1.4rem;
+    margin-top: 0.2rem;
+
+    @media #{$small-only} {
+      margin-right: 1rem;
+      font-size: 1.3rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .calender_icon{
+    @extend .input_icon;
+    font-size: 1.3rem;
+    margin-right: 1.4rem;
+    margin-top: 0.4rem;
+
+    @media #{$small-only} {
+      margin-right: 1.1rem;
+      font-size: 1.1rem;
+      margin-top: 0.32rem;
+    }
+  }
+
+  select, #selectedDate, #selectedTime {
+    position: absolute;
+    height: 2.17rem;
+    @media #{$small-only} {
+      height: 1.8rem;
+    }
+  }
+
+  input#selectedDate, #selectedTime {
+    &::-webkit-input-placeholder {
+      color: $black;
+    }
+    &::-moz-placeholder {
+      color: $black;
+    }
+    &::-moz-p {
+      color: $black;
+    }
+    &:-ms-input-placeholder {
+      color: $black;
+    }
+  }
+
+}

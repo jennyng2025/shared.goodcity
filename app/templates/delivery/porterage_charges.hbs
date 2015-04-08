@@ -1,0 +1,36 @@
+<nav class="tab-bar">
+  <section class="left-small">
+    {{#link-to 'delivery.confirm_van' classNames="back"}}{{t "back"}}{{/link-to}}
+  </section>
+
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "gogovan.porterage.title"}}</h1>
+  </section>
+</nav>
+
+<section class="main-section">
+  <div class="row ui">
+    <div class="small-12 columns">
+      <div class='porterage_charges_text'>
+        {{t "gogovan.porterage.driver"}}{{t "gogovan.porterage.price_factors"}}:
+
+        <ul>
+          <li><span>{{t "gogovan.porterage.item_count_size"}}</span></li>
+          <li><span>{{t "gogovan.porterage.obstacles"}}</span></li>
+          <li><span>{{t "gogovan.porterage.park_van"}}</span></li>
+          <li><span>{{t "gogovan.porterage.help"}}</span></li>
+        </ul>
+
+        {{t "gogovan.porterage.unwilling_driver"}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="btm">
+  <div class="row">
+    <div class="small-10 small-offset-1 columns">
+      {{#link-to 'delivery.confirm_van' classNames='button secondary expand'}}{{t "gogovan.porterage.thanks"}}{{/link-to}}
+    </div>
+  </div>
+</div>

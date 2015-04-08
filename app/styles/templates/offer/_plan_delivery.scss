@@ -1,0 +1,30 @@
+.plan_delivery {
+  @media #{$small-only} {
+    font-size: 0.7rem;
+  }
+
+  hr {
+    margin: 0 -0.7rem 0.8rem -0.7rem !important;
+  }
+
+  .fa-check-circle {
+    color: $coral-red;
+  }
+
+  .right {
+    text-align: right; }
+
+  .delivery-image {
+    width: 3.5rem;
+    margin-top: 1rem; }
+
+  .button {
+    padding: 0.6rem;
+    margin-top: 0.6rem; }
+
+  .learn_more {
+    text-decoration: underline; }
+
+  .cost {
+    color: $white; }
+}
