@@ -394,17 +394,12 @@ a.disabled{
   color: black;
   height: 9rem;
   min-height: 0rem;
+  @media #{$medium-only} {
+    width: 25rem;
+  }
   a{
     background-color: $coral-red;
     color: $white;
-  }
-  .close-reveal-modal{
-    text-align: center;
-    font-size: 1rem;
-    width: 1.2rem;
-    height: 1.2rem;
-    padding: 0.05rem;
-    border-radius: 50%;
   }
 }
 
