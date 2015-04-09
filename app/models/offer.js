@@ -39,6 +39,10 @@ export default DS.Model.extend({
   userName:       attr('string'),
   userPhone:      attr('string'),
 
+  // for deleted offer
+  removedAt: attr('date'),
+  isRemoved: Ember.computed.notEmpty("removedAt"),
+
   crossroadsTruckCost: function(){
     return this.get('crossroadsTransport.cost');
   }.property('crossroadsTransport'),
@@ -67,9 +71,6 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
-
-  // removedAt:      attr('date'),
-  // isRemoved: Ember.computed.notEmpty("removedAt"),
 
   activeItems: function(){
     return this.get('items').rejectBy("state", "draft");
