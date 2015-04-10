@@ -392,20 +392,20 @@ a.disabled{
 .reveal-modal#errorModal {
   background-color: $light-grey;
   color: black;
-  height: 9rem;
+  height: 8.5rem;
   min-height: 0rem;
+  @media #{$medium-only} {
+    width: 25rem;
+  }
+  @media #{$small-only} {
+    height: 9rem;
+  }
   a{
     background-color: $coral-red;
     color: $white;
   }
-  .close-reveal-modal{
-    text-align: center;
-    font-size: 1rem;
-    width: 1.2rem;
-    height: 1.2rem;
-    padding: 0.05rem;
-    border-radius: 50%;
-  }
+
+  p { margin-bottom: 0; }
 }
 
 .f-topbar-fixed {
