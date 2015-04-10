@@ -8,10 +8,13 @@ var attr = DS.attr,
 export default Addressable.extend({
   firstName:   attr('string'),
   lastName:    attr('string'),
+  mobile:      attr('string'),
+  createdAt:   attr('date'),
 
   image:          belongsTo('image'),
   permission:     belongsTo('permission'),
   reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
+  donations:      hasMany('offers', { inverse: 'createdBy' }),
 
   nameInitial: function() {
     return this.get('firstName').charAt(0).capitalize();
