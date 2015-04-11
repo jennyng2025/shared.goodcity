@@ -32,12 +32,13 @@ export default Ember.ObjectController.extend({
       var date = this.get('selectedDate');
       var slotName = this.get('slots').filterBy('id', selectedSlot.get('id')).get('firstObject.name');
 
-      var scheduleProperties = { slot: selectedSlot, scheduledAt: date, slotName: slotName};
-
-      var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
       var deliveryId = this.get('controllers.delivery.id');
       var offerId = this.get('controllers.offer.id');
       var offer = this.store.getById('offer', offerId);
+
+      var scheduleProperties = { slot: selectedSlot, scheduledAt: date, slotName: slotName, currentDeliveryId: deliveryId };
+
+      var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
 
       bookedSchedule.save()
         .then(schedule => {

@@ -10,7 +10,8 @@ export default DS.Model.extend({
   zone:        attr('string'),
   scheduledAt: attr('date'),
 
-  deliveries:   hasMany('delivery'),
+  deliveries:  hasMany('delivery'),
+  currentDeliveryId: attr('number'),
 
   dayTime: function() {
     var slot  = this.get('slotName');

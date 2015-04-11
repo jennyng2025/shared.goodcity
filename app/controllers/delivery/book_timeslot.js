@@ -14,6 +14,7 @@ export default Ember.ArrayController.extend({
           'resource','scheduledAt', 'slot', 'slotName');
       var deliveryId = this.get('controllers.delivery').get('id');
       var offerId = this.get('controllers.offer').get('id');
+      scheduleProperties.currentDeliveryId = deliveryId;
 
       var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
 

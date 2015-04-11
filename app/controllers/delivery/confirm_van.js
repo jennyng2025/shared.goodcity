@@ -19,6 +19,7 @@ export default Ember.ObjectController.extend({
       var controller = this;
       var loadingView = this.container.lookup('view:loading').append();
       var orderDetails = controller.get("orderDetails");
+      var deliveryId = controller.get('controllers.delivery.id');
 
       // address details
       var district = controller.store.getById("district", orderDetails.get('districtId'));
@@ -31,10 +32,10 @@ export default Ember.ObjectController.extend({
       var contactProperties = { name: name, mobile: mobile };
 
       // schedule details
-      var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
+      var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot'), currentDeliveryId: deliveryId };
       var schedule = controller.store.createRecord('schedule', scheduleProperties);
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.id'));
+      var delivery = controller.store.getById("delivery", deliveryId);
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });
