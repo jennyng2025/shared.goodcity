@@ -4,6 +4,7 @@ I18nTranslationsEn =
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
   "send": "Send"
+  "delete_confirm": "Are you sure? This cannot be undone."
 
   "crossroads" : "Crossroads"
   "language": "en"
