@@ -9,9 +9,9 @@ export default Ember.Controller.extend({
   orderDetails: Ember.computed.alias('model'),
 
   districtName: function(){
-    var district = this.store.getById("district", this.get('districtId'));
+    var district = this.store.getById("district", this.get('model.districtId'));
     return district.get('name');
-  }.property('districtId'),
+  }.property('model.districtId'),
 
   actions: {
 
