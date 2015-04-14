@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ["delivery", "offer"],
 
   slots: function() {

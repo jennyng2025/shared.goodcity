@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var transportDetails =  Ember.ObjectController.extend({
+var transportDetails =  Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
 
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
