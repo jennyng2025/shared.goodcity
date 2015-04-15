@@ -4,7 +4,7 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Select Schedule</h1>
+    <h1 class="title">{{t "drop-off.select_schedule"}}</h1>
   </section>
 </nav>
 
@@ -25,7 +25,7 @@
                 name='selectedDate'
                 id='selectedDate'
                 value=''
-                selectionBinding='selectedDate'
+                selection=selectedDate
                 required='true'
                 placeholder='Date'
                 available=available_dates
@@ -35,10 +35,10 @@
 
             <div class="small-5 columns time_selector">
               {{view "select"
-                contentBinding='slots'
+                content=slots
                 optionLabelPath='content.name'
                 optionValuePath='content.id'
-                selectionBinding='selectedId'
+                selection=selectedId
                 prompt='Time'
                 required='true'}}
               <i class="fa fa-clock-o time_icon"></i>

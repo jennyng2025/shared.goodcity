@@ -1,6 +1,6 @@
 <section class="main-section row">
 
-  <div id="main-image" {{bind-attr class="isExpanded"}}>
+  <div id="main-image" class="{{if isExpanded 'is-expanded'}}">
     {{#unless noImage}}
       <div style={{{previewImageBgCss}}}>
         <div id="main-image-controls">
@@ -11,7 +11,7 @@
             <i class="fa {{if previewMatchesFavourite 'fa-star' 'fa-star-o'}}"></i>
           </a>
           <a {{action "expandImage"}} title={{t "edit_images.fullscreen_tooltip"}}>
-            <i {{bind-attr class=":fa isExpanded:fa-compress:fa-expand"}}></i>
+            <i class="fa {{if isExpanded 'fa-compress' 'fa-expand'}}"></i>
           </a>
         </div>
       </div>
@@ -25,9 +25,9 @@
     {{/unless}}
   </div>
 
-  <ul id="photo-list" {{bind-attr class="isExpanded:hidden"}}>
+  <ul id="photo-list" class="{{if isExpanded 'hidden'}}">
     <li>
-      <a id="add-photo" {{action "triggerUpload"}} {{bind-attr class=":center-box isReady::disabled"}} style={{{thumbImageCss}}}>
+      <a id="add-photo" {{action "triggerUpload"}} class="center-box {{unless isReady 'disabled'}}" style={{{thumbImageCss}}}>
         <span class="center-item">
           <i class="fa fa-camera"></i>
           {{addPhotoLabel}}
@@ -39,7 +39,7 @@
     </li>
     {{#each image in images}}
       <li>
-        <a {{action "setPreview" image}} {{bind-attr class="image.selected"}}>
+        <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
           <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
           <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
         </a>
@@ -48,15 +48,15 @@
   </ul>
 </section>
 
-<div {{bind-attr class=":btm isExpanded:hidden"}}>
+<div class="btm {{if isExpanded 'hidden'}}">
   <div class="row">
     {{#if backBtnVisible}}
-    <div class="small-6 columns">
-      <button {{ action "back"}} class="button expand secondary">{{t "back"}}</button>
-    </div>
+      <div class="small-6 columns">
+        <button {{ action "back"}} class="button expand secondary">{{t "back"}}</button>
+      </div>
     {{/if}}
     <div class="{{if backBtnVisible 'small-6' 'small-12'}} columns">
-      <button {{ action "next"}} {{bind-attr disabled="noImage"}} class="button expand">{{t "next"}}</button>
+      <button {{ action "next"}} disabled={{noImage}} class="button expand">{{t "next"}}</button>
     </div>
   </div>
 </div>

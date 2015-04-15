@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   needs: ["offer"],
   logger: Ember.inject.service(),
 
-  offerId: Ember.computed.alias('controllers.offer.id'),
+  offerId: Ember.computed.alias('controllers.offer.model.id'),
 
   offer: function(){
     return this.store.getById('offer', this.get('offerId'));
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
 
   actions: {
     startDelivery: function(delivery_type) {
-      var offerId = this.get('controllers.offer').get('id');
+      var offerId = this.get('controllers.offer').get('model.id');
       var delivery = this.store.createRecord('delivery', {
         offer: this.store.getById('offer', offerId),
         deliveryType: delivery_type

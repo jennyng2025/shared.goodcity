@@ -15,7 +15,7 @@ export default addressDetails.extend({
       contactProperties.mobile = "+852" + Ember.$('#mobile').val();
 
       var contact = this.store.createRecord('contact', contactProperties);
-      var deliveryId = this.get('controllers.delivery').get('id');
+      var deliveryId = this.get('controllers.delivery').get('model.id');
       var delivery = this.store.getById('delivery', deliveryId);
       var offer = delivery.get('offer');
       var schedule = delivery.get('schedule');

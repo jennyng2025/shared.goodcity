@@ -31,7 +31,7 @@ export default addressDetails.extend({
       var controller = this;
 
       var selectedDate = controller.get('selectedDate');
-      var deliveryId = controller.get('controllers.delivery').get('id');
+      var deliveryId = controller.get('controllers.delivery').get('model.id');
       var delivery = controller.store.getById('delivery', deliveryId);
 
       selectedDate.setMinutes(selectedDate.getMinutes() + parseInt(controller.get('selectedTime.id')));

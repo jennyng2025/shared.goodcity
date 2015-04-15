@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
       var schedule = controller.store.createRecord('schedule', scheduleProperties);
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.id'));
+      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });

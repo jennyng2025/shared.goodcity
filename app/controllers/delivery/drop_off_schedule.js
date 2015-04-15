@@ -35,8 +35,8 @@ export default Ember.Controller.extend({
       var scheduleProperties = { slot: selectedSlot, scheduledAt: date, slotName: slotName};
 
       var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
-      var deliveryId = this.get('controllers.delivery.id');
-      var offerId = this.get('controllers.offer.id');
+      var deliveryId = this.get('controllers.delivery.model.id');
+      var offerId = this.get('controllers.offer.model.id');
       var offer = this.store.getById('offer', offerId);
 
       bookedSchedule.save()
