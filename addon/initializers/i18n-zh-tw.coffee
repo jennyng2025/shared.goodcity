@@ -38,7 +38,6 @@ I18nTranslationsZhTw =
 
   "application":
     "home" : "首頁"
-    "all_offers" : "所有優惠"
     "login" : "登入"
     "logout" : "註銷"
     "register" : "報名"

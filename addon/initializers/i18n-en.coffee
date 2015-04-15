@@ -38,7 +38,6 @@ I18nTranslationsEn =
 
   "application":
     "home" : "Home"
-    "all_offers" : "All Offers"
     "login" : "Log in"
     "logout" : "Logout"
     "register" : "Register"
