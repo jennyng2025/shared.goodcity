@@ -21,7 +21,7 @@ export default Ember.Route.extend({
       this.set('attemptedTransition', null);
     } else {
       var currentUser = this.get('session.currentUser');
-      if (currentUser.get('isStaff')) {
+      if (this.get('session.isAdminApp')) {
         var myOffers = this.store.all('offer').filterBy('reviewedBy.id', currentUser.get('id'));
         if(myOffers.get('length') > 0) {
           this.transitionTo('my_list');
