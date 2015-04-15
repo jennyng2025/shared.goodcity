@@ -62,7 +62,7 @@ export default Ember.ObjectController.extend({
                 controller.set("inProgress", false);
                 loadingView.destroy();
 
-                if(controller.get("session.isAdmin")) {
+                if(controller.get("session.isAdminApp")) {
                   controller.transitionToRoute('review_offer.logistics', offer);
                 } else {
                   controller.transitionToRoute('offer.transport_details', offer);

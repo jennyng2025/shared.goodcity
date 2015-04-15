@@ -13,9 +13,13 @@ export default Ember.Service.extend({
     return store.all('user_profile').get('firstObject') || null;
   }.property().volatile(),
 
-  isAdmin: function() {
+  isAdminApp: function() {
     return config.APP.NAME === "admin.goodcity";
   }.property(),
+
+  isDonorApp: function() {
+    return this.get('isAdminApp') === false;
+  }.property('isAdminApp'),
 
   clear: function() {
     this.set("authToken", null);

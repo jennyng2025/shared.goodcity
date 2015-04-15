@@ -13,12 +13,12 @@ export default Ember.Service.extend({
   },
 
   getRoute: function( message) {
-    var isDonor = this.get("session.currentUser.isDonor");
+    var isDonorApp = this.get("session.isDonorApp");
     var offerId = message.get ? message.get("offer.id") : message.offer_id;
     var itemId = message.get ? message.get("item.id") : message.item_id;
     var isPrivate = message.get ? message.get("isPrivate") : message.is_private;
 
-    if (isDonor) {
+    if (isDonorApp) {
       if (itemId) {
         return ["item.messages", offerId, itemId];
       } else {

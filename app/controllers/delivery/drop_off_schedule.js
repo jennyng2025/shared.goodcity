@@ -49,7 +49,7 @@ export default Ember.ObjectController.extend({
           delivery.save()
             .then(() => {
               offer.set('state', 'scheduled');
-              if(this.get("session.isAdmin")) {
+              if(this.get("session.isAdminApp")) {
                 this.transitionToRoute('review_offer.logistics', offer);
               } else {
                 this.transitionToRoute('offer.transport_details', offer);
