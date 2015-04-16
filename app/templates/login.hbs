@@ -1,5 +1,5 @@
 <nav class="tab-bar">
-  {{#unless session.isAdmin}}
+  {{#unless session.isAdminApp}}
     <section class="left-small">
       {{#link-to 'register' classNames='back'}}{{t "application.register"}}{{/link-to}}
     </section>

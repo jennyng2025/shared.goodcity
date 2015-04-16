@@ -11,7 +11,7 @@ export default AuthorizeRoute.extend({
     var offer = this.store.getById('offer', offerId);
 
     if (offer.get('isScheduled') && !params.queryParams.modify) {
-      if(this.get('session.isAdmin')) {
+      if(this.get('session.isAdminApp')) {
         this.transitionTo('review_offer.logistics', offer);
       } else {
         this.transitionTo('offer.transport_details', offer);
