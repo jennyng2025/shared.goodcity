@@ -29,7 +29,7 @@ I18nTranslationsZhTw =
   "select_district" : "Select a district"
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
-  "404_error" : "Unfortunately, the details that you are looking for is not here."
+  "404_error" : "Unfortunately, the details that you are looking for are not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "save": "Save"
@@ -38,7 +38,6 @@ I18nTranslationsZhTw =
 
   "application":
     "home" : "首頁"
-    "all_offers" : "所有優惠"
     "login" : "登入"
     "logout" : "註銷"
     "register" : "報名"

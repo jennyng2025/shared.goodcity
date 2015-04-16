@@ -29,7 +29,7 @@ I18nTranslationsEn =
   "select_district" : "Select a district"
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
-  "404_error" : "Unfortunately, the details that you are looking for is not here."
+  "404_error" : "Unfortunately, the details that you are looking for are not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "save": "Save"
@@ -38,7 +38,6 @@ I18nTranslationsEn =
 
   "application":
     "home" : "Home"
-    "all_offers" : "All Offers"
     "login" : "Log in"
     "logout" : "Logout"
     "register" : "Register"

@@ -6,6 +6,7 @@ Router.map(function() {
   this.resource('i18n', { path: '/i18n' });
   this.resource('logout', { path: '/logout' });
   this.route('login');
+  this.route('post_login');
   this.route('resend');
   this.route('offline');
   this.route('authenticate');
