@@ -47,10 +47,9 @@ export default Ember.ObjectController.extend({
         },
         gogovanOrder: orderDetails._attributes };
 
-      new AjaxPromise("/confirm_ggv_order", "POST", this.get('session.authToken'), properties)
+      new AjaxPromise("/confirm_delivery", "POST", this.get('session.authToken'), properties)
         .then(function(data) {
           controller.store.pushPayload(data);
-          // offer.set('state', 'scheduled');
           controller.set("inProgress", false);
           loadingView.destroy();
 
@@ -61,7 +60,6 @@ export default Ember.ObjectController.extend({
           }
         }).catch(error => {
           loadingView.destroy();
-          schedule.unloadRecord();
           throw error;
       });
     }
