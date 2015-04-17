@@ -8,33 +8,15 @@ export default Ember.ArrayController.extend({
   isSelected: 1,
   actions: {
     assignSchedule: function() {
-      var selectedSlot = this.get('isSelected');
+      var selectedSlot        = this.get('isSelected');
       var getSelectedSchedule = this.store.getById('schedule', selectedSlot);
-      var scheduleProperties = getSelectedSchedule.getProperties('zone',
+      var scheduleProperties  = getSelectedSchedule.getProperties('zone',
           'resource','scheduledAt', 'slot', 'slotName');
+      var schedule   = this.store.createRecord('schedule', scheduleProperties);
       var deliveryId = this.get('controllers.delivery').get('model.id');
-      var offerId = this.get('controllers.offer').get('model.id');
-
-      var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
-
-      var loadingView = this.container.lookup('view:loading').append();
-
-      bookedSchedule.save()
-        .then(schedule => {
-          var delivery = this.store.push('delivery', {
-              id: deliveryId,
-              schedule: schedule,
-              offer: offerId
-          });
-          delivery.save()
-            .then(() => this.transitionToRoute('delivery.contact_details'))
-            .finally(() => loadingView.destroy());
-        })
-        .catch(error => {
-          bookedSchedule.unloadRecord();
-          loadingView.destroy();
-          throw error;
-        });
+      var delivery   = this.store.getById('delivery', deliveryId);
+      delivery.set('schedule', schedule);
+      this.transitionToRoute('delivery.contact_details');
     }
   }
 });
