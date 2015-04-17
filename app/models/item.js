@@ -86,4 +86,11 @@ export default DS.Model.extend({
     }
     return value;
   }.property('lastMessage'),
+
+  statusBarClass: function(){
+    if(this.get("isSubmitted")) { return "is-submitted"; }
+    else if(this.get("isUnderReview")) { return "is-under-review"; }
+    else if(this.get("isAccepted")) { return "is-accepted"; }
+    else if(this.get("isRejected")) { return "is-rejected"; }
+  }.property("state")
 });
