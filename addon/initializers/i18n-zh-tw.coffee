@@ -1,5 +1,5 @@
 I18nTranslationsZhTw =
-"socket_offline_error": "Attempting to connect to app.goodcity.hk..."
+  "socket_offline_error": "Attempting to connect to app.goodcity.hk..."
   "offline_error": "Unable to complete action, please check your internet connection."
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
@@ -174,7 +174,7 @@ I18nTranslationsZhTw =
 
   "gogovan":
     "porterage":
-      "title" : "Porterage Charges"
+      "title" : "Labour Charges"
       "driver" : "This needs to be negotiated with driver."
       "price_factors" : "The price will vary based on many factors, including"
       "item_count_size" : "How many items of what size"
@@ -187,7 +187,7 @@ I18nTranslationsZhTw =
     "confirm_van" :
       "title" : "Confirm Van"
       "base_fee" : "Base fee"
-      "porterage" : "Porterage"
+      "porterage" : "Labour"
       "speak_english" : "Speak English"
       "trolley" : "Borrow trolley(s)"
       "details" : "Details"
@@ -207,7 +207,7 @@ I18nTranslationsZhTw =
       "requirements" : "Extra Requirements"
       "speak_english" : "Speak English"
       "trolly_cost" : "Borrow trolley(s) + $20/piece"
-      "porterage" : "Porterage/go up(negotiate with drivers)"
+      "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
 
