@@ -12,11 +12,11 @@ var transportDetails =  Ember.ObjectController.extend({
 
   userName: function(){
     return this.get('delivery.contact.name') || this.get("user.fullName");
-  }.property('contact.name', 'user'),
+  }.property('delivery.contact.name', 'user'),
 
   userMobile: function(){
     return this.get('delivery.contact.mobile') || this.get("user.mobile");
-  }.property('contact.mobile', 'user'),
+  }.property('delivery.contact.mobile', 'user'),
 
   district: function(){
     return this.get('delivery.contact.address.district.name') || this.get("user.address.district.name");
