@@ -35,7 +35,12 @@ export default Ember.ObjectController.extend({
       var offerId = this.get('controllers.offer').get('id');
       var offer = this.store.getById('offer', offerId);
       var delivery = offer.get("delivery");
-      if(!delivery) {
+      if(delivery) {
+        delivery.setProperties({
+          offer: offer,
+          deliveryType: delivery_type
+        });
+      } else {
         delivery = this.store.createRecord('delivery', {
           offer: offer,
           deliveryType: delivery_type
