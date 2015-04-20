@@ -174,7 +174,7 @@ I18nTranslationsEn =
 
   "gogovan":
     "porterage":
-      "title" : "Porterage Charges"
+      "title" : "Labour Charges"
       "driver" : "This needs to be negotiated with driver."
       "price_factors" : "The price will vary based on many factors, including"
       "item_count_size" : "How many items of what size"
@@ -187,7 +187,7 @@ I18nTranslationsEn =
     "confirm_van" :
       "title" : "Confirm Van"
       "base_fee" : "Base fee"
-      "porterage" : "Porterage"
+      "porterage" : "Labour"
       "speak_english" : "Speak English"
       "trolley" : "Borrow trolley(s)"
       "details" : "Details"
@@ -207,7 +207,7 @@ I18nTranslationsEn =
       "requirements" : "Extra Requirements"
       "speak_english" : "Speak English"
       "trolly_cost" : "Borrow trolley(s) + $20/piece"
-      "porterage" : "Porterage/go up(negotiate with drivers)"
+      "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
 
