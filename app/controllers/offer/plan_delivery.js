@@ -33,10 +33,14 @@ export default Ember.ObjectController.extend({
   actions: {
     startDelivery: function(delivery_type) {
       var offerId = this.get('controllers.offer').get('id');
-      var delivery = this.store.createRecord('delivery', {
-        offer: this.store.getById('offer', offerId),
-        deliveryType: delivery_type
-      });
+      var offer = this.store.getById('offer', offerId);
+      var delivery = offer.get("delivery");
+      if(!delivery) {
+        delivery = this.store.createRecord('delivery', {
+          offer: offer,
+          deliveryType: delivery_type
+        });
+      }
 
       delivery.save()
         .then(delivery => {
