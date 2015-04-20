@@ -34,11 +34,11 @@
 
       <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
 
-      <ul>
+      <ul class='call_ggv'>
         {{#if driverContact}}
-          <li>{{t 'delivery.cancel.call_driver'}} {{driverContact}} or</li>
+          <li>{{t 'delivery.cancel.call_driver'}} <a href="tel:{{driverContact}}">{{driverContact}}</a> or</li>
         {{/if}}
-        <li>{{t 'delivery.cancel.call_ggv'}} {{gogovanContact}}</li>
+        <li>{{t 'delivery.cancel.call_ggv'}} <a href="tel:{{gogovanContact}}">{{gogovanContact}}</a></li>
       </ul>
 
       <div>{{t 'delivery.cancel.confirm_ggv_cancel'}}</div>

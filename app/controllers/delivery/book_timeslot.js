@@ -16,7 +16,7 @@ export default Ember.ArrayController.extend({
       var deliveryId = this.get('controllers.delivery').get('model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       delivery.set('schedule', schedule);
-      this.transitionToRoute('delivery.contact_details');
+      this.transitionToRoute('delivery.contact_details', {queryParams: {placeOrder: true}});
     }
   }
 });

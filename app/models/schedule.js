@@ -14,7 +14,7 @@ export default DS.Model.extend({
 
   dayTime: function() {
     var slot  = this.get('slotName');
-    var value = slot.split(',');
+    var value = slot ? slot.split(',') : [];
     if(value.length > 1) {
       value = value[0];
     } else {

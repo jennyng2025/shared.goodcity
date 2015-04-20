@@ -55,7 +55,7 @@ var transportDetails =  Ember.Controller.extend({
 
         delivery.destroyRecord()
           .then(function() {
-            var route = _this.get('session.isAdmin') ? 'review_offer' : 'offer.offer_details';
+            var route = _this.get('session.isAdminApp') ? 'review_offer' : 'offer.offer_details';
             _this.transitionToRoute(route, offer);
           })
           .finally(() => loadingView.destroy());
