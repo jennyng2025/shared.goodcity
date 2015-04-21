@@ -1,12 +1,12 @@
 <nav class="tab-bar">
   {{#unless session.isAdminApp}}
     <section class="left-small">
-      {{#link-to 'register' classNames='back'}}Register{{/link-to}}
+      {{#link-to 'register' classNames='back'}}{{t "application.register"}}{{/link-to}}
     </section>
   {{/unless}}
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Login</h1>
+    <h1 class="title">{{t "application.login"}}</h1>
   </section>
 </nav>
 

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ["delivery", "offer"],
 
   slots: function() {
@@ -36,7 +36,7 @@ export default Ember.ObjectController.extend({
         scheduledAt: controller.get('selectedDate'),
         slotName:    slotName };
 
-      var deliveryId = this.get('controllers.delivery.id');
+      var deliveryId = this.get('controllers.delivery.model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       var offer      = delivery.get("offer");
       var deliveryType = delivery.get("deliveryType");
@@ -54,7 +54,6 @@ export default Ember.ObjectController.extend({
           controller.store.pushPayload(data);
           controller.set("inProgress", false);
           loadingView.destroy();
-
           if(controller.get("session.isAdminApp")) {
             controller.transitionToRoute('review_offer.logistics', offer);
           } else {

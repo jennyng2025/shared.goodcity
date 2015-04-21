@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   type:    "file",
   accept:  "image/*",
   name:    "file",
-  classNames: ["cloudinary-fileupload"],
+  classNames: ["cloudinary-fileupload", "hidden"],
   "data-cloudinary-field": "image_upload",
   "data-url": config.APP.CLOUD_URL,
   disabled: true,

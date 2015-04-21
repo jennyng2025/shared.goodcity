@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 
   user: Ember.computed.alias('session.currentUser'),
   territoryId: Ember.computed.alias('user.address.district.territory.id'),

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import config from './../../config/environment';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 
   needs: ['offer/transport_details'],
 

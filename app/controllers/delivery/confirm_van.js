@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from './../../config/environment';
 import AjaxPromise from './../../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['delivery'],
 
   user: Ember.computed.alias('session.currentUser'),
@@ -10,9 +10,9 @@ export default Ember.ObjectController.extend({
   orderDetails: Ember.computed.alias('model'),
 
   districtName: function(){
-    var district = this.store.getById("district", this.get('districtId'));
+    var district = this.store.getById("district", this.get('model.districtId'));
     return district.get('name');
-  }.property('districtId'),
+  }.property('model.districtId'),
 
   actions: {
 
@@ -29,7 +29,7 @@ export default Ember.ObjectController.extend({
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.id'));
+      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });

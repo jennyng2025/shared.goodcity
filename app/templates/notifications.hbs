@@ -4,7 +4,7 @@
       <a {{action 'view'}} class='notification_box'>
         <div class="small-2 large-1 columns image-item">
           {{#if controller.showItemImage}}
-            <img {{bind-attr src=itemImageUrl}} alt="">
+            <img src={{itemImageUrl}} alt="">
           {{/if}}
         </div>
         <div class="small-8 large-10 columns msg-with-arrow">

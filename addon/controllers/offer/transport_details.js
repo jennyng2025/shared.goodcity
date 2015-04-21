@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-var transportDetails =  Ember.ObjectController.extend({
+var transportDetails =  Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
-
+  contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
 
   user: function(){
@@ -11,25 +11,25 @@ var transportDetails =  Ember.ObjectController.extend({
   }.property().volatile(),
 
   userName: function(){
-    return this.get('delivery.contact.name') || this.get("user.fullName");
-  }.property('delivery.contact.name', 'user'),
+    return this.get('contact.name') || this.get("user.fullName");
+  }.property('contact.name', 'user'),
 
   userMobile: function(){
-    return this.get('delivery.contact.mobile') || this.get("user.mobile");
-  }.property('delivery.contact.mobile', 'user'),
+    return this.get('contact.mobile') || this.get("user.mobile");
+  }.property('contact.mobile', 'user'),
 
   district: function(){
-    return this.get('delivery.contact.address.district.name') || this.get("user.address.district.name");
+    return this.get('contact.address.district.name') || this.get("user.address.district.name");
   }.property('user', 'delivery'),
 
   actions: {
     handleBrokenImage: function() {
-      this.get("reviewedBy").set("hasImage", null);
+      this.get("model.reviewedBy").set("hasImage", null);
     },
 
     cancelDelivery: function(){
       if(this.get('hasActiveGGVOrder')) {
-        this.set('cancelBooking', true);
+        // this.set('cancelBooking', true);
         this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
           .then(newRoute => newRoute.controller.set('isCancel', true));
       } else {
@@ -48,7 +48,7 @@ var transportDetails =  Ember.ObjectController.extend({
     },
 
     removeDelivery: function(delivery){
-      if(confirm("Are you sure? This cannot be undone.")) {
+      if(confirm(Ember.I18n.t("delete_confirm"))) {
         var loadingView = this.container.lookup('view:loading').append();
         var offer = delivery.get('offer');
         var _this = this;

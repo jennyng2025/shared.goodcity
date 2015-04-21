@@ -12,9 +12,8 @@ export default Ember.ArrayController.extend({
       var getSelectedSchedule = this.store.getById('schedule', selectedSlot);
       var scheduleProperties  = getSelectedSchedule.getProperties('zone',
           'resource','scheduledAt', 'slot', 'slotName');
-
       var schedule   = this.store.createRecord('schedule', scheduleProperties);
-      var deliveryId = this.get('controllers.delivery').get('id');
+      var deliveryId = this.get('controllers.delivery').get('model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       delivery.set('schedule', schedule);
       this.transitionToRoute('delivery.contact_details', {queryParams: {placeOrder: true}});

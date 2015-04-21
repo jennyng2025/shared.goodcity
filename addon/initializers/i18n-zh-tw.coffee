@@ -35,6 +35,12 @@ I18nTranslationsZhTw =
   "save": "Save"
   "must_login": "You must login!"
   "unexpected_error": "Something went wrong"
+  "all": "All"
+  "thank_you": "Thank you"
+
+
+  "time_ago":
+    "right_now" : "Right Now"
 
   "application":
     "home" : "Home"
@@ -83,6 +89,12 @@ I18nTranslationsZhTw =
     "view": "View"
 
   "delivery":
+    "thank_offer":
+      "staff_will_contact": "Our staff will call {{name}} on {{mobile}} next Friday to confirm."
+    "book_timeslot":
+      "hint": "Pick preferred date/time. First available times listed below."
+      "select_time": "Select Time"
+
     "cancel":
       "cancel_title": "Cancel Booking"
       "modify_title": "Modify Booking"
@@ -185,6 +197,7 @@ I18nTranslationsZhTw =
       "thanks" : "Got it, thank you!"
 
     "confirm_van" :
+      "other-msg" : "Tolls, parking, etc. not included"
       "title" : "Confirm Van"
       "base_fee" : "Base fee"
       "porterage" : "Labour"
@@ -212,6 +225,7 @@ I18nTranslationsZhTw =
       "get_quote" : "Get Quote"
 
   "drop-off":
+    "select_schedule": "Select Schedule"
     "expect_delivery": "When can we expect your delivery?"
     "find_crossroads": "How to find crossroads"
     "open_new_tab": "will open in new tab"
