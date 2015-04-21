@@ -4,5 +4,14 @@ export default Ember.View.extend({
     Ember.$(document).foundation({
       offcanvas: { close_on_click: true }
     });
+
+    Ember.$("#lightGallery").lightGallery({
+      thumbnail: false,
+      hideControlOnEnd: true,
+      closable: false,
+      counter: true,
+      swipeThreshold : 50,
+      enableTouch : true,
+    });
   }
 });
