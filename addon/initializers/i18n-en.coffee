@@ -4,6 +4,7 @@ I18nTranslationsEn =
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
   "send": "Send"
+  "delete_confirm": "Are you sure? This cannot be undone."
 
   "crossroads" : "Crossroads"
   "language": "en"
@@ -28,17 +29,22 @@ I18nTranslationsEn =
   "select_district" : "Select a district"
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
-  "404_error" : "Unfortunately, the details that you are looking for is not here."
+  "404_error" : "Unfortunately, the details that you are looking for are not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "save": "Save"
   "must_login": "You must login!"
   "unexpected_error": "Something went wrong"
+  "all": "All"
+  "thank_you": "Thank you"
+
+  "time_ago":
+    "right_now" : "Right Now"
 
   "application":
     "home" : "Home"
     "all_offers" : "All Offers"
-    "login" : "Log in"
+    "login" : "Login"
     "logout" : "Logout"
     "register" : "Register"
     "tour" : "Tour"
@@ -83,6 +89,12 @@ I18nTranslationsEn =
     "view": "View"
 
   "delivery":
+    "thank_offer":
+      "staff_will_contact": "Our staff will call {{name}} on {{mobile}} next Friday to confirm."
+    "book_timeslot":
+      "hint": "Pick preferred date/time. First available times listed below."
+      "select_time": "Select Time"
+
     "cancel":
       "cancel_title": "Cancel Booking"
       "modify_title": "Modify Booking"
@@ -174,7 +186,7 @@ I18nTranslationsEn =
 
   "gogovan":
     "porterage":
-      "title" : "Porterage Charges"
+      "title" : "Labour Charges"
       "driver" : "This needs to be negotiated with driver."
       "price_factors" : "The price will vary based on many factors, including"
       "item_count_size" : "How many items of what size"
@@ -185,9 +197,10 @@ I18nTranslationsEn =
       "thanks" : "Got it, thank you!"
 
     "confirm_van" :
+      "other-msg" : "Tolls, parking, etc. not included"
       "title" : "Confirm Van"
       "base_fee" : "Base fee"
-      "porterage" : "Porterage"
+      "porterage" : "Labour"
       "speak_english" : "Speak English"
       "trolley" : "Borrow trolley(s)"
       "details" : "Details"
@@ -207,15 +220,15 @@ I18nTranslationsEn =
       "requirements" : "Extra Requirements"
       "speak_english" : "Speak English"
       "trolly_cost" : "Borrow trolley(s) + $20/piece"
-      "porterage" : "Porterage/go up(negotiate with drivers)"
+      "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
 
   "drop-off":
+    "select_schedule": "Select Schedule"
     "expect_delivery": "When can we expect your delivery?"
     "find_crossroads": "How to find crossroads"
     "open_new_tab": "will open in new tab"
-    "message_map_link": "We will also message you a link to our map location so you have it handy when you need it!"
     "arrive_on_time": "Please arrive during our operating hours to ensure we can successfully receive your kind donation."
     "book_schedule": "Book Schedule"
 

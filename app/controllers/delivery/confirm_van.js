@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import config from './../../config/environment';
+import AjaxPromise from './../../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['delivery'],
 
   user: Ember.computed.alias('session.currentUser'),
@@ -9,9 +10,9 @@ export default Ember.ObjectController.extend({
   orderDetails: Ember.computed.alias('model'),
 
   districtName: function(){
-    var district = this.store.getById("district", this.get('districtId'));
+    var district = this.store.getById("district", this.get('model.districtId'));
     return district.get('name');
-  }.property('districtId'),
+  }.property('model.districtId'),
 
   actions: {
 
@@ -20,11 +21,6 @@ export default Ember.ObjectController.extend({
       var loadingView = this.container.lookup('view:loading').append();
       var orderDetails = controller.get("orderDetails");
 
-      // address details
-      var district = controller.store.getById("district", orderDetails.get('districtId'));
-      var addressProperties = {addressType: 'collection',
-        district: district};
-
       // contact details
       var name = Ember.$("#userName").val();
       var mobile = config.APP.HK_COUNTRY_CODE + Ember.$("#mobile").val();
@@ -32,50 +28,39 @@ export default Ember.ObjectController.extend({
 
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
-      var schedule = controller.store.createRecord('schedule', scheduleProperties);
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.id'));
+      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });
       var handleError = error => { loadingView.destroy(); throw error; };
 
-      // save schedule
-      schedule.save().then(function(schedule) {
-        delivery.set('schedule', schedule);
+      contactProperties.addressAttributes = { addressType: 'collection', districtId: orderDetails.get('districtId') }
 
-        // save contact
-        var contact = controller.store.createRecord('contact', contactProperties);
-        contact.save().then(function(contact) {
-          addressProperties.addressable = contact;
-          var address = controller.store.createRecord('address', addressProperties);
+      var properties = {
+        delivery: {
+          id: delivery.id,
+          deliveryType: delivery.get("deliveryType"),
+          offerId: offer.id,
+          scheduleAttributes: scheduleProperties  ,
+          contactAttributes: contactProperties,
+        },
+        gogovanOrder: orderDetails._attributes };
 
-          //save address
-          address.save().then(function() {
-            delivery.set('contact', contact);
-            orderDetails.save().then(function(gogovan_order){
-              delivery.set('gogovanOrder', gogovan_order);
+      new AjaxPromise("/confirm_delivery", "POST", this.get('session.authToken'), properties)
+        .then(function(data) {
+          controller.store.pushPayload(data);
+          controller.set("inProgress", false);
+          loadingView.destroy();
 
-              // save delivery
-              delivery.save().then(function() {
-                offer.set('state', 'scheduled');
-                controller.set("inProgress", false);
-                loadingView.destroy();
-
-                if(controller.get("session.isAdmin")) {
-                  controller.transitionToRoute('review_offer.logistics', offer);
-                } else {
-                  controller.transitionToRoute('offer.transport_details', offer);
-                }
-              }, handleError);
-            }, handleError);
-          }, handleError);
-        }, handleError);
-      })
-      .catch(error => {
-        loadingView.destroy();
-        schedule.unloadRecord();
-        throw error;
+          if(controller.get("session.isAdminApp")) {
+            controller.transitionToRoute('review_offer.logistics', offer);
+          } else {
+            controller.transitionToRoute('offer.transport_details', offer);
+          }
+        }).catch(error => {
+          loadingView.destroy();
+          throw error;
       });
     }
   }

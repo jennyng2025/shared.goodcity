@@ -1,21 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['delivery', 'offer'],
 
   contact: function(key, value) {
     if(arguments.length > 1) {
       return value;
     } else {
-      var deliveryId = this.get('controllers.delivery.id');
-      return this.store.getById('delivery', deliveryId);
+      var deliveryId = this.get('controllers.delivery.model.id');
+      return this.store.getById('delivery', deliveryId).get("contact");
     }
   }.property('model'),
 
   actions:{
     done: function(){
-      var offerId = this.get('controllers.offer.id');
-      if(this.get("session.isAdmin")) {
+      var offerId = this.get('controllers.offer.model.id');
+      if(this.get("session.isAdminApp")) {
         this.transitionToRoute('review_offer.logistics', offerId);
       } else {
         this.transitionToRoute('offer.transport_details', offerId);

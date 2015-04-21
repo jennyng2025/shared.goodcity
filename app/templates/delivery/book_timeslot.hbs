@@ -4,7 +4,7 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Select Time</h1>
+    <h1 class="title">{{t "delivery.book_timeslot.select_time"}}</h1>
   </section>
 </nav>
 
@@ -12,14 +12,14 @@
   <div class="row">
     <div class="small-12 columns">
 
-      <div class='schedule-info'>Pick preferred date/time. First available times listed below.</div>
+      <div class='schedule-info'>{{t "delivery.book_timeslot.hint"}}</div>
 
       <ul>
-        {{#each item in availableSlots}}
+        {{#each availableSlots as |item|}}
           <li>
             {{view 'radio-button' name="timeslot" selection=controller.isSelected value=item.id id=item.id}}
-            <label {{bind-attr for=id}}>
-              <label class='schdule-date' {{bind-attr for=item.id}}>{{display-date item.scheduledAt}}</label><br/>
+            <label for={{item.id}}>
+              <label class='schdule-date' for={{item.id}}>{{display-date item.scheduledAt}}</label><br/>
               {{item.slotName}}
             </label>
           </li>

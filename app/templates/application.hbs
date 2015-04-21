@@ -2,8 +2,8 @@
 {{outlet}}
 
 {{#with controllers.subscriptions.status as status}}
-<div id="status" {{bind-attr class="status.online status.hidden"}}>
-  <i class="fa fa-dot-circle-o"></i>
-  <span>{{status.text}}</span>
-</div>
+  <div id="status" class="{{if status.online 'online'}} {{if status.hidden 'hidden'}}">
+    <i class="fa fa-dot-circle-o"></i>
+    <span>{{status.text}}</span>
+  </div>
 {{/with}}

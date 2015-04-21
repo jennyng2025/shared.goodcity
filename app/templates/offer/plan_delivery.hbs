@@ -1,6 +1,6 @@
 <nav class="tab-bar">
   <section class="left-small">
-    {{#if session.isAdmin}}
+    {{#if session.isAdminApp}}
       {{#link-to 'review_offer.logistics' classNames="back"}}{{t "back"}}{{/link-to}}
     {{else}}
       {{#link-to 'offer.transport_details' classNames="back"}}{{t "back"}}{{/link-to}}
@@ -16,7 +16,7 @@
   <div class="row">
     <div class="small-12 columns">
 
-      {{#if hasGogovanTransport}}
+      {{#if model.hasGogovanTransport}}
         <div class="row">
           <div class="small-8 columns left">
             <h3>{{t "plan_delivery.fastest.title"}} <i class="fa fa-check-circle"></i></h3>
@@ -36,7 +36,7 @@
         <hr/>
       {{/if}}
 
-      {{#if offer.hasCrossroadsTransport}}
+      {{#if model.hasCrossroadsTransport}}
         <div class="row">
           <div class="small-8 columns left">
             <h3>{{t "plan_delivery.alternate.title"}}</h3>

@@ -3,19 +3,19 @@
     content=territories
     optionValuePath="content.id"
     optionLabelPath="content.name"
-    selectionBinding='selectedTerritory'
-    valueBinding='territoryId'
+    selection=selectedTerritory
+    value=territoryId
     prompt="All"
     classNames='selectAddress'
     required='true' }}
 </div>
 <div class="small-6 columns">
   {{view "select"
-    contentBinding='districtsByTerritory'
+    content=districtsByTerritory
     optionValuePath="content.id"
     optionLabelPath="content.name"
-    selectionBinding='selectedDistrict'
-    valueBinding="districtId"
+    selection=selectedDistrict
+    value=districtId
     prompt="Select District"
     classNames='selectAddress district'
     required='true' }}

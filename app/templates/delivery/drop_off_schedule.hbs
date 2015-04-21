@@ -4,7 +4,7 @@
   </section>
 
   <section class="middle tab-bar-section">
-    <h1 class="title">Select Schedule</h1>
+    <h1 class="title">{{t "drop-off.select_schedule"}}</h1>
   </section>
 </nav>
 
@@ -25,7 +25,7 @@
                 name='selectedDate'
                 id='selectedDate'
                 value=''
-                selectionBinding='selectedDate'
+                selection=selectedDate
                 required='true'
                 placeholder='Date'
                 available=available_dates
@@ -35,10 +35,10 @@
 
             <div class="small-5 columns time_selector">
               {{view "select"
-                contentBinding='slots'
+                content=slots
                 optionLabelPath='content.name'
                 optionValuePath='content.id'
-                selectionBinding='selectedId'
+                selection=selectedId
                 prompt='Time'
                 required='true'}}
               <i class="fa fa-clock-o time_icon"></i>
@@ -48,10 +48,6 @@
           <div class="row schedule_info">
             <div class='description'>
               <a href="https://maps.google.com/?saddr=Current+Location&amp;daddr=Crossroads+Foundation,+2+Castle+Peak+Road+-+So+Kwun+Wat,+Hong+Kong" target="_blank">{{t "drop-off.find_crossroads"}}</a> ({{t "drop-off.open_new_tab"}})
-            </div>
-
-            <div class='description'>
-              {{t "drop-off.message_map_link"}}
             </div>
 
             <div class='description'>

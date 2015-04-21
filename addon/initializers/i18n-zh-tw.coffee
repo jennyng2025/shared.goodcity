@@ -4,50 +4,56 @@ I18nTranslationsZhTw =
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
   "send": "Send"
+  "delete_confirm": "Are you sure? This cannot be undone."
 
   "crossroads" : "Crossroads"
-  'language': 'zh-tw'
-  'loading': '加載中...'
-  "goodcity.hk" : "好人好市"
-  "skip_intro" : "跳過介紹"
-  "next" : "未來"
-  "back" : "回"
-  "error.message" : "很抱歉, 發生錯誤！"
-  "images" : "圖片"
-  "delete" : "刪除"
-  "edit" : "編輯"
-  "remove" : "刪除"
-  "yes" : "是啊"
-  "no" : "無"
-  "ok" : "行"
-  "index.title" : "十字路口基金會禮物"
-  "index.donate_goods" : "捐出你的精品給需要的人"
+  "language": "en"
+  "loading": "Loading..."
+  "goodcity.hk" : "GoodCity.HK"
+  "skip_intro" : "Skip intro"
+  "next" : "Next"
+  "back" : "Back"
+  "error.message" : "Sorry, an error occurred!"
+  "images" : "Images"
+  "delete" : "Delete"
+  "edit" : "Edit"
+  "remove" : "Remove"
+  "yes" : "Yes"
+  "no" : "No"
+  "ok" : "OK"
+  "index.title" : "Crossroads Foundation Presents"
+  "index.donate_goods" : "Donate your quality goods to people in need"
   "index.how" : "Learn How"
   "index.start" : "Start Now"
-  "full_name" : "{{lastName}} {{firstName}}"
+  "full_name" : "{{firstName}} {{lastName}}"
   "select_district" : "Select a district"
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
-  "404_error" : "Unfortunately, the details that you are looking for is not here."
+  "404_error" : "Unfortunately, the details that you are looking for are not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "save": "Save"
   "must_login": "You must login!"
   "unexpected_error": "Something went wrong"
+  "all": "All"
+  "thank_you": "Thank you"
+
+
+  "time_ago":
+    "right_now" : "Right Now"
 
   "application":
-    "home" : "首頁"
-    "all_offers" : "所有優惠"
-    "login" : "登入"
-    "logout" : "註銷"
-    "register" : "報名"
+    "home" : "Home"
+    "login" : "Log in"
+    "logout" : "Logout"
+    "register" : "Register"
     "tour" : "Tour"
 
   "authenticate":
-    "input_code" : "輸入代碼"
+    "input_code" : "Input Code"
 
   "districts":
-    "all" : "所有"
+    "all" : "All"
 
   "contact":
     "title" : "Contact Details"
@@ -61,9 +67,9 @@ I18nTranslationsZhTw =
     "done" : "Done"
 
   "_resend":
-    "no_sms" : "沒有收到短信代碼?"
-    "please_wait" : "請請等待5分鐘..."
-    "resend" : "再次發送"
+    "no_sms" : "Haven't received SMS code?"
+    "please_wait" : "Please wait 5 minutes..."
+    "resend" : "Resend"
 
   "_verification_pin":
     "input_code" : "Input 4-digit SMS code we just sent you:"
@@ -83,6 +89,12 @@ I18nTranslationsZhTw =
     "view": "View"
 
   "delivery":
+    "thank_offer":
+      "staff_will_contact": "Our staff will call {{name}} on {{mobile}} next Friday to confirm."
+    "book_timeslot":
+      "hint": "Pick preferred date/time. First available times listed below."
+      "select_time": "Select Time"
+
     "cancel":
       "cancel_title": "Cancel Booking"
       "modify_title": "Modify Booking"
@@ -123,29 +135,28 @@ I18nTranslationsZhTw =
     "favourite_tooltip" : "set as cover image"
     "delete_tooltip" : "delete image"
 
-
   "plan_delivery":
-    "title" : "計劃交付"
+    "title" : "Plan Transport"
     "fastest" :
-      "title" : "最快"
-      "booking_button" : "前往預訂"
+      "title" : "Fastest"
       "info" : "Hire a vehicle with a few clicks.<br/>Recommended!"
       "cost" : "From ${{cost}}"
+      "booking_button" : "Go to Booking"
       "learn_more": "Learn More"
       "gogovan_charges": "Gogovan Bookings"
 
     "alternate" :
-      "title" : "另類"
+      "title" : "Alternative"
       "info" : "Wait 14+ days until our team<br/>can collect from your area."
       "cost" : "Fee ${{cost}}"
-      "booking_button" : "前往預訂"
+      "booking_button" : "Go to Booking"
       "collection_charges": "Collection Charges"
 
     "crossroads" :
-      "title" : "交付给我们"
+      "title" : "Deliver to Us"
       "info" : "Drop off at Tuen Mun during<br/>our hours of operation."
-      "free" : "免費"
-      "booking_button" : "詳情及預訂"
+      "free" : "Free"
+      "booking_button" : "Details & Booking"
 
   "collection_charges":
       "info": '''
@@ -175,7 +186,7 @@ I18nTranslationsZhTw =
 
   "gogovan":
     "porterage":
-      "title" : "Porterage Charges"
+      "title" : "Labour Charges"
       "driver" : "This needs to be negotiated with driver."
       "price_factors" : "The price will vary based on many factors, including"
       "item_count_size" : "How many items of what size"
@@ -186,9 +197,10 @@ I18nTranslationsZhTw =
       "thanks" : "Got it, thank you!"
 
     "confirm_van" :
+      "other-msg" : "Tolls, parking, etc. not included"
       "title" : "Confirm Van"
       "base_fee" : "Base fee"
-      "porterage" : "Porterage"
+      "porterage" : "Labour"
       "speak_english" : "Speak English"
       "trolley" : "Borrow trolley(s)"
       "details" : "Details"
@@ -197,6 +209,8 @@ I18nTranslationsZhTw =
       "name" : "Your Name"
       "phone" : "Phone"
       "book_delivery" : "Confirm & Book"
+      "negotiate" : "Negotiate with driver"
+      "no_porterage" : "Not Requested"
 
     "book_van" :
       "title" : "Book Van"
@@ -206,20 +220,19 @@ I18nTranslationsZhTw =
       "requirements" : "Extra Requirements"
       "speak_english" : "Speak English"
       "trolly_cost" : "Borrow trolley(s) + $20/piece"
-      "porterage" : "Porterage/go up(negotiate with drivers)"
+      "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
 
   "drop-off":
+    "select_schedule": "Select Schedule"
     "expect_delivery": "When can we expect your delivery?"
     "find_crossroads": "How to find crossroads"
     "open_new_tab": "will open in new tab"
-    "message_map_link": "We will also message you a link to our map location so you have it handy when you need it!"
     "arrive_on_time": "Please arrive during our operating hours to ensure we can successfully receive your kind donation."
     "book_schedule": "Book Schedule"
 
   "crossroads_truck":
         "book_time": "Book Time"
         "show_more": "Show More"
-
 `export default I18nTranslationsZhTw`

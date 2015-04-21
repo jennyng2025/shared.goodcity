@@ -31,7 +31,7 @@ export default addressDetails.extend({
       var controller = this;
 
       var selectedDate = controller.get('selectedDate');
-      var deliveryId = controller.get('controllers.delivery').get('id');
+      var deliveryId = controller.get('controllers.delivery').get('model.id');
       var delivery = controller.store.getById('delivery', deliveryId);
 
       selectedDate.setMinutes(selectedDate.getMinutes() + parseInt(controller.get('selectedTime.id')));
@@ -51,7 +51,7 @@ export default addressDetails.extend({
 
       new AjaxPromise("/gogovan_orders/calculate_price", "POST", controller.get('session.authToken'), requestProperties).then(function(data) {
           order.set('baseFee', data['base']);
-          controller.transitionToRoute('delivery.confirm_van');
+          controller.transitionToRoute('delivery.confirm_van', {queryParams: {placeOrder: true}});
         });
     },
   }

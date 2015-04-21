@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ["delivery", "offer"],
 
   slots: function() {
@@ -26,42 +26,43 @@ export default Ember.ObjectController.extend({
 
   actions: {
     bookSchedule: function() {
-      var loadingView = this.container.lookup('view:loading').append();
+      var controller   = this;
+      var loadingView  = this.container.lookup('view:loading').append();
+      var selectedSlot = controller.get('selectedId');
+      var slotName     = controller.get('slots').filterBy('id', selectedSlot.get('id')).get('firstObject.name');
 
-      var selectedSlot = this.get('selectedId');
-      var date = this.get('selectedDate');
-      var slotName = this.get('slots').filterBy('id', selectedSlot.get('id')).get('firstObject.name');
+      var scheduleProperties = {
+        slot:        selectedSlot.id,
+        scheduledAt: controller.get('selectedDate'),
+        slotName:    slotName };
 
-      var scheduleProperties = { slot: selectedSlot, scheduledAt: date, slotName: slotName};
+      var deliveryId = this.get('controllers.delivery.model.id');
+      var delivery   = this.store.getById('delivery', deliveryId);
+      var offer      = delivery.get("offer");
+      var deliveryType = delivery.get("deliveryType");
 
-      var bookedSchedule = this.store.createRecord('schedule', scheduleProperties);
-      var deliveryId = this.get('controllers.delivery.id');
-      var offerId = this.get('controllers.offer.id');
-      var offer = this.store.getById('offer', offerId);
+      var properties = {
+        delivery: {
+          id: deliveryId,
+          deliveryType: deliveryType,
+          offerId: offer.id,
+          scheduleAttributes: scheduleProperties }
+      };
 
-      bookedSchedule.save()
-        .then(schedule => {
-          var delivery = this.store.push('delivery', {
-              id: deliveryId,
-              schedule: schedule,
-              offer: offerId
-          });
-          delivery.save()
-            .then(() => {
-              offer.set('state', 'scheduled');
-              if(this.get("session.isAdmin")) {
-                this.transitionToRoute('review_offer.logistics', offer);
-              } else {
-                this.transitionToRoute('offer.transport_details', offer);
-              }
-            })
-            .finally(() => loadingView.destroy());
-        })
-        .catch(error => {
+      new AjaxPromise("/confirm_delivery", "POST", this.get('session.authToken'), properties)
+        .then(function(data) {
+          controller.store.pushPayload(data);
+          controller.set("inProgress", false);
           loadingView.destroy();
-          bookedSchedule.unloadRecord();
+          if(controller.get("session.isAdminApp")) {
+            controller.transitionToRoute('review_offer.logistics', offer);
+          } else {
+            controller.transitionToRoute('offer.transport_details', offer);
+          }
+        }).catch(error => {
+          loadingView.destroy();
           throw error;
-        });
+      });
     }
   }
 });

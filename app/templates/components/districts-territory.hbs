@@ -3,8 +3,8 @@
     <label>{{t "register.districts"}}</label>
     <ul class="radio-buttons">
       <li class="radio active" id="all" {{action 'findDistrictbyTerritory'
-      on="click"}}>All</li>
-      {{#each territory in allTerritory}}
+      on="click"}}>{{t "all"}}</li>
+      {{#each allTerritory as |territory|}}
         <li class="radio" {{action "findDistrictbyTerritory" territory on="click"}}>
           {{territory.name}}
         </li>
@@ -17,12 +17,12 @@
   <div class="small-12 columns ui">
     <label>
       {{view "select"
-        contentBinding='districtsByTerritory'
+        content=districtsByTerritory
         optionLabelPath='content.name'
         optionValuePath='content.id'
-        selectionBinding='currentSelected'
+        selection=currentSelected
         value=''
-        promptBinding='selectDistrictLabel'
+        prompt=selectDistrictLabel
         optionClassPath='dropdowncls'
         required='true'}}
     </label>

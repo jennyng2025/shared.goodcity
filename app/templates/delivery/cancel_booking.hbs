@@ -1,6 +1,6 @@
 <nav class="tab-bar">
   <section class="left-small">
-    {{#if session.isAdmin}}
+    {{#if session.isAdminApp}}
       {{#link-to "review_offer.logistics" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
     {{else}}
       {{#link-to "offer.transport_details" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
@@ -34,11 +34,11 @@
 
       <div>{{t 'delivery.cancel.cancel_ggv'}}</div>
 
-      <ul>
+      <ul class='call_ggv'>
         {{#if driverContact}}
-          <li>{{t 'delivery.cancel.call_driver'}} {{driverContact}} or</li>
+          <li>{{t 'delivery.cancel.call_driver'}} <a href="tel:{{driverContact}}">{{driverContact}}</a> or</li>
         {{/if}}
-        <li>{{t 'delivery.cancel.call_ggv'}} {{gogovanContact}}</li>
+        <li>{{t 'delivery.cancel.call_ggv'}} <a href="tel:{{gogovanContact}}">{{gogovanContact}}</a></li>
       </ul>
 
       <div>{{t 'delivery.cancel.confirm_ggv_cancel'}}</div>
@@ -47,7 +47,7 @@
   </div>
   <div class="row">
     <div class="small-10 small-offset-1 columns">
-      {{#if session.isAdmin}}
+      {{#if session.isAdminApp}}
         {{#link-to "review_offer.logistics" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}
       {{else}}
         {{#link-to "offer.transport_details" model.offer classNames="button secondary expand"}}{{t 'delivery.cancel.back'}}{{/link-to}}

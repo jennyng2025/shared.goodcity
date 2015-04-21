@@ -32,7 +32,7 @@
               name='selectedDate'
               id='selectedDate'
               value=''
-              selectionBinding='selectedDate'
+              selection=selectedDate
               required='true'
               placeholder='Date'
               pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
@@ -43,7 +43,7 @@
               content=controller.timeSlots
               optionValuePath="content.id"
               optionLabelPath="content.name"
-              selectionBinding='selectedTime'
+              selection=selectedTime
               required='true'
               prompt='Time'
               id='selectedTime'
