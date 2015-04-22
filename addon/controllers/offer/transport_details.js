@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var transportDetails =  Ember.Controller.extend({
+export default Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
   contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
@@ -48,7 +48,7 @@ var transportDetails =  Ember.Controller.extend({
     },
 
     removeDelivery: function(delivery){
-      if(confirm(Ember.I18n.t("delete_confirm"))) {
+      if (confirm(Ember.I18n.t("delete_confirm"))) {
         var loadingView = this.container.lookup('view:loading').append();
         var offer = delivery.get('offer');
         var _this = this;
@@ -63,5 +63,3 @@ var transportDetails =  Ember.Controller.extend({
     }
   }
 });
-
-export default transportDetails;
