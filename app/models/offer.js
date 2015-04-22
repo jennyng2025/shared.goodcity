@@ -201,7 +201,7 @@ export default DS.Model.extend({
   // display "General Messages Thread"
   displayGeneralMessages: function(){
     return !(this.get('isDraft') && this.get('lastMessage') === null);
-  }.property('state', 'lastMessage'),
+  }.property('isDraft', 'lastMessage'),
 
   // to sort on offer-details page for updated-offer and latest-message
   latestUpdatedTime: function(){
@@ -216,11 +216,11 @@ export default DS.Model.extend({
 
   showOfferIcons:  function(){
     return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('isReceived'));
-  }.property('items.@each.state'),
+  }.property('itemCount', 'isClosed', 'isReceived'),
 
   preventNewItem:  function(){
     return this.get('isReviewed') || this.get('isScheduled');
-  }.property('items.@each.state'),
+  }.property('isReviewed', 'isScheduled'),
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}

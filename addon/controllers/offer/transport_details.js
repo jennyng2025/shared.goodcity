@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var transportDetails =  Ember.Controller.extend({
+export default Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
   contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
@@ -13,15 +13,15 @@ var transportDetails =  Ember.Controller.extend({
 
   userName: function(){
     return this.get('contact.name') || this.get("user.fullName");
-  }.property('contact.name', 'user'),
+  }.property('contact.name', 'user.fullName'),
 
   userMobile: function(){
     return this.get('contact.mobile') || this.get("user.mobile");
-  }.property('contact.mobile', 'user'),
+  }.property('contact.mobile', 'user.mobile'),
 
   district: function(){
     return this.get('contact.address.district.name') || this.get("user.address.district.name");
-  }.property('user', 'delivery'),
+  }.property('contact.address.district.name', 'user.address.district.name'),
 
   actions: {
     handleBrokenImage: function() {
@@ -64,5 +64,3 @@ var transportDetails =  Ember.Controller.extend({
     }
   }
 });
-
-export default transportDetails;
