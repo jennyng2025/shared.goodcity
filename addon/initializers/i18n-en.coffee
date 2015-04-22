@@ -9,7 +9,7 @@ I18nTranslationsEn =
   "crossroads" : "Crossroads"
   "language": "en"
   "loading": "Loading..."
-  "loading_timeout": "This is taking too long! Click ok to reload."
+  "loading_timeout": "This is taking too long! Click okay to reload."
   "goodcity.hk" : "GoodCity.HK"
   "skip_intro" : "Skip intro"
   "next" : "Next"
