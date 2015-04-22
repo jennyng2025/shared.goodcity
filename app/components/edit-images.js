@@ -3,6 +3,7 @@ import Ember from "ember";
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   alert: Ember.inject.service(),
+  confirm: Ember.inject.service(),
   offerId: null,
   itemId: null,
   packageId: null,
@@ -114,7 +115,8 @@ export default Ember.Component.extend({
         this.get("alert").show(Ember.I18n.t("edit_images.cant_delete_last_image"));
         return;
       }
-      if (window.confirm(Ember.I18n.t("edit_images.delete_confirm"))) {
+
+      this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
         var loadingView = this.container.lookup('view:loading').append();
         var img = this.get("previewImage");
         img.deleteRecord();
@@ -128,7 +130,7 @@ export default Ember.Component.extend({
           })
           .catch(error => { this.get("previewImage").rollback(); throw error; })
           .finally(() => loadingView.destroy());
-      }
+      });
     },
 
     expandImage: function() {

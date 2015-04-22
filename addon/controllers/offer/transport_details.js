@@ -4,6 +4,7 @@ var transportDetails =  Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
   contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
+  confirm: Ember.inject.service(),
 
   user: function(){
     var userId = this.session.get("currentUser.id");
@@ -48,10 +49,10 @@ var transportDetails =  Ember.Controller.extend({
     },
 
     removeDelivery: function(delivery){
-      if(confirm(Ember.I18n.t("delete_confirm"))) {
-        var loadingView = this.container.lookup('view:loading').append();
+      var _this = this;
+      this.get("confirm").show(Ember.I18n.t("delete_confirm"), () => {
+        var loadingView = _this.container.lookup('view:loading').append();
         var offer = delivery.get('offer');
-        var _this = this;
 
         delivery.destroyRecord()
           .then(function() {
@@ -59,7 +60,7 @@ var transportDetails =  Ember.Controller.extend({
             _this.transitionToRoute(route, offer);
           })
           .finally(() => loadingView.destroy());
-        }
+      });
     }
   }
 });

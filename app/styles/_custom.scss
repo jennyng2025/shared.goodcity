@@ -389,22 +389,23 @@ a.disabled{
   }
 }
 
-.reveal-modal#errorModal {
+.reveal-modal#errorModal, #confirmModal {
   background-color: $light-grey;
   color: black;
-  height: 8.5rem;
+  height: initial;
+  padding-bottom: inherit;
   min-height: 0rem;
   @media #{$medium-only} {
     width: 25rem;
-  }
-  @media #{$small-only} {
-    height: 9rem;
   }
   a{
     background-color: $coral-red;
     color: $white;
   }
-  p { margin-bottom: 0; }
+  .ok {
+    margin-right: 0.5rem;
+    margin-bottom: 1.25rem;
+   }
 }
 
 .f-topbar-fixed {
