@@ -9,6 +9,7 @@ I18nTranslationsZhTw =
   "crossroads" : "Crossroads"
   "language": "en"
   "loading": "Loading..."
+  "loading_timeout": "This is taking too long! Click ok to reload."
   "goodcity.hk" : "GoodCity.HK"
   "skip_intro" : "Skip intro"
   "next" : "Next"
@@ -38,13 +39,13 @@ I18nTranslationsZhTw =
   "all": "All"
   "thank_you": "Thank you"
 
-
   "time_ago":
     "right_now" : "Right Now"
 
   "application":
     "home" : "Home"
-    "login" : "Log in"
+    "all_offers" : "All Offers"
+    "login" : "Login"
     "logout" : "Logout"
     "register" : "Register"
     "tour" : "Tour"
