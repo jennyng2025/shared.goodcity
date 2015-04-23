@@ -47,12 +47,6 @@ export default DS.Model.extend({
     return this.get('crossroadsTransport.cost');
   }.property('crossroadsTransport'),
 
-  _offers: function() {
-    return this.store.get("offer");
-  }.property(),
-
-  offersCount: Ember.computed.alias("_offers.length"),
-
   itemCount: function() {
     return this.get("items").rejectBy("state", "draft").length;
   }.property('items.@each.state'),
