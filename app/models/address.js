@@ -20,5 +20,9 @@ export default DS.Model.extend({
     addressDetails = Ember.isBlank(addressDetails.compact()) ? [this.get('district.name'), this.get('district.territory.name')] : addressDetails;
     var formattedAddress = addressDetails.join('<br>');
     return new Ember.Handlebars.SafeString(formattedAddress);
-  }.property('flat','building','street')
+  }.property('flat','building','street'),
+
+  regionDetails: function(){
+    return [this.get('flat'), this.get('building'), this.get('street')].compact().join(" ");
+  }.property('flat','building','street'),
 });
