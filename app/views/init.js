@@ -5,7 +5,7 @@ export default Ember.View.extend({
       offcanvas: { close_on_click: true }
     });
 
-    Ember.$("#lightGallery").lightGallery({
+    Ember.$("#lightGallery, .lightGallery").lightGallery({
       thumbnail: false,
       hideControlOnEnd: true,
       closable: false,
