@@ -33,6 +33,7 @@ I18nTranslationsEn =
   "404_error" : "Unfortunately, the details that you are looking for are not here."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
+  "cancel": "Cancel"
   "save": "Save"
   "must_login": "You must login!"
   "unexpected_error": "Something went wrong"
