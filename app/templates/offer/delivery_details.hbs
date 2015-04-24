@@ -75,7 +75,8 @@
         {{t 'delivery_details.time'}}
       </div>
       <div class="small-6 columns right strong">
-        {{delivery.schedule.slotName}}
+        {{delivery.schedule.slotName}},
+        {{schedule-time-status delivery.schedule.scheduledAt}}
       </div>
     </div>
 
@@ -95,7 +96,7 @@
         {{t 'delivery_details.phone'}}
       </div>
       <div class="small-6 columns right strong">
-        {{userMobile}}
+        <a href="tel:{{userMobile}}">{{userMobile}}</a>
       </div>
     </div>
 
@@ -110,16 +111,6 @@
         </div>
       </div>
     {{/if}}
-
-    <hr>
-    <div class="row">
-      <div class="small-6 columns">
-        {{t 'delivery_details.district'}}
-      </div>
-      <div class="small-6 columns right strong">
-        {{district}}
-      </div>
-    </div>
 
     <hr>
     <div class="row">
