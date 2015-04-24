@@ -1,11 +1,10 @@
 import Ember from 'ember';
 
-var cancelTimer;
-
 export default Ember.View.extend({
   templateName: 'loading',
   alert: Ember.inject.service(),
   logger: Ember.inject.service(),
+  timer: null,
 
   didInsertElement: function() {
     var timer = Ember.run.later(() => {
@@ -16,12 +15,12 @@ export default Ember.View.extend({
       });
     }, 30000);
 
-    cancelTimer = () => Ember.run.cancel(timer);
-    $(document).on("cancel-loading-timer", cancelTimer);
+    this.set("timer", timer);
+    $(document).on("cancel-loading-timer", () => Ember.run.cancel(timer));
   },
 
   willDestroyElement: function() {
-    cancelTimer();
-    $(document).off("cancel-loading-timer", cancelTimer);
+    Ember.run.cancel(this.get("timer"));
+    $(document).off("cancel-loading-timer");
   }
 });
