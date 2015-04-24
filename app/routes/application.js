@@ -77,6 +77,7 @@ export default Ember.Route.extend({
       window.location.reload();
     },
     loading: function() {
+      Ember.$(".loading-indicator").remove();
       var view = this.container.lookup('view:loading').append();
       this.router.one('didTransition', view, 'destroy');
     },
