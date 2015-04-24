@@ -49,23 +49,26 @@ export default Ember.Route.extend({
   alert: Ember.inject.service(),
 
   handleError: function(reason) {
-    if (reason.status === 401) {
-      if (this.session.get('isLoggedIn')) {
-        this.controllerFor("application").send('logMeOut');
+    try
+    {
+      if (reason.status === 401) {
+        if (this.session.get('isLoggedIn')) {
+          this.controllerFor("application").send('logMeOut');
+        }
+        else {
+          this.transitionTo('login');
+        }
+      } else if (reason.status === 404) {
+        this.get("alert").show(Ember.I18n.t("404_error"));
+      } else if (reason.status === 0) {
+        // status 0 means request was aborted, this could be due to connection failure
+        // but can also mean request was manually cancelled
+        this.get("alert").show(Ember.I18n.t("offline_error"));
+      } else {
+        this.get("logger").error(reason);
+        this.get("alert").show(Ember.I18n.t("unexpected_error"));
       }
-      else {
-        this.transitionTo('login');
-      }
-    } else if (reason.status === 404) {
-      this.get("alert").show(Ember.I18n.t("404_error"));
-    } else if (reason.status === 0) {
-      // status 0 means request was aborted, this could be due to connection failure
-      // but can also mean request was manually cancelled
-      this.get("alert").show(Ember.I18n.t("offline_error"));
-    } else {
-      this.get("logger").error(reason);
-      this.get("alert").show(Ember.I18n.t("unexpected_error"));
-    }
+    } catch (err) {}
   },
 
   actions: {
@@ -80,11 +83,13 @@ export default Ember.Route.extend({
     // this is hopefully only triggered from promises from routes
     // so in this scenario redirect to home for 404
     error: function(reason) {
-      if (reason.status === 404) {
-        this.get("alert").show(Ember.I18n.t("404_error"), () => this.transitionTo("/"));
-      } else {
-        this.handleError(reason);
-      }
+      try {
+        if (reason.status === 404) {
+          this.get("alert").show(Ember.I18n.t("404_error"), () => this.transitionTo("/"));
+        } else {
+          this.handleError(reason);
+        }
+      } catch (err) {}
     }
   }
 });

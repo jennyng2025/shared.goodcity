@@ -9,6 +9,7 @@ export default Ember.Service.extend({
       Ember.$("#errorModal").removeClass("open"); // workaround https://github.com/zurb/foundation/issues/5721
       Ember.$("#errorModal").foundation("reveal", "open");
       Ember.$(".loading-indicator").hide();
+      $(document).trigger("cancel-loading-timer");
       Ember.$("#errorModal .button").click(() => {
         Ember.run.next(function() {
           Ember.$("#errorModal").foundation("reveal", "close");
