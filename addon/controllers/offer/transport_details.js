@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
   }.property('contact.name', 'user.fullName'),
 
   userMobile: function(){
-    return (this.get('contact.mobile') || this.get("user.mobile") || "").replace(/\+852/, '');
+    return (this.get('contact.mobile') || this.get("user.mobile") || "").toString().replace(/\+852/, '');
   }.property('contact.mobile', 'user.mobile'),
 
   district: function(){
