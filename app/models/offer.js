@@ -223,6 +223,10 @@ export default DS.Model.extend({
     else if(this.get("isScheduled")){return "is-scheduled"}
     else if(this.get("isClosed")){return "is-closed"}
     else if(this.get("isReceived")){return "is-received"}
+  }.property("state"),
+
+  showDeliveryDetails: function(){
+    return this.get("isScheduled") || this.get("isReceived");
   }.property("state")
 
 });
