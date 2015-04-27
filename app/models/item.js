@@ -28,6 +28,10 @@ export default DS.Model.extend({
   isAccepted: Ember.computed.equal("state", "accepted"),
   isRejected: Ember.computed.equal("state", "rejected"),
 
+  isDraft: function(){
+    return this.get('offer.state') === 'draft';
+  }.property('offer.state'),
+
   isSubmitted: function(){
     return this.get('state') === 'submitted' && this.get('offer.state') === 'submitted';
   }.property('state', 'offer.state'),
