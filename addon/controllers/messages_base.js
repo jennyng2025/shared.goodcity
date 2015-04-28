@@ -6,6 +6,7 @@ export default Ember.ArrayController.extend({
   sortAscending: true,
   isPrivate: false,
   offer: Ember.computed.alias("controllers.offer.model"),
+  disabled: Ember.computed.alias("offer.isFinished"),
   item: null,
 
   actions: {

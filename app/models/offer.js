@@ -79,6 +79,10 @@ export default DS.Model.extend({
     return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
   }.property('isUnderReview', 'isSubmitted', 'isClosed'),
 
+  isFinished: function() {
+    return this.get('isClosed') || this.get('isReceived');
+  }.property('isClosed', 'isReceived'),
+
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
   }.property('items.@each'),
@@ -214,8 +218,8 @@ export default DS.Model.extend({
   }.property('itemCount', 'isClosed', 'isReceived'),
 
   preventNewItem:  function(){
-    return this.get('isReviewed') || this.get('isScheduled');
-  }.property('isReviewed', 'isScheduled'),
+    return this.get('isReviewed') || this.get('isScheduled') || this.get('isFinished');
+  }.property('isReviewed', 'isScheduled', 'isFinished'),
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}
