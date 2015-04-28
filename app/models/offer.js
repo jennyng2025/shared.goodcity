@@ -34,6 +34,7 @@ export default DS.Model.extend({
   delivery:       belongsTo('delivery'),
   createdBy:      belongsTo('user'),
   reviewedBy:     belongsTo('user'),
+  closedBy:       belongsTo('user'),
 
   // User details
   userName:       attr('string'),
