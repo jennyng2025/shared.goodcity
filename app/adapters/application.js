@@ -8,7 +8,7 @@ export default DS.ActiveModelAdapter.extend({
   headers: function() {
     return {
       "Authorization":  'Bearer ' + this.get('session.authToken'),
-      "Accept-Language": Ember.I18n.translations.language,
+      "Accept-Language": this.get('session.language') || Ember.I18n.translations.language,
       "X-GOODCITY-APP-NAME": config.APP.NAME,
       "X-GOODCITY-APP-VERSION": config.APP.VERSION,
       "X-GOODCITY-APP-SHA": config.APP.SHA
