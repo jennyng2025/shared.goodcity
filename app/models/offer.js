@@ -16,6 +16,7 @@ export default DS.Model.extend({
   createdAt:      attr('date'),
   updatedAt:      attr('date'),
   submittedAt:    attr('date'),
+  cancelledAt:    attr('date'),
   state_event:    attr('string'),
   reviewedAt:     attr('date'),
   receivedAt:     attr('date'),
@@ -40,10 +41,6 @@ export default DS.Model.extend({
   userName:       attr('string'),
   userPhone:      attr('string'),
 
-  // for deleted offer
-  removedAt: attr('date'),
-  isRemoved: Ember.computed.notEmpty("removedAt"),
-
   crossroadsTruckCost: function(){
     return this.get('crossroadsTransport.cost');
   }.property('crossroadsTransport'),
@@ -66,6 +63,7 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
+  isCancelled: Ember.computed.equal("state", "cancelled"),
 
   activeItems: function(){
     return this.get('items').rejectBy("state", "draft");
