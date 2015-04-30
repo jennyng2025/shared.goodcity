@@ -4,6 +4,12 @@ import config from '../config/environment';
 
 export default Ember.Route.extend({
   beforeModel: function (transition) {
+    //for language for ggv_orders from url
+    if(transition.targetName === "ggv_orders") {
+      var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
+      this.set('session.language', language);
+    }
+
     var language = this.session.get("language") || Ember.I18n.default_language;
     Ember.I18n.translations = Ember.I18n.translation_store[language];
 

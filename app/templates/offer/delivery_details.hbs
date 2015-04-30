@@ -96,7 +96,7 @@
         {{t 'delivery_details.phone'}}
       </div>
       <div class="small-6 columns right strong">
-        <a href="tel:{{userMobile}}">{{userMobile}}</a>
+        {{view "phone" number=userMobile}}
       </div>
     </div>
 
@@ -123,13 +123,15 @@
     </div>
 
     <hr>
-    <div class="row transport-buttons">
-      <div class="small-5 columns">
-        <a href="#" {{action 'modifyBooking'}} class="button expand">{{t 'delivery_details.modify'}}</a>
+    {{#if model.isScheduled}}
+      <div class="row transport-buttons">
+        <div class="small-5 columns">
+          <a href="#" {{action 'modifyBooking'}} class="button expand">{{t 'delivery_details.modify'}}</a>
+        </div>
+        <div class="small-7 columns">
+          <a href="#" {{action 'cancelDelivery'}} class="button secondary expand">{{t 'delivery_details.cancel_booking'}}</a>
+        </div>
       </div>
-      <div class="small-7 columns">
-        <a href="#" {{action 'cancelDelivery'}} class="button secondary expand">{{t 'delivery_details.cancel_booking'}}</a>
-      </div>
-    </div>
+    {{/if}}
   </div>
 </div>

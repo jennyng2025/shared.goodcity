@@ -28,6 +28,10 @@ export default DS.Model.extend({
   isAccepted: Ember.computed.equal("state", "accepted"),
   isRejected: Ember.computed.equal("state", "rejected"),
 
+  isDraft: function(){
+    return this.get('offer.state') === 'draft';
+  }.property('offer.state'),
+
   isSubmitted: function(){
     return this.get('state') === 'submitted' && this.get('offer.state') === 'submitted';
   }.property('state', 'offer.state'),
@@ -88,7 +92,8 @@ export default DS.Model.extend({
   }.property('lastMessage'),
 
   statusBarClass: function(){
-    if(this.get("isSubmitted")) { return "is-submitted"; }
+    if(this.get("offer.isCancelled")) { return "is-closed"; }
+    else if(this.get("isSubmitted")) { return "is-submitted"; }
     else if(this.get("isUnderReview")) { return "is-under-review"; }
     else if(this.get("isAccepted")) { return "is-accepted"; }
     else if(this.get("isRejected")) { return "is-rejected"; }

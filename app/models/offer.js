@@ -16,6 +16,7 @@ export default DS.Model.extend({
   createdAt:      attr('date'),
   updatedAt:      attr('date'),
   submittedAt:    attr('date'),
+  cancelledAt:    attr('date'),
   state_event:    attr('string'),
   reviewedAt:     attr('date'),
   receivedAt:     attr('date'),
@@ -34,14 +35,11 @@ export default DS.Model.extend({
   delivery:       belongsTo('delivery'),
   createdBy:      belongsTo('user'),
   reviewedBy:     belongsTo('user'),
+  closedBy:       belongsTo('user'),
 
   // User details
   userName:       attr('string'),
   userPhone:      attr('string'),
-
-  // for deleted offer
-  removedAt: attr('date'),
-  isRemoved: Ember.computed.notEmpty("removedAt"),
 
   crossroadsTruckCost: function(){
     return this.get('crossroadsTransport.cost');
@@ -65,6 +63,7 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
+  isCancelled: Ember.computed.equal("state", "cancelled"),
 
   activeItems: function(){
     return this.get('items').rejectBy("state", "draft");
@@ -77,6 +76,10 @@ export default DS.Model.extend({
   needReview: function(){
     return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
   }.property('isUnderReview', 'isSubmitted', 'isClosed'),
+
+  isFinished: function() {
+    return this.get('isClosed') || this.get('isReceived');
+  }.property('isClosed', 'isReceived'),
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
@@ -213,8 +216,8 @@ export default DS.Model.extend({
   }.property('itemCount', 'isClosed', 'isReceived'),
 
   preventNewItem:  function(){
-    return this.get('isReviewed') || this.get('isScheduled');
-  }.property('isReviewed', 'isScheduled'),
+    return this.get('isReviewed') || this.get('isScheduled') || this.get('isFinished');
+  }.property('isReviewed', 'isScheduled', 'isFinished'),
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}
@@ -222,6 +225,11 @@ export default DS.Model.extend({
     else if(this.get("isReviewed")){return "is-reviewed"}
     else if(this.get("isScheduled")){return "is-scheduled"}
     else if(this.get("isClosed")){return "is-closed"}
+    else if(this.get("isReceived")){return "is-received"}
+  }.property("state"),
+
+  showDeliveryDetails: function(){
+    return this.get("isScheduled") || this.get("isReceived");
   }.property("state")
 
 });

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   templateName: 'time-ago',
+  classNames: 'time-ago',
   timeValue: new Date(),
 
   didInsertElement: function() {
