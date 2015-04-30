@@ -124,6 +124,8 @@ I18nTranslationsEn =
     "waiting": "Awaiting Driver Confirmation"
     "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
     "time": "Booking Time"
+    "id": "Booking ID"
+    "driver_screen": "Driver Screen"
     "modify": "Modify"
     "cancel_booking": "Cancel Booking"
     "accepted_items": "Accepted items to be transported"
