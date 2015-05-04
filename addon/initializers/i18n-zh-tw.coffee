@@ -177,17 +177,17 @@ I18nTranslationsZhTw =
 
   "gogovan_charges":
     "info": '''
-      We partner with GoGoVan so you can hire a van or truck from within GoodCity!
+      GoGoVan與好人好市合作，方便您租用貨車，運送物資！
 
-      Quotes are live, based on your location and the type of vehicle your donation requires. Our reviewers have already indicated if you will need a van or a truck so your quotes will be based on that.
+      現在，您可以根據您居住的地區，及切合您所需的貨車類型，預先得到租用費的報價。我們的義工會先評估，基於您的需要，租用小型貨車還是大貨車，並給予報價。
 
-      GoGoVan quotes do not include labour, tunnel tolls or other charges. You need to agree these with the driver before you finalise your booking.
+      GoGoVan的報價並不包括搬運費、隧道費及其他額外收費。在確認預約前，您必須先與司機商討費用安排。
 
-      Labour charges:<br/>In our experience, labour will typically cost about $100 per worker, per hour. You will often need two labourers to safely move large items.
+      搬運費：<br/>根據過往經驗，為確保安全搬運大型物件，您通常需要兩位工人協助，而每位工人的收費大約為每小時$100元。
 
-      Independent drivers use GoGoVan to get transport bookings, they are not employed by GoGoVan. Different drivers will have different skills and expectations when asked to provide "removal services". They won't ordinarily come prepared to disassemble items for you or put loose items into boxes. You can do all this in advance to keep things fast and simple or you can chat to the driver about your needs in detail so he can quote for the work.
+      獨立營運的司機會使用GoGoVan運送物資，但他們並非受雇於GoGoVan。不同的司機可能會為「移除物資」作出不同程度或形式的協助，但一般而言，司機通常不會協助裝拆物資及將分散的部件裝箱。為了使運送過程更快更方便，您可以預先包裝物資，或與司機商討協助，他們通常能立刻為您報價。
 
-      Also, please be up-front and clear about any challenges associated with your location (such as stairs, parking, footpaths or other obstacles) so the driver can charge for labour accordingly. If you're in a tricky location, please note that some drivers may not be able to take the job.
+      同時，要是您居住的地點可能對搬運構成任何困難（例如樓梯、泊車，只有行人道或其他障礙物），請不要隱瞞，務必清楚相告，讓司機能按情況需要收費。要是地點較難到達，部分司機可能無法接收此一工作，請見諒。
       '''
 
   "gogovan":
