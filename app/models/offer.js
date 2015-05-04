@@ -53,6 +53,10 @@ export default DS.Model.extend({
     return this.store.filter("package", p => p.get("offerId") === parseInt(this.get("id")));
   }.property(),
 
+  itemPackages: function() {
+    return this.store.all("package").filterBy("offerId", parseInt(this.get("id")));
+  }.property(),
+
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
   submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
