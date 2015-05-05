@@ -42,6 +42,10 @@ I18nTranslationsEn =
   "unexpected_error": "Something went wrong"
   "all": "All"
   "thank_you": "Thank you"
+  "go_to_top": "Go to Top"
+  "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
+  "loading_timeout_error": "Loading view timeout reached."
+  "items_text": "items"
 
   "time_ago":
     "right_now" : "Right Now"
@@ -94,6 +98,7 @@ I18nTranslationsEn =
     "view": "View"
 
   "delivery":
+    "select_district": "Select Destrict"
     "thank_offer":
       "staff_will_contact": "Our staff will call {{name}} on {{mobile}} next Friday to confirm."
     "book_timeslot":
@@ -230,6 +235,8 @@ I18nTranslationsEn =
       "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
+      "date": "Date"
+      "time": "Time"
 
   "drop-off":
     "select_schedule": "Select Schedule"

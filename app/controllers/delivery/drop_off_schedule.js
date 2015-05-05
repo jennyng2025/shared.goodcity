@@ -4,6 +4,9 @@ import AjaxPromise from './../../utils/ajax-promise';
 export default Ember.Controller.extend({
   needs: ["delivery", "offer"],
 
+  datePrompt: Ember.I18n.t("gogovan.book_van.date"),
+  timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+
   slots: function() {
     return this.store.all('timeslot').sortBy('id');
   }.property('timeslot.@each'),
