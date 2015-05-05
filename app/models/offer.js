@@ -131,7 +131,7 @@ export default DS.Model.extend({
   },
 
   status_text: function(){
-    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " items)")
+    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
   }.property('status'),
 
   scheduled_status: function(){

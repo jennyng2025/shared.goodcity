@@ -41,6 +41,10 @@ I18nTranslationsZhTw =
   "unexpected_error": "出錯了"
   "all": "全部"
   "thank_you": "多謝"
+  "go_to_top": "Go to Top"
+  "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
+  "loading_timeout_error": "Loading view timeout reached."
+  "items_text": "items"
 
   "time_ago":
     "right_now" : "現正進行"
@@ -93,6 +97,7 @@ I18nTranslationsZhTw =
     "view": "查看"
 
   "delivery":
+    "select_district": "Select Destrict"
     "thank_offer":
       "staff_will_contact": "我們的職員會於下星期五致電 {{mobile}} 給 {{name}} on {{mobile}} 以確認"
     "book_timeslot":
@@ -128,7 +133,7 @@ I18nTranslationsZhTw =
     "driver_screen": "司機介面"
     "modify": "修改"
     "cancel_booking": "取消預約"
-    "accepted_items": "Accepted items to be transported正在等候運送、已接受的物資"
+    "accepted_items": "正在等候運送、已接受的物資"
     "charity_sale": "您願意慈善義賣捐贈的物資嗎？"
 
   "edit_images":
@@ -229,6 +234,8 @@ I18nTranslationsZhTw =
       "porterage" : "須協助搬運（須與司機商量）"
       "extra_time_charge" : "額外時間（已包括15分鐘搬運時間，超過15分鐘可能需要額外收費）"
       "get_quote" : "報價"
+      "date": "Date"
+      "time": "Time"
 
   "drop-off":
     "select_schedule": "選擇時間"

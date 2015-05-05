@@ -26,6 +26,9 @@ export default addressDetails.extend({
   borrowTrolley: false,
   porterage: false,
 
+  datePrompt: Ember.I18n.t("gogovan.book_van.date"),
+  timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+
   actions: {
     bookVan: function(){
       var controller = this;

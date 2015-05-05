@@ -8,6 +8,9 @@ export default Ember.Controller.extend({
   selectedTerritory: {id: null},
   selectedDistrict: {id: null},
 
+  territoriesPrompt: Ember.I18n.t("all"),
+  destrictPrompt: Ember.I18n.t("delivery.select_district"),
+
   territories: function(){
     return this.store.all('territory');
   }.property(),

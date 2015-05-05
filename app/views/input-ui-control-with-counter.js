@@ -66,7 +66,7 @@ export default Ember.View.extend({
     this.send("displayCharCount");
 
     if (!this.get('maxlength')) {
-      Ember.assert('InputWithCounter doesn\'t work without a maxlength attribute');
+      Ember.assert(Ember.I18n.t("input_length_error_message"));
     }
 
     if(this.get('placeholder') === 'item_description') {
