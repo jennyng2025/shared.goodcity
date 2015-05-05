@@ -33,6 +33,7 @@ I18nTranslationsEn =
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
   "404_error" : "Unfortunately, the details that you are looking for are not here."
+  "403_error" : "You are not authorized to take this action."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "cancel": "Cancel"

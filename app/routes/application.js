@@ -5,7 +5,7 @@ import config from '../config/environment';
 export default Ember.Route.extend({
   beforeModel: function (transition) {
     //for language for ggv_orders from url
-    if(transition.targetName === "ggv_orders") {
+    if(transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
       this.set('session.language', language);
     }
@@ -91,8 +91,8 @@ export default Ember.Route.extend({
     // so in this scenario redirect to home for 404
     error: function(reason) {
       try {
-        if (reason.status === 404) {
-          this.get("alert").show(Ember.I18n.t("404_error"), () => this.transitionTo("/"));
+        if ([403, 404].indexOf(reason.status) >= 0) {
+          this.get("alert").show(Ember.I18n.t(reason.status+"_error"), () => this.transitionTo("/"));
         } else {
           this.handleError(reason);
         }
