@@ -33,6 +33,7 @@ I18nTranslationsZhTw =
   "offer_not_found": "找不到您搜索的捐獻項目"
   "item_not_found": "找不到您搜索的項目"
   "404_error" : "不好意思，您搜尋的資料並不存在"
+  "403_error" : "You are not authorized to take this action."
   "not_found": "不好意思，你搜尋的地點似乎不存在了！"
   "okay": "可以了"
   "cancel": "取消"
