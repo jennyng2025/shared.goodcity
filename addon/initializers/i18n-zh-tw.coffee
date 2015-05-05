@@ -5,6 +5,8 @@ I18nTranslationsZhTw =
   "try_again": "再試一次"
   "send": "傳送"
   "delete_confirm": "一旦確認，將無法還原。你確定嗎？"
+  "online": "Online"
+  "not_connected": "Not Connected"
 
   "crossroads" : "十字路會"
   "language": "繁體中文"
