@@ -1,13 +1,16 @@
 import Ember from "ember";
 import config from '../config/environment';
+import AjaxPromise from '../utils/ajax-promise';
 
 export default Ember.Service.extend({
+  session: Ember.inject.service(),
+
   appLoad: function () {
     if (!config.cordova.enabled) {
       return;
     }
 
-    var pushNotification;
+    var pushNotification, _this = this;
 
     function onDeviceReady() {
       document.addEventListener("backbutton", function (e) {
@@ -82,10 +85,7 @@ export default Ember.Service.extend({
       switch (e.event) {
         case 'registered':
           if (e.regid.length > 0) {
-            $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
-            // Your GCM push server needs to know the regID before it can push to this device
-            // here is where you might want to send it the regID for later use.
-            console.log("regID = " + e.regid);
+            new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: e.regid, platform: "gcm"});
           }
           break;
 
@@ -119,11 +119,11 @@ export default Ember.Service.extend({
           break;
 
         case 'error':
-          $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+          window.alert(e.msg);
           break;
 
         default:
-          $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+          window.alert("unknown event");
           break;
       }
     }
@@ -135,11 +135,11 @@ export default Ember.Service.extend({
 //    }
 
     function successHandler(result) {
-      $("#app-status-ul").append('<li>success:' + result + '</li>');
+      window.alert(result);
     }
 
     function errorHandler(error) {
-      $("#app-status-ul").append('<li>error:' + error + '</li>');
+      window.alert(error);
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
