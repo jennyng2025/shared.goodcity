@@ -18,9 +18,9 @@ export default Ember.Controller.extend({
 
   districtsByTerritory: function() {
     if(this.selectedTerritory && this.selectedTerritory.id) {
-      return this.selectedTerritory.get('districts');
+      return this.selectedTerritory.get('districts').sortBy('name');
     } else {
-      return this.store.all('district');
+      return this.store.all('district').sortBy('name');
     }
   }.property('selectedTerritory'),
 });
