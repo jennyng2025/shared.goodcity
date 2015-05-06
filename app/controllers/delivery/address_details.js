@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  user: Ember.computed.alias('session.currentUser'),
+  delivery: Ember.computed.alias("controllers.delivery.model"),
+  user: Ember.computed.alias('delivery.offer.createdBy'),
   territoryId: Ember.computed.alias('user.address.district.territory.id'),
   districtId: Ember.computed.alias('user.address.district.id'),
   selectedTerritory: {id: null},

@@ -5,7 +5,8 @@ import AjaxPromise from './../../utils/ajax-promise';
 export default Ember.Controller.extend({
   needs: ['delivery'],
 
-  user: Ember.computed.alias('session.currentUser'),
+  delivery: Ember.computed.alias("controllers.delivery.model"),
+  user: Ember.computed.alias('delivery.offer.createdBy'),
   mobileNumber: Ember.computed.alias('user.mobile'),
   orderDetails: Ember.computed.alias('model'),
 
