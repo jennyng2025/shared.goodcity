@@ -5,6 +5,8 @@ I18nTranslationsEn =
   "try_again": "Try Again"
   "send": "Send"
   "delete_confirm": "Are you sure? This cannot be undone."
+  "online": "Online"
+  "not_connected": "Not Connected"
 
   "crossroads" : "Crossroads"
   "language": "en"
