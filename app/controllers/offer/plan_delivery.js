@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
       var offerId = this.get('controllers.offer').get('model.id');
       var offer = this.store.getById('offer', offerId);
       var delivery = offer.get("delivery");
-      if(delivery) {
+      if(delivery && offer.get('isScheduled')) {
         delivery.setProperties({
           offer: offer,
           deliveryType: delivery_type
