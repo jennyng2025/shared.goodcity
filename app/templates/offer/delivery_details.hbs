@@ -27,7 +27,7 @@
                 {{t 'delivery_details.driver_contact'}}
               </div>
               <div class="small-6 columns right strong">
-                {{ggvOrder.driverMobile}}
+                {{view "phone" number=ggvOrder.driverMobile}}
               </div>
             </div>
             <hr>
@@ -47,7 +47,7 @@
                 {{t 'delivery_details.fee'}}
               </div>
               <div class="small-6 columns right strong">
-                {{ggvOrder.price}}
+                ${{ggvOrder.price}}
               </div>
             </div>
             <hr>
