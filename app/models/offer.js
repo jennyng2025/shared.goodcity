@@ -82,8 +82,8 @@ export default DS.Model.extend({
   }.property('isUnderReview', 'isSubmitted', 'isClosed'),
 
   isFinished: function() {
-    return this.get('isClosed') || this.get('isReceived');
-  }.property('isClosed', 'isReceived'),
+    return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled');
+  }.property('isClosed', 'isReceived', 'isCancelled'),
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
