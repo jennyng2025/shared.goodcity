@@ -4,6 +4,8 @@ import config from '../config/environment';
 import preloadDataMixin from '../mixins/preload_data';
 
 export default Ember.Route.extend(preloadDataMixin, {
+  cordova: Ember.inject.service(),
+
   beforeModel: function (transition = []) {
     if(transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";

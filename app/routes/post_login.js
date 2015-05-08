@@ -4,6 +4,7 @@ import AjaxPromise from '../utils/ajax-promise';
 import preloadDataMixin from '../mixins/preload_data';
 
 export default Ember.Route.extend(preloadDataMixin, {
+  cordova: Ember.inject.service(),
 
   beforeModel: function(transition) {
     var _this = this;

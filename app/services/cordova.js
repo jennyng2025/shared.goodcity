@@ -13,79 +13,56 @@ export default Ember.Service.extend({
     var pushNotification, _this = this;
 
     function onDeviceReady() {
-      document.addEventListener("backbutton", function (e) {
-        if ($("#home").length > 0) {
-          // call this to get a new token each time. don't call it to reuse existing token.
-          //pushNotification.unregister(successHandler, errorHandler);
-          e.preventDefault();
-          navigator.app.exitApp();
-        }
-        else {
-          navigator.app.backHistory();
-        }
-      }, false);
+      // document.addEventListener("backbutton", function (e) {
+      //   if ($("#home").length > 0) {
+      //     // call this to get a new token each time. don't call it to reuse existing token.
+      //     //pushNotification.unregister(successHandler, errorHandler);
+      //     e.preventDefault();
+      //     navigator.app.exitApp();
+      //   }
+      //   else {
+      //     navigator.app.backHistory();
+      //   }
+      // }, false);
 
       pushNotification = window.plugins.pushNotification;
       if (device.platform == "android" || device.platform == "Android" || device.platform == "amazon-fireos") {
-        pushNotification.register(
-          successHandler,
-          errorHandler,
-          {
-            "senderID": "266233825346",
-            "ecb": onNotificationGCM
-          }
-        );
+        var opts = {"senderID":"266233825346", "ecb":"onNotificationGCM"};
+        pushNotification.register(successHandler, errorHandler, opts);
+      } else if (device.platform === "iOS") {
+        var opts = {"badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN"};
+        pushNotification.register(res => sendToken(res, "aps"), errorHandler, opts);
+      } else if (device.platform === "Win32NT") {
+        var opts = {"channelName":channelName, "ecb":"onNotificationWP8", "uccb":"channelHandler", "errcb": "jsonErrorHandler"};
+        pushNotification.register(channelHandler, errorHandler, opts);
       }
-//      } else if (device.platform === "iOS") {
-//        pushNotification.register(
-//          tokenHandler,
-//          errorHandler,
-//          {
-//            "badge": "true",
-//            "sound": "true",
-//            "alert": "true",
-//            "ecb": onNotificationAPN
-//          }
-//        );
-//      } else if (device.platform === "Win32NT") {
-//        pushNotification.register(
-//          channelHandler,
-//          errorHandler,
-//          {
-//            "channelName": channelName,
-//            "ecb": "onNotificationWP8",
-//            "uccb": "channelHandler",
-//            "errcb": "jsonErrorHandler"
-//          }
-//        );
-//      }
     }
 
     // handle APNS notifications for iOS
-//    function onNotificationAPN(e) {
-//      if (e.alert) {
-//        $("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
-//        // showing an alert also requires the org.apache.cordova.dialogs plugin
-//        navigator.notification.alert(e.alert);
-//      }
-//
-//      if (e.sound) {
-//        // playing a sound also requires the org.apache.cordova.media plugin
-//        var snd = new Media(e.sound);
-//        snd.play();
-//      }
-//
-//      if (e.badge) {
-//        pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
-//      }
-//    }
+    function onNotificationAPN(e) {
+      if (e.alert) {
+        // showing an alert also requires the org.apache.cordova.dialogs plugin
+        navigator.notification.alert(e.alert);
+      }
+
+      if (e.sound) {
+        // playing a sound also requires the org.apache.cordova.media plugin
+        var snd = new Media(e.sound);
+        snd.play();
+      }
+
+      if (e.badge) {
+        pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+      }
+    }
 
     // handle GCM notifications for Android
-    function onNotificationGCM(e) {
+    window.onNotificationGCM = function(e) {
+      navigator.notification.alert(JSON.stringify(e));
       switch (e.event) {
         case 'registered':
           if (e.regid.length > 0) {
-            new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: e.regid, platform: "gcm"});
+            sendToken(e.regid, "gcm");
           }
           break;
 
@@ -128,11 +105,9 @@ export default Ember.Service.extend({
       }
     }
 
-//    function tokenHandler(result) {
-//      $("#app-status-ul").append('<li>token: ' + result + '</li>');
-//      // Your iOS push server needs to know the token before it can push to this device
-//      // here is where you might want to send it the token for later use.
-//    }
+    function sendToken(handle, platform) {
+      return new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: handle, platform: platform});
+    }
 
     function successHandler(result) {
       window.alert(result);
