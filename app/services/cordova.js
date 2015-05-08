@@ -27,7 +27,7 @@ export default Ember.Service.extend({
 
       pushNotification = window.plugins.pushNotification;
       if (device.platform == "android" || device.platform == "Android" || device.platform == "amazon-fireos") {
-        var opts = {"senderID":"266233825346", "ecb":"onNotificationGCM"};
+        var opts = {"senderID":"1032175117827", "ecb":"onNotificationGCM"};
         pushNotification.register(successHandler, errorHandler, opts);
       } else if (device.platform === "iOS") {
         var opts = {"badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN"};
@@ -40,6 +40,8 @@ export default Ember.Service.extend({
 
     // handle APNS notifications for iOS
     function onNotificationAPN(e) {
+      navigator.notification.alert(JSON.stringify(e));
+
       if (e.alert) {
         // showing an alert also requires the org.apache.cordova.dialogs plugin
         navigator.notification.alert(e.alert);
