@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+  session: Ember.inject.service(),
   store: Ember.inject.service(),
   alert: Ember.inject.service(),
   confirm: Ember.inject.service(),
@@ -169,8 +170,14 @@ export default Ember.Component.extend({
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       if (!this.get("item")) {
         var offer = this.get("offer");
-        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
-        var item = this.get("store").createRecord("item", {offer:offer,donorCondition:defaultDonorCondition,state:"draft"});
+
+        var defaultDonorCondition = this.get("session.isAdminApp") ? null :
+          this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var item = this.get("store").createRecord("item", {
+          offer: offer,
+          donorCondition: defaultDonorCondition,
+          state: "draft"
+        });
         item.save()
           .then(() => {
             this.get("store").createRecord('image', {cloudinaryId: identifier, item: item, favourite: true}).save()
