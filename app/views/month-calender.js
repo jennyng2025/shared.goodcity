@@ -35,6 +35,11 @@ export default Ember.TextField.extend({
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
         },
+
+        onClose: function() {
+          Ember.$(document.activeElement).blur();
+        },
+
         onStart: function(){
           var date = _this.get('selection');
           if(date) {
