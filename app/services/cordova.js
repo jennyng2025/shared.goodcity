@@ -27,7 +27,7 @@ export default Ember.Service.extend({
 
       pushNotification = window.plugins.pushNotification;
       if (device.platform == "android" || device.platform == "Android" || device.platform == "amazon-fireos") {
-        var opts = {"senderID":"1032175117827", "ecb":"onNotificationGCM"};
+        var opts = {"senderID":config.cordova.GcmSenderId, "ecb":"onNotificationGCM"};
         pushNotification.register(successHandler, errorHandler, opts);
       } else if (device.platform === "iOS") {
         var opts = {"badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN"};
@@ -49,8 +49,8 @@ export default Ember.Service.extend({
 
       if (e.sound) {
         // playing a sound also requires the org.apache.cordova.media plugin
-        var snd = new Media(e.sound);
-        snd.play();
+        // var snd = new Media(e.sound);
+        // snd.play();
       }
 
       if (e.badge) {
