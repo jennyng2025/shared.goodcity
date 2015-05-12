@@ -7,8 +7,11 @@ export default Ember.Controller.extend({
 
   delivery: Ember.computed.alias("controllers.delivery.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
-  mobileNumber: Ember.computed.alias('user.mobile'),
   orderDetails: Ember.computed.alias('model'),
+
+  mobileNumber: function(){
+    return this.get("user.mobile").replace(/\+852/, "");
+  }.property('user.mobile'),
 
   districtName: function(){
     var district = this.store.getById("district", this.get('model.districtId'));
