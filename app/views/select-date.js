@@ -33,6 +33,10 @@ export default Ember.TextField.extend({
           if(currentMins === 960) { this.set("disable", [new Date])}
         },
 
+        onClose: function() {
+          Ember.$(document.activeElement).blur();
+        },
+
         onSet: function() {
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);

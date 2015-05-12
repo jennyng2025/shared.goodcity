@@ -1,6 +1,7 @@
 .date_selector {
   .picker__holder {
-    min-width: 280px; }
+    min-width: 280px;
+    margin-top: 0 !important; }
 }
 
 .pickadate, .timepicker {
@@ -13,6 +14,15 @@
 
 .picker--time {
   min-width: 100px; }
+
+.picker__frame {
+  @media #{$large-only} {
+    top: 20% !important;
+  }
+  @media #{$medium-only} {
+    top: 20% !important;
+  }
+}
 
 .time_selector {
   .picker__holder {
