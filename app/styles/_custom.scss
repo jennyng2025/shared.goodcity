@@ -14,6 +14,14 @@ h2{
     font-size: 0.8rem !important; }
 }
 
+.back {
+  @media #{$small-only} {
+    margin-left: 0.5rem;
+    &:before {
+      margin-right: 0.25rem;
+    }
+  }
+}
 .tabs-content {
   .message_box {
     background-color: $white;
