@@ -10,7 +10,7 @@ export default Ember.Route.extend({
     }
 
     var language = this.session.get("language") || Ember.I18n.default_language;
-    moment.lang(language);
+    moment.locale(language);
     Ember.I18n.translations = Ember.I18n.translation_store[language];
 
     Ember.onerror = window.onerror = error => this.handleError(error);
