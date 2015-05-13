@@ -48,6 +48,10 @@ I18nTranslationsEn =
   "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
   "loading_timeout_error": "Loading view timeout reached."
   "items_text": "items"
+  "day":
+    "today": "Today"
+    "morning": "Morning"
+    "afternoon": "Afternoon"
 
   "time_ago":
     "right_now" : "Right Now"

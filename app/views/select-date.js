@@ -20,7 +20,8 @@ export default Ember.TextField.extend({
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
-
+        monthsFull: moment.months(),
+        weekdaysShort: moment.weekdaysShort(),
         disable: [ 1, 2 ],
         min: [date.getUTCFullYear(), date.getMonth(), date.getDate()],
         clear: false,
