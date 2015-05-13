@@ -104,7 +104,8 @@ export default DS.Model.extend({
   }.property('items.@each.displayImageUrl'),
 
   isCharitableSale: function() {
-    return this.get("items").rejectBy("saleable", false).length > 0 ? "Yes" : "No";
+    var isSaleable = this.get("items").rejectBy("saleable", false).length > 0;
+    return  isSaleable ? this.locale("yes") : this.locale("no");
   }.property('items.@each.saleable'),
 
   isAccepted: function() {
