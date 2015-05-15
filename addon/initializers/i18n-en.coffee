@@ -98,6 +98,7 @@ I18nTranslationsEn =
   "messages":
     "unread" : "Unread ({{unreadCount}})"
     "owner" : "You"
+    "today_with_time": "Today, {{time}}"
 
   "notifications":
     "text" : "{{text}}"
