@@ -53,6 +53,10 @@ export default DS.Model.extend({
     return this.store.filter("package", p => p.get("offerId") === parseInt(this.get("id")));
   }.property(),
 
+  itemPackages: function() {
+    return this.store.all("package").filterBy("offerId", parseInt(this.get("id")));
+  }.property(),
+
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
   submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
@@ -78,8 +82,8 @@ export default DS.Model.extend({
   }.property('isUnderReview', 'isSubmitted', 'isClosed'),
 
   isFinished: function() {
-    return this.get('isClosed') || this.get('isReceived');
-  }.property('isClosed', 'isReceived'),
+    return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled');
+  }.property('isClosed', 'isReceived', 'isCancelled'),
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
@@ -100,7 +104,8 @@ export default DS.Model.extend({
   }.property('items.@each.displayImageUrl'),
 
   isCharitableSale: function() {
-    return this.get("items").rejectBy("saleable", false).length > 0 ? "Yes" : "No";
+    var isSaleable = this.get("items").rejectBy("saleable", false).length > 0;
+    return  isSaleable ? this.locale("yes") : this.locale("no");
   }.property('items.@each.saleable'),
 
   isAccepted: function() {
@@ -127,7 +132,7 @@ export default DS.Model.extend({
   },
 
   status_text: function(){
-    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " items)")
+    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
   }.property('status'),
 
   scheduled_status: function(){

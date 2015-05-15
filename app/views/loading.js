@@ -8,7 +8,7 @@ export default Ember.View.extend({
 
   didInsertElement: function() {
     var timer = Ember.run.later(() => {
-      this.get("logger").error(new Error("Loading view timeout reached."));
+      this.get("logger").error(new Error(Ember.I18n.t("loading_timeout_error")));
       this.get("alert").show(Ember.I18n.t("loading_timeout"), () => {
         this.destroy();
         window.location.reload();

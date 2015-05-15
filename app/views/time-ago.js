@@ -11,7 +11,7 @@ export default Ember.View.extend({
       Ember.$.timeago.settings.strings.suffixAgo = "";
       Ember.$.timeago.settings.strings.suffixFromNow = "";
       Ember.$.timeago.settings.strings.seconds = "1m";
-      Ember.$.timeago.settings.strings.minutes = "1m";
+      Ember.$.timeago.settings.strings.minute = "1m";
       Ember.$.timeago.settings.strings.minutes = "%dm";
       Ember.$.timeago.settings.strings.hour = "1h";
       Ember.$.timeago.settings.strings.hours = "%dh";

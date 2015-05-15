@@ -25,6 +25,8 @@ export default Ember.TextField.extend({
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
+        monthsFull: moment.months(),
+        weekdaysShort: moment.weekdaysShort(),
         disable: available_array,
         min: new Date(),
         clear: false,
@@ -35,6 +37,11 @@ export default Ember.TextField.extend({
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
         },
+
+        onClose: function() {
+          Ember.$(document.activeElement).blur();
+        },
+
         onStart: function(){
           var date = _this.get('selection');
           if(date) {

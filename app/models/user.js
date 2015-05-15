@@ -11,6 +11,9 @@ export default Addressable.extend({
   mobile:      attr('string'),
   createdAt:   attr('date'),
 
+  lastConnected:    attr('date'),
+  lastDisconnected: attr('date'),
+
   image:          belongsTo('image'),
   permission:     belongsTo('permission'),
   reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
@@ -39,6 +42,16 @@ export default Addressable.extend({
 
   fullName: function() {
     return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName')
+  }.property('firstName', 'lastName'),
+
+  onlineStatus: function(){
+    if(!this.get('lastConnected') && !this.get('lastDisconnected')) {
+      return Ember.I18n.t('not_connected');
+    } else if(this.get('lastDisconnected') > this.get('lastConnected')) {
+      return false;
+    } else if(this.get('lastDisconnected') < this.get('lastConnected')) {
+      return Ember.I18n.t('online');
+    }
+  }.property('lastConnected', 'lastDisconnected'),
 
 });

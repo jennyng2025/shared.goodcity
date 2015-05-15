@@ -5,19 +5,39 @@ export default Ember.TextField.extend({
   classNames: 'pickadate',
   attributeBindings: [ "name", "type", "value", "id", 'required', 'pattern', 'placeholder'],
 
+  currentMinutes: function(){
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes() > 30 ? 30 : 0;;
+    var total_mins = hours*60 + minutes;
+    return (total_mins > 960) ? 960 : total_mins;
+  },
+
   didInsertElement: function(){
     var _this = this;
     var date = new Date();
+
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
-
+        monthsFull: moment.months(),
+        weekdaysShort: moment.weekdaysShort(),
         disable: [ 1, 2 ],
         min: [date.getUTCFullYear(), date.getMonth(), date.getDate()],
         clear: false,
         today: false,
         close: false,
         // editable: true,
+
+        onOpen: function() {
+          var currentMins = _this.currentMinutes();
+          if(currentMins === 960) { this.set("disable", [new Date])}
+        },
+
+        onClose: function() {
+          Ember.$(document.activeElement).blur();
+        },
+
         onSet: function() {
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
@@ -30,24 +50,16 @@ export default Ember.TextField.extend({
             selectedDate.setHours(0,0,0,0);
 
             if(selectedDate.getTime() === currentDate.getTime()) {
-              var currentTime = new Date();
-              var hours = currentTime.getHours();
-              var minutes = currentTime.getMinutes();
-              minutes = minutes > 30 ? 30 : 0;
-              var total_mins = hours*60 + minutes;
-              total_mins = total_mins > 960 ? 960 : total_mins;
-
+              var total_mins = _this.currentMinutes();
               // disabled all previous options
               Ember.$("#selectedTime option[value="+total_mins+"]").prevAll().each(function() {
-                  Ember.$( this ).prop('disabled', true);
-
-                });
+                  Ember.$( this ).addClass("hidden");
+              });
               // disable current option
-              Ember.$("#selectedTime option[value="+total_mins+"]").prop('disabled', true);
-
+              Ember.$("#selectedTime option[value="+total_mins+"]").addClass("hidden");
             } else {
               Ember.$("#selectedTime option").each(function() {
-                  Ember.$( this ).removeAttr( "disabled" );
+                  Ember.$( this ).removeClass("hidden");
                 });
             }
           }

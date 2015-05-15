@@ -27,7 +27,7 @@
                 {{t 'delivery_details.driver_contact'}}
               </div>
               <div class="small-6 columns right strong">
-                {{ggvOrder.driverMobile}}
+                {{view "phone" number=ggvOrder.driverMobile}}
               </div>
             </div>
             <hr>
@@ -47,7 +47,7 @@
                 {{t 'delivery_details.fee'}}
               </div>
               <div class="small-6 columns right strong">
-                {{ggvOrder.price}}
+                ${{ggvOrder.price}}
               </div>
             </div>
             <hr>
@@ -68,6 +68,20 @@
          {{/each}}
       </div>
     </div>
+    {{#if session.isAdminApp}}
+      {{#if delivery.gogovanOrder}}
+        <hr>
+        <div class="row booking-id">
+          <div class="small-6 columns">
+            {{t 'delivery_details.id'}}
+          </div>
+          <div class="small-6 columns right strong">
+            {{delivery.gogovanOrder.bookingId}}
+            (<a target="_blank" href={{ggvDriverUrl}}>{{t "delivery_details.driver_screen"}}</a>)
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
 
     <hr>
     <div class="row">

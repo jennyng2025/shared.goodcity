@@ -26,10 +26,13 @@ export default addressDetails.extend({
   borrowTrolley: false,
   porterage: false,
 
+  datePrompt: Ember.I18n.t("gogovan.book_van.date"),
+  timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+
   actions: {
     bookVan: function(){
       var controller = this;
-
+      var loadingView = this.container.lookup('view:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('controllers.delivery').get('model.id');
       var delivery = controller.store.getById('delivery', deliveryId);
@@ -48,9 +51,9 @@ export default addressDetails.extend({
 
       var order = controller.store.createRecord('gogovan_order', requestProperties);
       order.set('delivery', delivery);
-
       new AjaxPromise("/gogovan_orders/calculate_price", "POST", controller.get('session.authToken'), requestProperties).then(function(data) {
           order.set('baseFee', data['base']);
+          loadingView.destroy();
           controller.transitionToRoute('delivery.confirm_van', {queryParams: {placeOrder: true}});
         });
     },

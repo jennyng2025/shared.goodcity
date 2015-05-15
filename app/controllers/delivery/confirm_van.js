@@ -5,9 +5,13 @@ import AjaxPromise from './../../utils/ajax-promise';
 export default Ember.Controller.extend({
   needs: ['delivery'],
 
-  user: Ember.computed.alias('session.currentUser'),
-  mobileNumber: Ember.computed.alias('user.mobile'),
+  delivery: Ember.computed.alias("controllers.delivery.model"),
+  user: Ember.computed.alias('delivery.offer.createdBy'),
   orderDetails: Ember.computed.alias('model'),
+
+  mobileNumber: function(){
+    return this.get("user.mobile").replace(/\+852/, "");
+  }.property('user.mobile'),
 
   districtName: function(){
     var district = this.store.getById("district", this.get('model.districtId'));

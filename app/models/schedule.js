@@ -19,8 +19,8 @@ export default DS.Model.extend({
       value = value[0];
     } else {
       value = slot.split(':')[0];
-      value = (parseInt(value) > 8 && parseInt(value) < 12 ) ? "Morning" : "Afternoon";
+      value = (parseInt(value) > 8 && parseInt(value) < 12 ) ? "morning" : "afternoon";
     }
-    return value;
+    return Ember.I18n.t("day." + value.toLowerCase());
   }.property("slotName"),
 });

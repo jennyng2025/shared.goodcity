@@ -5,6 +5,8 @@ I18nTranslationsEn =
   "try_again": "Try Again"
   "send": "Send"
   "delete_confirm": "Are you sure? This cannot be undone."
+  "online": "Online"
+  "not_connected": "Not Connected"
 
   "crossroads" : "Crossroads"
   "language": "en"
@@ -33,6 +35,7 @@ I18nTranslationsEn =
   "offer_not_found": "The offer you were looking for could not be found."
   "item_not_found": "The item you were looking for could not be found."
   "404_error" : "Unfortunately, the details that you are looking for are not here."
+  "403_error" : "You are not authorized to take this action."
   "not_found": "Oooops, the location you're headed to doesn't seem to exist anymore. Sorry!"
   "okay": "Okay"
   "cancel": "Cancel"
@@ -41,6 +44,14 @@ I18nTranslationsEn =
   "unexpected_error": "Something went wrong"
   "all": "All"
   "thank_you": "Thank you"
+  "go_to_top": "Go to Top"
+  "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
+  "loading_timeout_error": "Loading view timeout reached."
+  "items_text": "items"
+  "day":
+    "today": "Today"
+    "morning": "Morning"
+    "afternoon": "Afternoon"
 
   "time_ago":
     "right_now" : "Right Now"
@@ -93,6 +104,7 @@ I18nTranslationsEn =
     "view": "View"
 
   "delivery":
+    "select_district": "Select Destrict"
     "thank_offer":
       "staff_will_contact": "Our staff will call {{name}} on {{mobile}} next Friday to confirm."
     "book_timeslot":
@@ -124,6 +136,8 @@ I18nTranslationsEn =
     "waiting": "Awaiting Driver Confirmation"
     "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
     "time": "Booking Time"
+    "id": "Booking ID"
+    "driver_screen": "Driver Screen"
     "modify": "Modify"
     "cancel_booking": "Cancel Booking"
     "accepted_items": "Accepted items to be transported"
@@ -227,6 +241,8 @@ I18nTranslationsEn =
       "porterage" : "Labour (negotiate with drivers)"
       "extra_time_charge" : "Extra Time(15 minutes waiting time is included for you to load the van. Extra time incurs a charge.)"
       "get_quote" : "Get Quote"
+      "date": "Date"
+      "time": "Time"
 
   "drop-off":
     "select_schedule": "Select Schedule"
