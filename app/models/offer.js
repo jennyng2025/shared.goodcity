@@ -193,7 +193,7 @@ export default DS.Model.extend({
   }.property('messages.[]'),
 
   hasCrossroadsTransport: function(){
-    return this.get('crossroadsTransport') && this.get('crossroadsTransport.name') !== Ember.I18n.t("offer.disable");
+    return this.get('crossroadsTransport') && this.get('crossroadsTransport.isVanAllowed')
   }.property('crossroadsTransport'),
 
   hasGogovanTransport: function(){
