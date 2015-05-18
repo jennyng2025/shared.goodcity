@@ -18,7 +18,7 @@ export default DS.Model.extend({
   messages:             hasMany('message'),
   images:               hasMany('image'),
   offer:                belongsTo('offer'),
-  itemType:             belongsTo('item_type'),
+  packageType:          belongsTo('package_type'),
   donorCondition:       belongsTo('donor_condition'),
   donorConditionId:     foreignKey('donorCondition.id'),
   rejectionReason:      belongsTo('rejection_reason'),
