@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
+import preloadDataMixin from '../mixins/preload_data';
 
-export default Ember.Route.extend({
-  beforeModel: function (transition) {
+export default Ember.Route.extend(preloadDataMixin, {
+  beforeModel: function (transition = []) {
     if(transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
       this.set('session.language', language);
@@ -15,29 +16,7 @@ export default Ember.Route.extend({
 
     Ember.onerror = window.onerror = error => this.handleError(error);
 
-    //preload data
-    var retrieve = types => types.map(type => this.store.find(type));
-    var promises = retrieve(config.APP.PRELOAD_TYPES);
-
-    //if logged in
-    if (this.session.get('authToken')) {
-      promises.push(
-        new AjaxPromise("/auth/current_user_profile", "GET", this.session.get("authToken"))
-          .then(data => {
-            this.store.pushPayload(data);
-            this.store.push('user', data.user_profile);
-          })
-      );
-      promises = promises.concat(retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));
-    }
-
-    return Ember.RSVP.all(promises).catch(error => {
-      if (error.status === 0) {
-        this.transitionTo("offline");
-      } else {
-        this.handleError(error);
-      }
-    });
+    return this.preloadData(this.retrieve(config.APP.PRELOAD_TYPES));
   },
 
   renderTemplate: function() {

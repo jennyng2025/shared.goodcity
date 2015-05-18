@@ -1,16 +1,16 @@
 import Ember from 'ember';
 import config from '../config/environment';
+import AjaxPromise from '../utils/ajax-promise';
+import preloadDataMixin from '../mixins/preload_data';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(preloadDataMixin, {
 
-  beforeModel: function() {
+  beforeModel: function(transition) {
     var _this = this;
     Ember.run(function(){
       _this.controllerFor('application').send('logMeIn');
     });
-    var promises = config.APP.PRELOAD_AUTHORIZED_TYPES
-      .map(function(type) { return _this.store.find(type); });
-    return Ember.RSVP.allSettled(promises);
+    return this.preloadData();
   },
 
   afterModel: function() {
