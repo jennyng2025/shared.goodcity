@@ -16,7 +16,7 @@ export default DS.Model.extend({
   createdAt:       attr('date'),
   updatedAt:       attr('date'),
   item:            belongsTo('item', { async: true }),
-  packageType:     belongsTo('item_type', { async: true }),
+  packageType:     belongsTo('package_type', { async: true }),
   imageId:         attr('number'),
   offerId:         attr('number'),
 
@@ -25,8 +25,8 @@ export default DS.Model.extend({
   }.property('packageType'),
 
   packageTypeObject: function() {
-    var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode', 'parentId');
-    obj.id = obj.itemTypeId = parseInt(obj.id);
+    var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode');
+    obj.id = obj.packageTypeId = parseInt(obj.id);
     return obj;
   }.property('packageType'),
 
