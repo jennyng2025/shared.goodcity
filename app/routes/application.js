@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 import preloadDataMixin from '../mixins/preload_data';
 
@@ -17,6 +16,10 @@ export default Ember.Route.extend(preloadDataMixin, {
     Ember.onerror = window.onerror = error => this.handleError(error);
 
     return this.preloadData(this.retrieve(config.APP.PRELOAD_TYPES));
+  },
+
+  model: function(){
+    return this.preloadOffers();
   },
 
   renderTemplate: function() {

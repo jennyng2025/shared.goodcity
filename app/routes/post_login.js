@@ -10,7 +10,8 @@ export default Ember.Route.extend(preloadDataMixin, {
     Ember.run(function(){
       _this.controllerFor('application').send('logMeIn');
     });
-    return this.preloadData();
+    this.preloadData();
+    return this.preloadOffers();
   },
 
   afterModel: function() {
