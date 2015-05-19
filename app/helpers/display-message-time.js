@@ -10,7 +10,8 @@ export default Ember.Handlebars.makeBoundHelper(function(value) {
   if(!message_time) {
     return "";
   } else if(day_difference < 1) {
-    return Ember.I18n.t("day.today")+", "+moment(message_time).format('HH:mm');
+    var time = moment(message_time).format('HH:mm');
+    return Ember.I18n.t("messages.today_with_time", {"time":time});;
   } else if(day_difference < 7) {
     return moment(message_time).format('dddd, HH:mm');
   } else {

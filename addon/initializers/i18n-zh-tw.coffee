@@ -99,6 +99,7 @@ I18nTranslationsZhTw =
   "messages":
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
+    "today_with_time": "Today, {{time}}"
 
   "notifications":
     "text" : "{{text}}"
