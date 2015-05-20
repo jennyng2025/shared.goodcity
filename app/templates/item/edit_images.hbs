@@ -1,1 +1,57 @@
-{{edit-images offerId=offer.id itemId=model.id next="next" back="back" newItem="newItem"}}
+<section class="main-section row">
+
+  <div id="main-image" class="{{if isExpanded 'is-expanded'}}">
+    {{#unless noImage}}
+      <div style={{{previewImageBgCss}}}>
+        <div id="main-image-controls">
+          <a {{action "deleteImage"}} title={{t "edit_images.delete_tooltip"}}>
+            <i class="fa fa-trash"></i>
+          </a>
+          <a {{action "setFavourite"}} title={{t "edit_images.favourite_tooltip"}}>
+            <i class="fa {{if previewMatchesFavourite 'fa-star' 'fa-star-o'}}"></i>
+          </a>
+          <a {{action "expandImage"}} title={{t "edit_images.fullscreen_tooltip"}}>
+            <i class="fa {{if isExpanded 'fa-compress' 'fa-expand'}}"></i>
+          </a>
+        </div>
+      </div>
+    {{else}}
+    <div class="center-box" style={{{instructionBoxCss}}}>
+      <span class="center-item">
+        <h3>{{t "edit_images.donating_what"}}</h3>
+        <p>{{t "edit_images.take_photos"}}</p>
+      </span>
+    </div>
+    {{/unless}}
+  </div>
+
+  <ul id="photo-list" class="{{if isExpanded 'hidden'}}">
+    <li>
+      <a id="add-photo" {{action "triggerUpload"}} class="center-box {{unless isReady 'disabled'}}" style={{{thumbImageCss}}}>
+        <span class="center-item">
+          <i class="fa fa-camera"></i>
+          {{addPhotoLabel}}
+        </span>
+      </a>
+      {{cloudinary-upload ready="uploadReady" progress="uploadProgress"
+        always="uploadComplete" done="uploadSuccess" submit="uploadProgress"
+        }}
+    </li>
+    {{#each image in images}}
+      <li>
+        <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
+          <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
+          <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+
+<div class="btm {{if isExpanded 'hidden'}}">
+  <div class="row">
+    <div class="small-12 columns">
+      <button {{ action "next"}} disabled={{noImage}} class="button expand">{{t "done"}}</button>
+    </div>
+  </div>
+</div>
