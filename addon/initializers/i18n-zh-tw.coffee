@@ -18,6 +18,7 @@ I18nTranslationsZhTw =
   "prev" : "上一步"
   "back" : "回到上一頁"
   "end" : "結束"
+  "done": "Done"
   "error.message" : "出錯了，請見諒！"
   "images" : "圖片"
   "delete" : "刪除"
@@ -154,6 +155,7 @@ I18nTranslationsZhTw =
     "fullscreen_tooltip" : "全螢幕"
     "favourite_tooltip" : "設定為封面圖片"
     "delete_tooltip" : "刪除圖片"
+    "image_uploading": "Image Uploading "
 
   "plan_delivery":
     "title" : "安排運輸"
