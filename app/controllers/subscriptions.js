@@ -53,7 +53,8 @@ export default Ember.Controller.extend({
       var updateStatus = Ember.run.bind(this, this.updateStatus);
       var connectUrl = config.APP.SOCKETIO_WEBSERVICE_URL +
         "?token=" + encodeURIComponent(this.session.get("authToken")) +
-        "&deviceId=" + this.get("deviceId");
+        "&deviceId=" + this.get("deviceId") +
+        "&appName=" + config.APP.NAME;
       var socket = io(connectUrl, {autoConnect:false,forceNew:true});
       this.set("socket", socket);
       socket.on("connect", function() {
