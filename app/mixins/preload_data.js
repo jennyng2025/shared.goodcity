@@ -6,7 +6,10 @@ export default Ember.Mixin.create({
   preloadData: function(promises = []){
     if (this.session.get('authToken')) {
       promises = promises.concat(this.retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));
+      var states;
+      if(this.session.get("isAdminApp")) { states = ["nondraft"]; }
 
+      promises.push(this.store.find("offer", {states: states}))
       promises.push(
         new AjaxPromise("/auth/current_user_profile", "GET", this.session.get("authToken"))
           .then(data => {
