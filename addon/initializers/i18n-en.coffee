@@ -18,6 +18,7 @@ I18nTranslationsEn =
   "prev" : "Prev"
   "back" : "Back"
   "end" : "End"
+  "done": "Done"
   "error.message" : "Sorry, an error occurred!"
   "images" : "Images"
   "delete" : "Delete"
@@ -153,6 +154,7 @@ I18nTranslationsEn =
     "fullscreen_tooltip" : "toggle fullscreen"
     "favourite_tooltip" : "set as cover image"
     "delete_tooltip" : "delete image"
+    "image_uploading": "Image Uploading "
 
   "plan_delivery":
     "title" : "Plan Transport"
