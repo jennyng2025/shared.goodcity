@@ -191,7 +191,7 @@ export default Ember.Controller.extend({
 
     uploadComplete: function() {
       this.set("uploadedFileDate", null);
-      Ember.$(".loading-indicator").hide();
+      Ember.$(".loading-indicator.hide_image_loading").hide();
       this.set("addPhotoLabel", Ember.I18n.t("edit_images.add_photo"));
       this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading"));
     },
@@ -200,6 +200,7 @@ export default Ember.Controller.extend({
       var _this = this;
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       if (!this.get("item") || this.get("item.isOffer")) {
+        var loadingView = this.container.lookup('view:loading').append();
         var offer = this.get("offer");
 
         var defaultDonorCondition = this.get("session.isAdminApp") ? null :
@@ -212,10 +213,14 @@ export default Ember.Controller.extend({
         item.save()
           .then(() => {
             this.get("store").createRecord('image', {cloudinaryId: identifier, item: item, favourite: true}).save()
-              .then(() => this.send("newItem", item));
+              .then(function() {
+                _this.send("newItem", item);
+                loadingView.destroy()
+              });
           })
           .catch(error => {
             item.unloadRecord();
+            loadingView.destroy();
             throw error;
           });
       } else {
