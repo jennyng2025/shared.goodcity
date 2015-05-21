@@ -28,7 +28,9 @@ export default Ember.Component.extend({
       disableImageResize: false,
 
       fail: function() {
-        this.get("alert").show(Ember.I18n.t('upload-image.upload_error'));
+        if(this.type !== "file") {
+          this.get("alert").show(Ember.I18n.t('upload-image.upload_error'));
+        }
       }
     };
 

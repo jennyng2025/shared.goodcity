@@ -19,6 +19,7 @@ export default Ember.Controller.extend({
   isExpanded: false,
   backBtnVisible: true,
   loadingPercentage: Ember.I18n.t("edit_images.image_uploading"),
+  uploadedFileDate: null,
 
   package: function() {
     return this.get("store").getById("package", this.get("packageId"));
@@ -173,8 +174,13 @@ export default Ember.Controller.extend({
       this.set("isReady", true);
     },
 
-    uploadStart: function() {
+    uploadStart: function(e, data) {
+      this.set("uploadedFileDate", data);
       Ember.$(".loading-indicator").show();
+    },
+
+    cancelUpload: function(){
+      if(this.get("uploadedFileDate")){ this.get("uploadedFileDate").abort(); }
     },
 
     uploadProgress: function(e, data) {
@@ -184,6 +190,7 @@ export default Ember.Controller.extend({
     },
 
     uploadComplete: function() {
+      this.set("uploadedFileDate", null);
       Ember.$(".loading-indicator").hide();
       this.set("addPhotoLabel", Ember.I18n.t("edit_images.add_photo"));
       this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading"));
