@@ -135,6 +135,7 @@ I18nTranslationsZhTw =
     "vehicle_reg": "車輛登記"
     "fee": "基本收費"
     "booked": "已確認預約"
+    "driver_completed": "Picked up"
     "waiting": "正在等候司機確認"
     "display_driver_details": "司機確認您的預約後，您即能查閱司機及車輛的資料"
     "time": "預約時間"
@@ -143,6 +144,7 @@ I18nTranslationsZhTw =
     "modify": "修改"
     "cancel_booking": "取消預約"
     "accepted_items": "正在等候運送、已接受的物資"
+    "driver_picked_up_items": "Items picked up by GGV Driver"
     "charity_sale": "您願意慈善義賣捐贈的物資嗎？"
 
   "edit_images":

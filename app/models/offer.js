@@ -120,7 +120,7 @@ export default DS.Model.extend({
       case 'under_review' : return this.locale('offers.index.in_review');
       case 'submitted' : return this.locale('offers.index.awaiting_review');
       case 'reviewed' : return this.locale('offers.index.arrange_transport');
-      case 'scheduled' : return this.scheduled_status();
+      case 'scheduled' : return this.scheduledStatus();
       case 'closed' : return this.locale('offers.index.closed');
       case 'received' : return this.locale('offers.index.received');
     }
@@ -131,11 +131,11 @@ export default DS.Model.extend({
     return Ember.I18n.t(text);
   },
 
-  status_text: function(){
+  statusText: function(){
     return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
   }.property('status'),
 
-  scheduled_status: function(){
+  scheduledStatus: function(){
     var deliveryType = this.get("delivery.deliveryType")
     switch(deliveryType) {
       case "Gogovan" : return this.get("gogovan_status");
@@ -145,11 +145,11 @@ export default DS.Model.extend({
   },
 
   gogovan_status: function(){
-    if(this.get("delivery.gogovanOrder.isPending")){
-      return this.locale("offers.index.van_booked");
-    }
-    else{
-      return this.locale("offers.index.van_confirmed");
+    var ggvStatus = this.get("delivery.gogovanOrder.status");
+    switch(ggvStatus) {
+      case "pending": return this.locale("offers.index.van_booked");
+      case "active": return this.locale("offers.index.van_confirmed");
+      case "completed": return this.locale("offers.index.picked_up");
     }
   }.property("delivery.gogovanOrder.status"),
 
@@ -235,6 +235,12 @@ export default DS.Model.extend({
 
   showDeliveryDetails: function(){
     return this.get("isScheduled") || this.get("isReceived");
-  }.property("state")
+  }.property("state"),
+
+  hideBookingModification: function(){
+    var session = this.container.lookup("service:session");
+    return !session.get('isAdminApp') && this.get("delivery.isGogovan")
+    && this.get("delivery.gogovanOrder.isCompleted");
+  }.property("delivery.gogovanOrder", "delivery.gogovanOrder.status")
 
 });

@@ -31,4 +31,5 @@ export default DS.Model.extend({
   isActive: Ember.computed.equal("status", "active"),
   isCompleted: Ember.computed.equal("status", "completed"),
   isCancelled: Ember.computed.equal("status", "cancelled"),
+  isPickedUp: Ember.computed.or("isActive", "isCompleted"),
 });

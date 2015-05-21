@@ -9,8 +9,14 @@
 
             {{t 'delivery_details.display_driver_details'}}
             <hr>
-          {{else if ggvOrder.isActive}}
-            <h3>{{t 'delivery_details.booked'}}</h3>
+          {{else if ggvOrder.isPickedUp}}
+            <h3>
+              {{#if ggvOrder.isActive}}
+                {{t 'delivery_details.booked'}}
+              {{else}}
+                {{t 'delivery_details.driver_completed'}}
+              {{/if}}
+            </h3>
 
             <div class="row">
               <div class="small-6 columns">
@@ -58,7 +64,11 @@
 
     <div class="row">
       <div class="small-12 columns">
-        {{t 'delivery_details.accepted_items'}}
+        {{#if delivery.completedWithGogovan}}
+          {{t 'delivery_details.driver_picked_up_items'}}
+        {{else}}
+          {{t 'delivery_details.accepted_items'}}
+        {{/if}}
       </div>
     </div>
     <div class="row">
@@ -138,14 +148,16 @@
 
     <hr>
     {{#if model.isScheduled}}
-      <div class="row transport-buttons">
-        <div class="small-5 columns">
-          <a href="#" {{action 'modifyBooking'}} class="button expand">{{t 'delivery_details.modify'}}</a>
+      {{#unless model.hideBookingModification}}
+        <div class="row transport-buttons">
+          <div class="small-5 columns">
+            <a href="#" {{action 'modifyBooking'}} class="button expand">{{t 'delivery_details.modify'}}</a>
+          </div>
+          <div class="small-7 columns">
+            <a href="#" {{action 'cancelDelivery'}} class="button secondary expand">{{t 'delivery_details.cancel_booking'}}</a>
+          </div>
         </div>
-        <div class="small-7 columns">
-          <a href="#" {{action 'cancelDelivery'}} class="button secondary expand">{{t 'delivery_details.cancel_booking'}}</a>
-        </div>
-      </div>
+      {{/unless}}
     {{/if}}
   </div>
 </div>
