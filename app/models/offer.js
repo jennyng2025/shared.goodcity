@@ -77,6 +77,10 @@ export default DS.Model.extend({
     return this.get('isUnderReview') || this.get('isReviewed');
   }.property('isUnderReview', 'isReviewed'),
 
+  adminCurrentOffer: function() {
+    return this.get("isReviewing") || this.get("isScheduled");
+  }.property('isReviewing', 'isScheduled'),
+
   needReview: function(){
     return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
   }.property('isUnderReview', 'isSubmitted', 'isClosed'),
