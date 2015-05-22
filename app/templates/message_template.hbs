@@ -9,7 +9,7 @@
         </p>
       {{else}}
         {{#each model as |message|}}
-          <div class="{{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+          <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
             <div class='message_details'>
               {{#if message.myMessage}}
                 {{t "messages.owner" }}
@@ -49,3 +49,6 @@
     </div>
   </div>
 </div>
+
+{{!-- This div holds the id of first unread message. As on page visit, it marked as read and lost the reference to first unread message --}}
+<div class="hidden unread_id"></div>
