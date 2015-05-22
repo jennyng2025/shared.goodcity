@@ -135,6 +135,7 @@ I18nTranslationsEn =
     "vehicle_reg": "Vehicle registration"
     "fee": "Base fee"
     "booked": "Booking Confirmed"
+    "driver_completed": "Picked up"
     "waiting": "Awaiting Driver Confirmation"
     "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
     "time": "Booking Time"
@@ -143,6 +144,7 @@ I18nTranslationsEn =
     "modify": "Modify"
     "cancel_booking": "Cancel Booking"
     "accepted_items": "Accepted items to be transported"
+    "driver_picked_up_items": "Items picked up by GGV Driver"
     "charity_sale": "Charity sale ok?"
 
   "edit_images":

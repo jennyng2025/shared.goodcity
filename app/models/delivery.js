@@ -25,4 +25,8 @@ export default DS.Model.extend({
   noGogovan: function() {
     return this.get('deliveryType') !== 'Gogovan';
   }.property('deliveryType'),
+
+  completedWithGogovan: function(){
+    return this.get("isGogovan") && this.get("gogovanOrder.isCompleted");
+  }.property('gogovanOrder', 'gogovanOrder.status')
 });
