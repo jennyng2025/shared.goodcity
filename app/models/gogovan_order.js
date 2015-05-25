@@ -14,6 +14,7 @@ export default DS.Model.extend({
   districtId:    attr('number'),
   territoryId:   attr('number'),
   offerId:       attr('number'),
+  completedAt:     attr('date'),
 
   needEnglish:   attr('boolean'),
   needCart:      attr('boolean'),
