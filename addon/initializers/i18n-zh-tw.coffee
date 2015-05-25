@@ -249,6 +249,8 @@ I18nTranslationsZhTw =
       "get_quote" : "報價"
       "date": "Date"
       "time": "Time"
+      "am": "AM"
+      "pm": "PM"
 
   "drop-off":
     "select_schedule": "選擇時間"
