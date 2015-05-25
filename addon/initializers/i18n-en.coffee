@@ -248,6 +248,8 @@ I18nTranslationsEn =
       "get_quote" : "Get Quote"
       "date": "Date"
       "time": "Time"
+      "am": "AM"
+      "pm": "PM"
 
   "drop-off":
     "select_schedule": "Select Schedule"
