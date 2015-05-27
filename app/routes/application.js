@@ -40,9 +40,6 @@ export default Ember.Route.extend(preloadDataMixin, {
         if (this.session.get('isLoggedIn')) {
           this.controllerFor("application").send('logMeOut');
         }
-        else {
-          this.transitionTo('login');
-        }
       } else if (reason.status === 404) {
         this.get("alert").show(Ember.I18n.t("404_error"));
       } else if (reason.status === 0) {
