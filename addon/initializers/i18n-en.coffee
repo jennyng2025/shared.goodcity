@@ -147,6 +147,13 @@ I18nTranslationsEn =
     "driver_picked_up_items": "Items picked up by GGV Driver"
     "charity_sale": "Charity sale ok?"
 
+  "items":
+    "add_item":
+      "condition": "Condition?"
+      "edit_image" : "Edit photos"
+      "save" : "Save Details"
+      "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
+
   "edit_images":
     "add_photo" : "Add photo"
     "delete_confirm" : "Are you sure you want to delete this image?"

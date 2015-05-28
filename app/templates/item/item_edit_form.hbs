@@ -1,0 +1,21 @@
+<div class="row item-details">
+  <div class="small-12 columns">
+
+      <div class="row">
+        <div class="small-4 large-2 columns fav-item-image">
+          {{#link-to 'item.edit_images' model class='edit-image-link'}}
+            <img src={{model.displayImageUrl}} class="thumb" style="width:100px;" />
+            <div>{{t "items.add_item.edit_image"}} ({{model.imageCount}})</div>
+          {{/link-to}}
+        </div>
+
+        <div class="small-8 large-10 columns">
+          {{view "input-ui-control-with-counter" type="textarea" value=formData.donorDescription label="" name="donorDescription" rows=5 placeholder="item_description" maxlength="180" required='true' }}
+          {{input type="hidden" value=offer.id name="offerId" }}
+        </div>
+      </div>
+
+      {{donor-conditions selectedId=formData.donorConditionId}}
+
+  </div>
+</div>

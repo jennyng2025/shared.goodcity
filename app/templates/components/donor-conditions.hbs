@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="small-12 columns ui">
+    <span class="form-label">{{t "items.add_item.condition"}}</span>
+    <ul class="radio-buttons">
+
+      {{#each donorConditions as |donor_condition|}}
+        <li class="radio">
+          {{view 'radio-button' name="selectionTest" selection=selectedId value=donor_condition.id id=donor_condition.id}}
+          <label class="radio-wrap small-only-text-center" for={{donor_condition.id}}>
+            {{donor_condition.name}}
+          </label>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
