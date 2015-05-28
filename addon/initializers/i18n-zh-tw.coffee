@@ -50,9 +50,9 @@ I18nTranslationsZhTw =
   "loading_timeout_error": "Loading view timeout reached."
   "items_text": "items"
   "day":
-    "today": "Today"
-    "morning": "Morning"
-    "afternoon": "Afternoon"
+    "today": "今天"
+    "morning": "早上"
+    "afternoon": "下午"
 
 
   "time_ago":
