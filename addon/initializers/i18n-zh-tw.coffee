@@ -148,6 +148,13 @@ I18nTranslationsZhTw =
     "driver_picked_up_items": "Items picked up by GGV Driver"
     "charity_sale": "您願意慈善義賣捐贈的物資嗎？"
 
+  "items":
+    "add_item":
+      "condition": "物資狀態如何？"
+      "edit_image" : "修改圖片"
+      "save" : "儲存資料"
+      "description_placeholder" : "物品的描述、大小及數量等。如要增加或修改這項物品的相片，請點擊圖像。"
+
   "edit_images":
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"

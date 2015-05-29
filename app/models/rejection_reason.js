@@ -5,5 +5,9 @@ var attr = DS.attr,
 
 export default DS.Model.extend({
   name: attr('string'),
-  items: hasMany('item')
+  items: hasMany('item'),
+
+  specialId: function() {
+    return this.get("id") + "_reason";
+  }.property('id'),
 });
