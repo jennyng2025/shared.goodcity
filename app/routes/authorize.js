@@ -5,10 +5,12 @@ export default Ember.Route.extend({
 
   beforeModel: function(transition) {
     if (!this.session.get('isLoggedIn')) {
-      this.get('alert').show(Ember.I18n.t('must_login'));
-      var loginController = this.controllerFor('login');
-      loginController.set('attemptedTransition', transition);
-      this.transitionTo('login');
+      this.get('alert').show(Ember.I18n.t('must_login'), () => {
+        var loginController = this.controllerFor('login');
+        loginController.set('attemptedTransition', transition);
+        this.transitionTo('login');
+      });
+      return false;
     }
   }
 });
