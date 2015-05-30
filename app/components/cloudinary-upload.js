@@ -12,9 +12,10 @@ export default Ember.Component.extend({
   "data-url": config.APP.CLOUD_URL,
   disabled: true,
   attributeBindings: [ "name", "type", "value", "data-cloudinary-field",
-    "data-url", "data-form-data", "disabled", "style", "accept"],
+    "data-url", "data-form-data", "disabled", "style", "accept", "offerId"],
   events: ["submit","progress","always","fail","done"],
   alert: Ember.inject.service(),
+  offerId: null,
 
   didInsertElement: function() {
     var _this = this;
@@ -45,7 +46,8 @@ export default Ember.Component.extend({
       }
     });
 
-    new AjaxPromise("/images/generate_signature", "GET", this.get('session.authToken'))
+    var reqData = this.get("offerId") ? { tags: "offer_" + this.get("offerId") } : {};
+    new AjaxPromise("/images/generate_signature", "GET", this.get('session.authToken'), reqData)
       .then(function(data) {
         _this.$()
           .attr("data-form-data", JSON.stringify(data))
