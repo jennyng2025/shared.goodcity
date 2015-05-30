@@ -37,9 +37,9 @@
 
       {{#validatable-form class="form-horizontal" action="sendMessage" on="submit"}}
 
-        <div class="row">
+        <div class="row ui">
           <div class="small-9 large-10 medium-10 columns">
-            {{textarea type='text' value=body name="body" rows=1 cols=20 required='true' disabled=disabled}}
+            {{#view "variable-height-textarea" value=body name="body"  required="true" disabled=disabled parentDiv="message-section"}}{{/view}}
           </div>
           <div class="small-3 large-2 medium-2 columns">
             {{#view "online-button" disabledOverride=disabled}}{{t "send"}}{{/view}}

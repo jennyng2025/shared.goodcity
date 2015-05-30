@@ -4,6 +4,7 @@ export default Ember.View.reopen({
   didInsertElement: function() {
     this._super();
 
+    // Scroll to first unread message in thread or scroll to bottom
     var messageBox, id, scrollOffset;
     var offset = 0;
     var hadUnread = Ember.$(".hidden.unread_id") && Ember.$(".hidden.unread_id").attr("data-name");
@@ -26,5 +27,6 @@ export default Ember.View.reopen({
       }, 'fast');
       return true;
     }
+
   },
 });
