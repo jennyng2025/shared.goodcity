@@ -3,33 +3,27 @@ import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 
 export default Ember.Mixin.create({
-  preloadData: function(promises = []){
-    if (this.session.get('authToken')) {
-      promises = promises.concat(this.retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));
-      var states;
-      if(this.session.get("isAdminApp")) { states = ["nondraft"]; }
+  preloadData: function(includePublicTypes) {
+    var promises = [];
+    var retrieve = types => types.map(type => this.store.find(type));
 
-      promises.push(this.store.find("offer", {states: states}))
+    if (includePublicTypes) {
+      promises = retrieve(config.APP.PRELOAD_TYPES);
+    }
+
+    if (this.get("session.authToken")) {
+      promises = promises.concat(retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));
+      var params = this.get("session.isAdminApp") ? {states: ["nondraft"]} : {};
+      promises.push(this.store.find("offer", params));
       promises.push(
         new AjaxPromise("/auth/current_user_profile", "GET", this.session.get("authToken"))
           .then(data => {
             this.store.pushPayload(data);
-            this.store.push('user', data.user_profile);
+            this.store.push("user", data.user_profile);
           })
       );
     }
 
-    return Ember.RSVP.all(promises).catch(error => {
-      if (error.status === 0) {
-        this.transitionTo("offline");
-      } else {
-        this.handleError(error);
-      }
-    });
-  },
-
-  retrieve: function(types){
-    var promises = types => types.map(type => this.store.find(type));
-    return promises(types);
+    return Ember.RSVP.all(promises);
   }
 });

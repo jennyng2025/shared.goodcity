@@ -10,7 +10,13 @@ export default Ember.Route.extend(preloadDataMixin, {
     Ember.run(function(){
       _this.controllerFor('application').send('logMeIn');
     });
-    return this.preloadData();
+    return this.preloadData().catch(error => {
+      if (error.status === 0) {
+        this.transitionTo("offline");
+      } else {
+        throw error;
+      }
+    });
   },
 
   afterModel: function() {
