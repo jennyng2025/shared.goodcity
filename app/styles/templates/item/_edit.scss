@@ -1,0 +1,29 @@
+.item-details {
+  .fav-item-image {
+    text-align: center; }
+
+  textarea {
+    font-size: 0.90rem !important;
+    color: black; }
+
+  .edit-image-link {
+    vertical-align: top;
+    display: block;
+    div {
+      display: block;
+      font-size: 0.8rem;
+      color: $medium-blue; }
+  }
+  .radio-buttons li{
+    border-style: none;
+  }
+
+  input[type="radio"]:checked + label, input[type="radio"] + label {
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      display: inline-block;
+      padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+      height: 3.2rem;
+    }
+  }
+}

@@ -4,22 +4,6 @@ import addressDetails from './address_details';
 export default addressDetails.extend({
   needs: ['delivery'],
 
-  timeSlots: [
-    {id: "600", name: "10:00 AM" },
-    {id: "630", name: "10:30 AM"},
-    {id: "660", name: "11:00 AM"},
-    {id: "690", name: "11:30 AM"},
-    {id: "720", name: "12:00 PM"},
-    {id: "750", name: "12:30 PM"},
-    {id: "780", name: "1:00 PM"},
-    {id: "810", name: "1:30 PM"},
-    {id: "840", name: "2:00 PM"},
-    {id: "870", name: "2:30 PM"},
-    {id: "900", name: "3:00 PM"},
-    {id: "930", name: "3:30 PM"},
-    {id: "960", name: "4:00 PM"},
-  ],
-
   selectedDate: null,
   selectedTime: null,
   speakEnglish: false,
@@ -28,6 +12,27 @@ export default addressDetails.extend({
 
   datePrompt: Ember.I18n.t("gogovan.book_van.date"),
   timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+
+  timeSlots: function(){
+    var options = [];
+    var slots = {"600": "10:00", "630": "10:30",
+      "660": "11:00",  "690": "11:30",
+      "720": "12:00", "750": "12:30",
+      "780": "1:00",  "810": "1:30",
+      "840": "2:00", "870": "2:30",
+      "900": "3:00", "930": "3:30",
+      "960": "4:00"}
+    for(var minutes in slots) {
+      var period = parseInt(minutes) >= 720 ? this.locale("gogovan.book_van.pm") : this.locale("gogovan.book_van.am");
+      options.push({id: minutes, name: slots[minutes] + " " + period});
+    }
+    return options;
+
+  }.property(),
+
+  locale: function(str) {
+    return Ember.I18n.t(str);
+  },
 
   actions: {
     bookVan: function(){

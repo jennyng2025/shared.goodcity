@@ -18,7 +18,7 @@ export default DS.Model.extend({
   messages:             hasMany('message'),
   images:               hasMany('image'),
   offer:                belongsTo('offer'),
-  itemType:             belongsTo('item_type'),
+  packageType:          belongsTo('package_type'),
   donorCondition:       belongsTo('donor_condition'),
   donorConditionId:     foreignKey('donorCondition.id'),
   rejectionReason:      belongsTo('rejection_reason'),
@@ -27,6 +27,7 @@ export default DS.Model.extend({
 
   isAccepted: Ember.computed.equal("state", "accepted"),
   isRejected: Ember.computed.equal("state", "rejected"),
+  isDrafted: Ember.computed.equal("state", "draft"),
 
   isDraft: function(){
     return this.get('offer.state') === 'draft';

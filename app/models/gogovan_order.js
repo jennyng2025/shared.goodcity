@@ -14,6 +14,7 @@ export default DS.Model.extend({
   districtId:    attr('number'),
   territoryId:   attr('number'),
   offerId:       attr('number'),
+  completedAt:     attr('date'),
 
   needEnglish:   attr('boolean'),
   needCart:      attr('boolean'),
@@ -31,4 +32,6 @@ export default DS.Model.extend({
   isActive: Ember.computed.equal("status", "active"),
   isCompleted: Ember.computed.equal("status", "completed"),
   isCancelled: Ember.computed.equal("status", "cancelled"),
+  isPickedUp: Ember.computed.or("isActive", "isCompleted"),
+  nonCompleted: Ember.computed.or("isActive", "isPending"),
 });

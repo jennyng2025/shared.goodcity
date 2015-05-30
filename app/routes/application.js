@@ -16,7 +16,13 @@ export default Ember.Route.extend(preloadDataMixin, {
 
     Ember.onerror = window.onerror = error => this.handleError(error);
 
-    return this.preloadData(this.retrieve(config.APP.PRELOAD_TYPES));
+    return this.preloadData(true).catch(error => {
+      if (error.status === 0) {
+        this.transitionTo("offline");
+      } else {
+        this.handleError(error);
+      }
+    });
   },
 
   renderTemplate: function() {

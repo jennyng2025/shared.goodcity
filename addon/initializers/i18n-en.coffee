@@ -135,6 +135,7 @@ I18nTranslationsEn =
     "vehicle_reg": "Vehicle registration"
     "fee": "Base fee"
     "booked": "Booking Confirmed"
+    "driver_completed": "Picked up"
     "waiting": "Awaiting Driver Confirmation"
     "display_driver_details": "Driver & vehicle details will appear here once a driver accepts your booking."
     "time": "Booking Time"
@@ -143,7 +144,15 @@ I18nTranslationsEn =
     "modify": "Modify"
     "cancel_booking": "Cancel Booking"
     "accepted_items": "Accepted items to be transported"
+    "driver_picked_up_items": "Items picked up by GGV Driver"
     "charity_sale": "Charity sale ok?"
+
+  "items":
+    "add_item":
+      "condition": "Condition?"
+      "edit_image" : "Edit photos"
+      "save" : "Save Details"
+      "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
 
   "edit_images":
     "add_photo" : "Add photo"
@@ -246,6 +255,8 @@ I18nTranslationsEn =
       "get_quote" : "Get Quote"
       "date": "Date"
       "time": "Time"
+      "am": "AM"
+      "pm": "PM"
 
   "drop-off":
     "select_schedule": "Select Schedule"

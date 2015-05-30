@@ -203,8 +203,7 @@ export default Ember.Controller.extend({
         var loadingView = this.container.lookup('view:loading').append();
         var offer = this.get("offer");
 
-        var defaultDonorCondition = this.get("session.isAdminApp") ? null :
-          this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
         var item = this.get("store").createRecord("item", {
           offer: offer,
           donorCondition: defaultDonorCondition,
