@@ -15,8 +15,8 @@ export default DS.Model.extend({
   rejectedAt:      attr('date'),
   createdAt:       attr('date'),
   updatedAt:       attr('date'),
-  item:            belongsTo('item', { async: true }),
-  packageType:     belongsTo('package_type', { async: true }),
+  item:            belongsTo('item'),
+  packageType:     belongsTo('package_type'),
   imageId:         attr('number'),
   offerId:         attr('number'),
 
