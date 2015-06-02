@@ -317,11 +317,9 @@ export default Ember.Controller.extend({
     },
 
     uploadSuccess: function(e, data) {
-      var _this = this;
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       if (!this.get("item") || this.get("item.isOffer")) {
-        var defaultDonorCondition = this.get("session.isAdminApp") ? null :
-          this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, false, identifier)
       } else {
         var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item")});
