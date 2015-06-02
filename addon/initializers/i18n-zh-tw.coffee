@@ -165,6 +165,11 @@ I18nTranslationsZhTw =
     "favourite_tooltip" : "設定為封面圖片"
     "delete_tooltip" : "刪除圖片"
     "image_uploading": "Image Uploading "
+    "remove_image": "Remove image"
+    "cancel_item": "Cancel item"
+    "cannot_provide_photo": "Cannot provide photo"
+    "last_image_with_item": "This is the only image associated with this item"
+    "cancelling_item_will_cancel_offer" : "Cancelling the last item will cancel this offer and any associated transport booking."
 
   "plan_delivery":
     "title" : "安排運輸"
