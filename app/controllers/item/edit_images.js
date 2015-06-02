@@ -200,7 +200,8 @@ export default Ember.Controller.extend({
         this.transitionToRoute("review_item.accept", this.get('offer'), item);
       }
       else{
-        this.createItem(null, true);
+        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        this.createItem(defaultDonorCondition, true);
       }
     },
 
