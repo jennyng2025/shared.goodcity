@@ -153,6 +153,7 @@ I18nTranslationsZhTw =
       "condition": "物資狀態如何？"
       "edit_image" : "修改圖片"
       "save" : "儲存資料"
+      "cancel": "Cancel"
       "description_placeholder" : "物品的描述、大小及數量等。如要增加或修改這項物品的相片，請點擊圖像。"
 
   "edit_images":
