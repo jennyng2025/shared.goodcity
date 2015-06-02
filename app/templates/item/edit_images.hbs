@@ -37,14 +37,20 @@
         always="uploadComplete" done="uploadSuccess" submit="uploadProgress"
         offerId=offer.id}}
     </li>
-    {{#each image in images}}
-      <li>
-        <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
-          <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
-          <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
-        </a>
+    {{#if noImageLink}}
+      <li class="noImage">
+        <a {{action "nextWithoutImage"}}>{{t "edit_images.cannot_provide_photo"}}</a>
       </li>
-    {{/each}}
+    {{else}}
+      {{#each image in images}}
+        <li>
+          <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
+            <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
+            <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
+          </a>
+        </li>
+      {{/each}}
+    {{/if}}
   </ul>
 </section>
 
