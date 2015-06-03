@@ -17,5 +17,15 @@ module.exports = {
     app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
     app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
     app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
+  },
+
+  contentFor: function(type, config) {
+    // add content security policy meta tag wanted by cordova-plugin-whitelist
+    if (type === 'head-footer' && config.cordova.enabled) {
+      var policy = Object.keys(config.contentSecurityPolicy)
+        .map(function(key) { return key + " " + config.contentSecurityPolicy[key]; })
+        .join("; ");
+      return '<meta http-equiv="Content-Security-Policy" content="' + policy + '">';
+    }
   }
 };
