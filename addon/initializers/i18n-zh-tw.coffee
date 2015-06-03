@@ -100,7 +100,7 @@ I18nTranslationsZhTw =
   "messages":
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
-    "today_with_time": "Today, {{time}}"
+    "today_with_time": "今天, {{time}}"
 
   "notifications":
     "text" : "{{text}}"
