@@ -357,6 +357,10 @@ textarea {
 body > .ember-view {
   position: relative;
   min-height: 100%;
+  ~ .ember-view {
+    position: initial;
+    min-height: 0;
+  }
 }
 
 .btm {
