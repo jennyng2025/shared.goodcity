@@ -22,6 +22,8 @@ module.exports = {
   contentFor: function(type, config) {
     // add content security policy meta tag wanted by cordova-plugin-whitelist
     if (type === 'head-footer' && config.cordova.enabled) {
+      // unsafe-self required by cordova.js
+      config.contentSecurityPolicy["script-src"] = (config.contentSecurityPolicy["script-src"] || "") + " 'unsafe-eval'";
       var policy = Object.keys(config.contentSecurityPolicy)
         .map(function(key) { return key + " " + config.contentSecurityPolicy[key]; })
         .join("; ");
