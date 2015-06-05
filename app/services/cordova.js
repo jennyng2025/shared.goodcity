@@ -5,6 +5,7 @@ import AjaxPromise from '../utils/ajax-promise';
 export default Ember.Service.extend({
   session: Ember.inject.service(),
   logger: Ember.inject.service(),
+  messagesUtil: Ember.inject.service("messages"),
 
   appLoad: function () {
     if (!config.cordova.enabled) {
@@ -63,6 +64,7 @@ export default Ember.Service.extend({
             // handled by socket.io notification sent at same time (e.payload.message)
           }
           else {
+            transitionToMessageThread(e.payload);
             // otherwise we were launched because the user touched a notification in the notification tray
           }
           break;
@@ -86,6 +88,12 @@ export default Ember.Service.extend({
 
     function errorHandler(error) {
       this.get("logger").error(error);
+    }
+
+    function transitionToMessageThread(message) {
+      var controller = _this.container.lookup("controller:application");
+      var route =  _this.get("messagesUtil").getRoute(message);
+      controller.transitionToRoute.apply(controller, route);
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
