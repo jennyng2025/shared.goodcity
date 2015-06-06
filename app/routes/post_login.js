@@ -7,10 +7,8 @@ export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
 
   beforeModel: function(transition) {
-    var _this = this;
-    Ember.run(function(){
-      _this.controllerFor('application').send('logMeIn');
-    });
+    Ember.run(() => this.controllerFor('application').send('logMeIn'));
+    this.get("cordova").appLoad();
     return this.preloadData().catch(error => {
       if (error.status === 0) {
         this.transitionTo("offline");

@@ -31,22 +31,9 @@ export default Ember.Service.extend({
     }
 
     // handle APNS notifications for iOS
-    function onNotificationAPN(e) {
-      window.alert(JSON.stringify(e));
+    window.onNotificationAPN = function(e) {
+      if (!e.foreground) {
 
-      if (e.alert) {
-        // showing an alert also requires the org.apache.cordova.dialogs plugin
-        window.alert(e.alert);
-      }
-
-      if (e.sound) {
-        // playing a sound also requires the org.apache.cordova.media plugin
-        // var snd = new Media(e.sound);
-        // snd.play();
-      }
-
-      if (e.badge) {
-        pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
       }
     }
 
