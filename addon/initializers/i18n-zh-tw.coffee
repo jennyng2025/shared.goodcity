@@ -274,6 +274,7 @@ I18nTranslationsZhTw =
       "time": "Time"
       "am": "AM"
       "pm": "PM"
+      "vehicle": "Vehicle Type"
 
   "drop-off":
     "select_schedule": "選擇時間"

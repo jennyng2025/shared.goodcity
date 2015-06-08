@@ -12,6 +12,16 @@ export default addressDetails.extend({
 
   datePrompt: Ember.I18n.t("gogovan.book_van.date"),
   timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+  offer: Ember.computed.alias("delivery.offer"),
+
+  gogovanOptions: function() {
+    var allOptions = this.store.all('gogovan_transport');
+    return allOptions.rejectBy('isDisabled', true).sortBy('id');
+  }.property(),
+
+  selectedGogovanOption: function(){
+    return this.get("offer.gogovanTransport.id") || this.get('gogovanOptions.firstObject.id');
+  }.property('gogovanOptions', 'offer'),
 
   timeSlots: function(){
     var options = [];
@@ -37,10 +47,11 @@ export default addressDetails.extend({
   actions: {
     bookVan: function(){
       var controller = this;
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = controller.container.lookup('view:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('controllers.delivery').get('model.id');
       var delivery = controller.store.getById('delivery', deliveryId);
+      var gogovanOptionId = controller.get('selectedGogovanOption');
 
       selectedDate.setMinutes(selectedDate.getMinutes() + parseInt(controller.get('selectedTime.id')));
 
@@ -53,6 +64,7 @@ export default addressDetails.extend({
       requestProperties.needCart = controller.get("borrowTrolley");
       requestProperties.needCarry = controller.get("porterage");
       requestProperties.offerId = delivery.get('offer.id');
+      requestProperties.gogovanOptionId = gogovanOptionId;
 
       var order = controller.store.createRecord('gogovan_order', requestProperties);
       order.set('delivery', delivery);

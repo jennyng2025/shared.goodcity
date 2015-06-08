@@ -22,6 +22,23 @@
         </div>
 
         <div class="row time_heading">
+          <h3>{{t "gogovan.book_van.vehicle"}}</h3>
+        </div>
+
+        <div class="gogovan-req ui">
+          <ul class='radio-buttons'>
+            {{#each gogovanOptions as |option|}}
+              <li class="radio">
+                {{view 'radio-button' name="selectionTest" selection=selectedGogovanOption value=option.id id=option.specialId}}
+                <label class="radio-wrap small-only-text-center" for={{option.specialId}}>
+                  {{option.name}}
+                </label>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="row time_heading">
           <h3>{{t "gogovan.book_van.select_day"}}</h3>
           <div class='description'>{{t "gogovan.book_van.crossroads_time"}}</div>
         </div>

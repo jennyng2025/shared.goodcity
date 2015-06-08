@@ -15,4 +15,29 @@
   .time_heading {
     margin-top: 0.8rem !important;
   }
+
+  .gogovan-req {
+    padding-bottom: 0rem;
+    margin-left: -0.5rem;
+    margin-right: -1rem;
+  }
+}
+
+.gogovan-req {
+  select {
+    width: 35%;
+  }
+
+  .radio-buttons li{
+    border-style: none;
+  }
+
+  input[type="radio"]:checked + label, input[type="radio"] + label {
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      display: inline-block;
+      padding: 0.5rem 0.2rem 0.2rem 0.2rem;
+      height: 3.2rem;
+    }
+  }
 }
