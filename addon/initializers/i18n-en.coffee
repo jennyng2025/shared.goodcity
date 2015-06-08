@@ -56,6 +56,16 @@ I18nTranslationsEn =
 
   "time_ago":
     "right_now" : "Right Now"
+    "1m": "1m"
+    "m": "m"
+    "1h": "1h"
+    "h": "h"
+    "1d": "1d"
+    "d": "d"
+    "1mths": "1mths"
+    "mths": "mths"
+    "1y": "1y"
+    "y": "y"
 
   "application":
     "home" : "Home"
