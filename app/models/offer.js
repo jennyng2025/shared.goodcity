@@ -227,6 +227,7 @@ export default DS.Model.extend({
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}
+    else if(this.get("allItemsRejected")){ return "is-closed" }
     else if(this.get("isUnderReview")){ return "is-under-review"}
     else if(this.get("isReviewed")){return "is-reviewed"}
     else if(this.get("isScheduled")){return "is-scheduled"}
