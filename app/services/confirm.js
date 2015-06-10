@@ -13,7 +13,7 @@ export default Ember.Service.extend({
     var _this = this;
     Ember.run.schedule("afterRender", function() {
       var value;
-      Ember.$("#confirmMessage").text(message);
+      Ember.$("#confirmMessage").html(message);
 
       // workaround https://github.com/zurb/foundation/issues/5721
       Ember.$("#confirmModal").removeClass("open");

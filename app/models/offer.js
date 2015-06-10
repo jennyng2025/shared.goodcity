@@ -68,6 +68,7 @@ export default DS.Model.extend({
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
+  preventNewItem: Ember.computed.alias("isFinished"),
 
   activeItems: function(){
     return this.get('items').rejectBy("state", "draft");
@@ -223,10 +224,6 @@ export default DS.Model.extend({
   showOfferIcons:  function(){
     return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('isReceived'));
   }.property('itemCount', 'isClosed', 'isReceived'),
-
-  preventNewItem:  function(){
-    return this.get('isScheduled') || this.get('isFinished');
-  }.property('isScheduled', 'isFinished'),
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}
