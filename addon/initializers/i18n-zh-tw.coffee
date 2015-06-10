@@ -57,6 +57,16 @@ I18nTranslationsZhTw =
 
   "time_ago":
     "right_now" : "現正進行"
+    "1m": "1m"
+    "m": "m"
+    "1h": "1h"
+    "h": "h"
+    "1d": "1d"
+    "d": "d"
+    "1mths": "1mths"
+    "mths": "mths"
+    "1y": "1y"
+    "y": "y"
 
   "application":
     "home" : "主頁"
@@ -100,7 +110,7 @@ I18nTranslationsZhTw =
   "messages":
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
-    "today_with_time": "Today, {{time}}"
+    "today_with_time": "今天, {{time}}"
 
   "notifications":
     "text" : "{{text}}"
@@ -153,6 +163,7 @@ I18nTranslationsZhTw =
       "condition": "物資狀態如何？"
       "edit_image" : "修改圖片"
       "save" : "儲存資料"
+      "cancel": "Cancel"
       "description_placeholder" : "物品的描述、大小及數量等。如要增加或修改這項物品的相片，請點擊圖像。"
 
   "edit_images":
@@ -165,6 +176,11 @@ I18nTranslationsZhTw =
     "favourite_tooltip" : "設定為封面圖片"
     "delete_tooltip" : "刪除圖片"
     "image_uploading": "Image Uploading "
+    "remove_image": "Remove image"
+    "cancel_item": "Cancel item"
+    "cannot_provide_photo": "Cannot provide photo"
+    "last_image_with_item": "This is the only image associated with this item"
+    "cancelling_item_will_cancel_offer" : "Cancelling the last item will cancel this offer and any associated transport booking."
 
   "plan_delivery":
     "title" : "安排運輸"
@@ -258,6 +274,7 @@ I18nTranslationsZhTw =
       "time": "Time"
       "am": "AM"
       "pm": "PM"
+      "vehicle": "Vehicle Type"
 
   "drop-off":
     "select_schedule": "選擇時間"

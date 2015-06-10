@@ -56,6 +56,16 @@ I18nTranslationsEn =
 
   "time_ago":
     "right_now" : "Right Now"
+    "1m": "1m"
+    "m": "m"
+    "1h": "1h"
+    "h": "h"
+    "1d": "1d"
+    "d": "d"
+    "1mths": "1mths"
+    "mths": "mths"
+    "1y": "1y"
+    "y": "y"
 
   "application":
     "home" : "Home"
@@ -152,6 +162,7 @@ I18nTranslationsEn =
       "condition": "Condition?"
       "edit_image" : "Edit photos"
       "save" : "Save Details"
+      "cancel": "Cancel"
       "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
 
   "edit_images":
@@ -164,6 +175,11 @@ I18nTranslationsEn =
     "favourite_tooltip" : "set as cover image"
     "delete_tooltip" : "delete image"
     "image_uploading": "Image Uploading "
+    "remove_image": "Remove image"
+    "cancel_item": "Cancel item"
+    "cannot_provide_photo": "Cannot provide photo"
+    "last_image_with_item": "This is the only image associated with this item"
+    "cancelling_item_will_cancel_offer": "Cancelling the last item will  cancel this offer and any associated transport booking."
 
   "plan_delivery":
     "title" : "Plan Transport"
@@ -244,7 +260,7 @@ I18nTranslationsEn =
 
     "book_van" :
       "title" : "Book Van"
-      "location" : "Location"
+      "location" : "Collection address (Hong Kong)"
       "select_day" : "Preferred day/time"
       "crossroads_time" : "Limited to Crossroads' operating hours"
       "requirements" : "Extra Requirements"
@@ -257,6 +273,7 @@ I18nTranslationsEn =
       "time": "Time"
       "am": "AM"
       "pm": "PM"
+      "vehicle": "Vehicle Type"
 
   "drop-off":
     "select_schedule": "Select Schedule"

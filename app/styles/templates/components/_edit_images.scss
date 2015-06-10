@@ -19,6 +19,14 @@
     top: -3px;
     right: -3px;
   }
+  .noImage {
+    left: 20%;
+    a {
+      text-decoration: underline;
+      font-weight: bold;
+      color: #596573 !important;
+    }
+  }
 }
 
 #add-photo {

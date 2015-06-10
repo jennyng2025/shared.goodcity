@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
       return value;
     } else {
       var params = {
-        districtId: this.session.get('currentUser.address.district.id'),
+        districtId: this.get('offer.createdBy.address.district.id'),
         offerId: this.get("offerId")
       };
 

@@ -357,6 +357,10 @@ textarea {
 body > .ember-view {
   position: relative;
   min-height: 100%;
+  ~ .ember-view {
+    position: initial;
+    min-height: 0;
+  }
 }
 
 .btm {
@@ -392,7 +396,7 @@ a.disabled{
   }
 }
 
-.reveal-modal#errorModal, #confirmModal {
+.reveal-modal#errorModal, #confirmModal, #customConfirmModal {
   background-color: $light-grey;
   color: black;
   height: initial;
@@ -405,7 +409,7 @@ a.disabled{
     background-color: $coral-red;
     color: $white;
   }
-  .ok {
+  .ok, .action2 {
     margin-right: 0.5rem;
     margin-bottom: 1.25rem;
    }

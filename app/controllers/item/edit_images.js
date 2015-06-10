@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   session: Ember.inject.service(),
   store: Ember.inject.service(),
   alert: Ember.inject.service(),
+  customConfirm: Ember.inject.service(),
   confirm: Ember.inject.service(),
   offerId: null,
   itemId: null,
@@ -55,7 +56,7 @@ export default Ember.Controller.extend({
     if (image) {
       this.send("setPreview", image);
     }
-  }.observes("package", "item").on("init"),
+  }.observes("package", "item", "item.images.@each").on("init"),
 
   //css related
   previewImageBgCss: function() {
@@ -77,12 +78,128 @@ export default Ember.Controller.extend({
     return "width:" + imgWidth + "px; height:" + imgWidth + "px;";
   }.property(),
 
+  noImageLink: function() {
+    return this.get("noImage") && this.get("session.isAdminApp");
+  }.property("noImage"),
+
+  locale: function(str){
+    return Ember.I18n.t(str);
+  },
+
+  createItem: function(donorCondition, withoutImage, identifier) {
+    var _this = this;
+    var loadingView = this.container.lookup('view:loading').append();
+    var offer = this.get("offer");
+    var item = this.get("store").createRecord("item", {
+      offer: offer,
+      donorCondition: donorCondition,
+      state: "draft"
+    });
+    item.save()
+      .then(() => {
+        if(withoutImage) {
+          loadingView.destroy();
+          _this.transitionToRoute("review_item.accept", _this.get('offer'), item);
+        }
+        else
+        {
+          this.get("store").createRecord('image', {cloudinaryId: identifier, item: item, favourite: true}).save()
+            .then(function() {
+              _this.send("newItem", item)
+              loadingView.destroy();
+            });
+        }
+      })
+      .catch(error => {
+        item.unloadRecord();
+        loadingView.destroy();
+        throw error;
+      });
+  },
+
+  deleteOffer: function(loadingView) {
+    var controller = this;
+    var offer = this.get("offer");
+    offer.destroyRecord().then(function(){
+      controller.transitionToRoute('my_list.reviewing');
+    })
+    .finally(() => loadingView.destroy());
+  },
+
+  cancelItem: function(controller, item) {
+    var offer = item.get('offer');
+    var loadingView = controller.container.lookup('view:loading').append();
+
+    if(offer.get('itemCount') === 1){
+      var delivery = offer.get("delivery");
+      if(delivery)
+        this.get("confirm").show(this.locale("edit_images.cancelling_item_will_cancel_offer"),
+          () =>{
+            var gogovanOrder = offer.get("delivery.gogovanOrder");
+            if(gogovanOrder && gogovanOrder.get("isActive")){
+              loadingView.destroy();
+              controller.transitionToRoute("offer.cancel_gogovan", offer)
+            }
+            else
+              this.deleteOffer(loadingView);
+          }
+        );
+      else
+        this.deleteOffer(loadingView);
+    }
+    else{
+      offer.get('items').removeObject(item);
+      item.destroyRecord().then(function(){
+        controller.transitionToRoute("review_offer.items");
+      })
+      .finally(() => loadingView.destroy());
+    }
+  },
+
+  removeImage: function(controller, item) {
+    var _this = this;
+    var img = item.get("images.firstObject");
+    var loadingView = controller.container.lookup('view:loading').append();
+    img.deleteRecord();
+    img.save()
+      .then(i => {
+        i.unloadRecord();
+        controller.transitionToRoute("item.edit_images", item);
+      })
+    .finally(() => loadingView.destroy());
+  },
+
+  confirmRemoveLastImage: function() {
+    var item = this.get("item");
+    this.get("customConfirm").show(this.locale("edit_images.last_image_with_item"),
+      this.locale("edit_images.remove_image"), this.locale("edit_images.cancel_item"),
+      () => this.cancelItem(this, item),
+      () => this.removeImage(this, item)
+    );
+  },
+
+  cannotRemoveImageAlert: function(){
+    this.get("alert").show(this.locale("edit_images.cant_delete_last_image"));
+  },
+
   actions: {
     next: function() {
       if(this.get("session.isAdminApp")) {
-        this.transitionToRoute("review_item.accept", this.get('model.offer'), this.get('model'));
+        this.transitionToRoute("review_item.accept", this.get('offer'), this.get('model'));
       } else {
         this.transitionToRoute("item.edit");
+      }
+    },
+
+    //only used for admin
+    nextWithoutImage: function() {
+      var item = this.get("item")
+      if(item){
+        this.transitionToRoute("review_item.accept", this.get('offer'), item);
+      }
+      else{
+        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        this.createItem(defaultDonorCondition, true);
       }
     },
 
@@ -129,26 +246,29 @@ export default Ember.Controller.extend({
     },
 
     deleteImage: function() {
-      if (this.get("item.images.length") === 1) {
-        this.get("alert").show(Ember.I18n.t("edit_images.cant_delete_last_image"));
+      if (this.get("item.images.length") === 1)
+      {
+        this.get("session.isAdminApp") ? this.confirmRemoveLastImage()
+          : this.cannotRemoveImageAlert();
         return;
       }
-
-      this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
-        var loadingView = this.container.lookup('view:loading').append();
-        var img = this.get("previewImage");
-        img.deleteRecord();
-        img.save()
-          .then(i => {
-            i.unloadRecord();
-            this.initPreviewImage();
-            if (!this.get("favouriteImage")) {
-              this.send("setFavourite");
-            }
-          })
-          .catch(error => { this.get("previewImage").rollback(); throw error; })
-          .finally(() => loadingView.destroy());
-      });
+      else {
+        this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
+          var loadingView = this.container.lookup('view:loading').append();
+          var img = this.get("previewImage");
+          img.deleteRecord();
+          img.save()
+            .then(i => {
+              i.unloadRecord();
+              this.initPreviewImage();
+              if (!this.get("favouriteImage")) {
+                this.send("setFavourite");
+              }
+            })
+            .catch(error => { this.get("previewImage").rollback(); throw error; })
+            .finally(() => loadingView.destroy());
+        });
+      }
     },
 
     expandImage: function() {
@@ -197,33 +317,14 @@ export default Ember.Controller.extend({
     },
 
     uploadSuccess: function(e, data) {
-      var _this = this;
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
-      if (!this.get("item") || this.get("item.isOffer")) {
-        var loadingView = this.container.lookup('view:loading').append();
-        var offer = this.get("offer");
-
+      var item = this.get("item");
+      if (!item || this.get("item.isOffer")) {
         var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
-        var item = this.get("store").createRecord("item", {
-          offer: offer,
-          donorCondition: defaultDonorCondition,
-          state: "draft"
-        });
-        item.save()
-          .then(() => {
-            this.get("store").createRecord('image', {cloudinaryId: identifier, item: item, favourite: true}).save()
-              .then(function() {
-                _this.send("newItem", item);
-                loadingView.destroy()
-              });
-          })
-          .catch(error => {
-            item.unloadRecord();
-            loadingView.destroy();
-            throw error;
-          });
+        this.createItem(defaultDonorCondition, false, identifier)
       } else {
-        var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item")});
+        var favourite = item.get("images.length") === 0;
+        var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item"), favourite: favourite});
         img.save().catch(error => { img.unloadRecord(); throw error; });
       }
     }
