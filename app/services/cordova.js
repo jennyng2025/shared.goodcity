@@ -24,9 +24,9 @@ export default Ember.Service.extend({
       } else if (device.platform === "iOS") {
         var opts = {"badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN"};
         pushNotification.register(res => sendToken(res, "aps"), errorHandler, opts);
-      } else if (device.platform === "Win32NT") {
-        var opts = {"channelName":channelName, "ecb":"onNotificationWP8", "uccb":"channelHandler", "errcb": "jsonErrorHandler"};
-        pushNotification.register(channelHandler, errorHandler, opts);
+      } else if (device.platform === "windows") {
+        var opts = {"ecb":"onNotificationWindows"};
+        pushNotification.register(res => sendToken(res.uri, "wns"), errorHandler, opts);
       }
     }
 
@@ -64,6 +64,11 @@ export default Ember.Service.extend({
           this.get("logger").error("unknown notification event " + JSON.stringify(e));
           break;
       }
+    }
+
+    // handle WNS notifications for WP8.1
+    window.onNotificationWindows = function(e) {
+
     }
 
     function sendToken(handle, platform) {

@@ -21,6 +21,7 @@ module.exports = {
 
   contentFor: function(type, config) {
     // add content security policy meta tag wanted by cordova-plugin-whitelist
+    // add winstore-jscompat.js for windows phone (not needed for Windows 10) https://github.com/MSOpenTech/winstore-jscompat
     if (type === 'head-footer' && config.cordova.enabled) {
       // gap: required by ios
       config.contentSecurityPolicy["frame-src"] = (config.contentSecurityPolicy["frame-src"] || "") + " gap:";
@@ -29,7 +30,8 @@ module.exports = {
       var policy = Object.keys(config.contentSecurityPolicy)
         .map(function(key) { return key + " " + config.contentSecurityPolicy[key]; })
         .join("; ");
-      return '<meta http-equiv="Content-Security-Policy" content="' + policy + '">';
+      return '<meta http-equiv="Content-Security-Policy" content="' + policy + '">' +
+        '\n<script src="shared.goodcity/winstore-jscompat.js"></script>';
     }
   }
 };
