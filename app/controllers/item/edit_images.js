@@ -296,7 +296,7 @@ export default Ember.Controller.extend({
 
     uploadStart: function(e, data) {
       this.set("uploadedFileDate", data);
-      Ember.$(".loading-indicator").show();
+      Ember.$(".loading-image-indicator").show();
     },
 
     cancelUpload: function(){
@@ -311,7 +311,7 @@ export default Ember.Controller.extend({
 
     uploadComplete: function() {
       this.set("uploadedFileDate", null);
-      Ember.$(".loading-indicator.hide_image_loading").hide();
+      Ember.$(".loading-image-indicator.hide_image_loading").hide();
       this.set("addPhotoLabel", Ember.I18n.t("edit_images.add_photo"));
       this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading"));
     },
