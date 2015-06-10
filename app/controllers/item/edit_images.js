@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
     if (image) {
       this.send("setPreview", image);
     }
-  }.observes("package", "item").on("init"),
+  }.observes("package", "item", "item.images.@each").on("init"),
 
   //css related
   previewImageBgCss: function() {
@@ -160,14 +160,12 @@ export default Ember.Controller.extend({
     var _this = this;
     var img = item.get("images.firstObject");
     var loadingView = controller.container.lookup('view:loading').append();
-    img.destroyRecord().then(function(i){
-      i.unloadRecord();
-      _this.initPreviewImage();
-      if (!_this.get("favouriteImage")) {
-        _this.send("setFavourite");
-      }
-      controller.transitionToRoute("item.edit_images", item);
-    })
+    img.deleteRecord();
+    img.save()
+      .then(i => {
+        i.unloadRecord();
+        controller.transitionToRoute("item.edit_images", item);
+      })
     .finally(() => loadingView.destroy());
   },
 
@@ -254,22 +252,23 @@ export default Ember.Controller.extend({
           : this.cannotRemoveImageAlert();
         return;
       }
-
-      this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
-        var loadingView = this.container.lookup('view:loading').append();
-        var img = this.get("previewImage");
-        img.deleteRecord();
-        img.save()
-          .then(i => {
-            i.unloadRecord();
-            this.initPreviewImage();
-            if (!this.get("favouriteImage")) {
-              this.send("setFavourite");
-            }
-          })
-          .catch(error => { this.get("previewImage").rollback(); throw error; })
-          .finally(() => loadingView.destroy());
-      });
+      else {
+        this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
+          var loadingView = this.container.lookup('view:loading').append();
+          var img = this.get("previewImage");
+          img.deleteRecord();
+          img.save()
+            .then(i => {
+              i.unloadRecord();
+              this.initPreviewImage();
+              if (!this.get("favouriteImage")) {
+                this.send("setFavourite");
+              }
+            })
+            .catch(error => { this.get("previewImage").rollback(); throw error; })
+            .finally(() => loadingView.destroy());
+        });
+      }
     },
 
     expandImage: function() {
@@ -319,11 +318,13 @@ export default Ember.Controller.extend({
 
     uploadSuccess: function(e, data) {
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
-      if (!this.get("item") || this.get("item.isOffer")) {
+      var item = this.get("item");
+      if (!item || this.get("item.isOffer")) {
         var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, false, identifier)
       } else {
-        var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item")});
+        var favourite = item.get("images.length") === 0;
+        var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item"), favourite: favourite});
         img.save().catch(error => { img.unloadRecord(); throw error; });
       }
     }

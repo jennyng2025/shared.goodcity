@@ -225,8 +225,8 @@ export default DS.Model.extend({
   }.property('itemCount', 'isClosed', 'isReceived'),
 
   preventNewItem:  function(){
-    return this.get('isReviewed') || this.get('isScheduled') || this.get('isFinished');
-  }.property('isReviewed', 'isScheduled', 'isFinished'),
+    return this.get('isScheduled') || this.get('isFinished');
+  }.property('isScheduled', 'isFinished'),
 
   statusBarClass: function(){
     if(this.get("isSubmitted")){ return "is-submitted"}

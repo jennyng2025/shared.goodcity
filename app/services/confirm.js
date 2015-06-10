@@ -22,7 +22,7 @@ export default Ember.Service.extend({
       // empty ember-view has minimum height of 100%, so removing them to
       // to avoid un-necessary long page.
       Ember.$(".loading-indicator").parent('.ember-view').remove();
-      $('.ember-view:blank').remove();
+      $('div.ember-view:blank').remove();
 
       Ember.$("#confirmModal .cancel").click(() => {
         _this.closeModal(confirmView);

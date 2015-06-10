@@ -56,6 +56,16 @@ I18nTranslationsEn =
 
   "time_ago":
     "right_now" : "Right Now"
+    "1m": "1m"
+    "m": "m"
+    "1h": "1h"
+    "h": "h"
+    "1d": "1d"
+    "d": "d"
+    "1mths": "1mths"
+    "mths": "mths"
+    "1y": "1y"
+    "y": "y"
 
   "application":
     "home" : "Home"
@@ -250,7 +260,7 @@ I18nTranslationsEn =
 
     "book_van" :
       "title" : "Book Van"
-      "location" : "Location"
+      "location" : "Collection address (Hong Kong)"
       "select_day" : "Preferred day/time"
       "crossroads_time" : "Limited to Crossroads' operating hours"
       "requirements" : "Extra Requirements"
@@ -263,6 +273,7 @@ I18nTranslationsEn =
       "time": "Time"
       "am": "AM"
       "pm": "PM"
+      "vehicle": "Vehicle Type"
 
   "drop-off":
     "select_schedule": "Select Schedule"
