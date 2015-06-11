@@ -143,7 +143,7 @@ I18nTranslationsZhTw =
     "district": "地區"
     "driver": "司機"
     "driver_contact": "司機聯絡資料"
-    "vehicle_reg": "車輛登記"
+    "vehicle_reg": "車牌號碼"
     "fee": "基本收費"
     "booked": "已確認預約"
     "driver_completed": "司機已確認預約"
