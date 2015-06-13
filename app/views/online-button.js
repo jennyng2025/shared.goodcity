@@ -17,9 +17,10 @@ export default Ember.View.extend(Ember.ViewTargetActionSupport, {
   disabledOverride: false,
 
   didInsertElement: function() {
-    this.updateDisabled = Ember.run.bind(this,
-      () => this.set("disabled", !navigator.onLine || this.get("disabledOverride"))
-    );
+    this.updateDisabled = Ember.run.bind(this, () => {
+      var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
+      this.set("disabled", !online || this.get("disabledOverride"));
+    });
     this.updateDisabled();
     window.addEventListener("online", this.updateDisabled);
     window.addEventListener("offline", this.updateDisabled);
