@@ -32,8 +32,13 @@ export default Ember.Service.extend({
 
     // handle APNS notifications for iOS
     window.onNotificationAPN = function(e) {
-      if (!e.foreground) {
+      if (e.foreground == "0") {
+        transitionToMessageThread(e.payload);
+      }
 
+      if ( e.badge )
+      {
+        pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, e.badge);
       }
     }
 
@@ -68,7 +73,9 @@ export default Ember.Service.extend({
 
     // handle WNS notifications for WP8.1
     window.onNotificationWindows = function(e) {
-
+      if (e.foreground == "0") {
+        transitionToMessageThread(e.detail.Arguments);
+      }
     }
 
     function sendToken(handle, platform) {
