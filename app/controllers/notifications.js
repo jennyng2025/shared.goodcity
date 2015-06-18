@@ -1,4 +1,5 @@
 import Ember from "ember";
+import AjaxPromise from './../utils/ajax-promise';
 
 export default Ember.ArrayController.extend({
   sortProperties: ["date"],
@@ -61,6 +62,12 @@ export default Ember.ArrayController.extend({
     view: function() {
       var notification = this.get("nextNotification");
       this.removeObject(notification);
+      if(notification.call){
+        var mobile = this.get("session.currentUser.mobile");
+        var prefix = mobile.indexOf("+852") === -1 ? "+852" : "";
+        var donorId = notification.entity.created_by_id;
+        new AjaxPromise("/twilio/accept_call", "GET", this.get('session.authToken'), { mobile: prefix + mobile, donor_id: donorId })
+      }
       this.transitionToRoute.apply(this, notification.route);
     }
   }
