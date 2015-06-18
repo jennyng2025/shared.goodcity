@@ -73,6 +73,10 @@
   .icon-empty-items {
     color: $body-font-color;
   }
+
+  .item_log {
+    text-align: center;
+  }
 }
 
 .message-form {
@@ -107,4 +111,21 @@
     padding-right: 0.2rem;
     z-index: 10;
   }
+}
+
+.day_seperator {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #334F75;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.day_seperator span {
+  padding:0 10px;
+  color: #314B6F;
+  background: #002352;
+}
+.tabs-content .day_seperator span {
+  background: #DEE4EB;
 }

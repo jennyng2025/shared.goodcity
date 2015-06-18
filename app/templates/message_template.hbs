@@ -8,22 +8,33 @@
           <p class="no-items">{{t "item.messages.info_text2" }}</p>
         </p>
       {{else}}
-        {{#each model as |message|}}
-          <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
-            <div class='message_details'>
-              {{#if message.myMessage}}
-                {{t "messages.owner" }}
-              {{else}}
-                {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
-                {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
-                {{message.sender.roleInitials}}
-              {{/if}}
-              →
-              {{display-message-time message.createdAt}}
-            </div>
-
-            {{{apply-line-break message.body}}}
+        {{#each groupedElements as |messages|}}
+          <div class="small-12 columns day_seperator">
+            <span>{{display-messages-date messages.firstObject.createdDate}}</span>
           </div>
+          {{#each messages as |message|}}
+            {{#if message.isMessage}}
+              <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+                <div class='message_details'>
+                  {{#if message.myMessage}}
+                    {{t "messages.owner" }}
+                  {{else}}
+                    {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
+                    {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                    {{message.sender.roleInitials}}
+                  {{/if}}
+                  →
+                  {{display-message-time message.createdAt}}
+                </div>
+
+                {{{apply-line-break message.body}}}
+              </div>
+            {{else}}
+              <div class="small-12 columns item_log">
+                {{display-message-time message.createdAt}} - {{message.whodunnitName}} {{display-log-status message.state}} item
+              </div>
+            {{/if}}
+          {{/each}}
         {{/each}}
       {{/if}}
 

@@ -165,6 +165,12 @@ I18nTranslationsEn =
       "cancel": "Cancel"
       "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
 
+  "item_log":
+    "added": "added"
+    "edited": "edited"
+    "accepted": "accepted"
+    "rejected": "rejected"
+
   "edit_images":
     "add_photo" : "Add photo"
     "delete_confirm" : "Are you sure you want to delete this image?"

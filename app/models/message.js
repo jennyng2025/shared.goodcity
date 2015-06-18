@@ -20,5 +20,13 @@ export default DS.Model.extend({
     return this.get("sender.id") === session.get("currentUser.id");
   }.property(),
 
+  isMessage: function() {
+    return this.get('constructor.typeKey') === 'message';
+  }.property('this'),
+
+  createdDate: function() {
+    return this.get("createdAt").toDateString();
+  }.property(),
+
   itemImageUrl: Ember.computed.alias("item.displayImageUrl")
 });

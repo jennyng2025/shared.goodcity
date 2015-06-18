@@ -21,9 +21,10 @@ export default Ember.Mixin.create({
             .then(data => {
               this.store.pushPayload(data);
               this.store.push('user', data.user_profile);
+              var user_id = this.get("session.currentUser.id")
               var offer_params = this.session.get("isAdminApp") ?
                 { states: ["nondraft"] }:
-                { created_by_id: this.get("session.currentUser.id"), states: ["for_donor"] }
+                { created_by_id: user_id, states: ["for_donor"] }
 
               this.store.find('offer', offer_params)
                 .then(() => accept())
