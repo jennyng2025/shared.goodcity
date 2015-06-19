@@ -13,7 +13,7 @@ export default Ember.Service.extend({
 
       Ember.$("#customConfirmModal").removeClass("open"); // workaround https://github.com/zurb/foundation/issues/5721
       Ember.$("#customConfirmModal").foundation("reveal", "open");
-      Ember.$(".loading-indicator").hide();
+      Ember.$(".loading-indicator").remove();
       Ember.$("#customConfirmModal .action1").click(() => {
         _this.closeModal(confirmView, failureCallback);
         // failureCallback();
