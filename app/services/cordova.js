@@ -25,8 +25,9 @@ export default Ember.Service.extend({
         var opts = {"badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN"};
         pushNotification.register(res => sendToken(res, "aps"), errorHandler, opts);
       } else if (device.platform === "windows") {
-        var opts = {"ecb":"onNotificationWindows"};
+        var opts = {"ecb":"noop"};
         pushNotification.register(res => sendToken(res.uri, "wns"), errorHandler, opts);
+        WinJS.Application.addEventListener("activated", window.onNotificationWindows, false);
       }
     }
 
@@ -72,10 +73,12 @@ export default Ember.Service.extend({
 
     // handle WNS notifications for WP8.1
     window.onNotificationWindows = function(e) {
-      if (e.foreground == "0") {
-        transitionToMessageThread(e.detail.Arguments);
+      if (e.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.launch) {
+        transitionToMessageThread(JSON.parse(e.detail.arguments));
       }
     }
+
+    window.noop = function() {}
 
     function sendToken(handle, platform) {
       return new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: handle, platform: platform});
