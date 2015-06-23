@@ -32,12 +32,11 @@ export default Ember.Service.extend({
 
     // handle APNS notifications for iOS
     window.onNotificationAPN = function(e) {
-      if (e.foreground == "0") {
-        transitionToMessageThread(e.payload);
+      if (e.foreground === "0") {
+        return transitionToMessageThread(e);
       }
 
-      if ( e.badge )
-      {
+      if (e.badge) {
         pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, e.badge);
       }
     }
