@@ -4,19 +4,17 @@ import AjaxPromise from '../utils/ajax-promise';
 import preloadDataMixin from '../mixins/preload_data';
 
 export default Ember.Route.extend(preloadDataMixin, {
+  cordova: Ember.inject.service(),
 
   beforeModel: function(transition) {
-    var _this = this;
-    Ember.run(function(){
-      _this.controllerFor('application').send('logMeIn');
-    });
+    Ember.run(() => this.controllerFor('application').send('logMeIn'));
     return this.preloadData().catch(error => {
       if (error.status === 0) {
         this.transitionTo("offline");
       } else {
         throw error;
       }
-    });
+    }).finally(() => this.get("cordova").appLoad());
   },
 
   afterModel: function() {
