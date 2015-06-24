@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
     if (arguments.length > 1) {
       return value;
     } else {
-      new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 10})
+      new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40})
         .then(data => this.set("available_dates", data));
       return value;
     }

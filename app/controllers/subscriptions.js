@@ -23,7 +23,8 @@ export default Ember.Controller.extend({
 
   updateStatus: function() {
     var socket = this.get("socket");
-    var online = socket && socket.connected && navigator.onLine;
+    var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
+    online = socket && socket.connected && online;
     var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
     var text = !online ? Ember.I18n.t("socket_offline_error") :
       "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
@@ -54,7 +55,10 @@ export default Ember.Controller.extend({
       var connectUrl = config.APP.SOCKETIO_WEBSERVICE_URL +
         "?token=" + encodeURIComponent(this.session.get("authToken")) +
         "&deviceId=" + this.get("deviceId") +
-        "&appName=" + config.APP.NAME;
+        "&meta=appName:" + config.APP.NAME;
+        // pass mutilple meta values by seperating '|' like this
+        // "&meta=appName:" + config.APP.NAME +"|version:" + config.APP.NAME;
+
       var socket = io(connectUrl, {autoConnect:false,forceNew:true});
       this.set("socket", socket);
       socket.on("connect", function() {

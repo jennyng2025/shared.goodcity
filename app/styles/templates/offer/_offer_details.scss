@@ -93,6 +93,9 @@
             @media #{$small-only} {
               margin-left: 0.5rem;
             }
+            audio {
+              width: 100%;
+            }
           }
         }
       }

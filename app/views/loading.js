@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   templateName: 'loading',
+  classNames: ["loading-indicator"],
   alert: Ember.inject.service(),
   logger: Ember.inject.service(),
   timer: null,
