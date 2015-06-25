@@ -76,6 +76,7 @@
 
   .item_log {
     text-align: center;
+    margin-bottom: 0.3rem;
   }
 }
 
@@ -116,7 +117,7 @@
 .day_seperator {
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid #334F75;
+  border-bottom: 1px solid $light-blue;
   line-height: 0.1em;
   margin: 10px 0 20px;
 }
@@ -124,8 +125,12 @@
 .day_seperator span {
   padding:0 10px;
   color: #314B6F;
-  background: #002352;
+  background: $dark-blue;
 }
 .tabs-content .day_seperator span {
-  background: #DEE4EB;
+  background: $light-grey;
+}
+
+.review_item .day_seperator {
+  border-bottom: 1px solid $medium-blue;
 }

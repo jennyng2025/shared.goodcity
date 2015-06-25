@@ -166,10 +166,13 @@ I18nTranslationsEn =
       "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
 
   "item_log":
-    "added": "added"
-    "edited": "edited"
-    "accepted": "accepted"
-    "rejected": "rejected"
+    "added": "added item"
+    "edited": "edited item"
+    "accepted": "accepted item"
+    "rejected": "rejected item"
+    "submitted": "submitted item"
+    "received": "received item"
+    "missing": "marked item missing"
 
   "edit_images":
     "add_photo" : "Add photo"
