@@ -73,6 +73,10 @@
   .icon-empty-items {
     color: $body-font-color;
   }
+  a {
+    color: inherit !important;
+    text-decoration: underline;
+  }
 }
 
 .message-form {
