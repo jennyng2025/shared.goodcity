@@ -21,7 +21,7 @@ export default DS.Model.extend({
   }.property(),
 
   isMessage: function() {
-    return this.get('constructor.typeKey') === 'message';
+    return true;
   }.property('this'),
 
   createdDate: function() {

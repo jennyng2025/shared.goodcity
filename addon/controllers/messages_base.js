@@ -33,7 +33,7 @@ export default Ember.ArrayController.extend({
   packagesLog: function() {
     var packageIds = this.get("item.packages").mapBy("id");
     return this.store.all('version').filterBy('itemType', 'Package').filter(function(log){
-      return packageIds.indexOf(String(log.get("itemId"))) >= 0;
+      return (packageIds.indexOf(String(log.get("itemId"))) >= 0) && (["received", "missing"].indexOf(log.get("state")) >= 0);
     });
   }.property("item.packages.[]", "versions.[]"),
 
