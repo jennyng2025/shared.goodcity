@@ -88,7 +88,7 @@ export default Ember.Service.extend({
     }
 
     function errorHandler(error) {
-      this.get("logger").error(error);
+      _this.get("logger").error(error);
     }
 
     function transitionToMessageThread(message) {

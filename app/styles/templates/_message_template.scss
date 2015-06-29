@@ -78,6 +78,10 @@
     text-align: center;
     margin-bottom: 0.3rem;
   }
+  a {
+    color: inherit !important;
+    text-decoration: underline;
+  }
 }
 
 .message-form {
