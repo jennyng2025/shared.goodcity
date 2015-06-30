@@ -29,8 +29,6 @@ export default Ember.View.reopen({
 
       Ember.$(".hidden.unread_id").attr("data-name", (id || 0));
       return true;
-
     });
-
   },
 });

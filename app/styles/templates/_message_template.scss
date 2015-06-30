@@ -73,6 +73,11 @@
   .icon-empty-items {
     color: $body-font-color;
   }
+
+  .item_log {
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
   a {
     color: inherit !important;
     text-decoration: underline;
@@ -111,4 +116,25 @@
     padding-right: 0.2rem;
     z-index: 10;
   }
+}
+
+.day_seperator {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid $light-blue;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.day_seperator span {
+  padding:0 10px;
+  color: #314B6F;
+  background: $dark-blue;
+}
+.tabs-content .day_seperator span {
+  background: $light-grey;
+}
+
+.review_item .day_seperator {
+  border-bottom: 1px solid $medium-blue;
 }
