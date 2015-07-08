@@ -56,6 +56,7 @@ export default Ember.Controller.extend({
         .then(function(data) {
           controller.store.pushPayload(data);
           controller.set("inProgress", false);
+          offer.set('state', 'scheduled');
           loadingView.destroy();
           if(controller.get("session.isAdminApp")) {
             controller.transitionToRoute('review_offer.logistics', offer);
