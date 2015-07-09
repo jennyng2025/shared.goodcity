@@ -167,13 +167,13 @@ I18nTranslationsZhTw =
       "description_placeholder" : "物品的描述、大小及數量等。如要增加或修改這項物品的相片，請點擊圖像。"
 
   "item_log":
-    "added": "added item"
-    "edited": "edited item"
-    "accepted": "accepted item"
-    "rejected": "rejected item"
-    "submitted": "submitted item"
-    "received": "received item"
-    "missing": "marked item missing"
+    "added": "加入此物"
+    "edited": "修改此物"
+    "accepted": "接受此物"
+    "rejected": "拒絕此物"
+    "submitted": "捐出此物"
+    "received": "收到此物"
+    "missing": "將此物的狀況改為'失蹤'"
 
   "edit_images":
     "add_photo" : "加入圖片"
