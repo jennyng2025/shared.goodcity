@@ -9,7 +9,7 @@ bower cache clean
 rm -rf node_modules bower_components dist tmp
 npm install -g ember-cli
 npm install --save-dev ember-cli # (SKIP if someone else has updated ember-cli already)
-npm link shared.goodcity
+npm link shared-goodcity
 ember init # (SKIP if someone else has updated ember-cli already)
 ember install
 ```
