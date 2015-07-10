@@ -25,7 +25,7 @@ export default DS.Model.extend({
   }.property('this'),
 
   createdDate: function() {
-    return this.get("createdAt").toDateString();
+    return new Date(this.get("createdAt")).toDateString();
   }.property(),
 
   itemImageUrl: Ember.computed.alias("item.displayImageUrl")
