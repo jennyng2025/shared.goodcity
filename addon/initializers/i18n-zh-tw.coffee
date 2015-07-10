@@ -1,5 +1,4 @@
 I18nTranslationsZhTw =
-  "socket_offline_error": "正在嘗試連接至 app.goodcity.hk..."
   "offline_error": "無法完成動作，請檢查您的網絡連線"
   "offline_page": "無法開啟應用程式，請檢查您的網絡連線"
   "try_again": "再試一次"
