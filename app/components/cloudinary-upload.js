@@ -16,6 +16,7 @@ export default Ember.Component.extend({
   events: ["submit","progress","always","fail","done"],
   alert: Ember.inject.service(),
   offerId: null,
+  i18n: Ember.inject.service(),
 
   didInsertElement: function() {
     var _this = this;
@@ -30,7 +31,7 @@ export default Ember.Component.extend({
 
       fail: function() {
         if(this.type !== "file") {
-          this.get("alert").show(Ember.I18n.t('upload-image.upload_error'));
+          this.get("alert").show(this.get("i18n").t('upload-image.upload_error'));
         }
       }
     };

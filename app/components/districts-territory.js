@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Component.extend({
   attributeBindings: ['selected_id'],
@@ -20,9 +21,7 @@ export default Ember.Component.extend({
     return store.all('territory').sortBy('name');
   }.property(),
 
-  selectDistrictLabel: function() {
-    return Ember.I18n.t("select_district");
-  }.property(),
+  selectDistrictLabel: t("select_district"),
 
   actions: {
     findDistrictbyTerritory: function(territory){

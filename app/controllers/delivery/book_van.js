@@ -1,5 +1,6 @@
 import AjaxPromise from './../../utils/ajax-promise';
 import addressDetails from './address_details';
+import { translationMacro as t } from "ember-i18n";
 
 export default addressDetails.extend({
   needs: ['delivery'],
@@ -10,9 +11,10 @@ export default addressDetails.extend({
   borrowTrolley: false,
   porterage: false,
 
-  datePrompt: Ember.I18n.t("gogovan.book_van.date"),
-  timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+  datePrompt: t("gogovan.book_van.date"),
+  timePrompt: t("gogovan.book_van.time"),
   offer: Ember.computed.alias("delivery.offer"),
+  i18n: Ember.inject.service(),
 
   gogovanOptions: function() {
     var allOptions = this.store.all('gogovan_transport');
@@ -41,7 +43,7 @@ export default addressDetails.extend({
   }.property(),
 
   locale: function(str) {
-    return Ember.I18n.t(str);
+    return this.get("i18n").t(str);
   },
 
   actions: {

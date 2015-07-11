@@ -6,9 +6,11 @@ export default Ember.TextField.extend({
   name:    "userName",
   attributeBindings: [ "name", "type", "id", "value", 'required', 'pattern'],
 
+  i18n: Ember.inject.service(),
+
   didInsertElement: function(){
     var user = this.get('user');
-    var translatedName = Ember.I18n.t("full_name", { firstName: user.get('firstName'), lastName: user.get('lastName') });
+    var translatedName = this.get("i18n").t("full_name", { firstName: user.get('firstName'), lastName: user.get('lastName') });
     this.set('value', translatedName);
   }
 });

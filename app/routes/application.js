@@ -5,16 +5,17 @@ import preloadDataMixin from '../mixins/preload_data';
 
 export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   beforeModel: function (transition = []) {
-    if(transition.queryParams.ln) {
+    if (transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
       this.set('session.language', language);
     }
 
-    var language = this.session.get("language") || Ember.I18n.default_language;
+    var language = this.session.get("language");
     moment.locale(language);
-    Ember.I18n.translations = Ember.I18n.translation_store[language];
+    this.set("i18n.locale", language);
 
     Ember.onerror = window.onerror = error => this.handleError(error);
 
@@ -54,14 +55,14 @@ export default Ember.Route.extend(preloadDataMixin, {
           this.controllerFor("application").send('logMeOut');
         }
       } else if (reason.status === 404) {
-        this.get("alert").show(Ember.I18n.t("404_error"));
+        this.get("alert").show(this.get("i18n").t("404_error"));
       } else if (reason.status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled
-        this.get("alert").show(Ember.I18n.t("offline_error"));
+        this.get("alert").show(this.get("i18n").t("offline_error"));
       } else {
         this.get("logger").error(reason);
-        this.get("alert").show(Ember.I18n.t("unexpected_error"));
+        this.get("alert").show(this.get("i18n").t("unexpected_error"));
       }
     } catch (err) {}
   },
@@ -81,7 +82,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     error: function(reason) {
       try {
         if ([403, 404].indexOf(reason.status) >= 0) {
-          this.get("alert").show(Ember.I18n.t(reason.status+"_error"), () => this.transitionTo("/"));
+          this.get("alert").show(this.get("i18n").t(reason.status+"_error"), () => this.transitionTo("/"));
         } else {
           this.handleError(reason);
         }

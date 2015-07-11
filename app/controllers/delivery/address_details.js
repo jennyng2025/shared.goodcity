@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
 
@@ -9,8 +10,8 @@ export default Ember.Controller.extend({
   selectedTerritory: {id: null},
   selectedDistrict: {id: null},
 
-  territoriesPrompt: Ember.I18n.t("all"),
-  destrictPrompt: Ember.I18n.t("delivery.select_district"),
+  territoriesPrompt: t("all"),
+  destrictPrompt: t("delivery.select_district"),
 
   territories: function(){
     return this.store.all('territory');

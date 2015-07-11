@@ -32,8 +32,10 @@ export default Ember.View.extend({
     });
   },
 
+  i18n: Ember.inject.service(),
+
   locale: function(str) {
-    return Ember.I18n.t("time_ago." + str);
+    return this.get("i18n").t("time_ago." + str);
   },
 
   timeString: function() {

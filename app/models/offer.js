@@ -132,8 +132,9 @@ export default DS.Model.extend({
     return status;
   }.property('state'),
 
+  i18n: Ember.inject.service(),
   locale: function(text) {
-    return Ember.I18n.t(text);
+    return this.get("i18n").t(text);
   },
 
   statusText: function(){
@@ -202,7 +203,7 @@ export default DS.Model.extend({
   }.property('crossroadsTransport'),
 
   hasGogovanTransport: function(){
-    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== Ember.I18n.t("offer.disable");
+    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable");
   }.property('gogovanTransport'),
 
   // display "General Messages Thread"

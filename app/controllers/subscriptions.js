@@ -14,11 +14,12 @@ export default Ember.Controller.extend({
   deviceTtl: 0,
   deviceId: Math.random().toString().substring(2),
   logger: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
   status: {
     online: false,
     hidden: true,
-    text: Ember.I18n.t("offline_error")
+    text: ""
   },
 
   updateStatus: function() {
@@ -26,7 +27,7 @@ export default Ember.Controller.extend({
     var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
     online = socket && socket.connected && online;
     var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
-    var text = !online ? Ember.I18n.t("socket_offline_error") :
+    var text = !online ? this.get("i18n").t("socket_offline_error") :
       "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
 
     this.set("status", {"online": online, "hidden": hidden, "text": text});
@@ -44,6 +45,7 @@ export default Ember.Controller.extend({
   }.observes("online"),
 
   initController: function() {
+    this.set("status.text", this.get("i18n").t("offline_error"));
     var updateStatus = Ember.run.bind(this, this.updateStatus);
     window.addEventListener("online", updateStatus);
     window.addEventListener("offline", updateStatus);

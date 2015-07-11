@@ -12,6 +12,8 @@ export default DS.Model.extend({
 
   deliveries:   hasMany('delivery'),
 
+  i18n: Ember.inject.service(),
+
   dayTime: function() {
     var slot  = this.get('slotName');
     var value = slot ? slot.split(',') : [];
@@ -21,6 +23,6 @@ export default DS.Model.extend({
       value = slot.split(':')[0];
       value = (parseInt(value) > 8 && parseInt(value) < 12 ) ? "morning" : "afternoon";
     }
-    return Ember.I18n.t("day." + value.toLowerCase());
+    return this.get("i18n").t("day." + value.toLowerCase());
   }.property("slotName"),
 });
