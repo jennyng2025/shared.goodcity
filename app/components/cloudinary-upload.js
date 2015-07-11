@@ -13,7 +13,6 @@ export default Ember.Component.extend({
   disabled: true,
   attributeBindings: [ "name", "type", "value", "data-cloudinary-field",
     "data-url", "data-form-data", "disabled", "style", "accept", "offerId"],
-  events: ["submit","progress","always","fail","done"],
   alert: Ember.inject.service(),
   offerId: null,
   i18n: Ember.inject.service(),
@@ -37,13 +36,9 @@ export default Ember.Component.extend({
     };
 
     // forward cloudinary events
-    this.get("events").forEach(function(event) {
-      if (_this[event]) {
-        options[event] = function(e, data) {
-          Ember.run(function() {
-            _this.sendAction(event, e, data);
-          });
-        };
+    ["submit","progress","always","fail","done"].forEach(ev => {
+      if (this[event]) {
+        options[event] = (e, data) => Ember.run(() => this.sendAction(event, e, data));
       }
     });
 
