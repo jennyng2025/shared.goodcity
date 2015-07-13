@@ -65,10 +65,7 @@ export default Ember.ArrayController.extend({
   },
 
   acceptCall: function(notification) {
-    var mobile = this.get("session.currentUser.mobile");
-    var prefix = mobile.indexOf("+852") === -1 ? "+852" : "";
-    var donorId = notification.author_id;
-    new AjaxPromise("/twilio/accept_call", "GET", this.get('session.authToken'), { mobile: prefix + mobile, donor_id: donorId })
+    new AjaxPromise("/twilio/accept_call", "GET", this.get('session.authToken'), { donor_id: notification.author_id })
   },
 
   actions: {
