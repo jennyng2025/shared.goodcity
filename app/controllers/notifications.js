@@ -65,7 +65,7 @@ export default Ember.ArrayController.extend({
   },
 
   acceptCall: function(notification) {
-    new AjaxPromise("/twilio/accept_call", "GET", this.get('session.authToken'), { donor_id: notification.author_id })
+    new AjaxPromise("/twilio_inbound/accept_call", "GET", this.get('session.authToken'), { donor_id: notification.author_id })
   },
 
   actions: {
