@@ -166,7 +166,7 @@ I18nTranslationsEn =
 
   "item_log":
     "added": "{{name}} added item"
-    "edited": "{{name}} edited item"
+    "updated": "{{name}} edited item"
     "accepted": "{{name}} accepted item"
     "rejected": "{{name}} rejected item"
     "submitted": "{{name}} submitted item"

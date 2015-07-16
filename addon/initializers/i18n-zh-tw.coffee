@@ -167,7 +167,7 @@ I18nTranslationsZhTw =
 
   "item_log":
     "added": "{{name}} 加入此物"
-    "edited": "{{name}} 修改此物"
+    "updated": "{{name}} 修改此物"
     "accepted": "{{name}} 接受此物"
     "rejected": "{{name}} 拒絕此物"
     "submitted": "{{name}} 捐出此物"

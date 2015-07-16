@@ -32,6 +32,6 @@ export default DS.Model.extend({
       case 'call_accepted' : return Ember.I18n.t("offer_log.call_accepted", {name: this.get("whodunnitName")});
     }
 
-    return "";
+    return Ember.I18n.t("item_log.updated", {name: this.get("whodunnitName")});
   }.property()
 });
