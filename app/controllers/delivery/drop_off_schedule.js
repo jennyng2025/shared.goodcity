@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
 
   datePrompt: t("gogovan.book_van.date"),
   timePrompt: t("gogovan.book_van.time"),
+  i18n: Ember.inject.service(),
 
   slots: function() {
     return this.store.all('timeslot').sortBy('id');

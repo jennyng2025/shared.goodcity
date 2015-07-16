@@ -13,7 +13,7 @@ export default Ember.Route.extend(preloadDataMixin, {
       this.set('session.language', language);
     }
 
-    var language = this.session.get("language");
+    var language = this.session.get("language") || "en";
     moment.locale(language);
     this.set("i18n.locale", language);
 
@@ -50,13 +50,17 @@ export default Ember.Route.extend(preloadDataMixin, {
   handleError: function(reason) {
     try
     {
-      if (reason.status === 401) {
+      var status;
+      try { status = parseInt(reason.errors[0].status); }
+      catch (err) { status = reason.status; }
+
+      if (status === 401) {
         if (this.session.get('isLoggedIn')) {
           this.controllerFor("application").send('logMeOut');
         }
-      } else if (reason.status === 404) {
+      } else if (status === 404) {
         this.get("alert").show(this.get("i18n").t("404_error"));
-      } else if (reason.status === 0) {
+      } else if (status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled
         this.get("alert").show(this.get("i18n").t("offline_error"));

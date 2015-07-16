@@ -37,8 +37,8 @@ export default Ember.Component.extend({
 
     // forward cloudinary events
     ["submit","progress","always","fail","done"].forEach(ev => {
-      if (this[event]) {
-        options[event] = (e, data) => Ember.run(() => this.sendAction(event, e, data));
+      if (this[ev]) {
+        options[ev] = (e, data) => Ember.run(() => this.sendAction(ev, e, data));
       }
     });
 

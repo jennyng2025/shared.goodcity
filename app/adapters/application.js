@@ -13,12 +13,5 @@ export default DS.ActiveModelAdapter.extend({
       "X-GOODCITY-APP-VERSION": config.APP.VERSION,
       "X-GOODCITY-APP-SHA": config.APP.SHA
     };
-  }.property("session.authToken"),
-
-  // without this, error is wrapped like this {__reason_with_error_thrown__:jqXHR,message:"",stack:""}
-  // it does add a stacktrace that would otherwise be missing but only relates to adapter
-  // instead of calling code so not that useful
-  ajaxError: function(jqXHR) {
-    return this._super(jqXHR);
-  }
+  }.property("session.authToken")
 });

@@ -28,9 +28,9 @@ export default Ember.Mixin.create({
 
               this.store.find('offer', offer_params)
                 .then(() => accept())
-                .catch(error => reject(reject));
+                .catch(error => reject(error));
             })
-            .catch(error => reject(reject));
+            .catch(error => reject(error));
           })
         )
     }

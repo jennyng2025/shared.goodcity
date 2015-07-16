@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   classNames: ['district-selection'],
   currentSelected: {id: null},
   selected_id: null,
+  i18n: Ember.inject.service(),
 
   currentSelectedObserver: function(){
     this.set('selected_id',this.getWithDefault('currentSelected.id'));
