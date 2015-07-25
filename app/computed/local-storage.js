@@ -6,7 +6,7 @@ try { localStorage.test = 2; delete localStorage.test; storageSupported = true; 
 catch(err) {}
 
 var cookiesSupported = false;
-try { $.cookie('test', 2); $removeCookie('test'); cookiesSupported = true; }
+try { $.cookie('test', 2); $.removeCookie('test'); cookiesSupported = true; }
 catch(err) {}
 
 export default Ember.computed.localStorage = function() {
