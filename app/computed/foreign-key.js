@@ -14,19 +14,18 @@ import Ember from 'ember';
 
 export default Ember.computed.foreignKey = function(path) {
   var relationshipName = path.split('.')[0];
-  return Ember.computed(function(key, value) {
-    //get
-    if (arguments.length === 1) {
+  return Ember.computed(relationshipName, {
+    get(key) {
       return this.get(path);
+    },
+    set(key, value) {
+      var type = this.get(relationshipName + ".constructor.modelName");
+      var model = this.store.getById(type, value);
+      if (!model) {
+        return this.get(path);
+      }
+      this.set(relationshipName, model);
+      return value;
     }
-
-    //set
-    var type = this.get(relationshipName + ".constructor.typeKey");
-    var model = this.store.getById(type, value);
-    if (!model) {
-      return this.get(path);
-    }
-    this.set(relationshipName, model);
-    return value;
-  }).property(relationshipName);
+  });
 };
