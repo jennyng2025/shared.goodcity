@@ -17,7 +17,7 @@ export default Ember.Service.extend({
     var pushNotification, _this = this;
 
     function onDeviceReady() {
-      if (config.staging && TestFairy) {
+      if (config.staging && typeof TestFairy != 'undefined') {
         TestFairy.begin('a362fd4ae199930a7a1a1b6daa6f729ac923b506');
       }
       pushNotification = window.plugins.pushNotification;
