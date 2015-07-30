@@ -1,0 +1,7 @@
+<div id="imageGallery">
+  {{#each items as |item|}}
+    <div data-src={{item.displayImage.imageUrl}} class='preview_image'>
+      <img src={{item.displayImageUrl}} class="thumbnail" />
+    </div>
+  {{/each}}
+</div>

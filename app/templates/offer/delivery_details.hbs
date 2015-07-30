@@ -73,9 +73,7 @@
     </div>
     <div class="row">
       <div class="small-12 columns items_list">
-         {{#each model.approvedItems as |item|}}
-           <img src={{item.displayImageUrl}} class="thumb" />
-         {{/each}}
+         {{image-full-preview items=accepted}}
       </div>
     </div>
     {{#if session.isAdminApp}}
