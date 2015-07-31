@@ -5,7 +5,7 @@ export default Ember.Handlebars.makeBoundHelper(function(value) {
   var message_date = Date.parse(value);
   var current_time = Date.now();
 
-  var day_difference = Math.floor((current_time - message_date) / _MS_PER_DAY);
+  var day_difference = (current_time - message_date) / _MS_PER_DAY;
 
   if(!message_date) {
     return "";
