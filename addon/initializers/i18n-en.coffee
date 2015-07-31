@@ -298,4 +298,7 @@ I18nTranslationsEn =
   "crossroads_truck":
         "book_time": "Book Time"
         "show_more": "Show More"
+
+  "offer":
+    "disable": "Disable"
 `export default I18nTranslationsEn`

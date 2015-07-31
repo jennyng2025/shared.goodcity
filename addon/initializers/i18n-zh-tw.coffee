@@ -299,4 +299,7 @@ I18nTranslationsZhTw =
   "crossroads_truck":
         "book_time": "預約時間"
         "show_more": "更多"
+
+  "offer":
+    "disable": "關閉"
 `export default I18nTranslationsZhTw`
