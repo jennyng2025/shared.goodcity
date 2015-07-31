@@ -20,6 +20,8 @@ export default DS.Model.extend({
   imageId:         attr('number'),
   offerId:         attr('number'),
 
+  isReceived: Ember.computed.equal("state", "received"),
+
   packageName: function() {
     return this.get('packageType.name');
   }.property('packageType'),
