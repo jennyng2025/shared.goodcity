@@ -8,9 +8,6 @@
           <p class="no-items">{{t "item.messages.info_text2" }}</p>
         </p>
       {{else}}
-        {{!-- Don't know why but versions were not updating on UI so added blank loop--}}
-        {{#each versions as |v|}}
-        {{/each}}
         {{#each groupedElements as |messages|}}
           <div class="small-12 columns day_seperator">
             <span>{{display-messages-date messages.firstObject.createdDate}}</span>
