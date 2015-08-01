@@ -26,7 +26,7 @@
 
 
 ### Windows Phone
-* Install Visual Studio - https://www.visualstudio.com/en-us/features/cordova-vs.aspx
+* Install Visual Studio - https://www.visualstudio.com/
 * During install under optional features tick "Apache Cordova" (or look to install Visual Studio Tools for Apache Cordova)
 * Register your phone by using the "Windows Phone Developer Registration Tool"
 
