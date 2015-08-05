@@ -203,7 +203,7 @@ export default DS.Model.extend({
   }.property('crossroadsTransport'),
 
   hasGogovanTransport: function(){
-    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable");
+    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable").string;
   }.property('gogovanTransport'),
 
   // display "General Messages Thread"

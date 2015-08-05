@@ -16,3 +16,5 @@
 * To keep whitespace settings consistent in source code we're using .editorconfig which can be installed in your favourite editor via http://editorconfig.org/#download
 
 * Shared brocfile imports can be found in ```shared.goodcity/index.js```
+
+* Build error with pickadate.js 3.5.6 - https://github.com/amsul/pickadate.js/issues/685
