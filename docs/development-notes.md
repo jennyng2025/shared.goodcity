@@ -16,3 +16,5 @@
 * To keep whitespace settings consistent in source code we're using .editorconfig which can be installed in your favourite editor via http://editorconfig.org/#download
 
 * Shared brocfile imports can be found in ```shared.goodcity/index.js```
+
+* If computed properties fail to update try changing dependant property name. Had situation where `Ember.computed.sort("category.items", "sortKey")` failed to update when `category` changed, however renamed `category` to `categoryObj` and it worked. https://github.com/crossroads/browse.goodcity/commit/65a65b
