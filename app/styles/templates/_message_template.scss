@@ -1,3 +1,7 @@
+.message-textbar {
+  padding-top: 0rem !important;
+}
+
 .message_bubble_box {
   background-color: $white;
   color: black;
@@ -111,10 +115,13 @@
   }
 
   div {
-    background-color: #dee4eb;
     padding-top: 0.1rem;
     padding-right: 0.2rem;
     z-index: 10;
+  }
+
+  .message-base {
+    background-color: #dee4eb;
   }
 }
 
@@ -137,4 +144,17 @@
 
 .review_item .day_seperator {
   border-bottom: 1px solid $medium-blue;
+}
+
+.chat_note {
+  color: white;
+  margin-bottom: 0.5rem;
+
+  @media #{$small-only} {
+    font-size: 0.8rem;
+  }
+
+  i {
+    color: $coral-red;
+  }
 }

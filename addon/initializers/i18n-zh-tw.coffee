@@ -110,6 +110,7 @@ I18nTranslationsZhTw =
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
     "today_with_time": "今天, {{time}}"
+    "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
     "text" : "{{text}}"

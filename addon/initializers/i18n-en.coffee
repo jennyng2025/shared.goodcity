@@ -109,6 +109,7 @@ I18nTranslationsEn =
     "unread" : "Unread ({{unreadCount}})"
     "owner" : "You"
     "today_with_time": "Today, {{time}}"
+    "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
     "text" : "{{text}}"
