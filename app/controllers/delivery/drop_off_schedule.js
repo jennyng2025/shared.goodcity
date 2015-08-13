@@ -11,10 +11,7 @@ export default Ember.Controller.extend({
     return this.store.all('timeslot').sortBy('id');
   }.property('timeslot.@each'),
 
-  selectedId: function(){
-    return this.get('slots.firstObject.id');
-  }.property('slots'),
-
+  selectedId: null,
   selectedDate: null,
 
   available_dates: function(key, value){

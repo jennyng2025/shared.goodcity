@@ -18,6 +18,8 @@ export default DS.Model.extend({
   isDropOff: Ember.computed.equal("deliveryType", "Drop Off"),
   isAlternate: Ember.computed.equal("deliveryType", "Alternate"),
 
+  wasDropOff: Ember.computed.notEmpty('schedule.slot'),
+
   noDropOff: function() {
     return this.get('deliveryType') !== 'Drop Off';
   }.property('deliveryType'),
