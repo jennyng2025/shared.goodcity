@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import '../computed/foreign-key';
 
 var attr = DS.attr,
     belongsTo = DS.belongsTo;
@@ -23,6 +24,8 @@ export default DS.Model.extend({
   packageName: function() {
     return this.get('packageType.name');
   }.property('packageType'),
+
+  packageTypeId:   Ember.computed.foreignKey('packageType.id'),
 
   packageTypeObject: function() {
     var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode');
