@@ -5,7 +5,7 @@ export default VerifyOfferStateRoute.extend({
   setupController: function(controller, model){
     controller.set('model', model);
 
-    if(model.get("wasDropOff")){
+    if(model.get('schedule') && model.get("wasDropOff")){
       var selectedSlot = model.get('schedule.slot').toString();
       var timeslot = controller.get('slots').filterBy('id', selectedSlot).get('firstObject');
       controller.set('selectedDate', model.get('schedule.scheduledAt'));
