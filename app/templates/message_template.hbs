@@ -13,7 +13,7 @@
         {{/each}}
         {{#each groupedElements as |messages|}}
           <div class="small-12 columns day_seperator">
-            <span>{{display-messages-date messages.firstObject.createdDate}}</span>
+            <span>{{display-messages-date messages.firstObject.createdDate (t 'day.today')}}</span>
           </div>
           {{#each messages as |message|}}
             {{#if message.isMessage}}

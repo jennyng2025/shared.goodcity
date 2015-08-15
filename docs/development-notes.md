@@ -18,3 +18,5 @@
 * Shared brocfile imports can be found in ```shared.goodcity/index.js```
 
 * Build error with pickadate.js 3.5.6 - https://github.com/amsul/pickadate.js/issues/685
+
+* `moment(date).isBetween(nextWeekEnd, afterNextWeekStart, 'day')` was incorrect with moment 2.10.3, works with 2.9.0
