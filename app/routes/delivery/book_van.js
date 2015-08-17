@@ -5,15 +5,23 @@ export default VerifyOfferStateRoute.extend({
   setupController: function(controller, model){
     controller.set('model', model);
 
-    if(model.get('schedule') && !model.get("wasDropOff")){
+    var isModifyingGGV = !this.get("backClick") && model.get('schedule') && !model.get("wasDropOff");
+    var dateSelection, timeSelection;
+
+    if(isModifyingGGV){
       var selectedSlot = model.get('schedule.slotName');
-      var timeslot = controller.get('timeSlots').filterBy('name', selectedSlot).get('firstObject');
-      controller.set('selectedDate', model.get('schedule.scheduledAt'));
-      controller.set('selectedTime', timeslot);
+      timeSelection = controller.get('timeSlots').filterBy('name', selectedSlot).get('firstObject');
+      dateSelection = model.get('schedule.scheduledAt');
+    } else if(this.get("backClick")) {
+      dateSelection = controller.get('selectedDate');
+      timeSelection = controller.get('selectedTime');
     } else {
-      controller.set('selectedDate', controller.get('selectedDate'));
-      controller.set('selectedTime', controller.get('selectedTime'));
+      dateSelection = null;
+      timeSelection = null;
     }
+
+    controller.set('selectedDate', dateSelection);
+    controller.set('selectedTime', timeSelection);
   }
 
 });

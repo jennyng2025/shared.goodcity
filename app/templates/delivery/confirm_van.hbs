@@ -1,6 +1,6 @@
 <nav class="tab-bar">
   <section class="left-small">
-    {{#link-to 'delivery.book_van' classNames="back"}}{{t "back"}}{{/link-to}}
+    {{#link-to 'delivery.book_van' (query-params placeOrder=true backClick=true) classNames="back"}}{{t "back"}}{{/link-to}}
   </section>
 
   <section class="middle tab-bar-section">
