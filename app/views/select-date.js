@@ -16,6 +16,7 @@ export default Ember.TextField.extend({
   didInsertElement: function(){
     var _this = this;
     var date = new Date();
+    var setting = false;
 
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
@@ -40,9 +41,17 @@ export default Ember.TextField.extend({
         },
 
         onSet: function() {
+          if (setting) { return; }
+
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
           Ember.$('#selectedTime').val('');
+
+          setting = true;
+          Ember.run.next(() => {
+            this.set('select', new Date(date), { format: 'ddd mmm d' });
+            setting = false;
+          });
 
           if(date) {
             var selectedDate = date;

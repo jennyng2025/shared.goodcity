@@ -6,10 +6,13 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
   delivery: Ember.computed.alias("controllers.delivery.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
-  territoryId: Ember.computed.alias('user.address.district.territory.id'),
-  districtId: Ember.computed.alias('user.address.district.id'),
-  selectedTerritory: {id: null},
-  selectedDistrict: {id: null},
+  selectedTerritory: null,
+  selectedDistrict: null,
+
+  initSelectedTerritories: function() {
+    this.set("selectedTerritory", this.get("user.address.district.territory.id"));
+    this.set("selectedDistrict", this.get("user.address.district.id"));
+  }.on("init"),
 
   territoriesPrompt: t("all"),
   destrictPrompt: t("delivery.select_district"),
