@@ -26,7 +26,7 @@ I18nTranslationsZhTw =
   "yes" : "是"
   "no" : "否"
   "ok" : "可以"
-  "index.title" : "Crossroads Foundation Presents十字路會呈獻"
+  "index.title" : "國際十字路會呈獻"
   "index.donate_goods" : "捐贈剩餘物資，幫助需要的人"
   "index.how" : "要怎樣做呢？"
   "index.start" : "立刻行動"
