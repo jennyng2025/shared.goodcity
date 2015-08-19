@@ -7,6 +7,7 @@ export default Ember.Service.extend({
     // todo use ember approach to implementing this
     var alertView = this.container.lookup("view:alert").append();
     Ember.run.schedule("afterRender", function() {
+      if (message.string) { message = message.string; } // unwrap SafeString object
       Ember.$("#errorMessage").text(message);
 
       // workaround https://github.com/zurb/foundation/issues/5721
