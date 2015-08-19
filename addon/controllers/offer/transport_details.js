@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
   confirm: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
   user: function(){
     var userId = this.session.get("currentUser.id");
@@ -50,7 +51,7 @@ export default Ember.Controller.extend({
 
     removeDelivery: function(delivery){
       var _this = this;
-      this.get("confirm").show(Ember.I18n.t("delete_confirm"), () => {
+      this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         var loadingView = _this.container.lookup('view:loading').append();
         var offer = delivery.get('offer');
 

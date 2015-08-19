@@ -12,12 +12,14 @@ export default DS.Model.extend({
 
   deliveries:   hasMany('delivery'),
 
+  i18n: Ember.inject.service(),
+
   dayTime: function() {
     var slot = (this.get('slotName') || '').split(',').slice(-1)[0];
     var day_time = ''
     if(slot) {
       slot = parseInt(slot);
-      day_time = Ember.I18n.t("day." + ((slot > 8 && slot < 12 ) ? "morning" : "afternoon"));
+      day_time = this.get("i18n").t("day." + ((slot > 8 && slot < 12 ) ? "morning" : "afternoon"));
     }
     return day_time;
   }.property("slotName"),

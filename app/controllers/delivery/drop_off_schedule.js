@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
   needs: ["delivery", "offer"],
 
-  datePrompt: Ember.I18n.t("gogovan.book_van.date"),
-  timePrompt: Ember.I18n.t("gogovan.book_van.time"),
+  datePrompt: t("gogovan.book_van.date"),
+  timePrompt: t("gogovan.book_van.time"),
+  i18n: Ember.inject.service(),
 
   slots: function() {
     return this.store.all('timeslot').sortBy('id');

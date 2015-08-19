@@ -6,17 +6,14 @@ try { localStorage.test = 2; delete localStorage.test; storageSupported = true; 
 catch(err) {}
 
 var cookiesSupported = false;
-try { $.cookie('test', 2); $.removeCookie('test'); cookiesSupported = true; }
+try { Ember.$.cookie('test', 2); Ember.$.removeCookie('test'); cookiesSupported = true; }
 catch(err) {}
 
-export default Ember.computed.localStorage = function() {
-  function useStorage(key, value) {
-    //get
-    if (arguments.length === 1) {
-      return JSON.parse(localStorage[key] || null);
-    }
-
-    //set
+var localStorageProvider = {
+  get(key) {
+    return JSON.parse(localStorage[key] || null);
+  },
+  set(key, value) {
     if (Ember.isNone(value)) {
       delete localStorage[key];
     } else {
@@ -24,34 +21,34 @@ export default Ember.computed.localStorage = function() {
     }
     return value;
   }
+};
 
-  function useCookie(key, value) {
-    //get
-    if (arguments.length === 1) {
-      return $.cookie(key);
-    }
-
-    //set
-    $.cookie.json = true;
+var cookieStorageProvider = {
+  get(key) {
+    return Ember.$.cookie(key);
+  },
+  set(key, value) {
+    Ember.$.cookie.json = true;
     if (Ember.isNone(value)) {
-      $.removeCookie(key);
+      Ember.$.removeCookie(key);
     } else {
-      $.cookie(key, value, {expires:365, path:'/', secure:config.environment==='production'});
+      Ember.$.cookie(key, value, {expires:365, path:'/', secure:config.environment==='production'});
     }
     return value;
   }
+};
 
-  function useMemory(key, value) {
+var memoryStorageProvider = {
+  get(key) {
     if (!window.goodcityStorage) {
       window.goodcityStorage = {};
     }
-
-    //get
-    if (arguments.length === 1) {
-      return window.goodcityStorage[key];
+    return window.goodcityStorage[key];
+  },
+  set(key, value) {
+    if (!window.goodcityStorage) {
+      window.goodcityStorage = {};
     }
-
-    //set
     if (Ember.isNone(value)) {
       delete window.goodcityStorage[key];
     } else {
@@ -59,16 +56,16 @@ export default Ember.computed.localStorage = function() {
     }
     return value;
   }
+};
 
-  return Ember.computed(function(key, value) {
-    if (storageSupported) {
-      return useStorage.apply(this, arguments);
-    }
+export default Ember.computed.localStorage = function() {
+  if (storageSupported) {
+    return Ember.computed(localStorageProvider);
+  }
 
-    if (cookiesSupported) {
-      return useCookie.apply(this, arguments);
-    }
+  if (cookiesSupported) {
+    return Ember.computed(cookieStorageProvider);
+  }
 
-    return useMemory.apply(this, arguments);
-  });
+  return Ember.computed(memoryStorageProvider);
 };

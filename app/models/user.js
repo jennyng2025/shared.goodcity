@@ -44,13 +44,15 @@ export default Addressable.extend({
     return (this.get('firstName') + " " + this.get('lastName'));
   }.property('firstName', 'lastName'),
 
+  i18n: Ember.inject.service(),
+
   onlineStatus: function(){
     if(!this.get('lastConnected') && !this.get('lastDisconnected')) {
-      return Ember.I18n.t('not_connected');
+      return this.get("i18n").t('not_connected');
     } else if(this.get('lastDisconnected') > this.get('lastConnected')) {
       return false;
     } else if(this.get('lastDisconnected') < this.get('lastConnected')) {
-      return Ember.I18n.t('online');
+      return this.get("i18n").t('online');
     }
   }.property('lastConnected', 'lastDisconnected'),
 

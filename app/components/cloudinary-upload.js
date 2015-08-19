@@ -13,9 +13,9 @@ export default Ember.Component.extend({
   disabled: true,
   attributeBindings: [ "name", "type", "value", "data-cloudinary-field",
     "data-url", "data-form-data", "disabled", "style", "accept", "offerId"],
-  events: ["submit","progress","always","fail","done"],
   alert: Ember.inject.service(),
   offerId: null,
+  i18n: Ember.inject.service(),
 
   didInsertElement: function() {
     var _this = this;
@@ -30,19 +30,15 @@ export default Ember.Component.extend({
 
       fail: function() {
         if(this.type !== "file") {
-          this.get("alert").show(Ember.I18n.t('upload-image.upload_error'));
+          this.get("alert").show(this.get("i18n").t('upload-image.upload_error'));
         }
       }
     };
 
     // forward cloudinary events
-    this.get("events").forEach(function(event) {
-      if (_this[event]) {
-        options[event] = function(e, data) {
-          Ember.run(function() {
-            _this.sendAction(event, e, data);
-          });
-        };
+    ["submit","progress","always","fail","done"].forEach(ev => {
+      if (this[ev]) {
+        options[ev] = (e, data) => Ember.run(() => this.sendAction(ev, e, data));
       }
     });
 

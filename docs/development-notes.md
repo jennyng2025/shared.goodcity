@@ -17,4 +17,8 @@
 
 * Shared brocfile imports can be found in ```shared.goodcity/index.js```
 
+* Build error with pickadate.js 3.5.6 - https://github.com/amsul/pickadate.js/issues/685
+
 * If computed properties fail to update try changing dependant property name. Had situation where `Ember.computed.sort("category.items", "sortKey")` failed to update when `category` changed, however renamed `category` to `categoryObj` and it worked. https://github.com/crossroads/browse.goodcity/commit/65a65b
+
+* `moment(date).isBetween(nextWeekEnd, afterNextWeekStart, 'day')` was incorrect with moment 2.10.3, works with 2.9.0

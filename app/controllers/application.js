@@ -4,8 +4,6 @@ import config from '../config/environment';
 export default Ember.Controller.extend({
   needs: ['subscriptions'],
 
-  currentLanguage: Ember.computed.readOnly('Ember.I18n.translations.language'),
-
   initSubscriptions: function() {
     if (this.session.get("isLoggedIn")) {
       this.send('setSubscriptions');

@@ -9,7 +9,7 @@ export default addressDetails.extend({
     saveContactDetails: function() {
       var controller = this;
       var addressProperties = this.getProperties('street', 'flat', 'building');
-      addressProperties.districtId  = this.selectedDistrict.id;
+      addressProperties.districtId  = this.selectedDistrict;
       addressProperties.addressType = 'collection';
 
       var contactProperties    = {};

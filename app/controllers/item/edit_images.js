@@ -1,4 +1,5 @@
 import Ember from "ember";
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
   needs: ["offer"],
@@ -10,16 +11,17 @@ export default Ember.Controller.extend({
   alert: Ember.inject.service(),
   customConfirm: Ember.inject.service(),
   confirm: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   offerId: null,
   itemId: null,
   packageId: null,
   noImage: Ember.computed.empty("item.images"),
   previewImage: null,
-  addPhotoLabel: Ember.I18n.t("edit_images.add_photo"),
+  addPhotoLabel: t("edit_images.add_photo"),
   isReady: false,
   isExpanded: false,
   backBtnVisible: true,
-  loadingPercentage: Ember.I18n.t("edit_images.image_uploading"),
+  loadingPercentage: t("edit_images.image_uploading"),
   uploadedFileDate: null,
 
   package: function() {
@@ -83,7 +85,7 @@ export default Ember.Controller.extend({
   }.property("noImage"),
 
   locale: function(str){
-    return Ember.I18n.t(str);
+    return this.get("i18n").t(str);
   },
 
   createItem: function(donorCondition, withoutImage, identifier) {
@@ -253,7 +255,7 @@ export default Ember.Controller.extend({
         return;
       }
       else {
-        this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
+        this.get("confirm").show(this.get("i18n").t("edit_images.delete_confirm"), () => {
           var loadingView = this.container.lookup('view:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
@@ -306,14 +308,14 @@ export default Ember.Controller.extend({
     uploadProgress: function(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10) || 0;
       this.set("addPhotoLabel", progress + "%");
-      this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading") + progress + "%");
+      this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading") + progress + "%");
     },
 
     uploadComplete: function() {
       this.set("uploadedFileDate", null);
       Ember.$(".loading-image-indicator.hide_image_loading").hide();
-      this.set("addPhotoLabel", Ember.I18n.t("edit_images.add_photo"));
-      this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading"));
+      this.set("addPhotoLabel", this.get("i18n").t("edit_images.add_photo"));
+      this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading"));
     },
 
     uploadSuccess: function(e, data) {

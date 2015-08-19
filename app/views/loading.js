@@ -5,12 +5,13 @@ export default Ember.View.extend({
   classNames: ["loading-indicator"],
   alert: Ember.inject.service(),
   logger: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   timer: null,
 
   didInsertElement: function() {
     var timer = Ember.run.later(() => {
-      this.get("logger").error(new Error(Ember.I18n.t("loading_timeout_error")));
-      this.get("alert").show(Ember.I18n.t("loading_timeout"), () => {
+      this.get("logger").error(new Error(this.get("i18n").t("loading_timeout_error")));
+      this.get("alert").show(this.get("i18n").t("loading_timeout"), () => {
         this.destroy();
         window.location.reload();
       });
