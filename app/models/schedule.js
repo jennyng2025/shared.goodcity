@@ -15,14 +15,12 @@ export default DS.Model.extend({
   i18n: Ember.inject.service(),
 
   dayTime: function() {
-    var slot  = this.get('slotName');
-    var value = slot ? slot.split(',') : [];
-    if(value.length > 1) {
-      value = value[0];
-    } else {
-      value = slot.split(':')[0];
-      value = (parseInt(value) > 8 && parseInt(value) < 12 ) ? "morning" : "afternoon";
+    var slot = (this.get('slotName') || '').split(',').slice(-1)[0];
+    var day_time = ''
+    if(slot) {
+      slot = parseInt(slot);
+      day_time = this.get("i18n").t("day." + ((slot > 8 && slot < 12 ) ? "morning" : "afternoon"));
     }
-    return this.get("i18n").t("day." + value.toLowerCase());
+    return day_time;
   }.property("slotName"),
 });

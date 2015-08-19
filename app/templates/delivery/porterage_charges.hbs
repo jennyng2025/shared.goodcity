@@ -30,7 +30,7 @@
 <div class="btm">
   <div class="row">
     <div class="small-10 small-offset-1 columns">
-      {{#link-to 'delivery.confirm_van' classNames='button secondary expand'}}{{t "gogovan.porterage.thanks"}}{{/link-to}}
+      {{#link-to 'delivery.confirm_van' (query-params placeOrder=true) classNames='button secondary expand'}}{{t "gogovan.porterage.thanks"}}{{/link-to}}
     </div>
   </div>
 </div>

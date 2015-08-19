@@ -2,8 +2,7 @@ import Ember from 'ember';
 
 export default Ember.TextArea.extend({
   tagName: "textarea",
-  attributeBindings: [ "name", "type", "value", "disabled", "required",
-    "parentDiv" ],
+  attributeBindings: ["disabled"],
   disabled: false,
 
   valueChanged: function(){

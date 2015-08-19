@@ -1,65 +1,64 @@
 <section class="message-section">
   <div class="row">
     <div class="small-12 columns">
-      {{#if noMessage}}
-        <p>
-          <i class="icon-empty-items fa fa-info-circle fa-5x"></i>
-          <p class="no-items">{{t "item.messages.info_text1" }}</p>
-          <p class="no-items">{{t "item.messages.info_text2" }}</p>
-        </p>
-      {{else}}
-        {{!-- Don't know why but versions were not updating on UI so added blank loop--}}
-        {{#each versions as |v|}}
-        {{/each}}
-        {{#each groupedElements as |messages|}}
-          <div class="small-12 columns day_seperator">
-            <span>{{display-messages-date messages.firstObject.createdDate (t 'day.today')}}</span>
-          </div>
-          {{#each messages as |message|}}
-            {{#if message.isMessage}}
-              <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
-                <div class='message_details'>
-                  {{#if message.myMessage}}
-                    {{t "messages.owner" }}
-                  {{else}}
-                    {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
-                    {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
-                    {{message.sender.roleInitials}}
-                  {{/if}}
-                  →
-                  {{display-message-time message.createdAt}}
-                </div>
-
-                {{{apply-line-break message.body}}}
+      {{#each groupedElements as |messages|}}
+        <div class="small-12 columns day_seperator">
+          <span>{{display-messages-date messages.firstObject.createdDate}}</span>
+        </div>
+        {{#each messages as |message|}}
+          {{#if message.isMessage}}
+            <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+              <div class='message_details'>
+                {{#if message.myMessage}}
+                  {{t "messages.owner" }}
+                {{else}}
+                  {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
+                  {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                  {{message.sender.roleInitials}}
+                {{/if}}
+                →
+                {{display-message-time message.createdAt}}
               </div>
-            {{else}}
-              <div class="small-12 columns item_log">
-                {{display-message-time message.createdAt}} - {{message.displayMessage}}
-              </div>
-            {{/if}}
-          {{/each}}
-        {{/each}}
-      {{/if}}
 
+              {{{apply-line-break message.body}}}
+            </div>
+          {{else}}
+            <div class="small-12 columns item_log">
+              {{display-message-time message.createdAt}} - {{message.displayMessage}}
+            </div>
+          {{/if}}
+        {{/each}}
+      {{/each}}
     </div>
   </div>
 </section>
 
 <div class="btm message-form">
   <div class="row message-textbar">
-    <div class="small-12 columns">
 
-      {{#validatable-form class="form-horizontal" action="sendMessage" on="submit"}}
-
-        <div class="row ui">
-          <div class="small-9 large-10 medium-10 columns">
-            {{#view "variable-height-textarea" value=body name="body"  required="true" disabled=disabled parentDiv="message-section"}}{{/view}}
-          </div>
-          <div class="small-3 large-2 medium-2 columns">
-            {{#view "online-button" disabledOverride=disabled}}{{t "send"}}{{/view}}
-          </div>
+    {{#if noMessage}}
+      <div class="row">
+        <div class="small-12 columns chat_note">
+          <i class="fa fa-info-circle"></i>
+          {{t "messages.chat_note"}}
         </div>
-      {{/validatable-form}}
+      </div>
+    {{/if}}
+
+    <div class="row message-base">
+      <div class="small-12 columns">
+        {{#validatable-form class="form-horizontal" action="sendMessage" on="submit"}}
+
+          <div class="row ui">
+            <div class="small-9 large-10 medium-10 columns">
+              {{#view "variable-height-textarea" value=body name="body"  required="true" disabled=disabled parentDiv="message-section"}}{{/view}}
+            </div>
+            <div class="small-3 large-2 medium-2 columns">
+              {{#view "online-button" disabledOverride=disabled}}{{t "send"}}{{/view}}
+            </div>
+          </div>
+        {{/validatable-form}}
+      </div>
     </div>
   </div>
 </div>
