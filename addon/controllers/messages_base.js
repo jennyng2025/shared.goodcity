@@ -3,6 +3,7 @@ import Ember from "ember";
 export default Ember.ArrayController.extend({
   needs: ["offer"],
   isPrivate: false,
+  inProgress: false,
   offer: Ember.computed.alias("controllers.offer.model"),
   sortProperties: ["createdAt:asc"],
   sortedElements: Ember.computed.sort("messagesAndVersions", "sortProperties"),
@@ -70,6 +71,7 @@ export default Ember.ArrayController.extend({
 
   actions: {
     sendMessage: function() {
+      this.set("inProgress", true);
       var values = this.getProperties("body", "offer", "item", "isPrivate");
       values.createdAt = new Date();
       values.sender = this.store.getById("user", this.get("session.currentUser.id"));
@@ -80,7 +82,8 @@ export default Ember.ArrayController.extend({
         .catch(error => {
           this.store.unloadRecord(message);
           throw error;
-        });
+        })
+        .finally(() => this.set("inProgress", false));
 
       Ember.$("body").animate({ scrollTop: Ember.$(document).height() }, 1000);
     }
