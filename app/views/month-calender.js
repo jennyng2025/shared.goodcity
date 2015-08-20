@@ -9,6 +9,7 @@ export default Ember.TextField.extend({
     var _this = this;
     var list = this.get('available');
     var available_count = 0, available_array = [true];
+    var setting = false;
 
     if(list) {
       available_count = list.length;
@@ -35,8 +36,16 @@ export default Ember.TextField.extend({
         close: false,
 
         onSet: function() {
+          if (setting) { return; }
+
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
+
+          setting = true;
+          Ember.run.next(() => {
+            this.set('select', new Date(date), { format: 'ddd mmm d' });
+            setting = false;
+          });
         },
 
         onClose: function() {
