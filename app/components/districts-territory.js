@@ -9,7 +9,8 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   currentSelectedObserver: function(){
-    this.set('selected_id',this.getWithDefault('currentSelected.id'));
+    var selectedDistrictId = this.getWithDefault('currentSelected.id');
+    if(selectedDistrictId) { this.set('selected_id', selectedDistrictId); }
   }.observes('currentSelected'),
 
   districtsByTerritory: function(key, value) {
