@@ -59,6 +59,7 @@ export default Ember.Route.extend(preloadDataMixin, {
           this.controllerFor("application").send('logMeOut');
         }
       } else if (status === 404) {
+        this.get("logger").error(reason);
         this.get("alert").show(this.get("i18n").t("404_error"));
       } else if (status === 0) {
         // status 0 means request was aborted, this could be due to connection failure

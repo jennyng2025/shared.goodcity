@@ -12,7 +12,8 @@ export default ActiveModelAdapter.extend({
       "Accept-Language": this.get('session.language'),
       "X-GOODCITY-APP-NAME": config.APP.NAME,
       "X-GOODCITY-APP-VERSION": config.APP.VERSION,
-      "X-GOODCITY-APP-SHA": config.APP.SHA
+      "X-GOODCITY-APP-SHA": config.APP.SHA,
+      "X-GOODCITY-APP-SHARED-SHA": config.APP.SHARED_SHA
     };
   }.property("session.authToken")
 });
