@@ -45,11 +45,13 @@ export default Ember.Component.extend({
     var reqData = this.get("offerId") ? { tags: "offer_" + this.get("offerId") } : {};
     new AjaxPromise("/images/generate_signature", "GET", this.get('session.authToken'), reqData)
       .then(function(data) {
-        Ember.$(_this.element)
-          .attr("data-form-data", JSON.stringify(data))
-          .cloudinary_fileupload(options);
-        _this.set("disabled", false);
-        _this.sendAction("ready");
+        if ( !(_this.get('isDestroyed') || _this.get('isDestroying')) ) {
+          Ember.$(_this.element)
+            .attr("data-form-data", JSON.stringify(data))
+            .cloudinary_fileupload(options);
+          _this.set("disabled", false);
+          _this.sendAction("ready");
+        }
       });
   }
 });
