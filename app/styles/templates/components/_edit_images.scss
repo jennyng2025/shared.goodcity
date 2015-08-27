@@ -80,3 +80,11 @@
   left: 0;
   z-index: 10;
 }
+
+.hidden_file_input{
+  opacity: 0;
+  height: 0;
+  z-index: -100;
+  width: 0;
+  position: absolute;
+}
