@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
           scheduleAttributes: scheduleProperties  ,
           contactAttributes: contactProperties,
         },
-        gogovanOrder: orderDetails._attributes };
+        gogovanOrder: orderDetails.toJSON() };
 
       new AjaxPromise("/confirm_delivery", "POST", this.get('session.authToken'), properties)
         .then(function(data) {
