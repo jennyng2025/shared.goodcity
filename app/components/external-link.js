@@ -1,15 +1,17 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Component.extend({
   tagName: "a",
   href: "#",
+  cordova: Ember.inject.service(),
 
   click: function() {
-    window.open(this.decodeLink(), "_system");
+    if (config.cordova.enabled) {
+      cordova.InAppBrowser.open(this.attrs.linkUrl, "_system");
+    } else {
+      window.open(this.attrs.linkUrl, "_system");
+    }
     return false;
-  },
-
-  decodeLink: function(){
-    return this.attrs.linkUrl.replace(/&amp;/g, '&');
-  },
+  }
 });

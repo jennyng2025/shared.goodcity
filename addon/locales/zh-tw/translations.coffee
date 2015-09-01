@@ -292,7 +292,7 @@ I18nTranslationsZhTw =
   "drop-off":
     "select_schedule": "選擇時間"
     "expect_delivery": "物資大約何時到達？"
-    "find_crossroads": "如何到達十字路會？"
+    "find_crossroads": "Find Crossroads on Google Maps"
     "open_new_tab": "將在新視窗打開"
     "arrive_on_time": "煩請於我們的辦公時間內到達，以確保我們能順利接收您的物資。"
     "book_schedule": "預約時間"
