@@ -180,6 +180,8 @@ I18nTranslationsZhTw =
     "call_accepted": "{{name}} answered call"
 
   "edit_images":
+    "upload": "Choose Image"
+    "camera": "Take Photo"
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"
     "cant_delete_last_image" : "最少需要一張圖片"

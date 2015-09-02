@@ -10,14 +10,16 @@ export default Ember.Component.extend({
   classNames: ["cloudinary-fileupload", "hidden_file_input"],
   "data-cloudinary-field": "image_upload",
   "data-url": config.APP.CLOUD_URL,
-  disabled: true,
   attributeBindings: [ "name", "type", "value", "data-cloudinary-field",
     "data-url", "data-form-data", "disabled", "style", "accept", "offerId"],
-  alert: Ember.inject.service(),
+
+  disabled: true,
   offerId: null,
+
+  alert: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
-  didInsertElement: function() {
+  didInsertElement() {
     var _this = this;
 
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
@@ -53,5 +55,6 @@ export default Ember.Component.extend({
           _this.sendAction("ready");
         }
       });
-  }
+  },
+
 });

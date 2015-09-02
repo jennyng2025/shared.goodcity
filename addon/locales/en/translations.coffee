@@ -179,6 +179,8 @@ I18nTranslationsEn =
     "call_accepted": "{{name}} answered call"
 
   "edit_images":
+    "upload": "Choose Image"
+    "camera": "Take Photo"
     "add_photo" : "Add photo"
     "delete_confirm" : "Are you sure you want to delete this image?"
     "cant_delete_last_image" : "You must have at least one image"
