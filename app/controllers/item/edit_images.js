@@ -40,6 +40,7 @@ export default Ember.Controller.extend({
       }
       if (buttonIndex === 2) {
         navigator.camera.getPicture(onSuccess, null, {
+          correctOrientation: true,
           quality: 40,
           destinationType: navigator.camera.DestinationType.DATA_URL,
           sourceType: navigator.camera.PictureSourceType.CAMERA
