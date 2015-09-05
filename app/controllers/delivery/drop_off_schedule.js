@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   i18n: Ember.inject.service(),
 
   slots: function() {
-    return this.store.all('timeslot').sortBy('id');
+    return this.store.peekAll('timeslot').sortBy('id');
   }.property('timeslot.@each'),
 
   selectedId: null,

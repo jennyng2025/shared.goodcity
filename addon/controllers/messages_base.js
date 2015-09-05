@@ -47,7 +47,7 @@ export default Ember.ArrayController.extend({
   }.property("allVersions.[]", "offer.id", "isItemThread"),
 
   allVersions: function() {
-    return this.store.all("version");
+    return this.store.peekAll("version");
   }.property(),
 
   groupBy: function(content, key) {

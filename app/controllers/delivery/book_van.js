@@ -17,7 +17,7 @@ export default addressDetails.extend({
   i18n: Ember.inject.service(),
 
   gogovanOptions: function() {
-    var allOptions = this.store.all('gogovan_transport');
+    var allOptions = this.store.peekAll('gogovan_transport');
     return allOptions.rejectBy('isDisabled', true).sortBy('id');
   }.property(),
 
