@@ -92,7 +92,7 @@ export default DS.Model.extend({
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
-  }.property('items.@each'),
+  }.property('items.[]'),
 
   allItemsReviewed: function(){
     var reviewedItems = this.get('activeItems').filterBy('state', 'submitted');
