@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Handlebars.makeBoundHelper(function(value) {
+export default Ember.Helper.helper(function(value) {
   var message_time = Date.parse(value);
   if(!message_time) {
     return "";

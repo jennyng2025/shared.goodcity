@@ -3,7 +3,6 @@ import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 
 export default Ember.Controller.extend({
-  needs: ['application'],
   alert: Ember.inject.service(),
 
   mobile: function() {

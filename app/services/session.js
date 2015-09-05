@@ -10,7 +10,7 @@ export default Ember.Service.extend({
 
   currentUser: function() {
     var store = this.container.lookup('store:main');
-    return store.all('user_profile').get('firstObject') || null;
+    return store.peekAll('user_profile').get('firstObject') || null;
   }.property().volatile(),
 
   isAdminApp: function() {

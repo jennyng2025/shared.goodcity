@@ -54,7 +54,7 @@ export default DS.Model.extend({
   }.property(),
 
   itemPackages: function() {
-    return this.store.all("package").filterBy("offerId", parseInt(this.get("id")));
+    return this.store.peekAll("package").filterBy("offerId", parseInt(this.get("id")));
   }.property(),
 
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
@@ -92,7 +92,7 @@ export default DS.Model.extend({
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
-  }.property('items.@each'),
+  }.property('items.[]'),
 
   allItemsReviewed: function(){
     var reviewedItems = this.get('activeItems').filterBy('state', 'submitted');

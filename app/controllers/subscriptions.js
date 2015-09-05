@@ -8,7 +8,8 @@ function run(func) {
 }
 
 export default Ember.Controller.extend({
-  needs: ["notifications"],
+
+  notifications: Ember.inject.controller(),
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
@@ -109,7 +110,7 @@ export default Ember.Controller.extend({
 
   notification: function(data, success) {
     data.date = new Date(data.date);
-    this.get("controllers.notifications").pushObject(data);
+    this.get("notifications").pushObject(data);
     run(success);
   },
 
@@ -132,7 +133,7 @@ export default Ember.Controller.extend({
 
     // update_store message is sent before response to APP save so ignore
     var fromCurrentUser = parseInt(data.sender.user.id) === parseInt(this.session.get("currentUser.id"));
-    var hasNewItemSaving = this.store.all(type).some(function(o) { return o.id === null && o.get("isSaving"); });
+    var hasNewItemSaving = this.store.peekAll(type).some(function(o) { return o.id === null && o.get("isSaving"); });
     var existingItemIsSaving = existingItem && existingItem.get("isSaving"); // isSaving is true during delete as well
     if (fromCurrentUser && (data.operation === "create" && hasNewItemSaving || existingItemIsSaving)) {
       run(success);
@@ -140,7 +141,7 @@ export default Ember.Controller.extend({
     }
 
     if (data.operation === "update" && !existingItem) {
-      this.store.find(type, item.id);
+      this.store.findRecord(type, item.id);
     } else if (["create","update"].contains(data.operation)) {
         this.store.push(type, item);
     } else if (existingItem) { //delete

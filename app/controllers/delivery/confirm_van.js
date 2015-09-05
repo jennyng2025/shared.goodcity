@@ -3,9 +3,8 @@ import config from './../../config/environment';
 import AjaxPromise from './../../utils/ajax-promise';
 
 export default Ember.Controller.extend({
-  needs: ['delivery'],
-
-  delivery: Ember.computed.alias("controllers.delivery.model"),
+  deliveryController: Ember.inject.controller('delivery'),
+  delivery: Ember.computed.alias("deliveryController.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
   orderDetails: Ember.computed.alias('model'),
 
@@ -33,7 +32,7 @@ export default Ember.Controller.extend({
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.model.id'));
+      var delivery = controller.store.getById("delivery", controller.get('deliveryController.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });

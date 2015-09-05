@@ -3,8 +3,8 @@ import { translationMacro as t } from "ember-i18n";
 import config from '../../config/environment';
 
 export default Ember.Controller.extend({
-  needs: ["offer"],
-  offer: Ember.computed.alias("controllers.offer.model"),
+  offerController: Ember.inject.controller('offer'),
+  offer: Ember.computed.alias("offerController.model"),
   item: Ember.computed.alias("model"),
 
   session: Ember.inject.service(),

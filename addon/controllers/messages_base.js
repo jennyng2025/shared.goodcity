@@ -1,10 +1,11 @@
 import Ember from "ember";
 
 export default Ember.ArrayController.extend({
-  needs: ["offer"],
+
+  offerController: Ember.inject.controller('offer'),
   isPrivate: false,
   inProgress: false,
-  offer: Ember.computed.alias("controllers.offer.model"),
+  offer: Ember.computed.alias("offerController.model"),
   sortProperties: ["createdAt:asc"],
   sortedElements: Ember.computed.sort("messagesAndVersions", "sortProperties"),
   isItemThread: Ember.computed.notEmpty("item"),
@@ -47,7 +48,7 @@ export default Ember.ArrayController.extend({
   }.property("allVersions.[]", "offer.id", "isItemThread"),
 
   allVersions: function() {
-    return this.store.all("version");
+    return this.store.peekAll("version");
   }.property(),
 
   groupBy: function(content, key) {

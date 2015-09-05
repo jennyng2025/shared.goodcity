@@ -3,7 +3,7 @@ import config from './../../config/environment';
 
 export default Ember.Controller.extend({
 
-  needs: ['offer/transport_details'],
+  transportController: Ember.inject.controller('offer/transport_details'),
 
   canCancel: Ember.computed.alias('model.gogovanOrder.isCancelled'),
   driverContact: Ember.computed.alias('model.gogovanOrder.driverMobile'),
@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
   actions: {
     cancelBooking: function() {
       if(this.get('canCancel')){
-        this.get('controllers.offer/transport_details').send('removeDelivery', this.get('model'));
+        this.get('transportController').send('removeDelivery', this.get('model'));
       }
     }
   }
