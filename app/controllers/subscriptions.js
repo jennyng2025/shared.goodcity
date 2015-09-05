@@ -140,7 +140,7 @@ export default Ember.Controller.extend({
     }
 
     if (data.operation === "update" && !existingItem) {
-      this.store.find(type, item.id);
+      this.store.findRecord(type, item.id);
     } else if (["create","update"].contains(data.operation)) {
         this.store.push(type, item);
     } else if (existingItem) { //delete

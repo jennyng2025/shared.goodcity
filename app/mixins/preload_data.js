@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
 
   preloadData: function(includePublicTypes) {
     var promises = [];
-    var retrieve = types => types.map(type => this.store.find(type));
+    var retrieve = types => types.map(type => this.store.findAll(type));
 
     if (includePublicTypes) {
       promises = retrieve(config.APP.PRELOAD_TYPES);
@@ -25,7 +25,7 @@ export default Ember.Mixin.create({
         { states: ["nondraft"] }:
         { states: ["for_donor"] };
       promises.push(
-        this.store.find('offer', offer_params)
+        this.store.query('offer', offer_params)
       );
 
       promises = promises.concat(retrieve(config.APP.PRELOAD_AUTHORIZED_TYPES));

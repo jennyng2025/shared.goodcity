@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
       this.store.init();
       var _this = this;
       config.APP.PRELOAD_TYPES.forEach(function(type) {
-        _this.store.find(type);
+        _this.store.findAll(type);
       });
       this.transitionToRoute('login');
     },

@@ -6,6 +6,6 @@ export default AuthorizeRoute.extend({
       return null;
     }
 
-    return this.store.find('item', params.item_id);
+    return this.store.findRecord('item', params.item_id);
   }
 });
