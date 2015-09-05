@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Handlebars.makeBoundHelper(function(value) {
+export default Ember.Helper.helper(function(value) {
   var text;
   if(/<[a-z][\s\S]*>/i.test(value)) {
     text = value;

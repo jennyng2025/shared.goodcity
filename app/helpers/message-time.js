@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Handlebars.makeBoundHelper(function(value) {
+export default Ember.Helper.helper(function(value) {
   var _MS_PER_DAY = 1000 * 60 * 60 * 24;
   var message_time = Date.parse(value);
   var current_time = Date.now();
