@@ -3,8 +3,10 @@ import AjaxPromise from './../../utils/ajax-promise';
 import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
-  needs: ["delivery", "offer"],
 
+  delivery: Ember.inject.controller(),
+  selectedId: null,
+  selectedDate: null,
   datePrompt: t("gogovan.book_van.date"),
   timePrompt: t("gogovan.book_van.time"),
   i18n: Ember.inject.service(),
@@ -12,9 +14,6 @@ export default Ember.Controller.extend({
   slots: function() {
     return this.store.peekAll('timeslot').sortBy('id');
   }.property('timeslot.@each'),
-
-  selectedId: null,
-  selectedDate: null,
 
   available_dates: function(key, value){
     if (arguments.length > 1) {
@@ -38,7 +37,7 @@ export default Ember.Controller.extend({
         scheduledAt: controller.get('selectedDate'),
         slotName:    slotName };
 
-      var deliveryId = this.get('controllers.delivery.model.id');
+      var deliveryId = this.get('delivery.model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       var offer      = delivery.get("offer");
       var deliveryType = delivery.get("deliveryType");

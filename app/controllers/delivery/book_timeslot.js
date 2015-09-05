@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ["delivery", "offer"],
+  delivery: Ember.inject.controller(),
 
   availableSlots: Ember.computed.filterBy('model', 'deliveries.length', 0),
 
@@ -13,7 +13,7 @@ export default Ember.ArrayController.extend({
       var scheduleProperties  = getSelectedSchedule.getProperties('zone',
           'resource','scheduledAt', 'slot', 'slotName');
       var schedule   = this.store.createRecord('schedule', scheduleProperties);
-      var deliveryId = this.get('controllers.delivery').get('model.id');
+      var deliveryId = this.get('delivery').get('model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       delivery.set('schedule', schedule);
       this.transitionToRoute('delivery.contact_details', {queryParams: {placeOrder: true}});

@@ -3,7 +3,7 @@ import addressDetails from './address_details';
 import AjaxPromise from './../../utils/ajax-promise';
 
 export default addressDetails.extend({
-  needs: ["delivery"],
+  deliveryController: Ember.inject.controller('delivery'),
 
   actions: {
     saveContactDetails: function() {
@@ -16,7 +16,7 @@ export default addressDetails.extend({
       contactProperties.name   = Ember.$('#userName').val();
       contactProperties.mobile = "+852" + Ember.$('#mobile').val();
 
-      var deliveryId = this.get('controllers.delivery').get('model.id');
+      var deliveryId = this.get('deliveryController.model.id');
       var delivery   = this.store.getById('delivery', deliveryId);
       var offer      = delivery.get('offer');
       var schedule   = delivery.get('schedule');

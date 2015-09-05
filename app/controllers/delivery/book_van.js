@@ -3,7 +3,7 @@ import addressDetails from './address_details';
 import { translationMacro as t } from "ember-i18n";
 
 export default addressDetails.extend({
-  needs: ['delivery'],
+  deliveryController: Ember.inject.controller('delivery'),
 
   selectedDate: null,
   selectedTime: null,
@@ -51,7 +51,7 @@ export default addressDetails.extend({
       var controller = this;
       var loadingView = controller.container.lookup('view:loading').append();
       var selectedDate = controller.get('selectedDate');
-      var deliveryId = controller.get('controllers.delivery').get('model.id');
+      var deliveryId = controller.get('deliveryController.model.id');
       var delivery = controller.store.getById('delivery', deliveryId);
       var gogovanOptionId = controller.get('selectedGogovanOption');
 

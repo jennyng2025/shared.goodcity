@@ -8,7 +8,8 @@ function run(func) {
 }
 
 export default Ember.Controller.extend({
-  needs: ["notifications"],
+
+  notifications: Ember.inject.controller(),
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
@@ -109,7 +110,7 @@ export default Ember.Controller.extend({
 
   notification: function(data, success) {
     data.date = new Date(data.date);
-    this.get("controllers.notifications").pushObject(data);
+    this.get("notifications").pushObject(data);
     run(success);
   },
 
