@@ -1,0 +1,11 @@
+<select {{action 'change' on='change'}} required={{required}} pattern={{pattern}}>
+  {{#if prompt}}
+    <option value="" selected={{is-not selectedValue}}>{{prompt}}</option>
+  {{/if}}
+
+  {{#each content key="@index" as |item|}}
+    <option value={{item.value}} selected={{is-equal item selectedValue}}>
+      {{item.name}}
+    </option>
+  {{/each}}
+</select>

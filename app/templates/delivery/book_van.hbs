@@ -56,15 +56,13 @@
             <i class="fa fa-calendar calender_icon"></i>
           </div>
           <div class="small-5 columns time_selector">
-            {{view "select"
+            {{select-list
               content=controller.timeSlots
-              optionValuePath="content.id"
-              optionLabelPath="content.name"
-              selection=selectedTime
-              required='true'
+              on-change=(action (mut selectedTime))
+              selectedValue=selectedTime
               prompt=timePrompt
-              id='selectedTime'
-              pattern="[0-9]{1,2}:(00|30)\s?(AM|PM)" }}
+              required='true'
+              pattern="[0-9]{1,2}:(00|30)\s?(AM|PM)"}}
             <i class="fa fa-clock-o time_icon"></i>
           </div>
         </div>
