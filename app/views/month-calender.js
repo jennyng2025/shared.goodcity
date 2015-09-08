@@ -72,9 +72,6 @@ export default Ember.TextField.extend({
     }
 
     function validateInputs(){
-      Ember.$('#selectedDate').focusout(function(){
-        return checkInput(this);
-      });
       Ember.$('#selectedDate').focus(function(){
         return removeHighlight(this);
       });
