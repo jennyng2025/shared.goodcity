@@ -4,7 +4,7 @@ import { translationMacro as t } from "ember-i18n";
 export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
-  delivery: Ember.computed.alias("controllers.delivery.model"),
+  delivery: Ember.computed.alias("deliveryController.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
   selectedTerritory: null,
   selectedDistrict: null,
