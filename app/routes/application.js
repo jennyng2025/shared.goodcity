@@ -41,6 +41,14 @@ export default Ember.Route.extend(preloadDataMixin, {
         outlet: 'notifications', // the name of the outlet in that template
         controller: 'notifications'   // the controller to use for the template
       });
+
+      if(this.session.get("isAdminApp")){
+        this.render('notification_link', {
+          into: 'application',
+          outlet: 'notification_link',
+          controller: 'notification_link'
+        });
+      }
     }
   },
 
