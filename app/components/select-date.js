@@ -13,7 +13,7 @@ export default Ember.TextField.extend({
     return (total_mins > 960) ? 960 : total_mins;
   },
 
-  didInsertElement: function(){
+  didInsertElement() {
     var _this = this;
     var date = new Date();
     var setting = false;
@@ -38,14 +38,12 @@ export default Ember.TextField.extend({
 
         onClose: function() {
           Ember.$(document.activeElement).blur();
-        },
 
-        onSet: function() {
           if (setting) { return; }
 
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
-          Ember.$('#selectedTime').val('');
+          Ember.$('.time_selector select').val('');
 
           setting = true;
           Ember.run.next(() => {
@@ -62,18 +60,19 @@ export default Ember.TextField.extend({
             if(selectedDate.getTime() === currentDate.getTime()) {
               var total_mins = _this.currentMinutes();
               // disabled all previous options
-              Ember.$("#selectedTime option[value="+total_mins+"]").prevAll().each(function() {
+              Ember.$(".time_selector select option[value="+total_mins+"]").prevAll().each(function() {
                   Ember.$( this ).addClass("hidden");
               });
               // disable current option
-              Ember.$("#selectedTime option[value="+total_mins+"]").addClass("hidden");
+              Ember.$(".time_selector select option[value="+total_mins+"]").addClass("hidden");
             } else {
-              Ember.$("#selectedTime option").each(function() {
+              Ember.$(".time_selector select option").each(function() {
                   Ember.$( this ).removeClass("hidden");
                 });
             }
           }
         },
+
         onStart: function(){
           var date = _this.get('selection');
           if(date) {
