@@ -35,7 +35,9 @@ export default Ember.TextField.extend({
         today: false,
         close: false,
 
-        onSet: function() {
+        onClose: function() {
+          Ember.$(document.activeElement).blur();
+
           if (setting) { return; }
 
           var date = this.get('select') && this.get('select').obj;
@@ -46,10 +48,6 @@ export default Ember.TextField.extend({
             this.set('select', new Date(date), { format: 'ddd mmm d' });
             setting = false;
           });
-        },
-
-        onClose: function() {
-          Ember.$(document.activeElement).blur();
         },
 
         onStart: function(){
