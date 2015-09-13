@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import initFoundation from './init-foundation';
 
-export default Ember.View.reopen({
-  didInsertElement: function() {
+export default initFoundation.extend({
+  didInsertElement() {
     this._super();
 
     Ember.$().ready(function(){
