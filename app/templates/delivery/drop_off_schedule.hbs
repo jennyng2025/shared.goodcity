@@ -34,13 +34,13 @@
             </div>
 
             <div class="small-5 columns time_selector">
-              {{view "select"
+              {{select-list
                 content=slots
-                optionLabelPath='content.name'
-                optionValuePath='content.id'
-                selection=selectedId
+                on-change=(action (mut selectedId))
+                selectedValue=selectedId
                 prompt=timePrompt
                 required='true'}}
+
               <i class="fa fa-clock-o time_icon"></i>
             </div>
           </div>
