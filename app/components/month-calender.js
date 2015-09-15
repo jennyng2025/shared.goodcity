@@ -60,6 +60,7 @@ export default Ember.TextField.extend({
 
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
+          Ember.$('.time_selector select').val('');
 
           setting = true;
           Ember.run.next(() => {
@@ -121,12 +122,17 @@ export default Ember.TextField.extend({
 
     function validateForm(){
       Ember.$('.button.drop_off').click(function(){
-        return checkInput(Ember.$('#selectedDate'));
+        var date = checkInput(Ember.$('#selectedDate'));
+        var time = checkInput(Ember.$('.time_selector select'));
+        return date && time;
       });
     }
 
     function validateInputs(){
       Ember.$('#selectedDate').focus(function(){
+        return removeHighlight(this);
+      });
+      Ember.$('.time_selector select').focus(function(){
         return removeHighlight(this);
       });
     }
