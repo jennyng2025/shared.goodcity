@@ -50,7 +50,6 @@
               id='selectedDate'
               value=''
               selection=selectedDate
-              required='true'
               placeholder=datePrompt
               pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
             <i class="fa fa-calendar calender_icon"></i>
@@ -61,7 +60,6 @@
               on-change=(action (mut selectedTime))
               selectedValue=selectedTime
               prompt=timePrompt
-              required='true'
               pattern="[0-9]{1,2}:(00|30)\s?(AM|PM)"}}
             <i class="fa fa-clock-o time_icon"></i>
           </div>

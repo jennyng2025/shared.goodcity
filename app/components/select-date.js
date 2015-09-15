@@ -44,6 +44,7 @@ export default Ember.TextField.extend({
           var date = this.get('select') && this.get('select').obj;
           _this.set("selection", date);
           Ember.$('.time_selector select').val('');
+          removeHighlight(".date_selector input");
 
           setting = true;
           Ember.run.next(() => {
@@ -87,7 +88,46 @@ export default Ember.TextField.extend({
           }
         }
       });
+
+      validateForm();
+      validateInputs();
     });
 
+    function validateForm(){
+      Ember.$('.button.book_van').click(function(){
+        var date = checkInput(Ember.$('.date_selector input'));
+        var time = checkInput(Ember.$('.time_selector select'));
+        return date && time;
+      });
+    }
+
+    function validateInputs(){
+      Ember.$('.date_selector input').focus(function(){
+        return removeHighlight(this);
+      });
+      Ember.$('.time_selector select').focus(function(){
+        return removeHighlight(this);
+      });
+    }
+
+    function checkInput(element){
+      var parent = Ember.$(element).parent();
+      var value = Ember.$(element).val();
+
+      if(value === undefined || value.length === 0) {
+        parent.addClass('has-error');
+        return false;
+      } else {
+        parent.removeClass('has-error');
+        return true;
+      }
+    }
+
+    function removeHighlight(element){
+      var parent = Ember.$(element).parent();
+      parent.removeClass('has-error');
+    }
   }
+
+
 });
