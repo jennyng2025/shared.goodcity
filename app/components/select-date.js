@@ -59,16 +59,23 @@ export default Ember.TextField.extend({
 
             if(selectedDate.getTime() === currentDate.getTime()) {
               var total_mins = _this.currentMinutes();
+
               // disabled all previous options
               Ember.$(".time_selector select option[value="+total_mins+"]").prevAll().each(function() {
                   Ember.$( this ).addClass("hidden");
+                  this.disabled = true;
               });
+
               // disable current option
               Ember.$(".time_selector select option[value="+total_mins+"]").addClass("hidden");
+              Ember.$(".time_selector select option[value="+total_mins+"]")[0].disabled = true;
+
             } else {
+              // Enable all select options
               Ember.$(".time_selector select option").each(function() {
-                  Ember.$( this ).removeClass("hidden");
-                });
+                Ember.$( this ).removeClass("hidden");
+                this.disabled = false;
+              });
             }
           }
         },
