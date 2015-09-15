@@ -10,8 +10,10 @@ export default Ember.Controller.extend({
   selectedDistrict: null,
 
   initSelectedTerritories: function() {
-    this.set("selectedTerritory", this.get("user.address.district.territory.id"));
-    this.set("selectedDistrict", this.get("user.address.district.id"));
+    if(this.get("selectedDistrict") === null) {
+      this.set("selectedTerritory", this.get("user.address.district.territory"));
+      this.set("selectedDistrict", this.get("user.address.district"));
+    }
   }.on("init"),
 
   territoriesPrompt: t("all"),

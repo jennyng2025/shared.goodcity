@@ -1,20 +1,17 @@
 <div class="small-6 columns">
-  {{view "select"
+  {{select-list
     content=territories
-    optionValuePath="content.id"
-    optionLabelPath="content.name"
+    on-change=(action (mut selectedTerritory))
+    selectedValue=selectedTerritory
     value=selectedTerritory
-    prompt=territoriesPrompt
-    classNames='selectAddress'
     required='true' }}
 </div>
+
 <div class="small-6 columns">
-  {{view "select"
+  {{select-list
     content=districtsByTerritory
-    optionValuePath="content.id"
-    optionLabelPath="content.name"
+    on-change=(action (mut selectedDistrict))
+    selectedValue=selectedDistrict
     value=selectedDistrict
-    prompt=destrictPrompt
-    classNames='selectAddress district'
     required='true' }}
 </div>

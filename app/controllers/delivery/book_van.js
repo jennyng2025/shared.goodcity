@@ -60,8 +60,8 @@ export default addressDetails.extend({
       var requestProperties = {};
       requestProperties.pickupTime = selectedDate;
       requestProperties.slot = this.get('selectedTime.name');
-      requestProperties.districtId = controller.get('selectedDistrict');
-      requestProperties.territoryId = controller.get('selectedTerritory');
+      requestProperties.districtId = controller.get('selectedDistrict.id');
+      requestProperties.territoryId = controller.get('selectedTerritory.id');
       requestProperties.needEnglish = controller.get("speakEnglish");
       requestProperties.needCart = controller.get("borrowTrolley");
       requestProperties.needCarry = controller.get("porterage");
