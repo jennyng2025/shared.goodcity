@@ -5,7 +5,7 @@ import Ember from 'ember';
 //   <option value="">Time</option>
 //   <option value="1">9AM-11AM</option> => (540mins - 660mins)
 //   <option value="2">11AM-1PM</option> => (660mins - 840mins)
-//   <option value="3">2PM-4PM</option>  => (840mins)
+//   <option value="3">2PM-4PM</option>  => (840mins - 960mins)
 // </select>
 
 export default Ember.TextField.extend({
@@ -18,7 +18,7 @@ export default Ember.TextField.extend({
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes() > 30 ? 30 : 0;
     var total_mins = hours*60 + minutes;
-    return (total_mins > 840) ? 840 : total_mins;
+    return (total_mins > 961) ? 961 : total_mins;
   },
 
   didInsertElement: function(){
@@ -39,7 +39,7 @@ export default Ember.TextField.extend({
       }
 
       var currentMins = _this.currentMinutes();
-      if(currentMins === 840) { available_array.pop(); }
+      if(currentMins === 961) { available_array.pop(); }
     }
 
     Ember.$().ready(function(){
@@ -78,11 +78,11 @@ export default Ember.TextField.extend({
               var total_mins = _this.currentMinutes();
               var option;
 
-              if(total_mins >= 540 && total_mins < 660) {
+              if(total_mins >= 660 && total_mins < 840) {
                 option = Ember.$(".time_selector select option:eq(1)");
-              } else if(total_mins >= 660 && total_mins < 840) {
-                option =  Ember.$(".time_selector select option:eq(2)");
-              } else if(total_mins >= 840) {
+              } else if(total_mins >= 840 && total_mins < 960) {
+                option = Ember.$(".time_selector select option:eq(2)");
+              } else if(total_mins >= 960) {
                 option = Ember.$(".time_selector select option:eq(3)");
               }
 
