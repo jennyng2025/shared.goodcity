@@ -16,7 +16,7 @@ export default Ember.TextField.extend({
   currentMinutes: function(){
     var currentTime = new Date();
     var hours = currentTime.getHours();
-    var minutes = currentTime.getMinutes() > 30 ? 30 : 0;
+    var minutes = currentTime.getMinutes();
     var total_mins = hours*60 + minutes;
     return (total_mins > 961) ? 961 : total_mins;
   },
