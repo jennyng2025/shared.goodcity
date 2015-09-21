@@ -42,7 +42,7 @@ export default Ember.ArrayController.extend({
   }.property("item.packages", "allVersions.[]", "isItemThread"),
 
   offerVersions: function() {
-    if (!this.get("isItemThread")) { return []; }
+    if (this.get("isItemThread")) { return []; }
     var offerId = parseInt(this.get("offer.id"));
     return this.get('allVersions').filterBy('itemType', 'Offer').filterBy("itemId", offerId);
   }.property("allVersions.[]", "offer.id", "isItemThread"),
