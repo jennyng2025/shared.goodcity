@@ -7,7 +7,7 @@ export default DS.Model.extend({
   i18n: Ember.inject.service(),
 
   isDisabled: function() {
-    return this.get('name') === this.get("i18n").t("offer.disable");
+    return this.get('name') === this.get("i18n").t("offer.disable").string;
   }.property('name'),
 
   specialId: function() {
