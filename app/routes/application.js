@@ -7,6 +7,21 @@ export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
+  _loadDataStore: function(){
+    return this.preloadData(true).catch(error => {
+      if (error.status === 0 || error.errors[0].status === "0") {
+        this.transitionTo("offline");
+      } else {
+        this.handleError(error);
+      }
+    }).finally(() => {
+      // don't know why but placing this before preloadData on iPhone 6 causes register_device request to fail with status 0
+      if (this.session.get('isLoggedIn')) {
+        this.get("cordova").appLoad();
+      }
+    });
+  },
+
   beforeModel: function (transition = []) {
     if (transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
@@ -19,18 +34,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
     Ember.onerror = window.onerror = error => this.handleError(error);
 
-    return this.preloadData(true).catch(error => {
-      if (error.status === 0) {
-        this.transitionTo("offline");
-      } else {
-        this.handleError(error);
-      }
-    }).finally(() => {
-      // don't know why but placing this before preloadData on iPhone 6 causes register_device request to fail with status 0
-      if (this.session.get('isLoggedIn')) {
-        this.get("cordova").appLoad();
-      }
-    });
+    return this._loadDataStore();
   },
 
   renderTemplate: function() {

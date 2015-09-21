@@ -30,8 +30,16 @@ export default Ember.Controller.extend({
     var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
     var text = !online ? this.get("i18n").t("socket_offline_error") :
       "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
-
     this.set("status", {"online": online, "hidden": hidden, "text": text});
+
+    if(!this.session.get("currentUser.fullName") && online) {
+      var currentUrl = this.container.lookup("router:main").get("url");
+      if (currentUrl == "/offline") {
+        this.transitionTo("/");
+      } else {
+        window.location.reload();
+      }
+    }
   }.observes("socket"),
 
   // resync if offline longer than deviceTtl
