@@ -11,7 +11,7 @@ export default AuthorizeRoute.extend({
 
   beforeModel: function(params){
     var offerId = this.modelFor('offer').get('id');
-    var offer = this.store.getById('offer', offerId);
+    var offer = this.store.peekRecord('offer', offerId);
     this.set("backClick", params.queryParams.backClick);
 
     if (offer.get('isScheduled') && !params.queryParams.placeOrder) {

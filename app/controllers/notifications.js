@@ -35,7 +35,7 @@ export default Ember.ArrayController.extend({
 
   itemImageUrl: function() {
     var itemId = this.get("nextNotification.item_id");
-    return itemId ? this.store.getById("item", itemId).get("displayImageUrl") : null;
+    return itemId ? this.store.peekRecord("item", itemId).get("displayImageUrl") : null;
   }.property("nextNotification"),
 
   showItemImage: Ember.computed.notEmpty("itemImageUrl"),
@@ -43,7 +43,7 @@ export default Ember.ArrayController.extend({
   senderImageUrl: function() {
     var notification = this.get("nextNotification");
     if (!notification) { return null; }
-    return this.store.getById("user", notification.author_id).get("displayImageUrl");
+    return this.store.peekRecord("user", notification.author_id).get("displayImageUrl");
   }.property("nextNotification"),
 
   setRoute: function(notification) {

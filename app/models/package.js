@@ -47,7 +47,7 @@ export default DS.Model.extend({
   }.property('width', 'height', 'length'),
 
   image: function() {
-    return this.store.getById("image", this.get("imageId"));
+    return this.store.peekRecord("image", this.get("imageId"));
   }.property("imageId"),
 
   displayImageUrl: function() {

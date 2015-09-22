@@ -8,7 +8,7 @@ export default AuthorizeRoute.extend({
 
   beforeModel: function(params) {
     var offerId = this.modelFor('offer').get('id');
-    var offer = this.store.getById('offer', offerId);
+    var offer = this.store.peekRecord('offer', offerId);
 
     if (offer.get('isScheduled') && !params.queryParams.modify) {
       if(this.get('session.isAdminApp')) {

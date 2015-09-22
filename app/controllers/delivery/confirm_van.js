@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
   }.property('user.mobile'),
 
   districtName: function(){
-    var district = this.store.getById("district", this.get('model.districtId'));
+    var district = this.store.peekRecord("district", this.get('model.districtId'));
     return district.get('name');
   }.property('model.districtId'),
 
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
 
-      var delivery = controller.store.getById("delivery", controller.get('deliveryController.model.id'));
+      var delivery = controller.store.peekRecord("delivery", controller.get('deliveryController.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });

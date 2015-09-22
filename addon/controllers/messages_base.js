@@ -68,7 +68,7 @@ export default Ember.ArrayController.extend({
       this.set("inProgress", true);
       var values = this.getProperties("body", "offer", "item", "isPrivate");
       values.createdAt = new Date();
-      values.sender = this.store.getById("user", this.get("session.currentUser.id"));
+      values.sender = this.store.peekRecord("user", this.get("session.currentUser.id"));
 
       var message = this.store.createRecord("message", values);
       message.save()

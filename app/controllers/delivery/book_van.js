@@ -52,7 +52,7 @@ export default addressDetails.extend({
       var loadingView = controller.container.lookup('view:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('deliveryController.model.id');
-      var delivery = controller.store.getById('delivery', deliveryId);
+      var delivery = controller.store.peekRecord('delivery', deliveryId);
       var gogovanOptionId = controller.get('selectedGogovanOption');
 
       selectedDate.setMinutes(selectedDate.getMinutes() + parseInt(controller.get('selectedTime.id')));

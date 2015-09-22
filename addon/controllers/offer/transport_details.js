@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 
   user: function(){
     var userId = this.session.get("currentUser.id");
-    return this.store.getById('user_profile', userId);
+    return this.store.peekRecord('user_profile', userId);
   }.property().volatile(),
 
   userName: function(){

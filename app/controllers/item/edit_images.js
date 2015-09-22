@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
   },
 
   package: function() {
-    return this.get("store").getById("package", this.get("packageId"));
+    return this.get("store").peekRecord("package", this.get("packageId"));
   }.property("packageId"),
 
   previewMatchesFavourite: function() {

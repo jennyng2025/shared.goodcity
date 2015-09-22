@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   offerId: Ember.computed.alias('offerController.model.id'),
 
   offer: function(){
-    return this.store.getById('offer', this.get('offerId'));
+    return this.store.peekRecord('offer', this.get('offerId'));
   }.property('offerId'),
 
   gogovanPrice: function(key, value) {
@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
   actions: {
     startDelivery: function(delivery_type) {
       var offerId = this.get('offerController.model.id');
-      var offer = this.store.getById('offer', offerId);
+      var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");
       if(delivery) {
         delivery.setProperties({

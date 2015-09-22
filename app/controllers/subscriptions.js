@@ -132,7 +132,7 @@ export default Ember.Controller.extend({
     var item = Ember.$.extend({}, data.item[type]);
     this.store.normalize(type, item);
 
-    var existingItem = this.store.getById(type, item.id);
+    var existingItem = this.store.peekRecord(type, item.id);
 
     // update_store message is sent before response to APP save so ignore
     var fromCurrentUser = parseInt(data.sender.user.id) === parseInt(this.session.get("currentUser.id"));
@@ -161,7 +161,7 @@ export default Ember.Controller.extend({
       var messageUrl = router.generate.apply(router, messageRoute);
 
       if (currentUrl === messageUrl) {
-        var message = this.store.getById("message", item.id);
+        var message = this.store.peekRecord("message", item.id);
         this.get("messagesUtil").markRead(message);
       }
     }

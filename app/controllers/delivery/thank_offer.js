@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
       return value;
     } else {
       var deliveryId = this.get('delivery.model.id');
-      return this.store.getById('delivery', deliveryId).get("contact");
+      return this.store.peekRecord('delivery', deliveryId).get("contact");
     }
   }.property('model'),
 
