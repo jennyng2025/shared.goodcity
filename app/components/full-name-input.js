@@ -8,8 +8,8 @@ export default Ember.TextField.extend({
 
   i18n: Ember.inject.service(),
 
-  didInsertElement: function(){
-    var user = this.get('user');
+  didInsertElement(){
+    var user = this.attrs.user;
     var translatedName = this.get("i18n").t("full_name", { firstName: user.get('firstName'), lastName: user.get('lastName') });
     this.set('value', translatedName);
   }
