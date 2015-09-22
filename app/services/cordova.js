@@ -1,40 +1,11 @@
 import Ember from "ember";
 import config from '../config/environment';
 import AjaxPromise from '../utils/ajax-promise';
-import './../computed/local-storage';
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
   logger: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
-  androidRegId: Ember.computed.localStorage(),
-
-  unregisterDevice: function(){
-
-    var pushNotification, _this = this;
-    var authToken = _this.get("session.authToken");
-
-    pushNotification = window.plugins.pushNotification;
-    if (device.platform == "android" || device.platform == "Android" || device.platform == "amazon-fireos") {
-      var opts = {"senderID":config.cordova.GcmSenderId, "ecb":"onNotificationGCM"};
-      pushNotification.unregister(res => deleteToken(_this.get("androidRegId"), "gcm"), errorHandler, opts);
-    } else if (device.platform === "iOS") {
-      pushNotification.unregister(res => deleteToken(res, "aps"), errorHandler, {});
-    } else if (device.platform === "windows") {
-      pushNotification.unregister(res => deleteToken(res.uri, "wns"), errorHandler, {});
-    }
-
-    function deleteToken(handle, platform) {
-      return new AjaxPromise("/auth/unregister_device", "POST", authToken, { handle: handle, platform: platform });
-    }
-
-    function successHandler(result) {
-    }
-
-    function errorHandler(error) {
-      _this.get("logger").error(error);
-    }
-  },
 
   appLoad: function () {
     if (!config.cordova.enabled) {
@@ -113,7 +84,6 @@ export default Ember.Service.extend({
     window.noop = function() {}
 
     function sendToken(handle, platform) {
-      _this.set("androidRegId", handle);
       return new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: handle, platform: platform});
     }
 

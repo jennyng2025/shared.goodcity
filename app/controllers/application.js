@@ -3,7 +3,6 @@ import config from '../config/environment';
 
 export default Ember.Controller.extend({
   subscriptions: Ember.inject.controller(),
-  cordova: Ember.inject.service(),
 
   initSubscriptions: function() {
     if (this.session.get("isLoggedIn")) {
@@ -13,9 +12,6 @@ export default Ember.Controller.extend({
 
   actions: {
     logMeOut: function(){
-      if (config.cordova.enabled) {
-        this.get("cordova").unregisterDevice();
-      }
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.get('subscriptions').send('unwire');
       this.store.init();
