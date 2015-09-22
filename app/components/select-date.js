@@ -13,6 +13,43 @@ export default Ember.TextField.extend({
     return (total_mins > 960) ? 960 : total_mins;
   },
 
+  _getValidDate: function(selectedDate){
+    var today = new Date();
+    var currentDate = new Date();
+    var selected = selectedDate;
+    currentDate.setHours(0,0,0,0);
+    selected.setHours(0,0,0,0);
+    return currentDate > selected ? today : selectedDate;
+  },
+
+  _setTimeSlots: function(date){
+    var selectedDate = date;
+    var currentDate = new Date();
+    currentDate.setHours(0,0,0,0);
+    selectedDate.setHours(0,0,0,0);
+
+    if(selectedDate.getTime() === currentDate.getTime()) {
+      var total_mins = this.currentMinutes();
+
+      // disabled all previous options
+      Ember.$(".time_selector select option[value="+total_mins+"]").prevAll().each(function() {
+          Ember.$( this ).addClass("hidden");
+          this.disabled = true;
+      });
+
+      // disable current option
+      Ember.$(".time_selector select option[value="+total_mins+"]").addClass("hidden");
+      Ember.$(".time_selector select option[value="+total_mins+"]")[0].disabled = true;
+
+    } else {
+      // Enable all select options
+      Ember.$(".time_selector select option").each(function() {
+        Ember.$( this ).removeClass("hidden");
+        this.disabled = false;
+      });
+    }
+  },
+
   didInsertElement() {
     var _this = this;
     var date = new Date();
@@ -52,39 +89,15 @@ export default Ember.TextField.extend({
             setting = false;
           });
 
-          if(date) {
-            var selectedDate = date;
-            var currentDate = new Date();
-            currentDate.setHours(0,0,0,0);
-            selectedDate.setHours(0,0,0,0);
-
-            if(selectedDate.getTime() === currentDate.getTime()) {
-              var total_mins = _this.currentMinutes();
-
-              // disabled all previous options
-              Ember.$(".time_selector select option[value="+total_mins+"]").prevAll().each(function() {
-                  Ember.$( this ).addClass("hidden");
-                  this.disabled = true;
-              });
-
-              // disable current option
-              Ember.$(".time_selector select option[value="+total_mins+"]").addClass("hidden");
-              Ember.$(".time_selector select option[value="+total_mins+"]")[0].disabled = true;
-
-            } else {
-              // Enable all select options
-              Ember.$(".time_selector select option").each(function() {
-                Ember.$( this ).removeClass("hidden");
-                this.disabled = false;
-              });
-            }
-          }
+          if(date) { _this._setTimeSlots(date); }
         },
 
         onStart: function(){
           var date = _this.get('selection');
           if(date) {
+            date = _this._getValidDate(date);
             this.set('select', new Date(date), { format: 'ddd mmm d' });
+            _this._setTimeSlots(date);
           }
         }
       });
@@ -128,6 +141,5 @@ export default Ember.TextField.extend({
       parent.removeClass('has-error');
     }
   }
-
 
 });
