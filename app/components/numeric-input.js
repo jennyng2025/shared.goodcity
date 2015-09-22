@@ -3,7 +3,11 @@ import Ember from 'ember';
 export default Ember.TextField.extend({
   tagName: "input",
   type: "tel",
-  attributeBindings: [ "name", "type", "value", "maxlength", "id" ],
+  attributeBindings: [ "name", "type", "value", "maxlength", "id", "autoFocus" ],
+
+  becomeFocused: function() {
+    if(this.attrs.autoFocus) { this.$().focus(); }
+  }.on('didInsertElement'),
 
   currentKey: function(key, value){
     return (arguments.length > 1) ? value : 0;
