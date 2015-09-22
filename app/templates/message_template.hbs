@@ -51,7 +51,7 @@
 
           <div class="row ui">
             <div class="small-9 large-10 medium-10 columns">
-              {{#view "variable-height-textarea" value=body name="body"  required="true" disabled=disabled parentDiv="message-section"}}{{/view}}
+              {{variable-height-textarea value=body name="body" required="true" disabled=disabled parentDiv="message-section"}}
             </div>
             <div class="small-3 large-2 medium-2 columns">
               {{#view "online-button" disabledOverride=disabled disabled=inProgress}}{{t "send"}}{{/view}}
