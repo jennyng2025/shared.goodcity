@@ -9,10 +9,10 @@ export default DS.Model.extend({
   finish:        attr('date'),
   deliveryType:  attr('string'),
 
-  offer:         belongsTo('offer'),
-  contact:       belongsTo('contact'),
-  schedule:      belongsTo('schedule'),
-  gogovanOrder:  belongsTo('gogovan_order'),
+  offer:         belongsTo('offer', { async: false }),
+  contact:       belongsTo('contact', { async: false }),
+  schedule:      belongsTo('schedule', { async: false }),
+  gogovanOrder:  belongsTo('gogovan_order', { async: false }),
 
   isGogovan: Ember.computed.equal("deliveryType", "Gogovan"),
   isDropOff: Ember.computed.equal("deliveryType", "Drop Off"),

@@ -23,19 +23,19 @@ export default DS.Model.extend({
   reviewCompletedAt: attr('date'),
   deliveredBy:    attr('string'),
 
-  gogovanTransport:    belongsTo('gogovan_transport'),
-  crossroadsTransport: belongsTo('crossroads_transport'),
+  gogovanTransport:    belongsTo('gogovan_transport', { async: false }),
+  crossroadsTransport: belongsTo('crossroads_transport', { async: false }),
 
   // used for items of current-offer
   saleable:       attr('boolean'),
 
-  items:          hasMany('item'),
-  messages:       hasMany('message'),
+  items:          hasMany('item', { async: false }),
+  messages:       hasMany('message', { async: false }),
 
-  delivery:       belongsTo('delivery'),
-  createdBy:      belongsTo('user'),
-  reviewedBy:     belongsTo('user'),
-  closedBy:       belongsTo('user'),
+  delivery:       belongsTo('delivery', { async: false }),
+  createdBy:      belongsTo('user', { async: false }),
+  reviewedBy:     belongsTo('user', { async: false }),
+  closedBy:       belongsTo('user', { async: false }),
 
   // User details
   userName:       attr('string'),

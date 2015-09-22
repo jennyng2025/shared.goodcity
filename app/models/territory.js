@@ -4,5 +4,5 @@ var attr = DS.attr,
 
 export default DS.Model.extend({
   name: attr('string'),
-  districts:  hasMany('district')
+  districts:  hasMany('district', { async: false })
 });

@@ -10,7 +10,7 @@ export default DS.Model.extend({
   zone:        attr('string'),
   scheduledAt: attr('date'),
 
-  deliveries:   hasMany('delivery'),
+  deliveries:   hasMany('delivery', { async: false }),
 
   i18n: Ember.inject.service(),
 

@@ -2,15 +2,14 @@ import Ember from 'ember';
 import DS from 'ember-data';
 import Addressable from './addressable';
 
-var attr = DS.attr,
-  hasMany = DS.hasMany;;
+var attr = DS.attr;
 
 export default Addressable.extend({
   firstName:   attr('string'),
   lastName:    attr('string'),
   mobile:      attr('string'),
 
-  permission:  DS.belongsTo('permission'),
+  permission:  DS.belongsTo('permission', { async: false }),
 
   isDonor: Ember.computed.empty("permission.name"),
   isStaff: Ember.computed.notEmpty("permission.name"),

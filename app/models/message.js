@@ -11,9 +11,9 @@ export default DS.Model.extend({
   createdAt:   attr('date'),
   updatedAt:   attr('date'),
   state:       attr('string', {defaultValue: 'read'}),
-  sender:      belongsTo('user'),
-  item:        belongsTo('item'),
-  offer:       belongsTo('offer'),
+  sender:      belongsTo('user', { async: false }),
+  item:        belongsTo('item', { async: false }),
+  offer:       belongsTo('offer', { async: false }),
 
   myMessage: function() {
     var session = this.container.lookup("service:session");

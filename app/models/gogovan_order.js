@@ -27,7 +27,7 @@ export default DS.Model.extend({
   driverMobile:  attr('string'),
   driverLicense: attr('string'),
   ggvUuid:       attr('string'),
-  delivery:      belongsTo('delivery'),
+  delivery:      belongsTo('delivery', { async: false }),
 
   isPending: Ember.computed.equal("status", "pending"),
   isActive: Ember.computed.equal("status", "active"),
