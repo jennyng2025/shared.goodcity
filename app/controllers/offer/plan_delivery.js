@@ -11,10 +11,8 @@ export default Ember.Controller.extend({
     return this.store.peekRecord('offer', this.get('offerId'));
   }.property('offerId'),
 
-  gogovanPrice: function(key, value) {
-    if (arguments.length > 1) {
-      return value;
-    } else {
+  gogovanPrice: Ember.computed('offerId', {
+    get: function() {
       var params = {
         districtId: this.get('offer.createdBy.address.district.id'),
         offerId: this.get("offerId")
@@ -25,8 +23,11 @@ export default Ember.Controller.extend({
         .catch(error => this.get("logger").error(error));
 
       return "";
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('offerId'),
+  }),
 
   gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
 

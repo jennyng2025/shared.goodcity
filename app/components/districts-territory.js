@@ -13,10 +13,16 @@ export default Ember.Component.extend({
     if(selectedDistrictId) { this.set('selected_id', selectedDistrictId); }
   }.observes('currentSelected'),
 
-  districtsByTerritory: function(key, value) {
-    var store = this.get('targetObject.store');
-    return (arguments.length > 1 && value !== '' ? value : store.peekAll('district').sortBy('name'));
-  }.property(),
+  districtsByTerritory: Ember.computed({
+    get: function() {
+      var store = this.get('targetObject.store');
+      return store.peekAll('district').sortBy('name');
+    },
+    set: function(key, value) {
+      var store = this.get('targetObject.store');
+      return value !== '' ? value : store.peekAll('district').sortBy('name');
+    }
+  }),
 
   allTerritory: function(){
     var store = this.get('targetObject.store');

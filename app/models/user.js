@@ -32,13 +32,14 @@ export default Addressable.extend({
     return this.get('image.thumbImageUrl') || "assets/images/default_user_image.jpg";
   }.property('image'),
 
-  hasImage: function(key, value) {
-    if(arguments.length > 1) {
-      return value;
-    } else {
+  hasImage: Ember.computed("image", {
+    get: function() {
       return this.get('image.thumbImageUrl');
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('image'),
+  }),
 
   fullName: function() {
     return (this.get('firstName') + " " + this.get('lastName'));

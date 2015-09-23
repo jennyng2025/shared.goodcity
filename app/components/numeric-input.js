@@ -9,9 +9,14 @@ export default Ember.TextField.extend({
     if(this.attrs.autoFocus) { this.$().focus(); }
   }.on('didInsertElement'),
 
-  currentKey: function(key, value){
-    return (arguments.length > 1) ? value : 0;
-  }.property(),
+  currentKey: Ember.computed({
+    get: function() {
+      return 0;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
 
   isAllowed: function(){
     var key = this.get('currentKey');

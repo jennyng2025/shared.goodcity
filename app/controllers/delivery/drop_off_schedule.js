@@ -15,15 +15,16 @@ export default Ember.Controller.extend({
     return this.store.peekAll('timeslot').sortBy('id');
   }.property('timeslot.@each'),
 
-  available_dates: function(key, value){
-    if (arguments.length > 1) {
-      return value;
-    } else {
+  available_dates: Ember.computed('available_dates.[]', {
+    get: function() {
       new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40})
         .then(data => this.set("available_dates", data));
       return value;
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('available_dates.[]'),
+  }),
 
   actions: {
     bookSchedule: function() {
