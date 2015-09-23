@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'input-ui-control-with-counter',
+export default Ember.Component.extend({
+
   i18n: Ember.inject.service(),
 
   isTextArea: function(){
@@ -63,7 +63,7 @@ export default Ember.View.extend({
     this.send("displayCharCount");
   },
 
-  didInsertElement: function () {
+  didInsertElement() {
     this.send("displayCharCount");
 
     if (!this.get('maxlength')) {
