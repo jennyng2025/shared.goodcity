@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   delivery: Ember.inject.controller(),
 
   availableSlots: Ember.computed.filterBy('model', 'deliveries.length', 0),
