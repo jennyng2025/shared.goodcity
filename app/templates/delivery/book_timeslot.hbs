@@ -17,7 +17,7 @@
       <ul>
         {{#each availableSlots as |item|}}
           <li>
-            {{view 'radio-button' name="timeslot" selection=controller.isSelected value=item.id id=item.id}}
+            {{radio-button name="timeslot" selection=controller.isSelected value=item.id id=item.id}}
             <label for={{item.id}}>
               <label class='schdule-date' for={{item.id}}>{{display-date item.scheduledAt}}</label><br/>
               {{item.slotName}}
