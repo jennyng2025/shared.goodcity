@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'time-ago',
+export default Ember.Component.extend({
+
   classNames: 'time-ago',
   timeValue: new Date(),
 
-  didInsertElement: function() {
+  didInsertElement() {
 
     if(this.smallPrefix) {
       Ember.$.timeago.settings.strings.suffixAgo = "";

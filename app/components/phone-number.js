@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   tagName: "span",
   number: null,
   hidden: Ember.computed.empty("number"),
-  templateName: "phone",
 
   displayNumber: function() {
     if (this.get("hidden")) {return ""};
