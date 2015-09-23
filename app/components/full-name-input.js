@@ -9,7 +9,7 @@ export default Ember.TextField.extend({
   i18n: Ember.inject.service(),
 
   didInsertElement(){
-    var user = this.attrs.user;
+    var user = this.attrs.user.value;
     var translatedName = this.get("i18n").t("full_name", { firstName: user.get('firstName'), lastName: user.get('lastName') });
     this.set('value', translatedName);
   }

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  didInsertElement: function() {
+export default Ember.Component.extend({
+  didInsertElement() {
     Ember.$().ready(function(){
       validateInputs();
       validateForm();
