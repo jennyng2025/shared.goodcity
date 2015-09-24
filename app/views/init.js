@@ -1,6 +1,12 @@
 import Ember from 'ember';
 export default Ember.View.extend({
   didInsertElement: function() {
+
+    Ember.run.debounce(this, function(){
+        var clientHeight = $( window ).height();
+        $('.inner-wrap').css('min-height', clientHeight);
+      }, 1000);
+
     Ember.$(document).foundation({
       offcanvas: { close_on_click: true }
     });
