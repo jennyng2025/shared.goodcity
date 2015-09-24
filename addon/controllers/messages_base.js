@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
 
     content.forEach(function(item) {
       value = item.get ? item.get(key) : item[key];
-      object = result.findProperty('value', value);
+      object = result.findBy('value', value);
       if (!object) {
         object = {
           value: value,

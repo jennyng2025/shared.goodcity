@@ -160,7 +160,7 @@ export default DS.Model.extend({
   }.property("delivery.gogovanOrder.status"),
 
   isOffer: function() {
-    return this.get('constructor.typeKey') === 'offer';
+    return this.get('constructor.modelName') === 'offer';
   }.property('this'),
 
   // unread offer-items messages

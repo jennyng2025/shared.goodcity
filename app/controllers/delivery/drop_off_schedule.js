@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
     get: function() {
       new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40})
         .then(data => this.set("available_dates", data));
-      return value;
     },
     set: function(key, value) {
       return value;

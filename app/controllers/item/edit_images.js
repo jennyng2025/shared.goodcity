@@ -225,7 +225,7 @@ export default Ember.Controller.extend({
         this.transitionToRoute("review_item.accept", this.get('offer'), item);
       }
       else{
-        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").peekAll("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, true);
       }
     },
@@ -365,7 +365,7 @@ export default Ember.Controller.extend({
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       var item = this.get("item");
       if (!item || this.get("item.isOffer")) {
-        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").peekAll("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, false, identifier)
       } else {
         var favourite = item.get("images.length") === 0;

@@ -10,7 +10,7 @@ export default {
       .concat("user")
       .map(t => t.replace(/_(.)/, (m,g) => g.toUpperCase())); //to camelcase
 
-    if (!record || record.unloading || taxonomyTypes.indexOf(record.constructor.typeKey) !== -1) {
+    if (!record || record.unloading || taxonomyTypes.indexOf(record.constructor.modelName) !== -1) {
       return;
     }
 
@@ -50,7 +50,7 @@ export default {
     // this is the workaround I seem to need from unit test
     var relationshipKind = Ember.get(record.constructor, "relationshipsByName").get(relationshipName).kind;
     if (relationshipKind === "belongsTo") {
-      return record.store.hasRecordForId(relatedRecord.constructor.typeKey, relatedRecord.id);
+      return record.store.hasRecordForId(relatedRecord.constructor.modelName, relatedRecord.id);
     } else {
       throw "NotYetImplemented";
     }
