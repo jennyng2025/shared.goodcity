@@ -83,7 +83,7 @@ export default Ember.Controller.extend({
     if (image) {
       this.send("setPreview", image);
     }
-  }.observes("package", "item", "item.images.@each").on("init"),
+  }.observes("package", "item", "item.images.[]").on("init"),
 
   //css related
   previewImageBgCss: function() {
