@@ -22,9 +22,8 @@ export default Ember.ArrayController.extend({
     var messages = this.get("model").toArray();
     var itemVersions = this.get("itemVersions").toArray();
     var packageVersions = this.get("packageVersions").toArray();
-    var offerVersions = this.get("offerVersions").toArray();
-    return messages.concat(itemVersions, packageVersions, offerVersions);
-  }.property("model.[]", "itemVersions", "packageVersions", "offerVersions"),
+    return messages.concat(itemVersions, packageVersions);
+  }.property("model.[]", "itemVersions", "packageVersions"),
 
   itemVersions: function(){
     if (!this.get("isItemThread")) { return []; }
@@ -40,12 +39,6 @@ export default Ember.ArrayController.extend({
       return (packageIds.indexOf(String(log.get("itemId"))) >= 0) && (["received", "missing"].indexOf(log.get("state")) >= 0);
     });
   }.property("item.packages", "allVersions.[]", "isItemThread"),
-
-  offerVersions: function() {
-    if (this.get("isItemThread")) { return []; }
-    var offerId = parseInt(this.get("offer.id"));
-    return this.get('allVersions').filterBy('itemType', 'Offer').filterBy("itemId", offerId);
-  }.property("allVersions.[]", "offer.id", "isItemThread"),
 
   allVersions: function() {
     return this.store.peekAll("version");
