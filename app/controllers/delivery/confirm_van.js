@@ -8,14 +8,14 @@ export default Ember.Controller.extend({
   user: Ember.computed.alias('delivery.offer.createdBy'),
   orderDetails: Ember.computed.alias('model'),
 
-  mobileNumber: function(){
+  mobileNumber: Ember.computed('user.mobile', function(){
     return this.get("user.mobile").replace(/\+852/, "");
-  }.property('user.mobile'),
+  }),
 
-  districtName: function(){
+  districtName: Ember.computed('model.districtId', function(){
     var district = this.store.peekRecord("district", this.get('model.districtId'));
     return district.get('name');
-  }.property('model.districtId'),
+  }),
 
   actions: {
 

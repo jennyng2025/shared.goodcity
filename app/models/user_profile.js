@@ -16,7 +16,7 @@ export default Addressable.extend({
   isReviewer: Ember.computed.equal("permission.name", "Reviewer"),
   isSupervisor: Ember.computed.equal("permission.name", "Supervisor"),
 
-  fullName: function(){
+  fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName')
+  })
 });

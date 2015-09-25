@@ -67,7 +67,7 @@ export default Ember.TextField.extend({
     }
   },
 
-  didInsertElement: function(){
+  didInsertElement() {
     var _this = this;
     var list = this.get('available');
     var available_count = 0, available_array = [true];

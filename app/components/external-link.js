@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   href: "#",
   cordova: Ember.inject.service(),
 
-  click: function() {
+  click() {
     if (config.cordova.enabled) {
       cordova.InAppBrowser.open(this.attrs.linkUrl, "_system");
     } else {

@@ -38,8 +38,8 @@ export default Ember.Component.extend({
     return this.get("i18n").t("time_ago." + str).string;
   },
 
-  timeString: function() {
+  timeString: Ember.computed(function(){
     var timeValue = this.timeValue || new Date();
     return new Date(timeValue).toISOString();
-  }.property()
+  })
 });

@@ -2,14 +2,15 @@ import Ember from 'ember';
 import AjaxPromise from '../../utils/ajax-promise';
 
 export default Ember.Controller.extend({
+
   offerController: Ember.inject.controller('offer'),
   logger: Ember.inject.service(),
-
   offerId: Ember.computed.alias('offerController.model.id'),
+  gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
 
-  offer: function(){
+  offer: Ember.computed('offerId', function(){
     return this.store.peekRecord('offer', this.get('offerId'));
-  }.property('offerId'),
+  }),
 
   gogovanPrice: Ember.computed('offerId', {
     get: function() {
@@ -28,8 +29,6 @@ export default Ember.Controller.extend({
       return value;
     }
   }),
-
-  gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
 
   actions: {
     startDelivery: function(delivery_type) {

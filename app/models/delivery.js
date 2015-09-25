@@ -20,15 +20,15 @@ export default DS.Model.extend({
 
   wasDropOff: Ember.computed.notEmpty('schedule.slot'),
 
-  noDropOff: function() {
+  noDropOff: Ember.computed('deliveryType', function() {
     return this.get('deliveryType') !== 'Drop Off';
-  }.property('deliveryType'),
+  }),
 
-  noGogovan: function() {
+  noGogovan: Ember.computed('deliveryType', function() {
     return this.get('deliveryType') !== 'Gogovan';
-  }.property('deliveryType'),
+  }),
 
-  completedWithGogovan: function(){
+  completedWithGogovan: Ember.computed('gogovanOrder', 'gogovanOrder.status', function() {
     return this.get("isGogovan") && this.get("gogovanOrder.isCompleted");
-  }.property('gogovanOrder', 'gogovanOrder.status')
+  }),
 });

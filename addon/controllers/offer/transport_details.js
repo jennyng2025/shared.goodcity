@@ -7,22 +7,22 @@ export default Ember.Controller.extend({
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
-  user: function(){
+  user: Ember.computed(function(){
     var userId = this.session.get("currentUser.id");
     return this.store.peekRecord('user_profile', userId);
-  }.property().volatile(),
+  }).volatile(),
 
-  userName: function(){
+  userName: Ember.computed('contact.name', 'user.fullName', function(){
     return this.get('contact.name') || this.get("user.fullName");
-  }.property('contact.name', 'user.fullName'),
+  }),
 
-  userMobile: function(){
+  userMobile: Ember.computed('contact.mobile', 'user.mobile', function(){
     return this.get('contact.mobile') || this.get("user.mobile");
-  }.property('contact.mobile', 'user.mobile'),
+  }),
 
-  district: function(){
+  district: Ember.computed('contact.address.district.name', 'user.address.district.name', function(){
     return this.get('contact.address.district.name') || this.get("user.address.district.name");
-  }.property('contact.address.district.name', 'user.address.district.name'),
+  }),
 
   actions: {
     handleBrokenImage: function() {

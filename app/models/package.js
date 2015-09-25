@@ -23,19 +23,19 @@ export default DS.Model.extend({
 
   isReceived: Ember.computed.equal("state", "received"),
 
-  packageName: function() {
+  packageName: Ember.computed('packageType', function(){
     return this.get('packageType.name');
-  }.property('packageType'),
+  }),
 
   packageTypeId:   Ember.computed.foreignKey('packageType.id'),
 
-  packageTypeObject: function() {
+  packageTypeObject: Ember.computed('packageType', function(){
     var obj = this.get('packageType').getProperties('id', 'name', 'isItemTypeNode');
     obj.id = obj.packageTypeId = parseInt(obj.id);
     return obj;
-  }.property('packageType'),
+  }),
 
-  dimensions: function() {
+  dimensions: Ember.computed('width', 'height', 'length', function(){
     var res = '';
     var append = val => {
       if (val) { res += !res ? val : ' x ' + val; }
@@ -44,13 +44,13 @@ export default DS.Model.extend({
     append(this.get('height'));
     append(this.get('length'));
     return !res ? '' : res + 'cm';
-  }.property('width', 'height', 'length'),
+  }),
 
-  image: function() {
+  image: Ember.computed('imageId', function(){
     return this.store.peekRecord("image", this.get("imageId"));
-  }.property("imageId"),
+  }),
 
-  displayImageUrl: function() {
+  displayImageUrl: Ember.computed("image", "item.displayImageUrl", function(){
     return this.get("image") ? this.get("image.thumbImageUrl") : this.get("item.displayImageUrl");
-  }.property("image", "item.displayImageUrl")
+  })
 });

@@ -24,10 +24,10 @@ export default Ember.Component.extend({
     }
   }),
 
-  allTerritory: function(){
+  allTerritory: Ember.computed(function(){
     var store = this.get('targetObject.store');
     return store.peekAll('territory').sortBy('name');
-  }.property(),
+  }),
 
   selectDistrictLabel: t("select_district"),
 
@@ -38,8 +38,7 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function(){
-
+  didInsertElement(){
     Ember.$().ready(function (){
       Ember.$(".radio").click(function(){
         Ember.$(".radio").removeClass('active');

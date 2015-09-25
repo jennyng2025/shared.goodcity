@@ -19,15 +19,15 @@ export default Ember.Controller.extend({
   territoriesPrompt: t("all"),
   destrictPrompt: t("delivery.select_district"),
 
-  territories: function(){
+  territories: Ember.computed(function(){
     return this.store.peekAll('territory');
-  }.property(),
+  }),
 
-  districtsByTerritory: function() {
+  districtsByTerritory: Ember.computed('selectedTerritory', function(){
     if(this.selectedTerritory && this.selectedTerritory.id) {
       return this.selectedTerritory.get('districts').sortBy('name');
     } else {
       return this.store.peekAll('district').sortBy('name');
     }
-  }.property('selectedTerritory'),
+  }),
 });

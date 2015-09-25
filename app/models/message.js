@@ -15,18 +15,18 @@ export default DS.Model.extend({
   item:        belongsTo('item', { async: false }),
   offer:       belongsTo('offer', { async: false }),
 
-  myMessage: function() {
+  myMessage: Ember.computed(function(){
     var session = this.container.lookup("service:session");
     return this.get("sender.id") === session.get("currentUser.id");
-  }.property(),
+  }),
 
-  isMessage: function() {
+  isMessage: Ember.computed('this', function(){
     return true;
-  }.property('this'),
+  }),
 
-  createdDate: function() {
+  createdDate: Ember.computed(function(){
     return new Date(this.get("createdAt")).toDateString();
-  }.property(),
+  }),
 
   itemImageUrl: Ember.computed.alias("item.displayImageUrl")
 });

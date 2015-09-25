@@ -5,9 +5,9 @@ export default Ember.TextField.extend({
   type: "tel",
   attributeBindings: [ "name", "type", "value", "maxlength", "id", "autoFocus" ],
 
-  becomeFocused: function() {
+  didInsertElement() {
     if(this.attrs.autoFocus) { this.$().focus(); }
-  }.on('didInsertElement'),
+  },
 
   currentKey: Ember.computed({
     get: function() {
@@ -18,7 +18,7 @@ export default Ember.TextField.extend({
     }
   }),
 
-  isAllowed: function(){
+  isAllowed: Ember.computed('currentKey', function(){
     var key = this.get('currentKey');
     var allowed = (key === 13 ||
       key === 8 ||
@@ -27,7 +27,7 @@ export default Ember.TextField.extend({
       key === 39 ||
       (key >= 35 && key <= 37));
     return allowed;
-  }.property('currentKey'),
+  }),
 
   keyUp: function(){
     var value = this.value;

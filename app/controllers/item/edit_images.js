@@ -49,15 +49,15 @@ export default Ember.Controller.extend({
     });
   },
 
-  package: function() {
+  package: Ember.computed('packageId', function(){
     return this.get("store").peekRecord("package", this.get("packageId"));
-  }.property("packageId"),
+  }),
 
-  previewMatchesFavourite: function() {
+  previewMatchesFavourite: Ember.computed("previewImage", "favouriteImage", function(){
     return this.get("previewImage") === this.get("favouriteImage");
-  }.property("previewImage", "favouriteImage"),
+  }),
 
-  images: function() {
+  images: Ember.computed("item.images.[]", function(){
     //The reason for sorting is because by default it's ordered by favourite
     //then id order. If another image is made favourite then deleted the first image
     //by id order is made favourite which can be second image in list which seems random.
@@ -70,13 +70,13 @@ export default Ember.Controller.extend({
       if (b === 0) { return -1; }
       return a - b;
     });
-  }.property("item.images.[]"),
+  }),
 
-  favouriteImage: function() {
+  favouriteImage: Ember.computed("item.images.@each.favourite", "package.image", function(){
     return this.get("package") ?
       this.get("package.image") :
       this.get("images").filterBy("favourite").get("firstObject");
-  }.property("item.images.@each.favourite", "package.image"),
+  }),
 
   initPreviewImage: function() {
     var image = this.get("package.image") || this.get("item.displayImage");
@@ -86,28 +86,28 @@ export default Ember.Controller.extend({
   }.observes("package", "item", "item.images.[]").on("init"),
 
   //css related
-  previewImageBgCss: function() {
+  previewImageBgCss: Ember.computed("previewImage", "isExpanded", function(){
     var css = this.get("instructionBoxCss");
     if (!this.get("previewImage")) {
       return css;
     }
     return css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
       "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";";
-  }.property("previewImage", "isExpanded"),
+  }),
 
-  instructionBoxCss: function() {
+  instructionBoxCss: Ember.computed("previewImage", "isExpanded", function(){
     var height = Ember.$(window).height() * 0.6;
     return "min-height:" + height + "px;";
-  }.property("previewImage", "isExpanded"),
+  }),
 
-  thumbImageCss: function() {
+  thumbImageCss: Ember.computed(function(){
     var imgWidth = Math.min(120, Ember.$(window).width() / 4 - 14);
     return "width:" + imgWidth + "px; height:" + imgWidth + "px;";
-  }.property(),
+  }),
 
-  noImageLink: function() {
+  noImageLink: Ember.computed("noImage", function(){
     return this.get("noImage") && this.get("session.isAdminApp");
-  }.property("noImage"),
+  }),
 
   locale: function(str){
     return this.get("i18n").t(str);

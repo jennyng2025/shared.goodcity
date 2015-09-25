@@ -4,9 +4,9 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
-  isTextArea: function(){
+  isTextArea: Ember.computed('type', function(){
     return this.get('type') === 'textarea';
-  }.property('type'),
+  }),
 
   /* dataType: {String} ['textarea']
    * type  -> (description: Type of Input Field, by default - its a text input
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
 
   currentCountBinding: 'inputControl.value.length',
 
-  charactersKeyedIn: function () {
+  charactersKeyedIn: Ember.computed('currentCount', function(){
     var control_val = this.get('inputControl.value') || "";
     var total_count = 0, special_chars, special_chars_length;
 
@@ -55,7 +55,7 @@ export default Ember.Component.extend({
     }
 
     return total_count;
-  }.property('currentCount').volatile(),
+  }).volatile(),
 
   isMaxCharLengthReached: Ember.computed.equal('charactersKeyedIn', 'maxlength'),
 

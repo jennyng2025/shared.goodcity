@@ -3,13 +3,13 @@ import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 
 export default Ember.Controller.extend({
+
   alert: Ember.inject.service(),
-
-  mobile: function() {
-    return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
-  }.property('mobilePhone'),
-
   attemptedTransition: null,
+
+  mobile: Ember.computed('mobilePhone', function(){
+    return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
+  }),
 
   actions: {
 

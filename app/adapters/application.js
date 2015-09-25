@@ -13,7 +13,8 @@ export default ActiveModelAdapter.extend({
   namespace: config.APP.NAMESPACE,
   host:      config.APP.API_HOST_URL,
   session:   Ember.inject.service(),
-  headers: function() {
+
+  headers: Ember.computed("session.authToken", function(){
     return {
       "Authorization":  'Bearer ' + this.get('session.authToken'),
       "Accept-Language": this.get('session.language'),
@@ -22,5 +23,5 @@ export default ActiveModelAdapter.extend({
       "X-GOODCITY-APP-SHA": config.APP.SHA,
       "X-GOODCITY-APP-SHARED-SHA": config.APP.SHARED_SHA
     };
-  }.property("session.authToken")
+  })
 });

@@ -16,16 +16,16 @@ export default addressDetails.extend({
   offer: Ember.computed.alias("delivery.offer"),
   i18n: Ember.inject.service(),
 
-  gogovanOptions: function() {
+  gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
     return allOptions.rejectBy('isDisabled', true).sortBy('id');
-  }.property(),
+  }),
 
-  selectedGogovanOption: function(){
+  selectedGogovanOption: Ember.computed('gogovanOptions', 'offer', function(){
     return this.get("offer.gogovanTransport.id") || this.get('gogovanOptions.firstObject.id');
-  }.property('gogovanOptions', 'offer'),
+  }),
 
-  timeSlots: function(){
+  timeSlots: Ember.computed(function(){
     var options = [];
     var slots = {"600": "10:00", "630": "10:30",
       "660": "11:00",  "690": "11:30",
@@ -39,8 +39,7 @@ export default addressDetails.extend({
       options.push({id: minutes, name: slots[minutes] + " " + period});
     }
     return options;
-
-  }.property(),
+  }),
 
   locale: function(str) {
     return this.get("i18n").t(str);

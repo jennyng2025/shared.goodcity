@@ -11,9 +11,9 @@ export default Ember.Controller.extend({
   timePrompt: t("gogovan.book_van.time"),
   i18n: Ember.inject.service(),
 
-  slots: function() {
+  slots: Ember.computed('timeslot.[]', function(){
     return this.store.peekAll('timeslot').sortBy('id');
-  }.property('timeslot.[]'),
+  }),
 
   available_dates: Ember.computed('available_dates.[]', {
     get: function() {

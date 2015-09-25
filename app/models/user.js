@@ -19,18 +19,20 @@ export default Addressable.extend({
   reviewedOffers: hasMany('offers', { inverse: 'reviewedBy', async: false }),
   donations:      hasMany('offers', { inverse: 'createdBy', async: false }),
 
-  nameInitial: function() {
-    return this.get('firstName').charAt(0).capitalize();
-  }.property('firstName'),
+  i18n: Ember.inject.service(),
 
-  roleInitials: function() {
+  nameInitial: Ember.computed('firstName', function(){
+    return this.get('firstName').charAt(0).capitalize();
+  }),
+
+  roleInitials: Ember.computed('permission', function(){
     var permission = this.get("permission.name") || "Donor";
     return "("+ permission.capitalize().charAt(0) +")";
-  }.property('permission'),
+  }),
 
-  displayImageUrl: function() {
+  displayImageUrl: Ember.computed('image', function(){
     return this.get('image.thumbImageUrl') || "assets/images/default_user_image.jpg";
-  }.property('image'),
+  }),
 
   hasImage: Ember.computed("image", {
     get: function() {
@@ -41,13 +43,11 @@ export default Addressable.extend({
     }
   }),
 
-  fullName: function() {
+  fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName'),
+  }),
 
-  i18n: Ember.inject.service(),
-
-  onlineStatus: function(){
+  onlineStatus: Ember.computed('lastConnected', 'lastDisconnected', function(){
     if(!this.get('lastConnected') && !this.get('lastDisconnected')) {
       return this.get("i18n").t('not_connected');
     } else if(this.get('lastDisconnected') > this.get('lastConnected')) {
@@ -55,6 +55,6 @@ export default Addressable.extend({
     } else if(this.get('lastDisconnected') < this.get('lastConnected')) {
       return this.get("i18n").t('online');
     }
-  }.property('lastConnected', 'lastDisconnected'),
+  }),
 
 });

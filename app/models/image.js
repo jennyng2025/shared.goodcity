@@ -9,13 +9,13 @@ export default DS.Model.extend({
   cloudinaryId:  attr('string'),
   item:          belongsTo('item', { async: false }),
 
-  imageUrl: function() {
+  imageUrl: Ember.computed('cloudinaryId', function(){
     return this.generateUrl();
-  }.property('cloudinaryId'),
+  }),
 
-  thumbImageUrl: function() {
+  thumbImageUrl: Ember.computed('cloudinaryId', function(){
     return this.generateUrl(120, 120, true);
-  }.property('cloudinaryId'),
+  }),
 
   generateUrl: function(width, height, crop) {
     //e.g. cloudinaryId = 1406959628/wjvaksnadntp239n6vwe.png

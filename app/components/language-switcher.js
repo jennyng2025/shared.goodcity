@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  isEnglish: function() {
+  isEnglish: Ember.computed('session.language', function(){
     return this.get('session.language') === 'en';
-  }.property('session.language'),
+  }),
 
-  isChinese: function() {
+  isChinese: Ember.computed('session.language', function(){
     return this.get('session.language') === 'zh-tw';
-  }.property('session.language'),
+  }),
 
   actions: {
     setLanguage: function(language) {
