@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    setLanguage: function(language) {
+    setLanguage(language) {
       this.set('session.language', language);
       window.location.reload();
     }

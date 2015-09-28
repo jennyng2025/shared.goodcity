@@ -25,11 +25,11 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    handleBrokenImage: function() {
+    handleBrokenImage() {
       this.get("model.reviewedBy").set("hasImage", null);
     },
 
-    cancelDelivery: function(){
+    cancelDelivery() {
       if(this.get('hasActiveGGVOrder')) {
         // this.set('cancelBooking', true);
         this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    modifyBooking: function(){
+    modifyBooking() {
       if(this.get('hasActiveGGVOrder')) {
         this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
           .then(newRoute => newRoute.controller.set('isCancel', false));
@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    removeDelivery: function(delivery){
+    removeDelivery(delivery) {
       var _this = this;
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
         var loadingView = _this.container.lookup('view:loading').append();

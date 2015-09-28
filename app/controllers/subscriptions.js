@@ -53,15 +53,15 @@ export default Ember.Controller.extend({
     }
   }),
 
-  initController: function() {
+  initController: Ember.on('init', function() {
     this.set("status.text", this.get("i18n").t("offline_error"));
     var updateStatus = Ember.run.bind(this, this.updateStatus);
     window.addEventListener("online", updateStatus);
     window.addEventListener("offline", updateStatus);
-  }.on("init"),
+  }),
 
   actions: {
-    wire: function() {
+    wire() {
       var updateStatus = Ember.run.bind(this, this.updateStatus);
       var connectUrl = config.APP.SOCKETIO_WEBSERVICE_URL +
         "?token=" + encodeURIComponent(this.session.get("authToken")) +
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
       socket.connect(); // manually connect since it's not auto-connecting if you logout and then back in
     },
 
-    unwire: function() {
+    unwire() {
       var socket = this.get("socket");
       if (socket) {
         socket.close();

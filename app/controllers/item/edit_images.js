@@ -78,12 +78,12 @@ export default Ember.Controller.extend({
       this.get("images").filterBy("favourite").get("firstObject");
   }),
 
-  initPreviewImage: Ember.observer("package", "item", "item.images.[]", function () {
+  initPreviewImage: Ember.on('init', Ember.observer("package", "item", "item.images.[]", function () {
     var image = this.get("package.image") || this.get("item.displayImage");
     if (image) {
       this.send("setPreview", image);
     }
-  }).on("init"),
+  })),
 
   //css related
   previewImageBgCss: Ember.computed("previewImage", "isExpanded", function(){

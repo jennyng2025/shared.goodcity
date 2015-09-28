@@ -32,7 +32,7 @@ export default Ember.Component.extend({
   selectDistrictLabel: t("select_district"),
 
   actions: {
-    findDistrictbyTerritory: function(territory){
+    findDistrictbyTerritory(territory) {
       var districts = territory ? territory.get('districts').sortBy('name') : '';
       this.set('districtsByTerritory', districts);
     }

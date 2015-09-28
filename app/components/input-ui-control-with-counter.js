@@ -77,7 +77,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    displayCharCount: function(){
+    displayCharCount() {
       var char_counter_message = this.get('charactersKeyedIn') + '/' + this.get('maxlength');
       this.set('message', char_counter_message );
     }

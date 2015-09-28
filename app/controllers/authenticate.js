@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    authenticateUser: function(){
+    authenticateUser() {
       Ember.$('.auth_error').hide();
       var pin = this.get('pin');
       var otp_auth_key = this.get('session.otpAuthKey');
@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
         .finally(() => loadingView.destroy());
     },
 
-    resendPin: function() {
+    resendPin() {
       var mobile = this.get('mobile');
       var loadingView = this.container.lookup('view:loading').append();
 

@@ -69,7 +69,7 @@ export default Ember.ArrayController.extend({
   },
 
   actions: {
-    view: function() {
+    view() {
       var notification = this.get("nextNotification");
       this.removeObject(notification);
       if (notification.category === "incoming_call") {

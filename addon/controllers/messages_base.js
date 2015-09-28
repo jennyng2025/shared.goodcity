@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    sendMessage: function() {
+    sendMessage() {
       this.set("inProgress", true);
       var values = this.getProperties("body", "offer", "item", "isPrivate");
       values.createdAt = new Date();

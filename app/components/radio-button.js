@@ -20,9 +20,9 @@ export default Ember.Component.extend({
     return this.get("value") === this.get("selection");
   }),
 
-  onInit: function() {
+  onInit: Ember.on('init', function() {
     if (this.get("value") == this.get("selection")) {
       this.set("checked", true);
     }
-  }.on("init")
+  })
 });
