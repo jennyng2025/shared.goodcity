@@ -1,9 +1,9 @@
 <nav class="tab-bar">
   <section class="left-small">
     {{#if session.isAdminApp}}
-      {{#link-to "review_offer.logistics" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
+      {{link-to (t 'back') "review_offer.logistics" model.offer classNames='back'}}
     {{else}}
-      {{#link-to "offer.transport_details" model.offer classNames='back'}}{{t 'back'}}{{/link-to}}
+      {{link-to (t 'back') "offer.transport_details" model.offer classNames='back'}}
     {{/if}}
   </section>
 

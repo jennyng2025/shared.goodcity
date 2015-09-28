@@ -1,9 +1,9 @@
 <nav class="tab-bar">
   <section class="left-small">
     {{#if session.isAdminApp}}
-      {{#link-to 'login' classNames='back'}}{{t "application.login"}}{{/link-to}}
+      {{link-to (t "application.login") 'login' classNames='back'}}
     {{else}}
-      {{#link-to 'tour' classNames='back'}}{{t "application.tour"}}{{/link-to}}
+      {{link-to (t "application.tour") 'tour' classNames='back'}}
     {{/if}}
     </section>
 
