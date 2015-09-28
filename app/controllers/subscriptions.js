@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
     text: ""
   },
 
-  updateStatus: function() {
+  updateStatus: Ember.observer('socket', function () {
     var socket = this.get("socket");
     var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
     online = socket && socket.connected && online;
@@ -40,10 +40,10 @@ export default Ember.Controller.extend({
         window.location.reload();
       }
     }
-  }.observes("socket"),
+  }),
 
   // resync if offline longer than deviceTtl
-  checkdeviceTtl: function() {
+  checkdeviceTtl: Ember.observer('online', function () {
     var online = this.get("online");
     var deviceTtl = this.get("deviceTtl");
     if (online && deviceTtl !== 0 && (Date.now() - this.get("lastOnline")) > deviceTtl * 1000) {
@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
     } else if (!online) {
       this.set("lastOnline", Date.now());
     }
-  }.observes("online"),
+  }),
 
   initController: function() {
     this.set("status.text", this.get("i18n").t("offline_error"));
