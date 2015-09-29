@@ -9,7 +9,7 @@ export default AuthorizeRoute.extend({
     backClick: false
   },
 
-  beforeModel: function(params){
+  beforeModel(params) {
     var offerId = this.modelFor('offer').get('id');
     var offer = this.store.peekRecord('offer', offerId);
     this.set("backClick", params.queryParams.backClick);

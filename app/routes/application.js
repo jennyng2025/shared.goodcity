@@ -22,7 +22,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     });
   },
 
-  beforeModel: function (transition = []) {
+  beforeModel(transition = []) {
     if (transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
       this.set('session.language', language);
@@ -37,7 +37,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     return this._loadDataStore();
   },
 
-  renderTemplate: function() {
+  renderTemplate() {
     this.render(); // default template
     if (this.session.get("isLoggedIn")){
       this.render('notifications', {   // the template to render

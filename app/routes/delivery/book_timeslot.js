@@ -2,7 +2,7 @@ import VerifyOfferStateRoute from './verify_offer_state';
 
 export default VerifyOfferStateRoute.extend({
 
-  model: function(){
+  model() {
     return this.store.findAll("schedule");
   }
 });
