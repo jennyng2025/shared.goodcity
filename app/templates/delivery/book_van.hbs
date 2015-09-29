@@ -45,26 +45,22 @@
 
         <div class="row time_inputs">
           <div class="small-7 columns date_selector">
-            {{view "select-date"
+            {{select-date
               name='selectedDate'
               id='selectedDate'
               value=''
               selection=selectedDate
-              required='true'
               placeholder=datePrompt
               pattern="[a-zA-Z]{3}\s?[a-zA-Z]{3}\s?[0-9]{1,2}"}}
             <i class="fa fa-calendar calender_icon"></i>
           </div>
           <div class="small-5 columns time_selector">
-            {{view "select"
+            {{select-list
               content=controller.timeSlots
-              optionValuePath="content.id"
-              optionLabelPath="content.name"
-              selection=selectedTime
-              required='true'
+              on-change=(action (mut selectedTime))
+              selectedValue=selectedTime
               prompt=timePrompt
-              id='selectedTime'
-              pattern="[0-9]{1,2}:(00|30)\s?(AM|PM)" }}
+              pattern="[0-9]{1,2}:(00|30)\s?(AM|PM)"}}
             <i class="fa fa-clock-o time_icon"></i>
           </div>
         </div>

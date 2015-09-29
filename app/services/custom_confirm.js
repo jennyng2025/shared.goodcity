@@ -7,6 +7,9 @@ export default Ember.Service.extend({
     var _this = this;
     Ember.run.schedule("afterRender", function() {
       var value;
+      if (message.string) { message = message.string; } // unwrap SafeString object
+      if (button1_text.string) { button1_text = button1_text.string; } // unwrap SafeString object
+      if (button2_text.string) { button2_text = button2_text.string; } // unwrap SafeString object
       Ember.$("#customConfirmMessage").text(message);
       Ember.$("#customConfirmModal .action1").text(button1_text);
       Ember.$("#customConfirmModal .action2").text(button2_text);

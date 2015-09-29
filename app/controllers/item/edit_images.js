@@ -1,8 +1,10 @@
 import Ember from "ember";
+import { translationMacro as t } from "ember-i18n";
+import config from '../../config/environment';
 
 export default Ember.Controller.extend({
-  needs: ["offer"],
-  offer: Ember.computed.alias("controllers.offer.model"),
+  offerController: Ember.inject.controller('offer'),
+  offer: Ember.computed.alias("offerController.model"),
   item: Ember.computed.alias("model"),
 
   session: Ember.inject.service(),
@@ -10,17 +12,42 @@ export default Ember.Controller.extend({
   alert: Ember.inject.service(),
   customConfirm: Ember.inject.service(),
   confirm: Ember.inject.service(),
+  i18n: Ember.inject.service(),
+  cordova: Ember.inject.service(),
   offerId: null,
   itemId: null,
   packageId: null,
   noImage: Ember.computed.empty("item.images"),
   previewImage: null,
-  addPhotoLabel: Ember.I18n.t("edit_images.add_photo"),
+  addPhotoLabel: t("edit_images.add_photo"),
   isReady: false,
   isExpanded: false,
   backBtnVisible: true,
-  loadingPercentage: Ember.I18n.t("edit_images.image_uploading"),
+  loadingPercentage: t("edit_images.image_uploading"),
   uploadedFileDate: null,
+
+  initActionSheet: function(onSuccess) {
+    var _this = this;
+    return window.plugins.actionsheet.show({
+      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string]
+    }, function(buttonIndex) {
+      if (buttonIndex === 1) {
+        navigator.camera.getPicture(onSuccess, null, {
+          quality: 40,
+          destinationType: navigator.camera.DestinationType.DATA_URL,
+          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+        });
+      }
+      if (buttonIndex === 2) {
+        navigator.camera.getPicture(onSuccess, null, {
+          correctOrientation: true,
+          quality: 40,
+          destinationType: navigator.camera.DestinationType.DATA_URL,
+          sourceType: navigator.camera.PictureSourceType.CAMERA
+        });
+      }
+    });
+  },
 
   package: function() {
     return this.get("store").getById("package", this.get("packageId"));
@@ -83,7 +110,7 @@ export default Ember.Controller.extend({
   }.property("noImage"),
 
   locale: function(str){
-    return Ember.I18n.t(str);
+    return this.get("i18n").t(str);
   },
 
   createItem: function(donorCondition, withoutImage, identifier) {
@@ -253,7 +280,7 @@ export default Ember.Controller.extend({
         return;
       }
       else {
-        this.get("confirm").show(Ember.I18n.t("edit_images.delete_confirm"), () => {
+        this.get("confirm").show(this.get("i18n").t("edit_images.delete_confirm"), () => {
           var loadingView = this.container.lookup('view:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
@@ -278,15 +305,33 @@ export default Ember.Controller.extend({
 
     //file upload
     triggerUpload: function() {
-      if(navigator.userAgent.match(/iemobile/i))
-      {
-        //don't know why but on windows phone need to click twice in quick succession
-        //for dialog to appear
-        Ember.$("#photo-list input[type='file']").click().click();
-      }
-      else
-      {
-        Ember.$("#photo-list input[type='file']").trigger("click");
+
+      // For Cordova application
+      if (config.cordova.enabled) {
+        var onSuccess = ((function(_this) {
+          return function(path) {
+            console.log(path);
+            var dataURL = "data:image/jpg;base64," + path
+
+            $("input[type='file']").fileupload('option', 'formData').file = dataURL;
+            $("input[type='file']").fileupload('add', { files: [ dataURL ] });
+          };
+        })(this));
+
+        this.initActionSheet(onSuccess);
+      } else {
+
+        // For web application
+        if(navigator.userAgent.match(/iemobile/i))
+        {
+          //don't know why but on windows phone need to click twice in quick succession
+          //for dialog to appear
+          Ember.$("#photo-list input[type='file']").click().click();
+        }
+        else
+        {
+          Ember.$("#photo-list input[type='file']").trigger("click");
+        }
       }
     },
 
@@ -306,14 +351,14 @@ export default Ember.Controller.extend({
     uploadProgress: function(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10) || 0;
       this.set("addPhotoLabel", progress + "%");
-      this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading") + progress + "%");
+      this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading") + progress + "%");
     },
 
     uploadComplete: function() {
       this.set("uploadedFileDate", null);
       Ember.$(".loading-image-indicator.hide_image_loading").hide();
-      this.set("addPhotoLabel", Ember.I18n.t("edit_images.add_photo"));
-      this.set("loadingPercentage", Ember.I18n.t("edit_images.image_uploading"));
+      this.set("addPhotoLabel", this.get("i18n").t("edit_images.add_photo"));
+      this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading"));
     },
 
     uploadSuccess: function(e, data) {
@@ -327,7 +372,7 @@ export default Ember.Controller.extend({
         var img = this.get("store").createRecord('image', {cloudinaryId: identifier, item: this.get("item"), favourite: favourite});
         img.save().catch(error => { img.unloadRecord(); throw error; });
       }
-    }
+    },
   },
 
 });

@@ -21,7 +21,7 @@
 
           <div class="row">
             <div class="small-7 columns date_selector">
-              {{view "month-calender"
+              {{month-calender
                 name='selectedDate'
                 id='selectedDate'
                 value=''
@@ -34,20 +34,22 @@
             </div>
 
             <div class="small-5 columns time_selector">
-              {{view "select"
+              {{select-list
                 content=slots
-                optionLabelPath='content.name'
-                optionValuePath='content.id'
-                selection=selectedId
+                on-change=(action (mut selectedId))
+                selectedValue=selectedId
                 prompt=timePrompt
                 required='true'}}
+
               <i class="fa fa-clock-o time_icon"></i>
             </div>
           </div>
 
           <div class="row schedule_info">
             <div class='description'>
-              <a href="https://maps.google.com/?saddr=Current+Location&amp;daddr=Crossroads+Foundation,+2+Castle+Peak+Road+-+So+Kwun+Wat,+Hong+Kong" target="_blank">{{t "drop-off.find_crossroads"}}</a> ({{t "drop-off.open_new_tab"}})
+              {{#external-link linkUrl="https://www.google.com/maps/place/22%C2%B022'30.6%22N+113%C2%B059'33.7%22E/@22.375181,113.992688,18z"}}
+                {{t "drop-off.find_crossroads"}}
+              {{/external-link}}
             </div>
 
             <div class='description'>

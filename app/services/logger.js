@@ -14,16 +14,15 @@ export default Ember.Service.extend({
       var userId = this.get("session.currentUser.id");
       var error = reason instanceof Error || typeof reason != "object" ?
           reason : JSON.stringify(reason);
+      var environment = config.staging ? "staging" : config.environment;
+      var version = `${config.APP.SHA} (shared ${config.APP.SHARED_SHA})`;
 
-      var airbrake = new airbrakeJs.Client();
-      airbrake.setHost(config.APP.AIRBRAKE_HOST);
-      airbrake.setProject(config.APP.AIRBRAKE_PROJECT_ID, config.APP.AIRBRAKE_PROJECT_KEY);
-      airbrake.setEnvironmentName(config.staging ? "staging" : config.environment);
-
-      airbrake.push({
-        error: error,
-        context: { userId: userId, userName: userName }
+      var airbrake = new airbrakeJs.Client({
+        projectId: config.APP.AIRBRAKE_PROJECT_ID,
+        projectKey: config.APP.AIRBRAKE_PROJECT_KEY
       });
+      airbrake.setHost(config.APP.AIRBRAKE_HOST);
+      airbrake.notify({ error, context: { userId, userName, environment, version } });
     }
   }
 });

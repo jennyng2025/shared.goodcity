@@ -2,10 +2,10 @@ import Ember from 'ember';
 import AjaxPromise from '../../utils/ajax-promise';
 
 export default Ember.Controller.extend({
-  needs: ["offer"],
+  offerController: Ember.inject.controller('offer'),
   logger: Ember.inject.service(),
 
-  offerId: Ember.computed.alias('controllers.offer.model.id'),
+  offerId: Ember.computed.alias('offerController.model.id'),
 
   offer: function(){
     return this.store.getById('offer', this.get('offerId'));
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
 
   actions: {
     startDelivery: function(delivery_type) {
-      var offerId = this.get('controllers.offer').get('model.id');
+      var offerId = this.get('offerController.model.id');
       var offer = this.store.getById('offer', offerId);
       var delivery = offer.get("delivery");
       if(delivery) {

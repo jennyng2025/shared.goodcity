@@ -2,8 +2,7 @@ import Ember from 'ember';
 
 export default Ember.TextArea.extend({
   tagName: "textarea",
-  attributeBindings: [ "name", "type", "value", "disabled", "required",
-    "parentDiv" ],
+  attributeBindings: ["disabled"],
   disabled: false,
 
   valueChanged: function(){
@@ -22,9 +21,11 @@ export default Ember.TextArea.extend({
           .css({'margin-bottom': textarea.scrollHeight - 50 });
 
         // scrolling down to bottom of page
-        Ember.$('html, body').stop(true, false).animate({
-          scrollTop: Ember.$(document).height()
-        }, 'fast');
+        if(this.get("value") !== ""){
+          Ember.$('html, body').stop(true, false).animate({
+            scrollTop: Ember.$(document).height()
+          }, 'fast');
+        }
       }
     }
   }.observes('value'),

@@ -3,9 +3,8 @@ import config from './../../config/environment';
 import AjaxPromise from './../../utils/ajax-promise';
 
 export default Ember.Controller.extend({
-  needs: ['delivery'],
-
-  delivery: Ember.computed.alias("controllers.delivery.model"),
+  deliveryController: Ember.inject.controller('delivery'),
+  delivery: Ember.computed.alias("deliveryController.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
   orderDetails: Ember.computed.alias('model'),
 
@@ -33,7 +32,7 @@ export default Ember.Controller.extend({
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
 
-      var delivery = controller.store.getById("delivery", controller.get('controllers.delivery.model.id'));
+      var delivery = controller.store.getById("delivery", controller.get('deliveryController.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });
@@ -49,12 +48,13 @@ export default Ember.Controller.extend({
           scheduleAttributes: scheduleProperties  ,
           contactAttributes: contactProperties,
         },
-        gogovanOrder: orderDetails._attributes };
+        gogovanOrder: orderDetails.toJSON() };
 
       new AjaxPromise("/confirm_delivery", "POST", this.get('session.authToken'), properties)
         .then(function(data) {
           controller.store.pushPayload(data);
           controller.set("inProgress", false);
+          offer.set('state', 'scheduled');
           loadingView.destroy();
 
           if(controller.get("session.isAdminApp")) {

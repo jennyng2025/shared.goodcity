@@ -1,5 +1,4 @@
 I18nTranslationsEn =
-  "socket_offline_error": "Attempting to connect to app.goodcity.hk..."
   "offline_error": "Unable to complete action, please check your internet connection."
   "offline_page": "Unable to load app, please check your internet connection."
   "try_again": "Try Again"
@@ -110,6 +109,7 @@ I18nTranslationsEn =
     "unread" : "Unread ({{unreadCount}})"
     "owner" : "You"
     "today_with_time": "Today, {{time}}"
+    "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
     "text" : "{{text}}"
@@ -165,7 +165,22 @@ I18nTranslationsEn =
       "cancel": "Cancel"
       "description_placeholder" : "Item description, size, quantity etc. To add or edit photos of this item, click the thumbnail."
 
+  "item_log":
+    "added": "{{name}} added item"
+    "updated": "{{name}} edited item"
+    "accepted": "{{name}} accepted item"
+    "rejected": "{{name}} rejected item"
+    "submitted": "{{name}} submitted item"
+    "received": "{{name}} received item"
+    "missing": "{{name}} marked item missing"
+
+  "offer_log":
+    "donor_called": "{{name}} called"
+    "call_accepted": "{{name}} answered call"
+
   "edit_images":
+    "upload": "Choose Image"
+    "camera": "Take Photo"
     "add_photo" : "Add photo"
     "delete_confirm" : "Are you sure you want to delete this image?"
     "cant_delete_last_image" : "You must have at least one image"
@@ -278,7 +293,7 @@ I18nTranslationsEn =
   "drop-off":
     "select_schedule": "Select Schedule"
     "expect_delivery": "When can we expect your delivery?"
-    "find_crossroads": "How to find crossroads"
+    "find_crossroads": "Find Crossroads on Google Maps"
     "open_new_tab": "will open in new tab"
     "arrive_on_time": "Please arrive during our operating hours to ensure we can successfully receive your kind donation."
     "book_schedule": "Book Schedule"
@@ -286,4 +301,7 @@ I18nTranslationsEn =
   "crossroads_truck":
         "book_time": "Book Time"
         "show_more": "Show More"
+
+  "offer":
+    "disable": "Disable"
 `export default I18nTranslationsEn`

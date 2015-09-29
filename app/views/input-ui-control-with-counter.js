@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   templateName: 'input-ui-control-with-counter',
+  i18n: Ember.inject.service(),
 
   isTextArea: function(){
     return this.get('type') === 'textarea';
@@ -66,11 +67,11 @@ export default Ember.View.extend({
     this.send("displayCharCount");
 
     if (!this.get('maxlength')) {
-      Ember.assert(Ember.I18n.t("input_length_error_message"));
+      Ember.assert(this.get("i18n").t("input_length_error_message"));
     }
 
     if(this.get('placeholder') === 'item_description') {
-      var placeholderText = Ember.I18n.t("items.add_item.description_placeholder");
+      var placeholderText = this.get("i18n").t("items.add_item.description_placeholder");
       this.set('placeholder', placeholderText);
     }
   },

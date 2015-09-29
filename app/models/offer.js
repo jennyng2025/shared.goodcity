@@ -54,7 +54,7 @@ export default DS.Model.extend({
   }.property(),
 
   itemPackages: function() {
-    return this.store.all("package").filterBy("offerId", parseInt(this.get("id")));
+    return this.store.peekAll("package").filterBy("offerId", parseInt(this.get("id")));
   }.property(),
 
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
@@ -92,7 +92,7 @@ export default DS.Model.extend({
 
   nonEmptyOffer: function(){
     return this.get('itemCount') > 0;
-  }.property('items.@each'),
+  }.property('items.[]'),
 
   allItemsReviewed: function(){
     var reviewedItems = this.get('activeItems').filterBy('state', 'submitted');
@@ -132,8 +132,9 @@ export default DS.Model.extend({
     return status;
   }.property('state'),
 
+  i18n: Ember.inject.service(),
   locale: function(text) {
-    return Ember.I18n.t(text);
+    return this.get("i18n").t(text);
   },
 
   statusText: function(){
@@ -202,7 +203,7 @@ export default DS.Model.extend({
   }.property('crossroadsTransport'),
 
   hasGogovanTransport: function(){
-    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== Ember.I18n.t("offer.disable");
+    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable").string;
   }.property('gogovanTransport'),
 
   // display "General Messages Thread"

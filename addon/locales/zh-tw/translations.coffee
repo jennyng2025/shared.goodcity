@@ -1,5 +1,4 @@
 I18nTranslationsZhTw =
-  "socket_offline_error": "正在嘗試連接至 app.goodcity.hk..."
   "offline_error": "無法完成動作，請檢查您的網絡連線"
   "offline_page": "無法開啟應用程式，請檢查您的網絡連線"
   "try_again": "再試一次"
@@ -27,7 +26,7 @@ I18nTranslationsZhTw =
   "yes" : "是"
   "no" : "否"
   "ok" : "可以"
-  "index.title" : "Crossroads Foundation Presents十字路會呈獻"
+  "index.title" : "國際十字路會呈獻"
   "index.donate_goods" : "捐贈剩餘物資，幫助需要的人"
   "index.how" : "要怎樣做呢？"
   "index.start" : "立刻行動"
@@ -111,6 +110,7 @@ I18nTranslationsZhTw =
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
     "today_with_time": "今天, {{time}}"
+    "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
     "text" : "{{text}}"
@@ -166,7 +166,22 @@ I18nTranslationsZhTw =
       "cancel": "取消"
       "description_placeholder" : "物品的描述、大小及數量等。如要增加或修改這項物品的相片，請點擊圖像。"
 
+  "item_log":
+    "added": "{{name}} 加入此物"
+    "updated": "{{name}} 修改此物"
+    "accepted": "{{name}} 接受此物"
+    "rejected": "{{name}} 拒絕此物"
+    "submitted": "{{name}} 捐出此物"
+    "received": "{{name}} 收到此物"
+    "missing": "{{name}} 將此物的狀況改為'失蹤'"
+
+  "offer_log":
+    "donor_called": "{{name}} called"
+    "call_accepted": "{{name}} answered call"
+
   "edit_images":
+    "upload": "Choose Image"
+    "camera": "Take Photo"
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"
     "cant_delete_last_image" : "最少需要一張圖片"
@@ -279,7 +294,7 @@ I18nTranslationsZhTw =
   "drop-off":
     "select_schedule": "選擇時間"
     "expect_delivery": "物資大約何時到達？"
-    "find_crossroads": "如何到達十字路會？"
+    "find_crossroads": "Find Crossroads on Google Maps"
     "open_new_tab": "將在新視窗打開"
     "arrive_on_time": "煩請於我們的辦公時間內到達，以確保我們能順利接收您的物資。"
     "book_schedule": "預約時間"
@@ -287,4 +302,7 @@ I18nTranslationsZhTw =
   "crossroads_truck":
         "book_time": "預約時間"
         "show_more": "更多"
+
+  "offer":
+    "disable": "關閉"
 `export default I18nTranslationsZhTw`

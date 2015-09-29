@@ -1,4 +1,5 @@
 import Ember from "ember";
+import AjaxPromise from './../utils/ajax-promise';
 
 export default Ember.ArrayController.extend({
   sortProperties: ["date"],
@@ -33,7 +34,7 @@ export default Ember.ArrayController.extend({
   },
 
   itemImageUrl: function() {
-    var itemId = this.get("nextNotification.entity.item_id");
+    var itemId = this.get("nextNotification.item_id");
     return itemId ? this.store.getById("item", itemId).get("displayImageUrl") : null;
   }.property("nextNotification"),
 
@@ -42,25 +43,38 @@ export default Ember.ArrayController.extend({
   senderImageUrl: function() {
     var notification = this.get("nextNotification");
     if (!notification) { return null; }
-    var userId = notification.entity_type === "message" ?
-      notification.entity.sender_id :
-      notification.entity.created_by_id;
-    return this.store.getById("user", userId).get("displayImageUrl");
+    return this.store.getById("user", notification.author_id).get("displayImageUrl");
   }.property("nextNotification"),
 
   setRoute: function(notification) {
-    if (notification.entity_type === "message") {
-      notification.route = this.get("messagesUtil").getRoute(notification.entity);
-    } else if (notification.entity_type === "offer") {
-      var routeName = this.get("session.isDonorApp") ? "offer" : "review_offer";
-      notification.route = [routeName, notification.entity.id];
+    switch (notification.category) {
+      case "message":
+        notification.route = this.get("messagesUtil").getRoute(notification);
+        break;
+
+      case "new_offer":
+      case "incoming_call":
+        var routeName = this.get("session.isDonorApp") ? "offer" : "review_offer";
+        notification.route = [routeName, notification.offer_id];
+        break;
+
+      case "call_answered":
+        notification.route = ["offer.donor_messages", notification.offer_id];
+        break;
     }
+  },
+
+  acceptCall: function(notification) {
+    new AjaxPromise("/twilio_inbound/accept_call", "GET", this.get('session.authToken'), { donor_id: notification.author_id })
   },
 
   actions: {
     view: function() {
       var notification = this.get("nextNotification");
       this.removeObject(notification);
+      if (notification.category === "incoming_call") {
+        this.acceptCall(notification);
+      }
       this.transitionToRoute.apply(this, notification.route);
     }
   }

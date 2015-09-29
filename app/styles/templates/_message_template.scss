@@ -1,3 +1,7 @@
+.message-textbar {
+  padding-top: 0rem !important;
+}
+
 .message_bubble_box {
   background-color: $white;
   color: black;
@@ -73,6 +77,15 @@
   .icon-empty-items {
     color: $body-font-color;
   }
+
+  .item_log {
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: underline;
+  }
 }
 
 .message-form {
@@ -102,9 +115,46 @@
   }
 
   div {
-    background-color: #dee4eb;
     padding-top: 0.1rem;
     padding-right: 0.2rem;
     z-index: 10;
+  }
+
+  .message-base {
+    background-color: #dee4eb;
+  }
+}
+
+.day_seperator {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid $light-blue;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.day_seperator span {
+  padding:0 10px;
+  color: #314B6F;
+  background: $dark-blue;
+}
+.tabs-content .day_seperator span {
+  background: $light-grey;
+}
+
+.review_item .day_seperator {
+  border-bottom: 1px solid $medium-blue;
+}
+
+.chat_note {
+  color: white;
+  margin-bottom: 0.5rem;
+
+  @media #{$small-only} {
+    font-size: 0.8rem;
+  }
+
+  i {
+    color: $coral-red;
   }
 }

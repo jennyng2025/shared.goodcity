@@ -8,6 +8,7 @@ export default Ember.Service.extend({
     var _this = this;
     Ember.run.schedule("afterRender", function() {
       var value;
+      if (message.string) { message = message.string; } // unwrap SafeString object
       Ember.$("#confirmMessage").html(message);
 
       // workaround https://github.com/zurb/foundation/issues/5721

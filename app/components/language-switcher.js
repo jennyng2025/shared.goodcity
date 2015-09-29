@@ -3,17 +3,18 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   isEnglish: function() {
-    return this.get('currentLanguage') === 'en';
-  }.property('currentLanguage'),
+    return this.get('session.language') === 'en';
+  }.property('session.language'),
 
   isChinese: function() {
-    return this.get('currentLanguage') === 'zh-tw';
-  }.property('currentLanguage'),
-  
+    return this.get('session.language') === 'zh-tw';
+  }.property('session.language'),
+
   actions: {
     setLanguage: function(language) {
-      this.sendAction('action', language);
+      this.set('session.language', language);
+      window.location.reload();
     }
   }
-  
+
 });

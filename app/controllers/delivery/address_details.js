@@ -1,26 +1,33 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Controller.extend({
 
-  delivery: Ember.computed.alias("controllers.delivery.model"),
+  i18n: Ember.inject.service(),
+  delivery: Ember.computed.alias("deliveryController.model"),
   user: Ember.computed.alias('delivery.offer.createdBy'),
-  territoryId: Ember.computed.alias('user.address.district.territory.id'),
-  districtId: Ember.computed.alias('user.address.district.id'),
-  selectedTerritory: {id: null},
-  selectedDistrict: {id: null},
+  selectedTerritory: null,
+  selectedDistrict: null,
 
-  territoriesPrompt: Ember.I18n.t("all"),
-  destrictPrompt: Ember.I18n.t("delivery.select_district"),
+  initSelectedTerritories: function() {
+    if(this.get("selectedDistrict") === null) {
+      this.set("selectedTerritory", this.get("user.address.district.territory"));
+      this.set("selectedDistrict", this.get("user.address.district"));
+    }
+  }.on("init"),
+
+  territoriesPrompt: t("all"),
+  destrictPrompt: t("delivery.select_district"),
 
   territories: function(){
-    return this.store.all('territory');
+    return this.store.peekAll('territory');
   }.property(),
 
   districtsByTerritory: function() {
     if(this.selectedTerritory && this.selectedTerritory.id) {
       return this.selectedTerritory.get('districts').sortBy('name');
     } else {
-      return this.store.all('district').sortBy('name');
+      return this.store.peekAll('district').sortBy('name');
     }
   }.property('selectedTerritory'),
 });

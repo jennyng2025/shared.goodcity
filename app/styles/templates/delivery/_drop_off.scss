@@ -68,7 +68,7 @@
     }
   }
 
-  select, #selectedDate, #selectedTime {
+  select, #selectedDate, #selectedTime select {
     position: absolute;
     height: 2.17rem;
     @media #{$small-only} {
@@ -76,7 +76,7 @@
     }
   }
 
-  input#selectedDate, #selectedTime {
+  input#selectedDate, #selectedTime select {
     &::-webkit-input-placeholder {
       color: $black;
     }

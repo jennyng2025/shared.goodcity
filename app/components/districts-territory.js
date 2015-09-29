@@ -1,28 +1,29 @@
 import Ember from 'ember';
+import { translationMacro as t } from "ember-i18n";
 
 export default Ember.Component.extend({
   attributeBindings: ['selected_id'],
   classNames: ['district-selection'],
   currentSelected: {id: null},
   selected_id: null,
+  i18n: Ember.inject.service(),
 
   currentSelectedObserver: function(){
-    this.set('selected_id',this.getWithDefault('currentSelected.id'));
+    var selectedDistrictId = this.getWithDefault('currentSelected.id');
+    if(selectedDistrictId) { this.set('selected_id', selectedDistrictId); }
   }.observes('currentSelected'),
 
   districtsByTerritory: function(key, value) {
     var store = this.get('targetObject.store');
-    return (arguments.length > 1 && value !== '' ? value : store.all('district').sortBy('name'));
+    return (arguments.length > 1 && value !== '' ? value : store.peekAll('district').sortBy('name'));
   }.property(),
 
   allTerritory: function(){
     var store = this.get('targetObject.store');
-    return store.all('territory').sortBy('name');
+    return store.peekAll('territory').sortBy('name');
   }.property(),
 
-  selectDistrictLabel: function() {
-    return Ember.I18n.t("select_district");
-  }.property(),
+  selectDistrictLabel: t("select_district"),
 
   actions: {
     findDistrictbyTerritory: function(territory){

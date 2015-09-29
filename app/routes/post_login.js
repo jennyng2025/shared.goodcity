@@ -26,7 +26,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     } else {
       var currentUser = this.get('session.currentUser');
       if (this.get('session.isAdminApp')) {
-        var myOffers = this.store.all('offer').filterBy('reviewedBy.id', currentUser.get('id'));
+        var myOffers = this.store.peekAll('offer').filterBy('reviewedBy.id', currentUser.get('id'));
         if(myOffers.get('length') > 0) {
           this.transitionTo('my_list');
         } else {

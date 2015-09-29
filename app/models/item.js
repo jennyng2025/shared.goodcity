@@ -27,7 +27,8 @@ export default DS.Model.extend({
 
   isAccepted: Ember.computed.equal("state", "accepted"),
   isRejected: Ember.computed.equal("state", "rejected"),
-  isDrafted: Ember.computed.equal("state", "draft"),
+  isDrafted:  Ember.computed.equal("state", "draft"),
+  canUpdated: Ember.computed.not("hasReceivedPackages"),
 
   isDraft: function(){
     return this.get('offer.state') === 'draft';
@@ -40,6 +41,10 @@ export default DS.Model.extend({
   isUnderReview: function(){
     return this.get('state') === 'submitted' && this.get('offer.state') === 'under_review';
   }.property('state', 'offer.state'),
+
+  hasReceivedPackages: function(){
+    return this.get('packages').filterBy('isReceived', true).length > 0;
+  }.property('packages.@each.state'),
 
   displayImage: function() {
     return this.get("images").filterBy("favourite").get("firstObject") ||

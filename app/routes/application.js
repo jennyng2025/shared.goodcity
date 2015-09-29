@@ -5,21 +5,11 @@ import preloadDataMixin from '../mixins/preload_data';
 
 export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
+  i18n: Ember.inject.service(),
 
-  beforeModel: function (transition = []) {
-    if(transition.queryParams.ln) {
-      var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
-      this.set('session.language', language);
-    }
-
-    var language = this.session.get("language") || Ember.I18n.default_language;
-    moment.locale(language);
-    Ember.I18n.translations = Ember.I18n.translation_store[language];
-
-    Ember.onerror = window.onerror = error => this.handleError(error);
-
+  _loadDataStore: function(){
     return this.preloadData(true).catch(error => {
-      if (error.status === 0) {
+      if (error.status === 0 || error.errors[0].status === "0") {
         this.transitionTo("offline");
       } else {
         this.handleError(error);
@@ -32,6 +22,21 @@ export default Ember.Route.extend(preloadDataMixin, {
     });
   },
 
+  beforeModel: function (transition = []) {
+    if (transition.queryParams.ln) {
+      var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
+      this.set('session.language', language);
+    }
+
+    var language = this.session.get("language") || "en";
+    moment.locale(language);
+    this.set("i18n.locale", language);
+
+    Ember.onerror = window.onerror = error => this.handleError(error);
+
+    return this._loadDataStore();
+  },
+
   renderTemplate: function() {
     this.render(); // default template
     if (this.session.get("isLoggedIn")){
@@ -40,6 +45,14 @@ export default Ember.Route.extend(preloadDataMixin, {
         outlet: 'notifications', // the name of the outlet in that template
         controller: 'notifications'   // the controller to use for the template
       });
+
+      if(this.session.get("isAdminApp")){
+        this.render('notification_link', {
+          into: 'application',
+          outlet: 'notification_link',
+          controller: 'notification_link'
+        });
+      }
     }
   },
 
@@ -49,19 +62,24 @@ export default Ember.Route.extend(preloadDataMixin, {
   handleError: function(reason) {
     try
     {
-      if (reason.status === 401) {
+      var status;
+      try { status = parseInt(reason.errors[0].status); }
+      catch (err) { status = reason.status; }
+
+      if (status === 401) {
         if (this.session.get('isLoggedIn')) {
           this.controllerFor("application").send('logMeOut');
         }
-      } else if (reason.status === 404) {
-        this.get("alert").show(Ember.I18n.t("404_error"));
-      } else if (reason.status === 0) {
+      } else if (status === 404) {
+        this.get("logger").error(reason);
+        this.get("alert").show(this.get("i18n").t("404_error"));
+      } else if (status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled
-        this.get("alert").show(Ember.I18n.t("offline_error"));
+        this.get("alert").show(this.get("i18n").t("offline_error"));
       } else {
         this.get("logger").error(reason);
-        this.get("alert").show(Ember.I18n.t("unexpected_error"));
+        this.get("alert").show(this.get("i18n").t("unexpected_error"));
       }
     } catch (err) {}
   },
@@ -81,7 +99,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     error: function(reason) {
       try {
         if ([403, 404].indexOf(reason.status) >= 0) {
-          this.get("alert").show(Ember.I18n.t(reason.status+"_error"), () => this.transitionTo("/"));
+          this.get("alert").show(this.get("i18n").t(reason.status+"_error"), () => this.transitionTo("/"));
         } else {
           this.handleError(reason);
         }

@@ -8,17 +8,19 @@ function run(func) {
 }
 
 export default Ember.Controller.extend({
-  needs: ["notifications"],
+
+  notifications: Ember.inject.controller(),
   socket: null,
   lastOnline: Date.now(),
   deviceTtl: 0,
   deviceId: Math.random().toString().substring(2),
   logger: Ember.inject.service(),
+  i18n: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
   status: {
     online: false,
     hidden: true,
-    text: Ember.I18n.t("offline_error")
+    text: ""
   },
 
   updateStatus: function() {
@@ -26,10 +28,18 @@ export default Ember.Controller.extend({
     var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
     online = socket && socket.connected && online;
     var hidden = !this.session.get("isLoggedIn") || (online && config.environment === "production" && config.staging !== true);
-    var text = !online ? Ember.I18n.t("socket_offline_error") :
+    var text = !online ? this.get("i18n").t("socket_offline_error") :
       "Online - " + this.session.get("currentUser.fullName") + " (" + socket.io.engine.transport.name + ")";
-
     this.set("status", {"online": online, "hidden": hidden, "text": text});
+
+    if(!this.session.get("currentUser.fullName") && online) {
+      var currentUrl = this.container.lookup("router:main").get("url");
+      if (currentUrl == "/offline") {
+        this.transitionTo("/");
+      } else {
+        window.location.reload();
+      }
+    }
   }.observes("socket"),
 
   // resync if offline longer than deviceTtl
@@ -44,6 +54,7 @@ export default Ember.Controller.extend({
   }.observes("online"),
 
   initController: function() {
+    this.set("status.text", this.get("i18n").t("offline_error"));
     var updateStatus = Ember.run.bind(this, this.updateStatus);
     window.addEventListener("online", updateStatus);
     window.addEventListener("offline", updateStatus);
@@ -107,7 +118,7 @@ export default Ember.Controller.extend({
 
   notification: function(data, success) {
     data.date = new Date(data.date);
-    this.get("controllers.notifications").pushObject(data);
+    this.get("notifications").pushObject(data);
     run(success);
   },
 
@@ -121,16 +132,11 @@ export default Ember.Controller.extend({
     var item = Ember.$.extend({}, data.item[type]);
     this.store.normalize(type, item);
 
-    if (type === "address") {
-      item.addressable = item.addressable_id;
-      delete item.addressable_id;
-    }
-
     var existingItem = this.store.getById(type, item.id);
 
     // update_store message is sent before response to APP save so ignore
     var fromCurrentUser = parseInt(data.sender.user.id) === parseInt(this.session.get("currentUser.id"));
-    var hasNewItemSaving = this.store.all(type).some(function(o) { return o.id === null && o.get("isSaving"); });
+    var hasNewItemSaving = this.store.peekAll(type).some(function(o) { return o.id === null && o.get("isSaving"); });
     var existingItemIsSaving = existingItem && existingItem.get("isSaving"); // isSaving is true during delete as well
     if (fromCurrentUser && (data.operation === "create" && hasNewItemSaving || existingItemIsSaving)) {
       run(success);
@@ -138,7 +144,7 @@ export default Ember.Controller.extend({
     }
 
     if (data.operation === "update" && !existingItem) {
-      this.store.find(type, item.id);
+      this.store.findRecord(type, item.id);
     } else if (["create","update"].contains(data.operation)) {
         this.store.push(type, item);
     } else if (existingItem) { //delete
