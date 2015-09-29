@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    confirmOrder: function(){
+    confirmOrder() {
       var controller = this;
       var loadingView = this.container.lookup('view:loading').append();
       var orderDetails = controller.get("orderDetails");

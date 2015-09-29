@@ -1,13 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
   delivery: Ember.inject.controller(),
-
   availableSlots: Ember.computed.filterBy('model', 'deliveries.length', 0),
-
   isSelected: 1,
+
   actions: {
-    assignSchedule: function() {
+    assignSchedule() {
       var selectedSlot        = this.get('isSelected');
       var getSelectedSchedule = this.store.peekRecord('schedule', selectedSlot);
       var scheduleProperties  = getSelectedSchedule.getProperties('zone',

@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
   }),
 
   actions:{
-    done: function(){
+    done() {
       var offerId = this.get('offer.model.id');
       if(this.get("session.isAdminApp")) {
         this.transitionToRoute('review_offer.logistics', offerId);

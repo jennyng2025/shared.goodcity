@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    startDelivery: function(delivery_type) {
+    startDelivery(delivery_type) {
       var offerId = this.get('offerController.model.id');
       var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");

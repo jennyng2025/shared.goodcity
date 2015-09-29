@@ -6,7 +6,7 @@ export default addressDetails.extend({
   deliveryController: Ember.inject.controller('delivery'),
 
   actions: {
-    saveContactDetails: function() {
+    saveContactDetails() {
       var controller = this;
       var addressProperties = this.getProperties('street', 'flat', 'building');
       addressProperties.districtId  = this.selectedDistrict;

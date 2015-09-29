@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    bookSchedule: function() {
+    bookSchedule() {
       var controller   = this;
       var loadingView  = this.container.lookup('view:loading').append();
       var selectedSlot = controller.get('selectedId');

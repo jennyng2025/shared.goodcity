@@ -210,7 +210,7 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    next: function() {
+    next() {
       if(this.get("session.isAdminApp")) {
         this.transitionToRoute("review_item.accept", this.get('offer'), this.get('model'));
       } else {
@@ -219,7 +219,7 @@ export default Ember.Controller.extend({
     },
 
     //only used for admin
-    nextWithoutImage: function() {
+    nextWithoutImage() {
       var item = this.get("item")
       if(item){
         this.transitionToRoute("review_item.accept", this.get('offer'), item);
@@ -230,7 +230,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    back: function() {
+    back() {
       if(this.get("session.isAdminApp")) {
         this.transitionToRoute("review_offer.items");
       } else {
@@ -242,7 +242,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    newItem: function(item) {
+    newItem(item) {
       if(this.get("session.isAdminApp")){
         this.transitionToRoute("item.edit_images", item.get("id"));
       } else {
@@ -250,13 +250,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    setPreview: function(image) {
+    setPreview(image) {
       this.get("item.images").setEach("selected", false);
       image.set("selected", true);
       this.set("previewImage", image);
     },
 
-    setFavourite: function() {
+    setFavourite() {
       if (this.get("package")) {
         var pkg = this.get("package");
         pkg.set("imageId", this.get("previewImage.id"));
@@ -272,7 +272,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    deleteImage: function() {
+    deleteImage() {
       if (this.get("item.images.length") === 1)
       {
         this.get("session.isAdminApp") ? this.confirmRemoveLastImage()
@@ -298,13 +298,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    expandImage: function() {
+    expandImage() {
       var value = this.get("isExpanded");
       this.set("isExpanded", !value);
     },
 
     //file upload
-    triggerUpload: function() {
+    triggerUpload() {
 
       // For Cordova application
       if (config.cordova.enabled) {
@@ -335,33 +335,33 @@ export default Ember.Controller.extend({
       }
     },
 
-    uploadReady: function() {
+    uploadReady() {
       this.set("isReady", true);
     },
 
-    uploadStart: function(e, data) {
+    uploadStart(e, data) {
       this.set("uploadedFileDate", data);
       Ember.$(".loading-image-indicator").show();
     },
 
-    cancelUpload: function(){
+    cancelUpload() {
       if(this.get("uploadedFileDate")){ this.get("uploadedFileDate").abort(); }
     },
 
-    uploadProgress: function(e, data) {
+    uploadProgress(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10) || 0;
       this.set("addPhotoLabel", progress + "%");
       this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading") + progress + "%");
     },
 
-    uploadComplete: function() {
+    uploadComplete() {
       this.set("uploadedFileDate", null);
       Ember.$(".loading-image-indicator.hide_image_loading").hide();
       this.set("addPhotoLabel", this.get("i18n").t("edit_images.add_photo"));
       this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading"));
     },
 
-    uploadSuccess: function(e, data) {
+    uploadSuccess(e, data) {
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       var item = this.get("item");
       if (!item || this.get("item.isOffer")) {
