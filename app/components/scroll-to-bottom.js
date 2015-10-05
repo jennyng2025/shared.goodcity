@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import initFoundation from './init-foundation';
-
-export default initFoundation.extend({
+// import initFoundation from './init-foundation';
+// export default initFoundation.extend({
+export default Ember.Component.extend({
   didInsertElement() {
     this._super();
 

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.TextField.extend({
   tagName: "input",
   type: "tel",
-  attributeBindings: [ "name", "type", "value", "maxlength", "id", "autoFocus" ],
+  attributeBindings: [ "name", "type", "value", "maxlength", "id", "autoFocus" , "placeholder", "required", "pattern"],
 
   didInsertElement() {
     if(this.attrs.autoFocus) { this.$().focus(); }
@@ -30,10 +30,11 @@ export default Ember.TextField.extend({
   }),
 
   keyUp: function(){
-    var value = this.value;
+    var value = this.attrs.value;
     if(value && value.search(/^\d{8}$/) !== 0){
       this.set('value', value.replace(/\D/g,''));
     }
+    return true;
   },
 
   keyDown: function(e) {
@@ -56,6 +57,6 @@ export default Ember.TextField.extend({
 
   keyPress: function() {
     var inputValue = this.value || "";
-    return this.get('isAllowed') ? true : (inputValue.length < this.maxlength);
+    return this.get('isAllowed') ? true : (inputValue.length < this.attrs.maxlength);
   }
 });

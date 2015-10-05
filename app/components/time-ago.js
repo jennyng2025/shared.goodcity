@@ -2,9 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  classNames: 'time-ago',
-  timeValue: new Date(),
-
   didInsertElement() {
 
     if(this.smallPrefix) {
@@ -39,7 +36,7 @@ export default Ember.Component.extend({
   },
 
   timeString: Ember.computed(function(){
-    var timeValue = this.timeValue || new Date();
+    var timeValue = this.attrs.timeValue.value || new Date();
     return new Date(timeValue).toISOString();
   })
 });
