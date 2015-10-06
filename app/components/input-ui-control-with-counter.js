@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'input-ui-control-with-counter',
+export default Ember.Component.extend({
+
   i18n: Ember.inject.service(),
 
-  isTextArea: function(){
+  isTextArea: Ember.computed('type', function(){
     return this.get('type') === 'textarea';
-  }.property('type'),
+  }),
 
   /* dataType: {String} ['textarea']
    * type  -> (description: Type of Input Field, by default - its a text input
@@ -38,7 +38,7 @@ export default Ember.View.extend({
 
   currentCountBinding: 'inputControl.value.length',
 
-  charactersKeyedIn: function () {
+  charactersKeyedIn: Ember.computed('currentCount', function(){
     var control_val = this.get('inputControl.value') || "";
     var total_count = 0, special_chars, special_chars_length;
 
@@ -55,7 +55,7 @@ export default Ember.View.extend({
     }
 
     return total_count;
-  }.property('currentCount').volatile(),
+  }).volatile(),
 
   isMaxCharLengthReached: Ember.computed.equal('charactersKeyedIn', 'maxlength'),
 
@@ -63,7 +63,7 @@ export default Ember.View.extend({
     this.send("displayCharCount");
   },
 
-  didInsertElement: function () {
+  didInsertElement() {
     this.send("displayCharCount");
 
     if (!this.get('maxlength')) {
@@ -77,7 +77,7 @@ export default Ember.View.extend({
   },
 
   actions: {
-    displayCharCount: function(){
+    displayCharCount() {
       var char_counter_message = this.get('charactersKeyedIn') + '/' + this.get('maxlength');
       this.set('message', char_counter_message );
     }

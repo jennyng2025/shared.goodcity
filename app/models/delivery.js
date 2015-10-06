@@ -9,10 +9,10 @@ export default DS.Model.extend({
   finish:        attr('date'),
   deliveryType:  attr('string'),
 
-  offer:         belongsTo('offer'),
-  contact:       belongsTo('contact'),
-  schedule:      belongsTo('schedule'),
-  gogovanOrder:  belongsTo('gogovan_order'),
+  offer:         belongsTo('offer', { async: false }),
+  contact:       belongsTo('contact', { async: false }),
+  schedule:      belongsTo('schedule', { async: false }),
+  gogovanOrder:  belongsTo('gogovan_order', { async: false }),
 
   isGogovan: Ember.computed.equal("deliveryType", "Gogovan"),
   isDropOff: Ember.computed.equal("deliveryType", "Drop Off"),
@@ -20,15 +20,15 @@ export default DS.Model.extend({
 
   wasDropOff: Ember.computed.notEmpty('schedule.slot'),
 
-  noDropOff: function() {
+  noDropOff: Ember.computed('deliveryType', function() {
     return this.get('deliveryType') !== 'Drop Off';
-  }.property('deliveryType'),
+  }),
 
-  noGogovan: function() {
+  noGogovan: Ember.computed('deliveryType', function() {
     return this.get('deliveryType') !== 'Gogovan';
-  }.property('deliveryType'),
+  }),
 
-  completedWithGogovan: function(){
+  completedWithGogovan: Ember.computed('gogovanOrder', 'gogovanOrder.status', function() {
     return this.get("isGogovan") && this.get("gogovanOrder.isCompleted");
-  }.property('gogovanOrder', 'gogovanOrder.status')
+  }),
 });

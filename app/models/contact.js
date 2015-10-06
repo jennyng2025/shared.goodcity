@@ -8,5 +8,5 @@ export default Addressable.extend({
   name:   attr('string'),
   mobile: attr('string'),
 
-  delivery: belongsTo('delivery')
+  delivery: belongsTo('delivery', { async: false })
 });

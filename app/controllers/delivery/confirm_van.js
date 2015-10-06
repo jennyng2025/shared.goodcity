@@ -8,18 +8,18 @@ export default Ember.Controller.extend({
   user: Ember.computed.alias('delivery.offer.createdBy'),
   orderDetails: Ember.computed.alias('model'),
 
-  mobileNumber: function(){
+  mobileNumber: Ember.computed('user.mobile', function(){
     return this.get("user.mobile").replace(/\+852/, "");
-  }.property('user.mobile'),
+  }),
 
-  districtName: function(){
-    var district = this.store.getById("district", this.get('model.districtId'));
+  districtName: Ember.computed('model.districtId', function(){
+    var district = this.store.peekRecord("district", this.get('model.districtId'));
     return district.get('name');
-  }.property('model.districtId'),
+  }),
 
   actions: {
 
-    confirmOrder: function(){
+    confirmOrder() {
       var controller = this;
       var loadingView = this.container.lookup('view:loading').append();
       var orderDetails = controller.get("orderDetails");
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
       // schedule details
       var scheduleProperties = { scheduledAt: orderDetails.get('pickupTime'), slotName: orderDetails.get('slot') };
 
-      var delivery = controller.store.getById("delivery", controller.get('deliveryController.model.id'));
+      var delivery = controller.store.peekRecord("delivery", controller.get('deliveryController.model.id'));
       var offer = delivery.get('offer');
 
       orderDetails.setProperties({ name: name, mobile: mobile, offerId: offer.get('id') });

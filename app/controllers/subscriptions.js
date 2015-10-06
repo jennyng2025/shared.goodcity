@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
     text: ""
   },
 
-  updateStatus: function() {
+  updateStatus: Ember.observer('socket', function () {
     var socket = this.get("socket");
     var online = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
     online = socket && socket.connected && online;
@@ -40,10 +40,10 @@ export default Ember.Controller.extend({
         window.location.reload();
       }
     }
-  }.observes("socket"),
+  }),
 
   // resync if offline longer than deviceTtl
-  checkdeviceTtl: function() {
+  checkdeviceTtl: Ember.observer('online', function () {
     var online = this.get("online");
     var deviceTtl = this.get("deviceTtl");
     if (online && deviceTtl !== 0 && (Date.now() - this.get("lastOnline")) > deviceTtl * 1000) {
@@ -51,17 +51,17 @@ export default Ember.Controller.extend({
     } else if (!online) {
       this.set("lastOnline", Date.now());
     }
-  }.observes("online"),
+  }),
 
-  initController: function() {
+  initController: Ember.on('init', function() {
     this.set("status.text", this.get("i18n").t("offline_error"));
     var updateStatus = Ember.run.bind(this, this.updateStatus);
     window.addEventListener("online", updateStatus);
     window.addEventListener("offline", updateStatus);
-  }.on("init"),
+  }),
 
   actions: {
-    wire: function() {
+    wire() {
       var updateStatus = Ember.run.bind(this, this.updateStatus);
       var connectUrl = config.APP.SOCKETIO_WEBSERVICE_URL +
         "?token=" + encodeURIComponent(this.session.get("authToken")) +
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
       socket.connect(); // manually connect since it's not auto-connecting if you logout and then back in
     },
 
-    unwire: function() {
+    unwire() {
       var socket = this.get("socket");
       if (socket) {
         socket.close();
@@ -132,11 +132,11 @@ export default Ember.Controller.extend({
     var item = Ember.$.extend({}, data.item[type]);
     this.store.normalize(type, item);
 
-    var existingItem = this.store.getById(type, item.id);
+    var existingItem = this.store.peekRecord(type, item.id);
 
     // update_store message is sent before response to APP save so ignore
     var fromCurrentUser = parseInt(data.sender.user.id) === parseInt(this.session.get("currentUser.id"));
-    var hasNewItemSaving = this.store.peekAll(type).some(function(o) { return o.id === null && o.get("isSaving"); });
+    var hasNewItemSaving = this.store.peekAll(type).any(function(o) { return o.id === null && o.get("isSaving"); });
     var existingItemIsSaving = existingItem && existingItem.get("isSaving"); // isSaving is true during delete as well
     if (fromCurrentUser && (data.operation === "create" && hasNewItemSaving || existingItemIsSaving)) {
       run(success);
@@ -161,7 +161,7 @@ export default Ember.Controller.extend({
       var messageUrl = router.generate.apply(router, messageRoute);
 
       if (currentUrl === messageUrl) {
-        var message = this.store.getById("message", item.id);
+        var message = this.store.peekRecord("message", item.id);
         this.get("messagesUtil").markRead(message);
       }
     }

@@ -6,14 +6,14 @@ export default Ember.ArrayController.extend({
   sortAscending: true,
   messagesUtil: Ember.inject.service("messages"),
 
-  nextNotification: function() {
+  nextNotification: Ember.computed('[]', function(){
     //retrieveNotification is not implemented here because it needs to call itself
     return this.retrieveNotification();
-  }.property("[]"),
+  }),
 
   retrieveNotification: function(index) {
     // not sure why but model.firstObject is undefined when there's one notification
-    var notification = this.get("model")[index || 0];
+    var notification = this.get("model") && this.get("model")[index || 0];
     if (!notification) {
       return null;
     }
@@ -33,18 +33,18 @@ export default Ember.ArrayController.extend({
     return notification;
   },
 
-  itemImageUrl: function() {
+  itemImageUrl: Ember.computed('nextNotification', function(){
     var itemId = this.get("nextNotification.item_id");
-    return itemId ? this.store.getById("item", itemId).get("displayImageUrl") : null;
-  }.property("nextNotification"),
+    return itemId ? this.store.peekRecord("item", itemId).get("displayImageUrl") : null;
+  }),
 
   showItemImage: Ember.computed.notEmpty("itemImageUrl"),
 
-  senderImageUrl: function() {
+  senderImageUrl: Ember.computed('nextNotification', function(){
     var notification = this.get("nextNotification");
     if (!notification) { return null; }
-    return this.store.getById("user", notification.author_id).get("displayImageUrl");
-  }.property("nextNotification"),
+    return this.store.peekRecord("user", notification.author_id).get("displayImageUrl");
+  }),
 
   setRoute: function(notification) {
     switch (notification.category) {
@@ -69,7 +69,7 @@ export default Ember.ArrayController.extend({
   },
 
   actions: {
-    view: function() {
+    view() {
       var notification = this.get("nextNotification");
       this.removeObject(notification);
       if (notification.category === "incoming_call") {

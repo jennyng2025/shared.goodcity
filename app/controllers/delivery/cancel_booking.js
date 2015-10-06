@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   isCancel: true,
 
   actions: {
-    cancelBooking: function() {
+    cancelBooking() {
       if(this.get('canCancel')){
         this.get('transportController').send('removeDelivery', this.get('model'));
       }

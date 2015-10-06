@@ -6,7 +6,7 @@ export default addressDetails.extend({
   deliveryController: Ember.inject.controller('delivery'),
 
   actions: {
-    saveContactDetails: function() {
+    saveContactDetails() {
       var controller = this;
       var addressProperties = this.getProperties('street', 'flat', 'building');
       addressProperties.districtId  = this.selectedDistrict;
@@ -17,7 +17,7 @@ export default addressDetails.extend({
       contactProperties.mobile = "+852" + Ember.$('#mobile').val();
 
       var deliveryId = this.get('deliveryController.model.id');
-      var delivery   = this.store.getById('delivery', deliveryId);
+      var delivery   = this.store.peekRecord('delivery', deliveryId);
       var offer      = delivery.get('offer');
       var schedule   = delivery.get('schedule');
 

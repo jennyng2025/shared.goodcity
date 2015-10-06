@@ -8,32 +8,37 @@ export default Ember.Component.extend({
   selected_id: null,
   i18n: Ember.inject.service(),
 
-  currentSelectedObserver: function(){
+  currentSelectedObserver: Ember.observer('currentSelected', function () {
     var selectedDistrictId = this.getWithDefault('currentSelected.id');
     if(selectedDistrictId) { this.set('selected_id', selectedDistrictId); }
-  }.observes('currentSelected'),
+  }),
 
-  districtsByTerritory: function(key, value) {
-    var store = this.get('targetObject.store');
-    return (arguments.length > 1 && value !== '' ? value : store.peekAll('district').sortBy('name'));
-  }.property(),
+  districtsByTerritory: Ember.computed({
+    get: function() {
+      var store = this.get('targetObject.store');
+      return store.peekAll('district').sortBy('name');
+    },
+    set: function(key, value) {
+      var store = this.get('targetObject.store');
+      return value !== '' ? value : store.peekAll('district').sortBy('name');
+    }
+  }),
 
-  allTerritory: function(){
+  allTerritory: Ember.computed(function(){
     var store = this.get('targetObject.store');
     return store.peekAll('territory').sortBy('name');
-  }.property(),
+  }),
 
   selectDistrictLabel: t("select_district"),
 
   actions: {
-    findDistrictbyTerritory: function(territory){
+    findDistrictbyTerritory(territory) {
       var districts = territory ? territory.get('districts').sortBy('name') : '';
       this.set('districtsByTerritory', districts);
     }
   },
 
-  didInsertElement: function(){
-
+  didInsertElement(){
     Ember.$().ready(function (){
       Ember.$(".radio").click(function(){
         Ember.$(".radio").removeClass('active');

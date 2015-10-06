@@ -1,7 +1,7 @@
 <nav class="tab-bar">
   {{#unless session.isAdminApp}}
     <section class="left-small">
-      {{#link-to 'register' classNames='back'}}{{t "application.register"}}{{/link-to}}
+      {{link-to (t "application.register") 'register' classNames='back'}}
     </section>
   {{/unless}}
 
@@ -28,7 +28,7 @@
               <span class="prefix">+852</span>
             </div>
             <div class="small-9 large-11 columns">
-              {{view 'numeric-input' value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" }}
+              {{numeric-input value=mobilePhone name="mobilePhone" id="mobile" maxlength="8" required=true pattern=".{8,}" autoFocus=true}}
             </div>
           </div>
         </div>

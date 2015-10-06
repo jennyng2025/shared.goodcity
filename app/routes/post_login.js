@@ -6,7 +6,7 @@ import preloadDataMixin from '../mixins/preload_data';
 export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
 
-  beforeModel: function(transition) {
+  beforeModel(transition) {
     Ember.run(() => this.controllerFor('application').send('logMeIn'));
     return this.preloadData().catch(error => {
       if (error.status === 0) {
@@ -17,7 +17,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     }).finally(() => this.get("cordova").appLoad());
   },
 
-  afterModel: function() {
+  afterModel() {
     // After everthying has been loaded, redirect user to requested url
     var attemptedTransition = this.controllerFor('login').get('attemptedTransition');
     if (attemptedTransition) {

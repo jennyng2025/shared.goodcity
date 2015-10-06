@@ -9,25 +9,25 @@ export default Ember.Controller.extend({
   selectedTerritory: null,
   selectedDistrict: null,
 
-  initSelectedTerritories: function() {
+  initSelectedTerritories: Ember.on('init', function() {
     if(this.get("selectedDistrict") === null) {
       this.set("selectedTerritory", this.get("user.address.district.territory"));
       this.set("selectedDistrict", this.get("user.address.district"));
     }
-  }.on("init"),
+  }),
 
   territoriesPrompt: t("all"),
   destrictPrompt: t("delivery.select_district"),
 
-  territories: function(){
+  territories: Ember.computed(function(){
     return this.store.peekAll('territory');
-  }.property(),
+  }),
 
-  districtsByTerritory: function() {
+  districtsByTerritory: Ember.computed('selectedTerritory', function(){
     if(this.selectedTerritory && this.selectedTerritory.id) {
       return this.selectedTerritory.get('districts').sortBy('name');
     } else {
       return this.store.peekAll('district').sortBy('name');
     }
-  }.property('selectedTerritory'),
+  }),
 });

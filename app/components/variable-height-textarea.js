@@ -5,7 +5,7 @@ export default Ember.TextArea.extend({
   attributeBindings: ["disabled"],
   disabled: false,
 
-  valueChanged: function(){
+  valueChanged: Ember.observer('value', function () {
     var textarea = this.element;
     if(textarea) {
       // auto-resize height of textarea $('textarea')[0].
@@ -28,6 +28,6 @@ export default Ember.TextArea.extend({
         }
       }
     }
-  }.observes('value'),
+  }),
 
 });

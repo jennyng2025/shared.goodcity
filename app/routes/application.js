@@ -22,7 +22,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     });
   },
 
-  beforeModel: function (transition = []) {
+  beforeModel(transition = []) {
     if (transition.queryParams.ln) {
       var language = transition.queryParams.ln === "zh-tw" ? "zh-tw" : "en";
       this.set('session.language', language);
@@ -37,7 +37,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     return this._loadDataStore();
   },
 
-  renderTemplate: function() {
+  renderTemplate() {
     this.render(); // default template
     if (this.session.get("isLoggedIn")){
       this.render('notifications', {   // the template to render
@@ -85,18 +85,18 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   actions: {
-    setLang: function(language) {
+    setLang(language) {
       this.session.set("language", language);
       window.location.reload();
     },
-    loading: function() {
+    loading() {
       Ember.$(".loading-indicator").remove();
       var view = this.container.lookup('view:loading').append();
       this.router.one('didTransition', view, 'destroy');
     },
     // this is hopefully only triggered from promises from routes
     // so in this scenario redirect to home for 404
-    error: function(reason) {
+    error(reason) {
       try {
         if ([403, 404].indexOf(reason.status) >= 0) {
           this.get("alert").show(this.get("i18n").t(reason.status+"_error"), () => this.transitionTo("/"));

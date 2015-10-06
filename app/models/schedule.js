@@ -10,11 +10,11 @@ export default DS.Model.extend({
   zone:        attr('string'),
   scheduledAt: attr('date'),
 
-  deliveries:   hasMany('delivery'),
+  deliveries:   hasMany('delivery', { async: false }),
 
   i18n: Ember.inject.service(),
 
-  dayTime: function() {
+  dayTime: Ember.computed('slotName', function(){
     var slot = (this.get('slotName') || '').split(',').slice(-1)[0];
     var day_time = ''
     if(slot) {
@@ -22,5 +22,5 @@ export default DS.Model.extend({
       day_time = this.get("i18n").t("day." + ((slot > 8 && slot < 12 ) ? "morning" : "afternoon"));
     }
     return day_time;
-  }.property("slotName"),
+  }),
 });

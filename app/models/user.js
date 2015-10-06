@@ -14,39 +14,40 @@ export default Addressable.extend({
   lastConnected:    attr('date'),
   lastDisconnected: attr('date'),
 
-  image:          belongsTo('image'),
-  permission:     belongsTo('permission'),
-  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy' }),
-  donations:      hasMany('offers', { inverse: 'createdBy' }),
-
-  nameInitial: function() {
-    return this.get('firstName').charAt(0).capitalize();
-  }.property('firstName'),
-
-  roleInitials: function() {
-    var permission = this.get("permission.name") || "Donor";
-    return "("+ permission.capitalize().charAt(0) +")";
-  }.property('permission'),
-
-  displayImageUrl: function() {
-    return this.get('image.thumbImageUrl') || "assets/images/default_user_image.jpg";
-  }.property('image'),
-
-  hasImage: function(key, value) {
-    if(arguments.length > 1) {
-      return value;
-    } else {
-      return this.get('image.thumbImageUrl');
-    }
-  }.property('image'),
-
-  fullName: function() {
-    return (this.get('firstName') + " " + this.get('lastName'));
-  }.property('firstName', 'lastName'),
+  image:          belongsTo('image', { async: false }),
+  permission:     belongsTo('permission', { async: false }),
+  reviewedOffers: hasMany('offers', { inverse: 'reviewedBy', async: false }),
+  donations:      hasMany('offers', { inverse: 'createdBy', async: false }),
 
   i18n: Ember.inject.service(),
 
-  onlineStatus: function(){
+  nameInitial: Ember.computed('firstName', function(){
+    return this.get('firstName').charAt(0).capitalize();
+  }),
+
+  roleInitials: Ember.computed('permission', function(){
+    var permission = this.get("permission.name") || "Donor";
+    return "("+ permission.capitalize().charAt(0) +")";
+  }),
+
+  displayImageUrl: Ember.computed('image', function(){
+    return this.get('image.thumbImageUrl') || "assets/images/default_user_image.jpg";
+  }),
+
+  hasImage: Ember.computed("image", {
+    get: function() {
+      return this.get('image.thumbImageUrl');
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  fullName: Ember.computed('firstName', 'lastName', function(){
+    return (this.get('firstName') + " " + this.get('lastName'));
+  }),
+
+  onlineStatus: Ember.computed('lastConnected', 'lastDisconnected', function(){
     if(!this.get('lastConnected') && !this.get('lastDisconnected')) {
       return this.get("i18n").t('not_connected');
     } else if(this.get('lastDisconnected') > this.get('lastConnected')) {
@@ -54,6 +55,6 @@ export default Addressable.extend({
     } else if(this.get('lastDisconnected') < this.get('lastConnected')) {
       return this.get("i18n").t('online');
     }
-  }.property('lastConnected', 'lastDisconnected'),
+  }),
 
 });

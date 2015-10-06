@@ -11,22 +11,22 @@ export default Ember.Controller.extend({
   timePrompt: t("gogovan.book_van.time"),
   i18n: Ember.inject.service(),
 
-  slots: function() {
+  slots: Ember.computed('timeslot.[]', function(){
     return this.store.peekAll('timeslot').sortBy('id');
-  }.property('timeslot.@each'),
+  }),
 
-  available_dates: function(key, value){
-    if (arguments.length > 1) {
-      return value;
-    } else {
+  available_dates: Ember.computed('available_dates.[]', {
+    get: function() {
       new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40})
         .then(data => this.set("available_dates", data));
+    },
+    set: function(key, value) {
       return value;
     }
-  }.property('available_dates.[]'),
+  }),
 
   actions: {
-    bookSchedule: function() {
+    bookSchedule() {
       var controller   = this;
       var loadingView  = this.container.lookup('view:loading').append();
       var selectedSlot = controller.get('selectedId');
@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
         slotName:    slotName };
 
       var deliveryId = this.get('delivery.model.id');
-      var delivery   = this.store.getById('delivery', deliveryId);
+      var delivery   = this.store.peekRecord('delivery', deliveryId);
       var offer      = delivery.get("offer");
       var deliveryType = delivery.get("deliveryType");
 

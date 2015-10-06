@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.View.reopen({
-  didInsertElement: function() {
+// Scroll to bottom of start page to display language-switcher
+export default Ember.Component.extend({
+  didInsertElement() {
     Ember.$().ready(function(){
       if(window.location.pathname === '/'){
         Ember.run.later(this, function() {

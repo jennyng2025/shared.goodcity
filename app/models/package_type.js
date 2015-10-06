@@ -8,6 +8,6 @@ export default DS.Model.extend({
   code:           attr('string'),
   isItemTypeNode: attr('boolean', {defaultValue: false}),
 
-  items:          hasMany('item'),
-  packages:       hasMany('package'),
+  items:          hasMany('item', { async: false }),
+  packages:       hasMany('package', { async: false }),
 });

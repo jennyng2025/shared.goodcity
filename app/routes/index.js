@@ -1,4 +1,3 @@
 import SessionRoute from './session';
 
-export default SessionRoute.extend({
-});
+export default SessionRoute.extend();

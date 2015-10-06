@@ -3,13 +3,22 @@ import Ember from 'ember';
 export default Ember.TextField.extend({
   tagName: "input",
   type: "tel",
-  attributeBindings: [ "name", "type", "value", "maxlength", "id" ],
+  attributeBindings: [ "name", "type", "value", "maxlength", "id", "autoFocus" , "placeholder", "required", "pattern"],
 
-  currentKey: function(key, value){
-    return (arguments.length > 1) ? value : 0;
-  }.property(),
+  didInsertElement() {
+    if(this.attrs.autoFocus) { this.$().focus(); }
+  },
 
-  isAllowed: function(){
+  currentKey: Ember.computed({
+    get: function() {
+      return 0;
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
+  isAllowed: Ember.computed('currentKey', function(){
     var key = this.get('currentKey');
     var allowed = (key === 13 ||
       key === 8 ||
@@ -18,13 +27,14 @@ export default Ember.TextField.extend({
       key === 39 ||
       (key >= 35 && key <= 37));
     return allowed;
-  }.property('currentKey'),
+  }),
 
   keyUp: function(){
-    var value = this.value;
+    var value = this.attrs.value;
     if(value && value.search(/^\d{8}$/) !== 0){
       this.set('value', value.replace(/\D/g,''));
     }
+    return true;
   },
 
   keyDown: function(e) {
@@ -47,6 +57,6 @@ export default Ember.TextField.extend({
 
   keyPress: function() {
     var inputValue = this.value || "";
-    return this.get('isAllowed') ? true : (inputValue.length < this.maxlength);
+    return this.get('isAllowed') ? true : (inputValue.length < this.attrs.maxlength);
   }
 });
