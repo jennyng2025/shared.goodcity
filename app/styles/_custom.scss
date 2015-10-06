@@ -392,7 +392,7 @@ a.disabled{
   }
 }
 
-.reveal-modal#errorModal, #confirmModal, #customConfirmModal {
+.reveal-modal#errorModal, #confirmModal, #customConfirmModal, #confirmReceivingModal {
   background-color: $light-grey;
   color: black;
   height: initial;
