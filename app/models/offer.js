@@ -22,6 +22,7 @@ export default DS.Model.extend({
   receivedAt:     attr('date'),
   reviewCompletedAt: attr('date'),
   deliveredBy:    attr('string'),
+  startReceivingAt: attr('date'),
 
   gogovanTransport:    belongsTo('gogovan_transport', { async: false }),
   crossroadsTransport: belongsTo('crossroads_transport', { async: false }),
@@ -36,6 +37,7 @@ export default DS.Model.extend({
   createdBy:      belongsTo('user', { async: false }),
   reviewedBy:     belongsTo('user', { async: false }),
   closedBy:       belongsTo('user', { async: false }),
+  receivedBy:     belongsTo('user', { async: false }),
 
   // User details
   userName:       attr('string'),
@@ -67,20 +69,13 @@ export default DS.Model.extend({
   isReviewed: Ember.computed.equal("state", "reviewed"),
   isClosed: Ember.computed.equal("state", "closed"),
   isReceived: Ember.computed.equal("state", "received"),
+  isReceiving: Ember.computed.equal("state", "receiving"),
   isCancelled: Ember.computed.equal("state", "cancelled"),
   preventNewItem: Ember.computed.alias("isFinished"),
 
-  activeItems: Ember.computed('items.@each.state', function(){
-    return this.get('items').rejectBy("state", "draft");
-  }),
-
-  isReviewing: Ember.computed('isUnderReview', 'isReviewed', function(){
-    return this.get('isUnderReview') || this.get('isReviewed');
-  }),
-
-  adminCurrentOffer: Ember.computed('isReviewing', 'isScheduled', function(){
-    return this.get("isReviewing") || this.get("isScheduled");
-  }),
+  hasReceived: Ember.computed.or('isReceived', 'isReceiving'),
+  isReviewing: Ember.computed.or('isUnderReview', 'isReviewed'),
+  adminCurrentOffer: Ember.computed.or('isReviewing', 'isScheduled'),
 
   needReview: Ember.computed('isUnderReview', 'isSubmitted', 'isClosed', function(){
     return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
@@ -88,6 +83,10 @@ export default DS.Model.extend({
 
   isFinished: Ember.computed('isClosed', 'isReceived', 'isCancelled', function(){
     return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled');
+  }),
+
+  activeItems: Ember.computed('items.@each.state', function(){
+    return this.get('items').rejectBy("state", "draft");
   }),
 
   nonEmptyOffer: Ember.computed('items.[]', function(){
@@ -128,6 +127,7 @@ export default DS.Model.extend({
       case 'scheduled' : return this.scheduledStatus();
       case 'closed' : return this.locale('offers.index.closed');
       case 'received' : return this.locale('offers.index.received');
+      case 'receiving' : return this.locale('offers.index.receiving');
     }
     return status;
   }),
@@ -233,7 +233,7 @@ export default DS.Model.extend({
     else if(this.get("isReviewed")){return "is-reviewed"}
     else if(this.get("isScheduled")){return "is-scheduled"}
     else if(this.get("isClosed")){return "is-closed"}
-    else if(this.get("isReceived")){return "is-received"}
+    else if(this.get("isReceived") || this.get("isReceiving")){return "is-received"}
   }),
 
   showDeliveryDetails: Ember.computed('state', function(){
