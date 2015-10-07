@@ -223,8 +223,8 @@ export default DS.Model.extend({
     return value;
   }),
 
-  showOfferIcons:  Ember.computed('itemCount', 'isClosed', 'isReceived', function(){
-    return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('isReceived'));
+  showOfferIcons:  Ember.computed('itemCount', 'isClosed', 'hasReceived', function(){
+    return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('hasReceived'));
   }),
 
   statusBarClass: Ember.computed('state', function(){
@@ -233,7 +233,7 @@ export default DS.Model.extend({
     else if(this.get("isReviewed")){return "is-reviewed"}
     else if(this.get("isScheduled")){return "is-scheduled"}
     else if(this.get("isClosed")){return "is-closed"}
-    else if(this.get("isReceived") || this.get("isReceiving")){return "is-received"}
+    else if(this.get("hasReceived")){return "is-received"}
   }),
 
   showDeliveryDetails: Ember.computed('state', function(){
