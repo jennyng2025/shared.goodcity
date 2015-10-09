@@ -93,9 +93,13 @@ export default DS.Model.extend({
     return this.get('itemCount') > 0;
   }),
 
-  allItemsReviewed: Ember.computed('items.@each.state', 'needReview', function(){
+  allItemsReviewed: Ember.computed('items.@each.state', function(){
     var reviewedItems = this.get('activeItems').filterBy('state', 'submitted');
-    return this.get('needReview') && reviewedItems.get('length') === 0;
+    return reviewedItems.get('length') === 0;
+  }),
+
+  readyForSchedule: Ember.computed('needReview', 'allItemsReviewed', function(){
+    return this.get('needReview') && this.get('allItemsReviewed');
   }),
 
   allItemsRejected: Ember.computed('items.@each.state', 'needReview', function(){
