@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
       var otp_auth_key = this.get('session.otpAuthKey');
       var _this = this;
 
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       new AjaxPromise("/auth/verify", "POST", null, {pin: pin, otp_auth_key: otp_auth_key})
         .then(function(data) {
           _this.setProperties({pin:null});
@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
 
     resendPin() {
       var mobile = this.get('mobile');
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
         .then(data => {

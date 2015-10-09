@@ -115,7 +115,7 @@ export default Ember.Controller.extend({
 
   createItem: function(donorCondition, withoutImage, identifier) {
     var _this = this;
-    var loadingView = this.container.lookup('view:loading').append();
+    var loadingView = this.container.lookup('component:loading').append();
     var offer = this.get("offer");
     var item = this.get("store").createRecord("item", {
       offer: offer,
@@ -155,7 +155,7 @@ export default Ember.Controller.extend({
 
   cancelItem: function(controller, item) {
     var offer = item.get('offer');
-    var loadingView = controller.container.lookup('view:loading').append();
+    var loadingView = controller.container.lookup('component:loading').append();
 
     if(offer.get('itemCount') === 1){
       var delivery = offer.get("delivery");
@@ -186,7 +186,7 @@ export default Ember.Controller.extend({
   removeImage: function(controller, item) {
     var _this = this;
     var img = item.get("images.firstObject");
-    var loadingView = controller.container.lookup('view:loading').append();
+    var loadingView = controller.container.lookup('component:loading').append();
     img.deleteRecord();
     img.save()
       .then(i => {
@@ -281,7 +281,7 @@ export default Ember.Controller.extend({
       }
       else {
         this.get("confirm").show(this.get("i18n").t("edit_images.delete_confirm"), () => {
-          var loadingView = this.container.lookup('view:loading').append();
+          var loadingView = this.container.lookup('component:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
           img.save()

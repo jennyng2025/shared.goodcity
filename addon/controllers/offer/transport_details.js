@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
     removeDelivery(delivery) {
       var _this = this;
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
-        var loadingView = _this.container.lookup('view:loading').append();
+        var loadingView = _this.container.lookup('component:loading').append();
         var offer = delivery.get('offer');
 
         delivery.destroyRecord()
