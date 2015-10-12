@@ -4,7 +4,7 @@ export default Ember.Service.extend({
   show: function(message, successCallback) {
 
     // todo use ember approach to implementing this
-    var confirmView = this.container.lookup("view:confirm").append();
+    var confirmView = this.container.lookup("component:confirm-box").append();
     var _this = this;
     Ember.run.schedule("afterRender", function() {
       var value;
