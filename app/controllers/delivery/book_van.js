@@ -48,7 +48,7 @@ export default addressDetails.extend({
   actions: {
     bookVan() {
       var controller = this;
-      var loadingView = controller.container.lookup('view:loading').append();
+      var loadingView = controller.container.lookup('component:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('deliveryController.model.id');
       var delivery = controller.store.peekRecord('delivery', deliveryId);

@@ -21,7 +21,7 @@ export default addressDetails.extend({
       var offer      = delivery.get('offer');
       var schedule   = delivery.get('schedule');
 
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       var handleError = error => { loadingView.destroy(); throw error; };
 
       contactProperties.addressAttributes = addressProperties;
