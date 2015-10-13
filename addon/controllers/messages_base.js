@@ -2,6 +2,7 @@ import Ember from "ember";
 
 export default Ember.Controller.extend({
 
+  body: "",
   offerController: Ember.inject.controller('offer'),
   isPrivate: false,
   inProgress: false,
