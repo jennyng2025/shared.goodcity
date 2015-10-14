@@ -349,12 +349,14 @@ export default Ember.Controller.extend({
     },
 
     uploadProgress(e, data) {
+      e.target.disabled = true; // disable image-selection
       var progress = parseInt(data.loaded / data.total * 100, 10) || 0;
       this.set("addPhotoLabel", progress + "%");
       this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading") + progress + "%");
     },
 
-    uploadComplete() {
+    uploadComplete(e) {
+      e.target.disabled = false; // enable image-selection
       this.set("uploadedFileDate", null);
       Ember.$(".loading-image-indicator.hide_image_loading").hide();
       this.set("addPhotoLabel", this.get("i18n").t("edit_images.add_photo"));
