@@ -9,7 +9,7 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   _loadDataStore: function(){
     return this.preloadData(true).catch(error => {
-      if (error.status === 0 || error.errors[0].status === "0") {
+      if (error.status === 0 || (error.errors && error.errors[0].status === "0")) {
         this.transitionTo("offline");
       } else {
         this.handleError(error);
