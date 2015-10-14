@@ -17,8 +17,8 @@ export default DS.Model.extend({
   isGogovan: Ember.computed.equal("deliveryType", "Gogovan"),
   isDropOff: Ember.computed.equal("deliveryType", "Drop Off"),
   isAlternate: Ember.computed.equal("deliveryType", "Alternate"),
-
   wasDropOff: Ember.computed.notEmpty('schedule.slot'),
+  hasGGVorder: Ember.computed.and('isGogovan','gogovanOrder'),
 
   noDropOff: Ember.computed('deliveryType', function() {
     return this.get('deliveryType') !== 'Drop Off';

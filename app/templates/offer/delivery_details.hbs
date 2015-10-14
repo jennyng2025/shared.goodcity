@@ -3,62 +3,64 @@
 
     <div class="row gogovan_status">
       <div class="small-12 columns">
-        {{#with delivery.gogovanOrder as |ggvOrder|}}
-          {{#if ggvOrder.isPending}}
-            <h3><i class="fa fa-exclamation-triangle"></i> {{t 'delivery_details.waiting'}}</h3>
+        {{#if delivery.hasGGVorder}}
+          {{#with delivery.gogovanOrder as |ggvOrder|}}
+            {{#if ggvOrder.isPending}}
+              <h3><i class="fa fa-exclamation-triangle"></i> {{t 'delivery_details.waiting'}}</h3>
 
-            {{t 'delivery_details.display_driver_details'}}
-            <hr>
-          {{else if ggvOrder.isPickedUp}}
-            <h3>
-              {{#if ggvOrder.isActive}}
-                {{t 'delivery_details.booked'}}
-              {{else}}
-                {{t 'delivery_details.driver_completed'}}
-              {{/if}}
-            </h3>
+              {{t 'delivery_details.display_driver_details'}}
+              <hr>
+            {{else if ggvOrder.isPickedUp}}
+              <h3>
+                {{#if ggvOrder.isActive}}
+                  {{t 'delivery_details.booked'}}
+                {{else}}
+                  {{t 'delivery_details.driver_completed'}}
+                {{/if}}
+              </h3>
 
-            <div class="row">
-              <div class="small-6 columns">
-                {{t 'delivery_details.driver'}}
+              <div class="row">
+                <div class="small-6 columns">
+                  {{t 'delivery_details.driver'}}
+                </div>
+                <div class="small-6 columns right strong">
+                  {{ggvOrder.driverName}}
+                </div>
               </div>
-              <div class="small-6 columns right strong">
-                {{ggvOrder.driverName}}
-              </div>
-            </div>
-            <hr>
+              <hr>
 
-            <div class="row">
-              <div class="small-6 columns">
-                {{t 'delivery_details.driver_contact'}}
+              <div class="row">
+                <div class="small-6 columns">
+                  {{t 'delivery_details.driver_contact'}}
+                </div>
+                <div class="small-6 columns right strong">
+                  {{phone-number number=ggvOrder.driverMobile}}
+                </div>
               </div>
-              <div class="small-6 columns right strong">
-                {{phone-number number=ggvOrder.driverMobile}}
-              </div>
-            </div>
-            <hr>
+              <hr>
 
-            <div class="row">
-              <div class="small-6 columns">
-                {{t 'delivery_details.vehicle_reg'}}
+              <div class="row">
+                <div class="small-6 columns">
+                  {{t 'delivery_details.vehicle_reg'}}
+                </div>
+                <div class="small-6 columns right strong">
+                  {{ggvOrder.driverLicense}}
+                </div>
               </div>
-              <div class="small-6 columns right strong">
-                {{ggvOrder.driverLicense}}
-              </div>
-            </div>
-            <hr>
+              <hr>
 
-            <div class="row">
-              <div class="small-6 columns">
-                {{t 'delivery_details.fee'}}
+              <div class="row">
+                <div class="small-6 columns">
+                  {{t 'delivery_details.fee'}}
+                </div>
+                <div class="small-6 columns right strong">
+                  ${{ggvOrder.price}}
+                </div>
               </div>
-              <div class="small-6 columns right strong">
-                ${{ggvOrder.price}}
-              </div>
-            </div>
-            <hr>
-          {{/if}}
-        {{/with}}
+              <hr>
+            {{/if}}
+          {{/with}}
+        {{/if}}
       </div>
     </div>
 
@@ -76,8 +78,9 @@
          {{image-full-preview items=model.approvedItems}}
       </div>
     </div>
+
     {{#if session.isAdminApp}}
-      {{#if delivery.gogovanOrder}}
+      {{#if delivery.hasGGVorder}}
         <hr>
         <div class="row booking-id">
           <div class="small-6 columns">
@@ -90,6 +93,7 @@
         </div>
       {{/if}}
     {{/if}}
+
 
     <hr>
     <div class="row">
