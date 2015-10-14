@@ -118,7 +118,11 @@
         {{t 'delivery_details.phone'}}
       </div>
       <div class="small-6 columns right strong">
-        {{phone-number number=userMobile}}
+        {{#if isDonorApp}}
+          {{userMobile}}
+        {{else}}
+          {{phone-number number=userMobile}}
+        {{/if}}
       </div>
     </div>
 

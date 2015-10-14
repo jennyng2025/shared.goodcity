@@ -6,10 +6,11 @@ export default Ember.Controller.extend({
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  isDonorApp: Ember.computed.alias("session.isDonorApp"),
 
   user: Ember.computed(function(){
-    var userId = this.session.get("currentUser.id");
-    return this.store.peekRecord('user_profile', userId);
+    var userId = this.get("model.createdBy.id") || this.session.get("currentUser.id");
+    return this.store.peekRecord('user', userId);
   }).volatile(),
 
   userName: Ember.computed('contact.name', 'user.fullName', function(){
