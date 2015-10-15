@@ -34,7 +34,9 @@ export default {
       if (descriptor.options.async) {
         Ember.run.next(() => record.get(name).then(r => unload(r)));
       } else {
-        unload(record.get(name));
+        try {
+          unload(record.get(name));
+        } catch(e) {}
       }
     });
 
