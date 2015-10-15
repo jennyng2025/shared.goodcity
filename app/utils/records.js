@@ -5,7 +5,7 @@ export default {
   // this function navigates the relationship tree unloading records unless
   // related record is a taxonomy type or user
   unloadRecordTree: function(record) {
-    var taxonomyTypes = ["territory", "package-type","donor-condition","rejection-reason","permission", "timeslot", "gogovan-transport", "crossroads-transport", "version", "user"]
+    var taxonomyTypes = ["territory", "district", "package-type","donor-condition","rejection-reason","permission", "timeslot", "gogovan-transport", "crossroads-transport", "version", "user"]
 
     // TO_DO FIX ISSUE WITH DELETION
     // var taxonomyTypes = config.APP.PRELOAD_TYPES
