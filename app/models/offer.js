@@ -142,7 +142,7 @@ export default DS.Model.extend({
     return this.get("i18n").t(text);
   },
 
-  statusText: Ember.computed('status', function(){
+  statusText: Ember.computed('status', 'itemCount', function(){
     return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
   }),
 
