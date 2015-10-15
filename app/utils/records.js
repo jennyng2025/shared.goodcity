@@ -5,10 +5,13 @@ export default {
   // this function navigates the relationship tree unloading records unless
   // related record is a taxonomy type or user
   unloadRecordTree: function(record) {
-    var taxonomyTypes = config.APP.PRELOAD_TYPES
-      .concat(config.APP.PRELOAD_AUTHORIZED_TYPES)
-      .concat("user")
-      .map(t => t.replace(/_/, '-'));
+    var taxonomyTypes = ["territory", "package-type","donor-condition","rejection-reason","permission", "timeslot", "gogovan-transport", "crossroads-transport", "version", "user"]
+
+    // TO_DO FIX ISSUE WITH DELETION
+    // var taxonomyTypes = config.APP.PRELOAD_TYPES
+    //   .concat(config.APP.PRELOAD_AUTHORIZED_TYPES)
+    //   .concat("user")
+    //   .map(t => t.replace(/_/, '-'));
 
     if (!record || record.unloading || taxonomyTypes.indexOf(record.constructor.modelName) !== -1) {
       return;
