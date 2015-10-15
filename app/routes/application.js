@@ -98,8 +98,9 @@ export default Ember.Route.extend(preloadDataMixin, {
     // so in this scenario redirect to home for 404
     error(reason) {
       try {
-        if ([403, 404].indexOf(reason.status) >= 0) {
-          this.get("alert").show(this.get("i18n").t(reason.status+"_error"), () => this.transitionTo("/"));
+        var errorStatus = parseInt(reason.status || reason.errors && reason.errors[0].status)
+        if ([403, 404].indexOf(errorStatus) >= 0) {
+          this.get("alert").show(this.get("i18n").t(errorStatus+"_error"), () => this.transitionTo("/"));
         } else {
           this.handleError(reason);
         }
