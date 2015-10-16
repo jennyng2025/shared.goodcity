@@ -227,8 +227,12 @@ export default DS.Model.extend({
     return value;
   }),
 
-  showOfferIcons:  Ember.computed('itemCount', 'isClosed', 'hasReceived', function(){
-    return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('hasReceived'));
+  hasCompleteGGVOrder: Ember.computed('delivery.gogovanOrder.status', function(){
+    return (this.get("delivery.gogovanOrder.status") || "") === "completed";
+  }),
+
+  showOfferIcons: Ember.computed('hasCompleteGGVOrder','itemCount', 'isClosed', 'hasReceived', function(){
+    return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('hasReceived')) && !this.get("hasCompleteGGVOrder");
   }),
 
   statusBarClass: Ember.computed('state', function(){
