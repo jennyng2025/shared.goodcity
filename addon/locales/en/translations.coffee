@@ -304,4 +304,13 @@ I18nTranslationsEn =
 
   "offer":
     "disable": "Disable"
+
+  # Components
+  "upload-images":
+    "angles" : "Got all the angles of this item?"
+    "favourite" : "Favourite"
+    "add_another" : "Add another image"
+  "upload-image":
+    "upload_error" : "There is an error with your image upload. Please try again after some time."
+
 `export default I18nTranslationsEn`
