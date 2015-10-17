@@ -88,12 +88,13 @@
           </div>
           <div class="small-6 columns right strong">
             {{delivery.gogovanOrder.bookingId}}
-            (<a target="_blank" href={{ggvDriverUrl}}>{{t "delivery_details.driver_screen"}}</a>)
+            ({{#external-link linkUrl=ggvDriverUrl}}
+              {{t "delivery_details.driver_screen"}}
+            {{/external-link}})
           </div>
         </div>
       {{/if}}
     {{/if}}
-
 
     <hr>
     <div class="row">

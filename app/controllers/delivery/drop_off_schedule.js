@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
   datePrompt: t("gogovan.book_van.date"),
   timePrompt: t("gogovan.book_van.time"),
   i18n: Ember.inject.service(),
+  crossroadsMapLocation: "https://www.google.com/maps/place/22%C2%B022'30.6%22N+113%C2%B059'33.7%22E/@22.375181,113.992688,18z",
 
   slots: Ember.computed('timeslot.[]', function(){
     return this.store.peekAll('timeslot').sortBy('id');
