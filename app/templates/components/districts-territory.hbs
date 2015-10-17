@@ -16,15 +16,15 @@
 <div class="row">
   <div class="small-12 columns ui">
     <label>
-      {{view "select"
+
+      {{select-list
         content=districtsByTerritory
-        optionLabelPath='content.name'
-        optionValuePath='content.id'
-        selection=currentSelected
-        value=''
+        on-change=(action (mut selectedDistrict))
+        selectedValue=currentSelected
+        value=currentSelected
         prompt=selectDistrictLabel
-        optionClassPath='dropdowncls'
-        required='true'}}
+        required='true' }}
+
     </label>
   </div>
 </div>

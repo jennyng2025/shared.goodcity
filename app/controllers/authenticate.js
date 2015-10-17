@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
 
   alert: Ember.inject.service(),
   attemptedTransition: null,
+  pin: "",
 
   mobile: Ember.computed('mobilePhone', function(){
     return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
