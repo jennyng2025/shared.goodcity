@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   initActionSheet: function(onSuccess) {
     var _this = this;
     return window.plugins.actionsheet.show({
-      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string]
+      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string, this.locale("edit_images.skip").string]
     }, function(buttonIndex) {
       if (buttonIndex === 1) {
         navigator.camera.getPicture(onSuccess, null, {
@@ -45,6 +45,9 @@ export default Ember.Controller.extend({
           destinationType: navigator.camera.DestinationType.DATA_URL,
           sourceType: navigator.camera.PictureSourceType.CAMERA
         });
+      }
+      if (buttonIndex === 3) {
+        window.plugins.actionsheet.hide();
       }
     });
   },
