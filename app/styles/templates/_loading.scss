@@ -1,5 +1,5 @@
 /* can't use 'loading' since link-to uses it http://emberjs.com/api/classes/Ember.LinkView.html#property_loadingClass */
-.loading-indicator, .loading-image-indicator {
+.loading-indicator, .loading-image-indicator, .joyride-view-background {
   z-index: 100;
   position:fixed;
   width:100%;
