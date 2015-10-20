@@ -30,8 +30,10 @@ export default Ember.Component.extend({
       imageMaxWidth: 800,
       disableImageResize: false,
 
-      fail: function() {
-        _this.get("alert").show(_this.get("i18n").t('upload-image.upload_error'));
+      fail: function(e, data) {
+        if(data.errorThrown === "timeout") {
+          _this.get("alert").show(_this.get("i18n").t('upload-image.upload_error'));
+        }
       }
     };
 
