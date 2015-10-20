@@ -28,7 +28,10 @@ export default DS.Model.extend({
   isAccepted: Ember.computed.equal("state", "accepted"),
   isRejected: Ember.computed.equal("state", "rejected"),
   isDrafted:  Ember.computed.equal("state", "draft"),
-  canUpdated: Ember.computed.not("hasReceivedPackages"),
+
+  canUpdated: Ember.computed("hasReceivedPackages", "offer.state", function(){
+    return !(this.get("hasReceivedPackages") || this.get("offer.isFinished"));
+  }),
 
   isDraft: Ember.computed('offer.state', function(){
     return this.get('offer.state') === 'draft';
