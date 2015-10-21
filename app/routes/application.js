@@ -105,6 +105,13 @@ export default Ember.Route.extend(preloadDataMixin, {
           this.handleError(reason);
         }
       } catch (err) {}
+    },
+
+    willTransition(transition) {
+      Ember.run.next(function() {
+        // before transitioning close all foundation-dialog box
+        Ember.$(".reveal-modal").foundation("reveal", "close");
+      });
     }
   }
 });
