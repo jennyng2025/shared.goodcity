@@ -31,7 +31,8 @@ export default Ember.TextField.extend({
 
   keyUp: function(){
     var value = this.attrs.value.value;
-    if(value && value.search(/^\d{8}$/) !== 0){
+    var regexPattern = new RegExp("^".concat(this.attrs.pattern, "$"));
+    if(value && value.toString().search(regexPattern) !== 0){
       this.set('value', value.replace(/\D/g,''));
     }
     return true;
@@ -56,7 +57,7 @@ export default Ember.TextField.extend({
   },
 
   keyPress: function() {
-    var inputValue = this.value || "";
+    var inputValue = (this.value || "").toString();
     return this.get('isAllowed') ? true : (inputValue.length < this.attrs.maxlength);
   }
 });
