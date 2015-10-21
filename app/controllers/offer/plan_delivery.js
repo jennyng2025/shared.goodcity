@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
 
   actions: {
     startDelivery(delivery_type) {
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('offerController.model.id');
       var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");
@@ -61,7 +62,8 @@ export default Ember.Controller.extend({
         .catch(error => {
           delivery.unloadRecord();
           throw error;
-        });
+        })
+        .finally(() => loadingView.destroy());
     }
   }
 });
