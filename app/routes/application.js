@@ -111,6 +111,11 @@ export default Ember.Route.extend(preloadDataMixin, {
       Ember.run.next(function() {
         // before transitioning close all foundation-dialog box
         Ember.$(".reveal-modal").foundation("reveal", "close");
+
+        // remove joyride-popup if not assigned for page
+        if($(".joyride-list").length === 0) {
+          Ember.$('.joyride-tip-guide').remove();
+        }
       });
     }
   }
