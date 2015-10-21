@@ -7,6 +7,7 @@ export default Ember.Service.extend({
   otpAuthKey: Ember.computed.localStorage(),
   isLoggedIn: Ember.computed.notEmpty("authToken"),
   language: Ember.computed.localStorage(),
+  seenTour: Ember.computed.localStorage(),
 
   currentUser: Ember.computed(function(){
     var store = this.container.lookup('store:main');
