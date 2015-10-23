@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     // https://github.com/blueimp/jQuery-File-Upload/wiki/Options
     var options = {
       dataType: 'json',
-      timeout: 60000,// 1 minute
+      timeout: 120000,// 2 minute
       imageMaxHeight: 800,
       imageMaxWidth: 800,
       disableImageResize: false,
