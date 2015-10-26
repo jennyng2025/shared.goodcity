@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
 
       var message = this.store.createRecord("message", values);
       message.save()
-        .then(() => this.set("body", ""))
+        .then(() => { this.set("body", ""); Ember.$("textarea").trigger('blur'); })
         .catch(error => {
           this.store.unloadRecord(message);
           throw error;
