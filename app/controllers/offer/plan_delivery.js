@@ -37,15 +37,9 @@ export default Ember.Controller.extend({
       var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");
       if(delivery) {
-        delivery.setProperties({
-          offer: offer,
-          deliveryType: delivery_type
-        });
+        delivery.setProperties({ offer: offer });
       } else {
-        delivery = this.store.createRecord('delivery', {
-          offer: offer,
-          deliveryType: delivery_type
-        });
+        delivery = this.store.createRecord('delivery', { offer: offer });
       }
 
       delivery.save()

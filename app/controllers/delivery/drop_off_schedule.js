@@ -41,12 +41,11 @@ export default Ember.Controller.extend({
       var deliveryId = this.get('delivery.model.id');
       var delivery   = this.store.peekRecord('delivery', deliveryId);
       var offer      = delivery.get("offer");
-      var deliveryType = delivery.get("deliveryType");
 
       var properties = {
         delivery: {
           id: deliveryId,
-          deliveryType: deliveryType,
+          deliveryType: 'Drop Off',
           offerId: offer.id,
           scheduleAttributes: scheduleProperties }
       };

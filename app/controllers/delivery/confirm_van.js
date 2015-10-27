@@ -43,7 +43,7 @@ export default Ember.Controller.extend({
       var properties = {
         delivery: {
           id: delivery.id,
-          deliveryType: delivery.get("deliveryType"),
+          deliveryType: 'Gogovan',
           offerId: offer.id,
           scheduleAttributes: scheduleProperties  ,
           contactAttributes: contactProperties,
