@@ -55,6 +55,8 @@
   }
 }
 .contain-to-grid.notification {
+  z-index: 999;
+
   .top-bar {
     margin: 0 0;
     max-width: 100%;
@@ -66,5 +68,11 @@
     .row {
       max-width: 768px;
     }
+  }
+}
+
+.contain-to-grid.message_nav_bar.fixed {
+  &.slide_for_notification {
+    top: 1.5rem;
   }
 }

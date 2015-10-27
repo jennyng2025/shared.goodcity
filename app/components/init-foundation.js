@@ -9,8 +9,10 @@ export default Ember.Component.extend({
       $('.inner-wrap').css('min-height', clientHeight);
     }, 1000);
 
-    Ember.$(document).foundation({
-      offcanvas: { close_on_click: true }
+    Ember.$().ready(function(){
+      Ember.$(document).foundation({
+        offcanvas: { close_on_click: true }
+      });
     });
 
     Ember.$("#lightGallery, .lightGallery").lightGallery({
