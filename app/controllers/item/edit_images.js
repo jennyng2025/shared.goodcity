@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   initActionSheet: function(onSuccess) {
     var _this = this;
     return window.plugins.actionsheet.show({
-      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string, this.locale("edit_images.skip").string]
+      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string, this.locale("edit_images.cancel").string]
     }, function(buttonIndex) {
       if (buttonIndex === 1) {
         navigator.camera.getPicture(onSuccess, null, {
