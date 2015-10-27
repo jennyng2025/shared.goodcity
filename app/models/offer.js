@@ -59,6 +59,14 @@ export default DS.Model.extend({
     return this.store.peekAll("package").filterBy("offerId", parseInt(this.get("id")));
   }),
 
+  receivedCount: Ember.computed("packages.@each.state", function(){
+    return this.get('packages').filterBy("state", "received").length;
+  }),
+
+  missingCount: Ember.computed("packages.@each.state", function(){
+    return this.get('packages').filterBy("state", "missing").length;
+  }),
+
   approvedItems: Ember.computed.filterBy("items", "state", "accepted"),
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
   submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
