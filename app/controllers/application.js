@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.get('subscriptions').send('unwire');
-      this.store.init();
+      this.store.unloadAll();
       var _this = this;
       config.APP.PRELOAD_TYPES.forEach(function(type) {
         _this.store.findAll(type);
