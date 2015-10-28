@@ -34,9 +34,7 @@ export default {
       if (descriptor.options.async) {
         Ember.run.next(() => record.get(name).then(r => unload(r)));
       } else {
-        try {
-          unload(record.get(name));
-        } catch(e) {}
+        unload(record.get(name));
       }
     });
 
@@ -45,7 +43,7 @@ export default {
 
   isAsyncRelationshipLoaded: function(record, relationshipName) {
     // todo replace use of private api "record._relationships" https://github.com/emberjs/data/issues/2431
-    var relatedRecord = record._relationships[relationshipName].inverseRecord;
+    var relatedRecord = record.relationshipFor(relationshipName).inverseRecord;
 
     // this is the workaround I read in github issue
     if (!relatedRecord) {
