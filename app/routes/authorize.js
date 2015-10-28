@@ -6,6 +6,7 @@ export default Ember.Route.extend({
 
   beforeModel(transition) {
     if (!this.session.get('isLoggedIn')) {
+      transition.abort();
       this.get('alert').show(this.get("i18n").t('must_login'), () => {
         var loginController = this.controllerFor('login');
         loginController.set('attemptedTransition', transition);
