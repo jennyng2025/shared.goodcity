@@ -15,7 +15,7 @@ export default DS.Model.extend({
   createdAt:            attr('date'),
   updatedAt:            attr('date'),
   packages:             hasMany('package', { async: false }),
-  messages:             hasMany('message', { async: false }),
+  messages:             hasMany('message', { async: true }),
   images:               hasMany('image', { async: false }),
   offer:                belongsTo('offer', { async: false }),
   packageType:          belongsTo('package_type', { async: false }),
