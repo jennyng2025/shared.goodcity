@@ -1,6 +1,6 @@
 <nav class="tab-bar">
   <section class="left-small">
-    {{#link-to 'delivery.book_timeslot' classNames="back"}}{{t "back"}}{{/link-to}}
+    {{link-to (t "back") 'delivery.book_timeslot' classNames="back"}}
   </section>
 
   <section class="middle tab-bar-section">
@@ -21,7 +21,7 @@
             <label>{{t "contact.name"}}</label>
           </div>
           <div class="small-9 columns">
-            {{view 'full-name-input' id='userName' user=user required='true' pattern="^[\S ]*[\S][\S ]*$" }}
+            {{full-name-input id='userName' user=user required='true' pattern="^[\S ]*[\S][\S ]*$" }}
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           <div class="small-9 columns">
             <div class='input_with_prefix'>
               <div class='mobile-prefix'>+852</div>
-              {{view 'numeric-input' value=user.mobile name="mobile" id="mobile" maxlength="8" required='true' pattern=".{8,}" }}
+              {{numeric-input value=user.mobile name="mobile" id="mobile" maxlength="8" required='true' pattern=".{8,}" }}
             </div>
           </div>
         </div>

@@ -1,15 +1,9 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'go-to-top-button',
+export default Ember.Component.extend({
 
-  didInsertElement: function () {
+  didInsertElement() {
     Ember.$().ready(function(){
-      backToTopLink();
-    });
-
-    // Back-to-top Link
-    function backToTopLink(){
       var offset = 300;
       var duration = 300;
 
@@ -25,6 +19,6 @@ export default Ember.View.extend({
         Ember.$('html, body').animate({scrollTop: 0}, duration);
         return false;
       });
-    }
+    });
   },
 });

@@ -6,30 +6,31 @@ export default Ember.Controller.extend({
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
   confirm: Ember.inject.service(),
   i18n: Ember.inject.service(),
+  isDonorApp: Ember.computed.alias("session.isDonorApp"),
 
-  user: function(){
-    var userId = this.session.get("currentUser.id");
-    return this.store.getById('user_profile', userId);
-  }.property().volatile(),
+  user: Ember.computed(function(){
+    var userId = this.get("model.createdBy.id") || this.session.get("currentUser.id");
+    return this.store.peekRecord('user', userId);
+  }).volatile(),
 
-  userName: function(){
+  userName: Ember.computed('contact.name', 'user.fullName', function(){
     return this.get('contact.name') || this.get("user.fullName");
-  }.property('contact.name', 'user.fullName'),
+  }),
 
-  userMobile: function(){
+  userMobile: Ember.computed('contact.mobile', 'user.mobile', function(){
     return this.get('contact.mobile') || this.get("user.mobile");
-  }.property('contact.mobile', 'user.mobile'),
+  }),
 
-  district: function(){
+  district: Ember.computed('contact.address.district.name', 'user.address.district.name', function(){
     return this.get('contact.address.district.name') || this.get("user.address.district.name");
-  }.property('contact.address.district.name', 'user.address.district.name'),
+  }),
 
   actions: {
-    handleBrokenImage: function() {
+    handleBrokenImage() {
       this.get("model.reviewedBy").set("hasImage", null);
     },
 
-    cancelDelivery: function(){
+    cancelDelivery() {
       if(this.get('hasActiveGGVOrder')) {
         // this.set('cancelBooking', true);
         this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
@@ -39,7 +40,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    modifyBooking: function(){
+    modifyBooking() {
       if(this.get('hasActiveGGVOrder')) {
         this.transitionToRoute('delivery.cancel_booking', this.get('delivery'))
           .then(newRoute => newRoute.controller.set('isCancel', false));
@@ -49,10 +50,10 @@ export default Ember.Controller.extend({
       }
     },
 
-    removeDelivery: function(delivery){
+    removeDelivery(delivery) {
       var _this = this;
       this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
-        var loadingView = _this.container.lookup('view:loading').append();
+        var loadingView = _this.container.lookup('component:loading').append();
         var offer = delivery.get('offer');
 
         delivery.destroyRecord()

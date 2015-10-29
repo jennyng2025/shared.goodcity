@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   initActionSheet: function(onSuccess) {
     var _this = this;
     return window.plugins.actionsheet.show({
-      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string]
+      buttonLabels: [this.locale("edit_images.upload").string, this.locale("edit_images.camera").string, this.locale("edit_images.cancel").string]
     }, function(buttonIndex) {
       if (buttonIndex === 1) {
         navigator.camera.getPicture(onSuccess, null, {
@@ -46,18 +46,21 @@ export default Ember.Controller.extend({
           sourceType: navigator.camera.PictureSourceType.CAMERA
         });
       }
+      if (buttonIndex === 3) {
+        window.plugins.actionsheet.hide();
+      }
     });
   },
 
-  package: function() {
-    return this.get("store").getById("package", this.get("packageId"));
-  }.property("packageId"),
+  package: Ember.computed('packageId', function(){
+    return this.get("store").peekRecord("package", this.get("packageId"));
+  }),
 
-  previewMatchesFavourite: function() {
+  previewMatchesFavourite: Ember.computed("previewImage", "favouriteImage", function(){
     return this.get("previewImage") === this.get("favouriteImage");
-  }.property("previewImage", "favouriteImage"),
+  }),
 
-  images: function() {
+  images: Ember.computed("item.images.[]", function(){
     //The reason for sorting is because by default it's ordered by favourite
     //then id order. If another image is made favourite then deleted the first image
     //by id order is made favourite which can be second image in list which seems random.
@@ -70,44 +73,44 @@ export default Ember.Controller.extend({
       if (b === 0) { return -1; }
       return a - b;
     });
-  }.property("item.images.[]"),
+  }),
 
-  favouriteImage: function() {
+  favouriteImage: Ember.computed("item.images.@each.favourite", "package.image", function(){
     return this.get("package") ?
       this.get("package.image") :
       this.get("images").filterBy("favourite").get("firstObject");
-  }.property("item.images.@each.favourite", "package.image"),
+  }),
 
-  initPreviewImage: function() {
+  initPreviewImage: Ember.on('init', Ember.observer("package", "item", "item.images.[]", function () {
     var image = this.get("package.image") || this.get("item.displayImage");
     if (image) {
       this.send("setPreview", image);
     }
-  }.observes("package", "item", "item.images.@each").on("init"),
+  })),
 
   //css related
-  previewImageBgCss: function() {
+  previewImageBgCss: Ember.computed("previewImage", "isExpanded", function(){
     var css = this.get("instructionBoxCss");
     if (!this.get("previewImage")) {
       return css;
     }
     return css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
       "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";";
-  }.property("previewImage", "isExpanded"),
+  }),
 
-  instructionBoxCss: function() {
+  instructionBoxCss: Ember.computed("previewImage", "isExpanded", function(){
     var height = Ember.$(window).height() * 0.6;
     return "min-height:" + height + "px;";
-  }.property("previewImage", "isExpanded"),
+  }),
 
-  thumbImageCss: function() {
+  thumbImageCss: Ember.computed(function(){
     var imgWidth = Math.min(120, Ember.$(window).width() / 4 - 14);
     return "width:" + imgWidth + "px; height:" + imgWidth + "px;";
-  }.property(),
+  }),
 
-  noImageLink: function() {
+  noImageLink: Ember.computed("noImage", function(){
     return this.get("noImage") && this.get("session.isAdminApp");
-  }.property("noImage"),
+  }),
 
   locale: function(str){
     return this.get("i18n").t(str);
@@ -115,7 +118,7 @@ export default Ember.Controller.extend({
 
   createItem: function(donorCondition, withoutImage, identifier) {
     var _this = this;
-    var loadingView = this.container.lookup('view:loading').append();
+    var loadingView = this.container.lookup('component:loading').append();
     var offer = this.get("offer");
     var item = this.get("store").createRecord("item", {
       offer: offer,
@@ -155,7 +158,7 @@ export default Ember.Controller.extend({
 
   cancelItem: function(controller, item) {
     var offer = item.get('offer');
-    var loadingView = controller.container.lookup('view:loading').append();
+    var loadingView = controller.container.lookup('component:loading').append();
 
     if(offer.get('itemCount') === 1){
       var delivery = offer.get("delivery");
@@ -186,7 +189,7 @@ export default Ember.Controller.extend({
   removeImage: function(controller, item) {
     var _this = this;
     var img = item.get("images.firstObject");
-    var loadingView = controller.container.lookup('view:loading').append();
+    var loadingView = controller.container.lookup('component:loading').append();
     img.deleteRecord();
     img.save()
       .then(i => {
@@ -210,7 +213,7 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    next: function() {
+    next() {
       if(this.get("session.isAdminApp")) {
         this.transitionToRoute("review_item.accept", this.get('offer'), this.get('model'));
       } else {
@@ -219,18 +222,18 @@ export default Ember.Controller.extend({
     },
 
     //only used for admin
-    nextWithoutImage: function() {
+    nextWithoutImage() {
       var item = this.get("item")
       if(item){
         this.transitionToRoute("review_item.accept", this.get('offer'), item);
       }
       else{
-        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").peekAll("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, true);
       }
     },
 
-    back: function() {
+    back() {
       if(this.get("session.isAdminApp")) {
         this.transitionToRoute("review_offer.items");
       } else {
@@ -242,7 +245,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    newItem: function(item) {
+    newItem(item) {
       if(this.get("session.isAdminApp")){
         this.transitionToRoute("item.edit_images", item.get("id"));
       } else {
@@ -250,13 +253,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    setPreview: function(image) {
+    setPreview(image) {
       this.get("item.images").setEach("selected", false);
       image.set("selected", true);
       this.set("previewImage", image);
     },
 
-    setFavourite: function() {
+    setFavourite() {
       if (this.get("package")) {
         var pkg = this.get("package");
         pkg.set("imageId", this.get("previewImage.id"));
@@ -272,7 +275,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    deleteImage: function() {
+    deleteImage() {
       if (this.get("item.images.length") === 1)
       {
         this.get("session.isAdminApp") ? this.confirmRemoveLastImage()
@@ -281,7 +284,7 @@ export default Ember.Controller.extend({
       }
       else {
         this.get("confirm").show(this.get("i18n").t("edit_images.delete_confirm"), () => {
-          var loadingView = this.container.lookup('view:loading').append();
+          var loadingView = this.container.lookup('component:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
           img.save()
@@ -298,13 +301,13 @@ export default Ember.Controller.extend({
       }
     },
 
-    expandImage: function() {
+    expandImage() {
       var value = this.get("isExpanded");
       this.set("isExpanded", !value);
     },
 
     //file upload
-    triggerUpload: function() {
+    triggerUpload() {
 
       // For Cordova application
       if (config.cordova.enabled) {
@@ -335,37 +338,39 @@ export default Ember.Controller.extend({
       }
     },
 
-    uploadReady: function() {
+    uploadReady() {
       this.set("isReady", true);
     },
 
-    uploadStart: function(e, data) {
+    uploadStart(e, data) {
       this.set("uploadedFileDate", data);
       Ember.$(".loading-image-indicator").show();
     },
 
-    cancelUpload: function(){
+    cancelUpload() {
       if(this.get("uploadedFileDate")){ this.get("uploadedFileDate").abort(); }
     },
 
-    uploadProgress: function(e, data) {
+    uploadProgress(e, data) {
+      e.target.disabled = true; // disable image-selection
       var progress = parseInt(data.loaded / data.total * 100, 10) || 0;
       this.set("addPhotoLabel", progress + "%");
       this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading") + progress + "%");
     },
 
-    uploadComplete: function() {
+    uploadComplete(e) {
+      e.target.disabled = false; // enable image-selection
       this.set("uploadedFileDate", null);
       Ember.$(".loading-image-indicator.hide_image_loading").hide();
       this.set("addPhotoLabel", this.get("i18n").t("edit_images.add_photo"));
       this.set("loadingPercentage", this.get("i18n").t("edit_images.image_uploading"));
     },
 
-    uploadSuccess: function(e, data) {
+    uploadSuccess(e, data) {
       var identifier = data.result.version + "/" + data.result.public_id + "." + data.result.format;
       var item = this.get("item");
       if (!item || this.get("item.isOffer")) {
-        var defaultDonorCondition = this.get("store").all("donorCondition").sortBy("id").get("firstObject");
+        var defaultDonorCondition = this.get("store").peekAll("donorCondition").sortBy("id").get("firstObject");
         this.createItem(defaultDonorCondition, false, identifier)
       } else {
         var favourite = item.get("images.length") === 0;

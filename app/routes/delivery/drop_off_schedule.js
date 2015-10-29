@@ -2,7 +2,7 @@ import VerifyOfferStateRoute from './verify_offer_state';
 
 export default VerifyOfferStateRoute.extend({
 
-  setupController: function(controller, model){
+  setupController(controller, model) {
     controller.set('model', model);
 
     if(model.get('schedule') && model.get("wasDropOff")){

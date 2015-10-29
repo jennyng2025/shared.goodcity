@@ -1,6 +1,8 @@
-{{outlet "notifications"}}
-{{outlet "notification_link"}}
-{{outlet}}
+{{#init-foundation}}
+  {{outlet "notifications"}}
+  {{outlet "notification_link"}}
+  {{outlet}}
+{{/init-foundation}}
 
 {{#with subscriptions.status as status}}
   <div id="status" class="{{if status.online 'online'}} {{if status.hidden 'hidden'}}">

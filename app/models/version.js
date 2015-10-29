@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-var attr = DS.attr,
-    belongsTo = DS.belongsTo;
+var attr = DS.attr;
 
 export default DS.Model.extend({
   event:          attr('string'),
@@ -13,13 +12,13 @@ export default DS.Model.extend({
   state:          attr('string'),
   createdAt:      attr('date'),
 
-  createdDate: function() {
+  createdDate: Ember.computed(function(){
     return this.get("createdAt").toDateString();
-  }.property(),
+  }),
 
   i18n: Ember.inject.service(),
 
-  displayMessage: function() {
+  displayMessage: Ember.computed(function(){
     switch (this.get("state")) {
       case 'draft': return this.get("i18n").t("item_log.added", {name: this.get("whodunnitName")});
       case 'submitted' : return this.get("i18n").t("item_log.submitted", {name: this.get("whodunnitName")});
@@ -35,5 +34,5 @@ export default DS.Model.extend({
     }
 
     return this.get("i18n").t("item_log.updated", {name: this.get("whodunnitName")});
-  }.property()
+  })
 });

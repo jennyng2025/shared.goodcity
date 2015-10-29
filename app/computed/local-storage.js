@@ -11,7 +11,11 @@ catch(err) {}
 
 var localStorageProvider = {
   get(key) {
-    return JSON.parse(localStorage[key] || null);
+    try {
+      return JSON.parse(localStorage[key] || null);
+    } catch(e) {
+      return null;
+    }
   },
   set(key, value) {
     if (Ember.isNone(value)) {

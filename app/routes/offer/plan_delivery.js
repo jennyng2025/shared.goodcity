@@ -6,16 +6,20 @@ export default AuthorizeRoute.extend({
     modify: false
   },
 
-  beforeModel: function(params) {
+  beforeModel(params) {
     var offerId = this.modelFor('offer').get('id');
-    var offer = this.store.getById('offer', offerId);
+    var offer = this.store.peekRecord('offer', offerId);
 
-    if (offer.get('isScheduled') && !params.queryParams.modify) {
-      if(this.get('session.isAdminApp')) {
-        this.transitionTo('review_offer.logistics', offer);
-      } else {
-        this.transitionTo('offer.transport_details', offer);
+    if(offer) {
+      if (offer.get('isScheduled') && !params.queryParams.modify) {
+        if(this.get('session.isAdminApp')) {
+          this.transitionTo('review_offer.logistics', offer);
+        } else {
+          this.transitionTo('offer.transport_details', offer);
+        }
       }
+    } else {
+      this.transitionTo("offers");
     }
   }
 });

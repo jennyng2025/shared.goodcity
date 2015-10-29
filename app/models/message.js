@@ -11,22 +11,22 @@ export default DS.Model.extend({
   createdAt:   attr('date'),
   updatedAt:   attr('date'),
   state:       attr('string', {defaultValue: 'read'}),
-  sender:      belongsTo('user'),
-  item:        belongsTo('item'),
-  offer:       belongsTo('offer'),
+  sender:      belongsTo('user', { async: false }),
+  item:        belongsTo('item', { async: false }),
+  offer:       belongsTo('offer', { async: false }),
 
-  myMessage: function() {
+  myMessage: Ember.computed(function(){
     var session = this.container.lookup("service:session");
     return this.get("sender.id") === session.get("currentUser.id");
-  }.property(),
+  }),
 
-  isMessage: function() {
+  isMessage: Ember.computed('this', function(){
     return true;
-  }.property('this'),
+  }),
 
-  createdDate: function() {
+  createdDate: Ember.computed(function(){
     return new Date(this.get("createdAt")).toDateString();
-  }.property(),
+  }),
 
   itemImageUrl: Ember.computed.alias("item.displayImageUrl")
 });

@@ -10,25 +10,26 @@ export default Ember.Controller.extend({
   datePrompt: t("gogovan.book_van.date"),
   timePrompt: t("gogovan.book_van.time"),
   i18n: Ember.inject.service(),
+  crossroadsMapLocation: "https://www.google.com/maps/place/22%C2%B022'30.6%22N+113%C2%B059'33.7%22E/@22.375181,113.992688,18z",
 
-  slots: function() {
+  slots: Ember.computed('timeslot.[]', function(){
     return this.store.peekAll('timeslot').sortBy('id');
-  }.property('timeslot.@each'),
+  }),
 
-  available_dates: function(key, value){
-    if (arguments.length > 1) {
-      return value;
-    } else {
+  available_dates: Ember.computed('available_dates.[]', {
+    get: function() {
       new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 40})
         .then(data => this.set("available_dates", data));
+    },
+    set: function(key, value) {
       return value;
     }
-  }.property('available_dates.[]'),
+  }),
 
   actions: {
-    bookSchedule: function() {
+    bookSchedule() {
       var controller   = this;
-      var loadingView  = this.container.lookup('view:loading').append();
+      var loadingView  = this.container.lookup('component:loading').append();
       var selectedSlot = controller.get('selectedId');
       var slotName     = controller.get('slots').filterBy('id', selectedSlot.get('id')).get('firstObject.name');
 
@@ -38,14 +39,13 @@ export default Ember.Controller.extend({
         slotName:    slotName };
 
       var deliveryId = this.get('delivery.model.id');
-      var delivery   = this.store.getById('delivery', deliveryId);
+      var delivery   = this.store.peekRecord('delivery', deliveryId);
       var offer      = delivery.get("offer");
-      var deliveryType = delivery.get("deliveryType");
 
       var properties = {
         delivery: {
           id: deliveryId,
-          deliveryType: deliveryType,
+          deliveryType: 'Drop Off',
           offerId: offer.id,
           scheduleAttributes: scheduleProperties }
       };

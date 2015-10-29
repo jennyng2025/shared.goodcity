@@ -6,11 +6,11 @@ export default Ember.Component.extend({
   attributeBindings: [ "name", "type", "value", "checked", "labelText", "disabled" ],
   disabled: false,
 
-  click: function() {
+  click() {
     this.set("selection", this.$().val());
   },
 
-  checked: function() {
+  checked: Ember.computed('selection', function(){
 
     // This block added for setting selection of reject item options.
     if(Ember.$.trim(this.labelText).length > '0' && this.get('selection.isController')){
@@ -18,11 +18,11 @@ export default Ember.Component.extend({
     }
 
     return this.get("value") === this.get("selection");
-  }.property('selection'),
+  }),
 
-  onInit: function() {
+  onInit: Ember.on('init', function() {
     if (this.get("value") == this.get("selection")) {
       this.set("checked", true);
     }
-  }.on("init")
+  })
 });

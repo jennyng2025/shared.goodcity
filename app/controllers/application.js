@@ -4,27 +4,29 @@ import config from '../config/environment';
 export default Ember.Controller.extend({
   subscriptions: Ember.inject.controller(),
 
-  initSubscriptions: function() {
+  initSubscriptions: Ember.on('init', function() {
     if (this.session.get("isLoggedIn")) {
       this.send('setSubscriptions');
     }
-  }.on("init"),
+  }),
 
   actions: {
-    logMeOut: function(){
+    logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.get('subscriptions').send('unwire');
-      this.store.init();
+      this.store.unloadAll();
       var _this = this;
       config.APP.PRELOAD_TYPES.forEach(function(type) {
         _this.store.findAll(type);
       });
       this.transitionToRoute('login');
     },
-    logMeIn: function() {
+
+    logMeIn() {
       this.send('setSubscriptions');
     },
-    setSubscriptions: function() {
+
+    setSubscriptions() {
       this.get('subscriptions').send('wire');
     }
   }

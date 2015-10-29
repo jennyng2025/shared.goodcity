@@ -182,6 +182,7 @@ I18nTranslationsZhTw =
   "edit_images":
     "upload": "Choose Image"
     "camera": "Take Photo"
+    "cancel": "Cancel"
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"
     "cant_delete_last_image" : "最少需要一張圖片"
@@ -305,4 +306,13 @@ I18nTranslationsZhTw =
 
   "offer":
     "disable": "關閉"
+
+  # Components
+  "upload-images":
+    "angles" : "圖片包含物資的所有角度嗎？"
+    "favourite" : "我的最愛"
+    "add_another" : "加入另一張圖片"
+  "upload-image":
+    "upload_error" : "圖片上傳時出錯，請稍後再試一次。"
+
 `export default I18nTranslationsZhTw`

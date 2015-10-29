@@ -1,6 +1,5 @@
-import Init from './init';
 import Ember from 'ember';
 
-export default Init.extend({
+export default Ember.View.extend({
   classNames: ['main-view']
 });

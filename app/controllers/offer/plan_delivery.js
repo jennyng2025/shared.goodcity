@@ -2,19 +2,18 @@ import Ember from 'ember';
 import AjaxPromise from '../../utils/ajax-promise';
 
 export default Ember.Controller.extend({
+
   offerController: Ember.inject.controller('offer'),
   logger: Ember.inject.service(),
-
   offerId: Ember.computed.alias('offerController.model.id'),
+  gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
 
-  offer: function(){
-    return this.store.getById('offer', this.get('offerId'));
-  }.property('offerId'),
+  offer: Ember.computed('offerId', function(){
+    return this.store.peekRecord('offer', this.get('offerId'));
+  }),
 
-  gogovanPrice: function(key, value) {
-    if (arguments.length > 1) {
-      return value;
-    } else {
+  gogovanPrice: Ember.computed('offerId', {
+    get: function() {
       var params = {
         districtId: this.get('offer.createdBy.address.district.id'),
         offerId: this.get("offerId")
@@ -25,26 +24,22 @@ export default Ember.Controller.extend({
         .catch(error => this.get("logger").error(error));
 
       return "";
+    },
+    set: function(key, value) {
+      return value;
     }
-  }.property('offerId'),
-
-  gogovanPriceCalculated: Ember.computed.notEmpty("gogovanPrice"),
+  }),
 
   actions: {
-    startDelivery: function(delivery_type) {
+    startDelivery(delivery_type) {
+      var loadingView = this.container.lookup('component:loading').append();
       var offerId = this.get('offerController.model.id');
-      var offer = this.store.getById('offer', offerId);
+      var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");
       if(delivery) {
-        delivery.setProperties({
-          offer: offer,
-          deliveryType: delivery_type
-        });
+        delivery.setProperties({ offer: offer });
       } else {
-        delivery = this.store.createRecord('delivery', {
-          offer: offer,
-          deliveryType: delivery_type
-        });
+        delivery = this.store.createRecord('delivery', { offer: offer });
       }
 
       delivery.save()
@@ -61,7 +56,8 @@ export default Ember.Controller.extend({
         .catch(error => {
           delivery.unloadRecord();
           throw error;
-        });
+        })
+        .finally(() => loadingView.destroy());
     }
   }
 });

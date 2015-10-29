@@ -3,23 +3,24 @@ import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 
 export default Ember.Controller.extend({
+
   alert: Ember.inject.service(),
-
-  mobile: function() {
-    return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
-  }.property('mobilePhone'),
-
   attemptedTransition: null,
+  pin: "",
+
+  mobile: Ember.computed('mobilePhone', function(){
+    return config.APP.HK_COUNTRY_CODE + this.get('mobilePhone');
+  }),
 
   actions: {
 
-    authenticateUser: function(){
+    authenticateUser() {
       Ember.$('.auth_error').hide();
       var pin = this.get('pin');
       var otp_auth_key = this.get('session.otpAuthKey');
       var _this = this;
 
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
       new AjaxPromise("/auth/verify", "POST", null, {pin: pin, otp_auth_key: otp_auth_key})
         .then(function(data) {
           _this.setProperties({pin:null});
@@ -40,9 +41,9 @@ export default Ember.Controller.extend({
         .finally(() => loadingView.destroy());
     },
 
-    resendPin: function() {
+    resendPin() {
       var mobile = this.get('mobile');
-      var loadingView = this.container.lookup('view:loading').append();
+      var loadingView = this.container.lookup('component:loading').append();
 
       new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
         .then(data => {

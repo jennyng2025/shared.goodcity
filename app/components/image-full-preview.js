@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  didInsertElement: function(){
+  didInsertElement(){
     Ember.$().ready(function(){
       Ember.$("#imageGallery").lightGallery({
         thumbnail: false,

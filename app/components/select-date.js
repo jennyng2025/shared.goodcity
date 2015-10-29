@@ -8,7 +8,7 @@ export default Ember.TextField.extend({
   currentMinutes: function(){
     var currentTime = new Date();
     var hours = currentTime.getHours();
-    var minutes = currentTime.getMinutes() > 30 ? 30 : 0;;
+    var minutes = currentTime.getMinutes() > 30 ? 30 : 0;
     var total_mins = hours*60 + minutes;
     return (total_mins > 960) ? 960 : total_mins;
   },
@@ -85,7 +85,9 @@ export default Ember.TextField.extend({
 
           setting = true;
           Ember.run.next(() => {
-            this.set('select', new Date(date), { format: 'ddd mmm d' });
+            if(date) {
+              this.set('select', new Date(date), { format: 'ddd mmm d' });
+            }
             setting = false;
           });
 
@@ -127,7 +129,7 @@ export default Ember.TextField.extend({
       var parent = Ember.$(element).parent();
       var value = Ember.$(element).val();
 
-      if(value === undefined || value.length === 0) {
+      if(!value || value.length === 0) {
         parent.addClass('has-error');
         return false;
       } else {

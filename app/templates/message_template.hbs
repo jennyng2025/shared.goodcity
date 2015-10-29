@@ -12,7 +12,7 @@
                 {{#if message.myMessage}}
                   {{t "messages.owner" }}
                 {{else}}
-                  {{view 'custom-img-tag' src=message.sender.displayImageUrl class="user-avatar"}}
+                  {{custom-img-tag src=message.sender.displayImageUrl class="user-avatar"}}
                   {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
                   {{message.sender.roleInitials}}
                 {{/if}}
@@ -51,7 +51,7 @@
 
           <div class="row ui">
             <div class="small-9 large-10 medium-10 columns">
-              {{#view "variable-height-textarea" value=body name="body"  required="true" disabled=disabled parentDiv="message-section"}}{{/view}}
+              {{variable-height-textarea value=body name="body" required="true" disabled=disabled parentDiv="message-section"}}
             </div>
             <div class="small-3 large-2 medium-2 columns">
               {{#view "online-button" disabledOverride=disabled disabled=inProgress}}{{t "send"}}{{/view}}

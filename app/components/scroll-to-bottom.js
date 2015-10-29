@@ -1,13 +1,37 @@
 import Ember from 'ember';
+export default Ember.Component.extend({
 
-export default Ember.View.reopen({
-  didInsertElement: function() {
+  updateHeaderPosition: function(){
+    var messagesHeader = Ember.$(".contain-to-grid.message_nav_bar");
+
+    if(document.body.scrollTop === 0 || (document.height === Ember.$(window).height()) || (Ember.$("textarea").is(":focus"))) {
+      messagesHeader.removeClass("fixed");
+    } else {
+      messagesHeader.addClass("fixed");
+    }
+  },
+
+  willDestroyElement() {
+    var _this = this;
+    var updateHeader = Ember.run.bind(this, _this.updateHeaderPosition);
+    window.removeEventListener("touchmove", updateHeader);
+    window.removeEventListener("scroll", updateHeader);
+  },
+
+  didInsertElement() {
+    var _this = this;
     this._super();
 
     Ember.$().ready(function(){
-      Ember.$('.sticky_title_bar').on('click', '.back', function(){
+      // Scroll back to page-top on back-click
+      Ember.$('.message_nav_bar').on('click', '.back', function(){
         window.scrollTo(0, 0);
       });
+
+      // Sticky Header when scrolled up
+      var updateHeader = Ember.run.bind(this, _this.updateHeaderPosition);
+      window.addEventListener("touchmove", updateHeader);
+      window.addEventListener("scroll", updateHeader);
     });
 
     Ember.run.scheduleOnce("afterRender", function() {

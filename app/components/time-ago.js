@@ -1,11 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'time-ago',
-  classNames: 'time-ago',
-  timeValue: new Date(),
+export default Ember.Component.extend({
 
-  didInsertElement: function() {
+  didInsertElement() {
 
     if(this.smallPrefix) {
       Ember.$.timeago.settings.strings.suffixAgo = "";
@@ -38,8 +35,8 @@ export default Ember.View.extend({
     return this.get("i18n").t("time_ago." + str).string;
   },
 
-  timeString: function() {
-    var timeValue = this.timeValue || new Date();
+  timeString: Ember.computed(function(){
+    var timeValue = this.attrs.timeValue.value || new Date();
     return new Date(timeValue).toISOString();
-  }.property()
+  })
 });

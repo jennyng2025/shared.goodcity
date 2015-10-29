@@ -181,6 +181,7 @@ I18nTranslationsEn =
   "edit_images":
     "upload": "Choose Image"
     "camera": "Take Photo"
+    "cancel": "Cancel"
     "add_photo" : "Add photo"
     "delete_confirm" : "Are you sure you want to delete this image?"
     "cant_delete_last_image" : "You must have at least one image"
@@ -304,4 +305,13 @@ I18nTranslationsEn =
 
   "offer":
     "disable": "Disable"
+
+  # Components
+  "upload-images":
+    "angles" : "Got all the angles of this item?"
+    "favourite" : "Favourite"
+    "add_another" : "Add another image"
+  "upload-image":
+    "upload_error" : "There is an error with your image upload. Please try again after some time."
+
 `export default I18nTranslationsEn`

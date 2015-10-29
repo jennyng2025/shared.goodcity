@@ -16,16 +16,16 @@ export default addressDetails.extend({
   offer: Ember.computed.alias("delivery.offer"),
   i18n: Ember.inject.service(),
 
-  gogovanOptions: function() {
+  gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
     return allOptions.rejectBy('isDisabled', true).sortBy('id');
-  }.property(),
+  }),
 
-  selectedGogovanOption: function(){
+  selectedGogovanOption: Ember.computed('gogovanOptions', 'offer', function(){
     return this.get("offer.gogovanTransport.id") || this.get('gogovanOptions.firstObject.id');
-  }.property('gogovanOptions', 'offer'),
+  }),
 
-  timeSlots: function(){
+  timeSlots: Ember.computed(function(){
     var options = [];
     var slots = {"600": "10:00", "630": "10:30",
       "660": "11:00",  "690": "11:30",
@@ -39,20 +39,19 @@ export default addressDetails.extend({
       options.push({id: minutes, name: slots[minutes] + " " + period});
     }
     return options;
-
-  }.property(),
+  }),
 
   locale: function(str) {
     return this.get("i18n").t(str);
   },
 
   actions: {
-    bookVan: function(){
+    bookVan() {
       var controller = this;
-      var loadingView = controller.container.lookup('view:loading').append();
+      var loadingView = controller.container.lookup('component:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('deliveryController.model.id');
-      var delivery = controller.store.getById('delivery', deliveryId);
+      var delivery = controller.store.peekRecord('delivery', deliveryId);
       var gogovanOptionId = controller.get('selectedGogovanOption');
 
       selectedDate.setMinutes(selectedDate.getMinutes() + parseInt(controller.get('selectedTime.id')));

@@ -1,0 +1,31 @@
+<div class="input_container">
+
+    {{#if isTextArea}}
+      {{textarea
+        viewName="inputControl"
+        value=value
+        name=name
+        placeholder=placeholder
+        maxlength=maxlength
+        rows=rows
+        required=required
+        }}
+
+    {{else}}
+
+      {{input
+        viewName=inputControl
+        name=name
+        value=value
+        placeholder=placeholder
+        maxlength=maxlength
+        required=required
+        }}
+
+    {{/if}}
+
+  <span class="{{isMaxCharLengthReached}} char-count right">
+    {{message}}
+  </span>
+  {{label}}
+</div>
