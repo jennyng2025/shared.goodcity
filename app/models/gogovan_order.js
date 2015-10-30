@@ -29,10 +29,22 @@ export default DS.Model.extend({
   ggvUuid:       attr('string'),
   delivery:      belongsTo('delivery', { async: false }),
 
+  i18n: Ember.inject.service(),
+
   isPending: Ember.computed.equal("status", "pending"),
   isActive: Ember.computed.equal("status", "active"),
   isCompleted: Ember.computed.equal("status", "completed"),
   isCancelled: Ember.computed.equal("status", "cancelled"),
   isPickedUp: Ember.computed.or("isActive", "isCompleted"),
   nonCompleted: Ember.computed.or("isActive", "isPending"),
+
+  ggvOrderStatus: Ember.computed("isActive", "isCompleted", function(){
+    if(this.get("isActive")) {
+      return this.get("i18n").t("offer.offer_details.is_gogovan_confirm").string;
+    } else if(this.get("isCompleted")) {
+      return this.get("i18n").t("offer.offer_details.driver_completed").string;
+    } else {
+      return this.get("i18n").t("offer.offer_details.is_gogovan_order").string;
+    }
+  }),
 });
