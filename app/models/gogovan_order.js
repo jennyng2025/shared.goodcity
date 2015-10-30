@@ -40,11 +40,11 @@ export default DS.Model.extend({
 
   ggvOrderStatus: Ember.computed("isActive", "isCompleted", function(){
     if(this.get("isActive")) {
-      return this.get("i18n").t("offer.offer_details.is_gogovan_confirm");
+      return this.get("i18n").t("offer.offer_details.is_gogovan_confirm").string;
     } else if(this.get("isCompleted")) {
-      return this.get("i18n").t("offer.offer_details.driver_completed");
+      return this.get("i18n").t("offer.offer_details.driver_completed").string;
     } else {
-      return this.get("i18n").t("offer.offer_details.is_gogovan_order");
+      return this.get("i18n").t("offer.offer_details.is_gogovan_order").string;
     }
   }),
 });
