@@ -70,9 +70,9 @@ export default Ember.Route.extend(preloadDataMixin, {
         if (this.session.get('isLoggedIn')) {
           this.controllerFor("application").send('logMeOut');
         }
-      } else if (status === 404) {
+      } else if ([403, 404].indexOf(status) >= 0) {
         this.get("logger").error(reason);
-        this.get("alert").show(this.get("i18n").t("404_error"));
+        this.get("alert").show(this.get("i18n").t(status+"_error"));
       } else if (status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled

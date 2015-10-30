@@ -295,7 +295,7 @@ export default Ember.Controller.extend({
                 this.send("setFavourite");
               }
             })
-            .catch(error => { this.get("previewImage").rollback(); throw error; })
+            .catch(error => { img.rollback(); throw error; })
             .finally(() => loadingView.destroy());
         });
       }
