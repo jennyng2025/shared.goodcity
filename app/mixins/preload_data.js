@@ -18,6 +18,7 @@ export default Ember.Mixin.create({
           .then(data => {
             this.store.pushPayload(data);
             this.store.push('user', data.user_profile);
+            this.notifyPropertyChange("session.currentUser");
           })
       );
 
