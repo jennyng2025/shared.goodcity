@@ -1,37 +1,41 @@
-<div class="contain-to-grid sticky notification">
-  <nav class="top-bar" data-topbar role="navigation">
-    <div class="row">
-      <a {{action 'view'}} class='notification_box'>
+{{#if session.isLoggedIn}}
+  {{#notification-bar}}
+    <div class="contain-to-grid sticky notification">
+      <nav class="top-bar" data-topbar role="navigation">
+        <div class="row">
+          <a {{action 'view'}} class='notification_box'>
 
-        {{#if (js-x "this.category != 'message'" nextNotification)}}
-          <div class="small-10 large-11 columns">
-            <div class="notification-text ellipsis one-line-ellipsis">
-              {{t "notifications.text" text=nextNotification.message}}
-            </div>
-          </div>
-          <div class="small-2 large-1 columns">
-            {{custom-img-tag src=senderImageUrl class="user-avatar"}}
-          </div>
-        {{else}}
+            {{#if (js-x "this.category != 'message'" nextNotification)}}
+              <div class="small-10 large-11 columns">
+                <div class="notification-text ellipsis one-line-ellipsis">
+                  {{t "notifications.text" text=nextNotification.message}}
+                </div>
+              </div>
+              <div class="small-2 large-1 columns">
+                {{custom-img-tag src=senderImageUrl class="user-avatar"}}
+              </div>
+            {{else}}
 
-          <div class="small-2 large-1 columns image-item">
-            {{#if controller.showItemImage}}
-              <img src={{itemImageUrl}} alt="">
+              <div class="small-2 large-1 columns image-item">
+                {{#if controller.showItemImage}}
+                  <img src={{itemImageUrl}} alt="">
+                {{/if}}
+              </div>
+              <div class="small-8 large-10 columns msg-with-arrow">
+                <div class="notification-text ellipsis one-line-ellipsis">
+                  {{t "notifications.text" text=nextNotification.message}}
+                </div>
+                <div class="arrow-icon">
+                  <i class="fa fa-arrow-circle-right"></i>
+                </div>
+              </div>
+              <div class="small-2 large-1 columns">
+                {{custom-img-tag src=senderImageUrl class="user-avatar"}}
+              </div>
             {{/if}}
-          </div>
-          <div class="small-8 large-10 columns msg-with-arrow">
-            <div class="notification-text ellipsis one-line-ellipsis">
-              {{t "notifications.text" text=nextNotification.message}}
-            </div>
-            <div class="arrow-icon">
-              <i class="fa fa-arrow-circle-right"></i>
-            </div>
-          </div>
-          <div class="small-2 large-1 columns">
-            {{custom-img-tag src=senderImageUrl class="user-avatar"}}
-          </div>
-        {{/if}}
-      </a>
+          </a>
+        </div>
+      </nav>
     </div>
-  </nav>
-</div>
+  {{/notification-bar}}
+{{/if}}

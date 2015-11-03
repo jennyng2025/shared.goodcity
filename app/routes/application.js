@@ -39,20 +39,19 @@ export default Ember.Route.extend(preloadDataMixin, {
 
   renderTemplate() {
     this.render(); // default template
-    if (this.session.get("isLoggedIn")){
-      this.render('notifications', {   // the template to render
-        into: 'application',      // the template to render into
-        outlet: 'notifications', // the name of the outlet in that template
-        controller: 'notifications'   // the controller to use for the template
-      });
 
-      if(this.session.get("isAdminApp")){
-        this.render('notification_link', {
-          into: 'application',
-          outlet: 'notification_link',
-          controller: 'notification_link'
-        });
-      }
+    this.render('notifications', {   // the template to render
+      into: 'application',      // the template to render into
+      outlet: 'notifications', // the name of the outlet in that template
+      controller: 'notifications'   // the controller to use for the template
+    });
+
+    if(this.get("session.isAdminApp")){
+      this.render('notification_link', {
+        into: 'application',
+        outlet: 'notification_link',
+        controller: 'notification_link'
+      });
     }
   },
 
