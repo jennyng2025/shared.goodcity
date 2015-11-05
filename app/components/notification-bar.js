@@ -8,7 +8,9 @@ export default Ember.Component.extend({
     if (!notification) { box.hide(); return; }
     if (box.is(":hidden")) {
       box.slideDown();
-      Ember.$(".contain-to-grid.message_nav_bar").addClass("slide_for_notification");
+      Ember.$(".sticky_title_bar").animate({
+            top : '5%',
+        }, 400);
       Ember.run.later(this, this.removeNotification, notification, 6000);
     }
   }).on("didInsertElement"),
@@ -21,8 +23,10 @@ export default Ember.Component.extend({
       remove();
       Ember.run.later(this, this.removeNotification, newNotification, 6000);
     } else {
-      Ember.$(".contain-to-grid.message_nav_bar").removeClass("slide_for_notification")
       Ember.$(".contain-to-grid.notification").slideUp(400, remove);
+      Ember.$(".sticky_title_bar").animate({
+            top : '0',
+        }, 400);
     }
   }
 });

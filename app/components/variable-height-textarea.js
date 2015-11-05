@@ -50,19 +50,17 @@ export default Ember.TextArea.extend({
 
     // Apply only in Donor Cordova App.
     if(grandParentDiv.length === 0 && config.cordova.enabled) {
-      var messagesHeader = Ember.$(".contain-to-grid.message_nav_bar");
+
       var msgTextbox = Ember.$(Ember.$(_this.element).closest(".message-textbar"));
 
       Ember.$().ready(function(){
         Ember.$(_this.element).focus(function(){
           msgTextbox.css({'position':'absolute'});
-          messagesHeader.removeClass("fixed");
           window.scrollTo(0, Ember.$(document).height());
         });
 
         Ember.$(_this.element).blur(function(){
           msgTextbox.css({'position':'fixed'});
-          messagesHeader.addClass("fixed");
         });
       });
 
