@@ -1,10 +1,10 @@
 import Ember from "ember";
 
-export default Ember.View.extend({
+export default Ember.Component.extend({
 
-  animateNotification: Ember.observer('controller.[]', function () {
+  animateNotification: Ember.observer('_controller.[]', function () {
     var box = Ember.$(".contain-to-grid.notification");
-    var notification = this.get("controller.nextNotification");
+    var notification = this.get("_controller.nextNotification");
     if (!notification) { box.hide(); return; }
     if (box.is(":hidden")) {
       box.slideDown();
@@ -14,7 +14,7 @@ export default Ember.View.extend({
   }).on("didInsertElement"),
 
   removeNotification: function(notification) {
-    var controller = this.get("controller");
+    var controller = this.get("_controller");
     var remove = function() { controller.removeObject(notification); };
     var newNotification = controller.retrieveNotification(1);
     if (newNotification) {

@@ -69,11 +69,6 @@ export default Ember.Component.extend({
     if (!this.get('maxlength')) {
       Ember.assert(this.get("i18n").t("input_length_error_message"));
     }
-
-    if(this.get('placeholder') === 'item_description') {
-      var placeholderText = this.get("i18n").t("items.add_item.description_placeholder");
-      this.set('placeholder', placeholderText);
-    }
   },
 
   actions: {
