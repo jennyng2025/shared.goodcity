@@ -13,8 +13,16 @@ export default addressDetails.extend({
 
   datePrompt: t("gogovan.book_van.date"),
   timePrompt: t("gogovan.book_van.time"),
-  offer: Ember.computed.alias("delivery.offer"),
   i18n: Ember.inject.service(),
+
+  offer: Ember.computed("deliveryController", {
+    get() {
+      return this.get("deliveryController.model.offer");
+    },
+    set(key, value) {
+      return value;
+    }
+  }),
 
   gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
