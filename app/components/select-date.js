@@ -55,6 +55,10 @@ export default Ember.TextField.extend({
     var date = new Date();
     var setting = false;
 
+    // Allow GGV booking for next 6 months span.
+    var maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 6);
+
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
@@ -63,6 +67,7 @@ export default Ember.TextField.extend({
         weekdaysShort: moment.weekdaysShort(),
         disable: [ 1, 2 ],
         min: [date.getUTCFullYear(), date.getMonth(), date.getDate()],
+        max: [maxDate.getUTCFullYear(), maxDate.getMonth(), maxDate.getDate()],
         clear: false,
         today: false,
         close: false,

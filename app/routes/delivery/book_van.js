@@ -17,6 +17,7 @@ export default VerifyOfferStateRoute.extend({
       var territory = district.get('territory');
       controller.set('selectedTerritory', territory);
       controller.set('selectedDistrict', district);
+      this.resetExtraRequirements(controller);
 
     } else if(this.get("backClick")) {
       dateSelection = controller.get('selectedDate');
@@ -24,10 +25,20 @@ export default VerifyOfferStateRoute.extend({
     } else {
       dateSelection = null;
       timeSelection = null;
+      this.resetExtraRequirements(controller);
     }
 
     controller.set('selectedDate', dateSelection);
     controller.set('selectedTime', timeSelection);
+
+    var offer = controller.get("deliveryController.model.offer");
+    controller.set('offer', offer);
+  },
+
+  resetExtraRequirements: function(controller) {
+    controller.set("speakEnglish", false);
+    controller.set("borrowTrolley", false);
+    controller.set("porterage", false);
   }
 
 });
