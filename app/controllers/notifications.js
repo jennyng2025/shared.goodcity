@@ -24,6 +24,7 @@ export default Ember.ArrayController.extend({
     var router = this.get("target");
     var currentUrl = router.get("url");
     var actionUrl = router.generate.apply(router, notification.route);
+    if(actionUrl.charAt(0) === "#") { actionUrl = actionUrl.substring(1); }
 
     if (currentUrl === actionUrl) {
       this.removeObject(notification);
