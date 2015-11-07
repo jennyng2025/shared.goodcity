@@ -159,10 +159,27 @@ export default Ember.Controller.extend({
       var currentUrl = router.get("url");
       var messageRoute = this.get("messagesUtil").getRoute(data.item[type]);
       var messageUrl = router.generate.apply(router, messageRoute);
+      if(messageUrl.charAt(0) === "#") { messageUrl = messageUrl.substring(1); }
 
       if (currentUrl === messageUrl) {
         var message = this.store.peekRecord("message", item.id);
         this.get("messagesUtil").markRead(message);
+
+        // scroll to bottom
+        var scrollOffset;
+        if(Ember.$(".message-textbar").length > 0) {
+          scrollOffset = Ember.$(document).height();
+        }
+
+        var screenHeight = document.documentElement.clientHeight;
+        var pageHeight = document.documentElement.scrollHeight;
+
+        if(scrollOffset && pageHeight > screenHeight) {
+          Ember.run.later(this, function() {
+            window.scrollTo(0, scrollOffset);
+          });
+        }
+
       }
     }
   }

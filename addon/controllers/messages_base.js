@@ -66,6 +66,9 @@ export default Ember.Controller.extend({
 
   actions: {
     sendMessage() {
+      // To hide soft keyboard
+      Ember.$("textarea").trigger('blur');
+
       this.set("inProgress", true);
       var values = this.getProperties("body", "offer", "item", "isPrivate");
       values.createdAt = new Date();
@@ -73,7 +76,7 @@ export default Ember.Controller.extend({
 
       var message = this.store.createRecord("message", values);
       message.save()
-        .then(() => { this.set("body", ""); Ember.$("textarea").trigger('blur'); })
+        .then(() => { this.set("body", ""); })
         .catch(error => {
           this.store.unloadRecord(message);
           throw error;
