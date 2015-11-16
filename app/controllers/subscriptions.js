@@ -100,6 +100,10 @@ export default Ember.Controller.extend({
         socket.close();
         this.set("socket", null);
       }
+    },
+
+    unloadNotifications() {
+      this.set('notifications.model', []);
     }
   },
 

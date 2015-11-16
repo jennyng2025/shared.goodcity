@@ -17,16 +17,18 @@ export default Ember.Component.extend({
 
   removeNotification: function(notification) {
     var controller = this.get("_controller");
-    var remove = function() { controller.removeObject(notification); };
-    var newNotification = controller.retrieveNotification(1);
-    if (newNotification) {
-      remove();
-      Ember.run.later(this, this.removeNotification, newNotification, 6000);
-    } else {
-      Ember.$(".contain-to-grid.notification").slideUp(400, remove);
-      Ember.$(".sticky_title_bar").animate({
-            top : '0',
-        }, 400);
+    if(controller) {
+      var remove = function() { controller.removeObject(notification); };
+      var newNotification =  controller.retrieveNotification(1);
+      if (newNotification) {
+        remove();
+        Ember.run.later(this, this.removeNotification, newNotification, 6000);
+      } else {
+        Ember.$(".contain-to-grid.notification").slideUp(400, remove);
+        Ember.$(".sticky_title_bar").animate({
+              top : '0',
+          }, 400);
+      }
     }
   }
 });
