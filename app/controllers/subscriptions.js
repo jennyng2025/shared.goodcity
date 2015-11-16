@@ -164,22 +164,6 @@ export default Ember.Controller.extend({
       if (currentUrl === messageUrl) {
         var message = this.store.peekRecord("message", item.id);
         this.get("messagesUtil").markRead(message);
-
-        // scroll to bottom
-        var scrollOffset;
-        if(Ember.$(".message-textbar").length > 0) {
-          scrollOffset = Ember.$(document).height();
-        }
-
-        var screenHeight = document.documentElement.clientHeight;
-        var pageHeight = document.documentElement.scrollHeight;
-
-        if(scrollOffset && pageHeight > screenHeight) {
-          Ember.run.later(this, function() {
-            window.scrollTo(0, scrollOffset);
-          });
-        }
-
       }
     }
   }
