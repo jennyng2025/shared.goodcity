@@ -15,7 +15,7 @@ export default DS.Model.extend({
   i18n: Ember.inject.service(),
 
   dayTime: Ember.computed('slotName', function(){
-    var slot = (this.get('slotName') || '').split(',').slice(-1)[0];
+    var slot = (this.get('slotName') || '').match(/\d+/);
     var day_time = ''
     if(slot) {
       slot = parseInt(slot);
