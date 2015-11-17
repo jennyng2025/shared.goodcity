@@ -10,6 +10,10 @@ export default Ember.Controller.extend({
     }
   }),
 
+  appVersion: Ember.computed(function(){
+    return config.cordova.enabled ? config.APP.VERSION : null;
+  }),
+
   actions: {
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
