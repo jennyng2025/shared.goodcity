@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     Ember.$().ready(function(){
 
       // Scroll back to page-top on back-click
-      Ember.$('.message_nav_bar').on('click', '.back', function(){
+      Ember.$('.custom_nav').on('click', '.back', function(){
         window.scrollTo(0, 0);
       });
 
