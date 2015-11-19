@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   didScroll: null,
   lastScrollTop: 0,
-  delta: 5,
+  delta: 2,
   intervalId: null,
 
   didInsertElement(){
@@ -12,7 +12,11 @@ export default Ember.Component.extend({
     Ember.$().ready(function(){
 
       Ember.$(window).scroll(function(event){
-          _this.set("didScroll", true);
+        _this.set("didScroll", true);
+      });
+
+      Ember.$(window).on('touchmove', function(event){
+        _this.set("didScroll", true);
       });
 
       var intervalId = setInterval(function() {
@@ -20,7 +24,7 @@ export default Ember.Component.extend({
           hasScrolled();
           _this.set("didScroll", false);
         }
-      }, 250);
+      }, 150);
 
       _this.set("intervalId", intervalId);
 
@@ -64,6 +68,7 @@ export default Ember.Component.extend({
 
     Ember.$().ready(function(){
       $(window).unbind('scroll');
+      $(window).unbind('touchmove');
       clearInterval(_this.get("intervalId"));
     });
   }
