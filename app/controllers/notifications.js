@@ -44,7 +44,8 @@ export default Ember.ArrayController.extend({
   senderImageUrl: Ember.computed('nextNotification', function(){
     var notification = this.get("nextNotification");
     if (!notification) { return null; }
-    return this.store.peekRecord("user", notification.author_id).get("displayImageUrl");
+    var sender = this.store.peekRecord("user", notification.author_id);
+    return sender ? sender.get("displayImageUrl") : "assets/images/default_user_image.jpg";
   }),
 
   setRoute: function(notification) {
