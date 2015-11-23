@@ -253,7 +253,7 @@ export default DS.Model.extend({
   }),
 
   showDeliveryDetails: Ember.computed('state', function(){
-    return this.get("isScheduled") || this.get("isReceived");
+    return this.get("isScheduled") || this.get("isReceived") || this.get("isReceiving");
   }),
 
   hideBookingModification: Ember.computed("delivery.gogovanOrder", "delivery.gogovanOrder.status", function(){
