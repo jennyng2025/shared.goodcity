@@ -167,7 +167,7 @@ export default Ember.Controller.extend({
 
       if (currentUrl === messageUrl) {
         var message = this.store.peekRecord("message", item.id);
-        if(!message.get("isRead")) {
+        if(message && !message.get("isRead")) {
           this.get("messagesUtil").markRead(message);
 
           var scrollOffset;
