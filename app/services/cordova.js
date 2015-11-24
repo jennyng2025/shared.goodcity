@@ -5,9 +5,12 @@ import AjaxPromise from '../utils/ajax-promise';
 export default Ember.Service.extend({
   session: Ember.inject.service(),
   logger: Ember.inject.service(),
+  store: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
 
   appLoad: function () {
+    var _this = this;
+
     if (!config.cordova.enabled) {
       return;
     }
@@ -99,8 +102,26 @@ export default Ember.Service.extend({
       if (payload.category === "incoming_call") {
         notifications.acceptCall(payload);
       }
+
       notifications.setRoute(payload);
-      notifications.transitionToRoute.apply(notifications, payload.route);
+
+      if(payload.category === "message") {
+        var hasMessage = _this.get("store").peekRecord("message", payload.message_id);
+        if(hasMessage) {
+          notifications.transitionToRoute.apply(notifications, payload.route);
+        } else {
+          var loadingView = _this.container.lookup('component:loading').append();
+          var messageUrl = payload.item_id ? `/items/${payload.item_id}/messages` : `/offers/${payload.offer_id}/messages`
+          new AjaxPromise(messageUrl, "GET", _this.get("session.authToken"), {})
+            .then(function(data) {
+              _this.get("store").pushPayload(data);
+              notifications.transitionToRoute.apply(notifications, payload.route);
+            })
+            .finally(() => loadingView.destroy());
+        }
+      } else {
+        notifications.transitionToRoute.apply(notifications, payload.route);
+      }
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
