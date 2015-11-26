@@ -216,7 +216,7 @@ export default DS.Model.extend({
   }),
 
   hasGogovanTransport: Ember.computed('gogovanTransport', function(){
-    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable").string;
+    return this.get('gogovanTransport') && !this.get('gogovanTransport.disabled');
   }),
 
   // display "General Messages Thread"
