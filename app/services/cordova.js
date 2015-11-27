@@ -111,7 +111,7 @@ export default Ember.Service.extend({
           notifications.transitionToRoute.apply(notifications, payload.route);
         } else {
           var loadingView = _this.container.lookup('component:loading').append();
-          var messageUrl = payload.item_id ? `/items/${payload.item_id}/messages` : `/offers/${payload.offer_id}/messages`
+          var messageUrl = payload.item_id ? `/messages?item_id=${payload.item_id}` : `/messages?offer_id=${payload.offer_id}`
           new AjaxPromise(messageUrl, "GET", _this.get("session.authToken"), {})
             .then(function(data) {
               _this.get("store").pushPayload(data);
