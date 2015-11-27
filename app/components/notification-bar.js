@@ -5,15 +5,13 @@ export default Ember.Component.extend({
   animateNotification: Ember.observer('_controller.[]', function () {
     var box = Ember.$(".contain-to-grid.notification");
     var notification = this.get("_controller.nextNotification");
-    var hasCustomNavbar = Ember.$('.custom_nav').length;
 
     if (!notification) { box.hide(); return; }
     if (box.is(":hidden")) {
-      if(hasCustomNavbar) {
-        box.show();
-      } else {
-        box.slideDown();
-      }
+      ibox.slideDown();
+      Ember.$(".sticky_title_bar").animate({
+            top : '5%',
+        }, 400);
       Ember.run.later(this, this.removeNotification, notification, 6000);
     }
   }).on("didInsertElement"),
@@ -27,13 +25,10 @@ export default Ember.Component.extend({
         remove();
         Ember.run.later(this, this.removeNotification, newNotification, 6000);
       } else {
-        var hasCustomNavbar = Ember.$('.custom_nav').length;
-
-        if(hasCustomNavbar) {
-          Ember.$(".contain-to-grid.notification").hide();
-        } else {
-          Ember.$(".contain-to-grid.notification").slideUp(400, remove);
-        }
+        Ember.$(".contain-to-grid.notification").slideUp(400, remove);
+        Ember.$(".sticky_title_bar").animate({
+              top : '0',
+          }, 400);
       }
     }
   }
