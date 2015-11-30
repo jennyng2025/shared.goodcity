@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
     if (!notification) { box.hide(); return; }
     if (box.is(":hidden")) {
-      ibox.slideDown();
+      box.slideDown();
       Ember.$(".sticky_title_bar").animate({
             top : '5%',
         }, 400);
