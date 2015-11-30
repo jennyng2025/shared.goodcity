@@ -398,6 +398,8 @@ a.disabled{
   height: initial;
   padding-bottom: inherit;
   min-height: 0rem;
+  position: fixed;
+
   @media #{$medium-only} {
     width: 25rem;
   }
