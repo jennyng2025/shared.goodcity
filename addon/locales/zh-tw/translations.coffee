@@ -48,6 +48,9 @@ I18nTranslationsZhTw =
   "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
   "loading_timeout_error": "Loading view timeout reached."
   "items_text": "項目"
+  "version": "Version"
+  "crossroads_foundation": "Crossroads Foundation"
+
   "day":
     "today": "今天"
     "morning": "早上"
