@@ -400,6 +400,10 @@ a.disabled{
   min-height: 0rem;
   position: fixed;
 
+  @media #{$small-only} {
+    top: 1rem !important;
+  }
+
   @media #{$medium-only} {
     width: 25rem;
   }
