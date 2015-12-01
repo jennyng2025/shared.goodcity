@@ -5,11 +5,13 @@ export default Ember.Service.extend({
   session: Ember.inject.service(),
 
   markRead: function(message) {
-    var adapter = this.container.lookup("adapter:application");
-    var url = adapter.buildURL("message", message.id) + "/mark_read";
-    adapter.ajax(url, "PUT")
-      .then(data => message.setProperties(data.message))
-      .catch(error => this.get("logger").error(error));
+    if(message.get("isUnread")) {
+      var adapter = this.container.lookup("adapter:application");
+      var url = adapter.buildURL("message", message.id) + "/mark_read";
+      adapter.ajax(url, "PUT")
+        .then(data => message.setProperties(data.message))
+        .catch(error => this.get("logger").error(error));
+    }
   },
 
   getRoute: function( message) {
