@@ -22,11 +22,12 @@ export default Ember.ArrayController.extend({
 
     // if current url matches notification view action url then dismiss notification
     var router = this.get("target");
-    var currentUrl = router.get("url");
-    var actionUrl = router.generate.apply(router, notification.route);
-    if(actionUrl.charAt(0) === "#") { actionUrl = actionUrl.substring(1); }
+    var currentUrl = window.location.href.split("#").get("lastObject");
 
-    if (currentUrl === actionUrl) {
+    var actionUrl = router.generate.apply(router, notification.route);
+    var actionUrl = actionUrl.split("#").get("lastObject");
+
+    if (currentUrl.indexOf(actionUrl) >= 0) {
       this.removeObject(notification);
       return this.retrieveNotification(index);
     }
