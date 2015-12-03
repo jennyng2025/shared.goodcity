@@ -33,7 +33,7 @@ export default Ember.Service.extend({
 
       push.on('notification', function(data) {
         if(!data.additionalData.foreground) {
-          if (device.platform === "iOS") {
+          if (window.device.platform === "iOS") {
             processTappedNotification(data.additionalData.payload)
           } else {
             processTappedNotification(data.additionalData);
@@ -48,14 +48,14 @@ export default Ember.Service.extend({
     }
 
     function isAndroid(){
-      return ["android", "Android", "amazon-fireos"].indexOf(device.platform) >= 0;
+      return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
     }
 
     function platformCode(){
       var platform;
       if (isAndroid()) { platform = "gcm"; }
-      else if (device.platform === "iOS") { platform = "aps"; }
-      else if (device.platform === "windows") { platform = "wns"; }
+      else if (window.device.platform === "iOS") { platform = "aps"; }
+      else if (window.device.platform === "windows") { platform = "wns"; }
       return platform;
     }
 
