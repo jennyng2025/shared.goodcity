@@ -90,8 +90,8 @@ export default Ember.TextField.extend({
         available_array.push(date_array);
       }
 
-      var firstDate = new Date(available_array.get("lastObject"));
-      firstDate.setMonth( firstDate.getMonth() + 1 );
+      var firstDateArray = available_array.get("lastObject");
+      var firstDate = new Date(firstDateArray[0], firstDateArray[1],firstDateArray[2]);
       var isTodayListed = _this._currentDay().getTime() === firstDate.getTime();
       if(_this.currentMinutes() === 961 && isTodayListed) { available_array.pop(); }
     }
