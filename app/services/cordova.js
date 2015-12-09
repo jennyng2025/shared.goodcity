@@ -19,7 +19,11 @@ export default Ember.Service.extend({
       }
 
       var push = PushNotification.init({
-        android: { senderID: config.cordova.GcmSenderId, badge: false },
+        android: {
+          senderID: config.cordova.GcmSenderId,
+          badge: false,
+          icon: "ic_notify"
+        },
         ios: {
           alert: true,
           sound: true
