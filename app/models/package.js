@@ -20,6 +20,7 @@ export default DS.Model.extend({
   packageType:     belongsTo('package_type', { async: false }),
   imageId:         attr('number'),
   offerId:         attr('number'),
+  inventoryNumber: attr('string'),
 
   isReceived: Ember.computed.equal("state", "received"),
 
