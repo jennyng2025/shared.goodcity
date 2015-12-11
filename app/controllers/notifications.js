@@ -22,11 +22,12 @@ export default Ember.ArrayController.extend({
 
     // if current url matches notification view action url then dismiss notification
     var router = this.get("target");
-    var currentUrl = router.get("url");
-    var actionUrl = router.generate.apply(router, notification.route);
-    if(actionUrl.charAt(0) === "#") { actionUrl = actionUrl.substring(1); }
+    var currentUrl = window.location.href.split("#").get("lastObject");
 
-    if (currentUrl === actionUrl) {
+    var actionUrl = router.generate.apply(router, notification.route);
+    var actionUrl = actionUrl.split("#").get("lastObject");
+
+    if (currentUrl.indexOf(actionUrl) >= 0) {
       this.removeObject(notification);
       return this.retrieveNotification(index);
     }
@@ -44,7 +45,8 @@ export default Ember.ArrayController.extend({
   senderImageUrl: Ember.computed('nextNotification', function(){
     var notification = this.get("nextNotification");
     if (!notification) { return null; }
-    return this.store.peekRecord("user", notification.author_id).get("displayImageUrl");
+    var sender = this.store.peekRecord("user", notification.author_id);
+    return sender ? sender.get("displayImageUrl") : "assets/images/default_user_image.jpg";
   }),
 
   setRoute: function(notification) {

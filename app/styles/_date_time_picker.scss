@@ -39,3 +39,11 @@
 
 .picker__input.picker__input--active {
   border-color: $medium-blue; }
+
+.picker__holder {
+  outline: none;
+}
+
+.picker__box {
+  display: inline-block;
+}

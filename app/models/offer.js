@@ -216,7 +216,7 @@ export default DS.Model.extend({
   }),
 
   hasGogovanTransport: Ember.computed('gogovanTransport', function(){
-    return this.get('gogovanTransport') && this.get('gogovanTransport.name') !== this.get("i18n").t("offer.disable").string;
+    return this.get('gogovanTransport') && !this.get('gogovanTransport.disabled');
   }),
 
   // display "General Messages Thread"
@@ -253,7 +253,7 @@ export default DS.Model.extend({
   }),
 
   showDeliveryDetails: Ember.computed('state', function(){
-    return this.get("isScheduled") || this.get("isReceived");
+    return this.get("isScheduled") || this.get("isReceived") || this.get("isReceiving");
   }),
 
   hideBookingModification: Ember.computed("delivery.gogovanOrder", "delivery.gogovanOrder.status", function(){

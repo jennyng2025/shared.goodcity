@@ -100,6 +100,10 @@ export default Ember.Controller.extend({
         socket.close();
         this.set("socket", null);
       }
+    },
+
+    unloadNotifications() {
+      this.set('notifications.model', []);
     }
   },
 
@@ -156,30 +160,32 @@ export default Ember.Controller.extend({
     // mark message as read if message will appear in current view
     if (type === "message") {
       var router = this.get("target");
-      var currentUrl = router.get("url");
+      var currentUrl = window.location.href.split("#").get("lastObject");
+
       var messageRoute = this.get("messagesUtil").getRoute(data.item[type]);
       var messageUrl = router.generate.apply(router, messageRoute);
-      if(messageUrl.charAt(0) === "#") { messageUrl = messageUrl.substring(1); }
+      var messageUrl = messageUrl.split("#").get("lastObject");
 
-      if (currentUrl === messageUrl) {
+      if (currentUrl.indexOf(messageUrl) >= 0) {
         var message = this.store.peekRecord("message", item.id);
-        this.get("messagesUtil").markRead(message);
+        if(message && !message.get("isRead")) {
+          this.get("messagesUtil").markRead(message);
 
-        // scroll to bottom
-        var scrollOffset;
-        if(Ember.$(".message-textbar").length > 0) {
-          scrollOffset = Ember.$(document).height();
+          var scrollOffset;
+          if(Ember.$(".message-textbar").length > 0) {
+            scrollOffset = Ember.$(document).height();
+          }
+
+          var screenHeight = document.documentElement.clientHeight;
+          var pageHeight = document.documentElement.scrollHeight;
+
+          if(scrollOffset && pageHeight > screenHeight) {
+            Ember.run.later(this, function() {
+              window.scrollTo(0, scrollOffset);
+            });
+          }
+
         }
-
-        var screenHeight = document.documentElement.clientHeight;
-        var pageHeight = document.documentElement.scrollHeight;
-
-        if(scrollOffset && pageHeight > screenHeight) {
-          Ember.run.later(this, function() {
-            window.scrollTo(0, scrollOffset);
-          });
-        }
-
       }
     }
   }

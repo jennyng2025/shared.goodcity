@@ -26,7 +26,7 @@ export default addressDetails.extend({
 
   gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
-    return allOptions.rejectBy('isDisabled', true).sortBy('id');
+    return allOptions.rejectBy('disabled', true).sortBy('id');
   }),
 
   selectedGogovanOption: Ember.computed('gogovanOptions', 'offer', function(){

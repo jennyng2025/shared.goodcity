@@ -21,6 +21,12 @@ export default Ember.TextField.extend({
     return (total_mins > 961) ? 961 : total_mins;
   },
 
+  _currentDay: function(){
+    var currentDate = new Date();
+    currentDate.setHours(0,0,0,0);
+    return currentDate;
+  },
+
   _getValidDate: function(selectedDate){
     var today = new Date();
     var currentDate = new Date();
@@ -84,8 +90,10 @@ export default Ember.TextField.extend({
         available_array.push(date_array);
       }
 
-      var currentMins = _this.currentMinutes();
-      if(currentMins === 961) { available_array.pop(); }
+      var firstDateArray = available_array.get("lastObject");
+      var firstDate = new Date(firstDateArray[0], firstDateArray[1],firstDateArray[2]);
+      var isTodayListed = _this._currentDay().getTime() === firstDate.getTime();
+      if(_this.currentMinutes() === 961 && isTodayListed) { available_array.pop(); }
     }
 
     Ember.$().ready(function(){
@@ -101,20 +109,20 @@ export default Ember.TextField.extend({
 
         onClose: function() {
           Ember.$(document.activeElement).blur();
-
           if (setting) { return; }
-
           var date = this.get('select') && this.get('select').obj;
-          _this.set("selection", date);
-          Ember.$('.time_selector select').val('');
 
-          setting = true;
-          Ember.run.next(() => {
-            this.set('select', new Date(date), { format: 'ddd mmm d' });
-            setting = false;
-          });
+          if(date) {
+            _this.set("selection", date);
+            Ember.$('.time_selector select').val('');
 
-          if(date) { _this._setTimeSlots(date); }
+            setting = true;
+            Ember.run.next(() => {
+              this.set('select', new Date(date), { format: 'ddd mmm d' });
+              setting = false;
+            });
+            _this._setTimeSlots(date);
+          }
         },
 
         onStart: function(){
@@ -129,8 +137,15 @@ export default Ember.TextField.extend({
 
       validateForm();
       validateInputs();
-
+      closeOnClick();
     });
+
+    function closeOnClick(){
+      Ember.$(".picker__holder").click(function(e){
+        if(e.target !== this) { return; }
+        Ember.$('#selectedDate').trigger("blur");
+      })
+    }
 
     function validateForm(){
       Ember.$('.button.drop_off').click(function(){

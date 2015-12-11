@@ -45,10 +45,10 @@ export default Ember.Component.extend({
     special_chars = control_val ? control_val.match(/(\r\n|\n|\r)/g) : "";
     special_chars_length = (special_chars && special_chars.length) || 0;
 
-    var currentLength = this.get('currentCount') || control_val.length;
+    var currentLength = parseInt(this.get('currentCount')) || control_val.length;
     total_count = special_chars_length + currentLength;
 
-    var maxlength = this.get("maxlength");
+    var maxlength = parseInt(this.get("maxlength"));
     if(total_count > maxlength) {
       var text = this.get('inputControl.value');
       this.set('inputControl.value', text.substring(0, maxlength-special_chars_length));

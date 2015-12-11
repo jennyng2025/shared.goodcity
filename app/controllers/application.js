@@ -10,10 +10,15 @@ export default Ember.Controller.extend({
     }
   }),
 
+  appVersion: Ember.computed(function(){
+    return config.cordova.enabled ? config.APP.VERSION : null;
+  }),
+
   actions: {
     logMeOut() {
       this.session.clear(); // this should be first since it updates isLoggedIn status
       this.get('subscriptions').send('unwire');
+      this.get('subscriptions').send('unloadNotifications');
       this.store.unloadAll();
       var _this = this;
       config.APP.PRELOAD_TYPES.forEach(function(type) {

@@ -40,3 +40,10 @@
 #lightGallery, .lightGallery {
   cursor: pointer;
 }
+
+.app_version {
+  text-align: center;
+  margin-top: 2.5rem;
+  color: $light-gray;
+  font-size: 0.6rem;
+}

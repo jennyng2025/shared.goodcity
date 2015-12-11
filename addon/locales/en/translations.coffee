@@ -48,6 +48,9 @@ I18nTranslationsEn =
   "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
   "loading_timeout_error": "Loading view timeout reached."
   "items_text": "items"
+  "version": "Version"
+  "crossroads_foundation": "Crossroads Foundation"
+
   "day":
     "today": "Today"
     "morning": "Morning"
