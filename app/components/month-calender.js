@@ -106,6 +106,8 @@ export default Ember.TextField.extend({
         clear: false,
         today: false,
         close: false,
+        min: available_array[available_array.length - 1],
+        max: available_array[1],
 
         onClose: function() {
           Ember.$(document.activeElement).blur();
