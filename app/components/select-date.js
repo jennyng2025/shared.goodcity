@@ -13,6 +13,12 @@ export default Ember.TextField.extend({
     return (total_mins > 960) ? 960 : total_mins;
   },
 
+  _currentDay: function(){
+    var currentDate = new Date();
+    currentDate.setHours(0,0,0,0);
+    return currentDate;
+  },
+
   _getValidDate: function(selectedDate){
     var today = new Date();
     var currentDate = new Date();
@@ -59,24 +65,40 @@ export default Ember.TextField.extend({
     var maxDate = new Date();
     maxDate.setMonth(maxDate.getMonth() + 6);
 
+
+    var list = this.get('available');
+    var available_count = 0, available_array = [true];
+
+    if(list) {
+      available_count = list.length;
+      for (var i = available_count - 1; i >= 0; i--) {
+        var date = new Date(list[i]);
+        var date_array = [];
+        date_array.push(date.getFullYear());
+        date_array.push(date.getMonth());
+        date_array.push(date.getDate());
+        available_array.push(date_array);
+      }
+
+      var firstDateArray = available_array.get("lastObject");
+      var firstDate = new Date(firstDateArray[0], firstDateArray[1],firstDateArray[2]);
+      var isTodayListed = _this._currentDay().getTime() === firstDate.getTime();
+      if(_this.currentMinutes() === 960 && isTodayListed) { available_array.pop(); }
+    }
+
+
     Ember.$().ready(function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
         monthsFull: moment.months(),
         monthsShort: moment.monthsShort(),
         weekdaysShort: moment.weekdaysShort(),
-        disable: [ 1, 2 ],
-        min: [date.getUTCFullYear(), date.getMonth(), date.getDate()],
-        max: [maxDate.getUTCFullYear(), maxDate.getMonth(), maxDate.getDate()],
+        disable: available_array,
         clear: false,
         today: false,
         close: false,
-        // editable: true,
-
-        onOpen: function() {
-          var currentMins = _this.currentMinutes();
-          if(currentMins === 960) { this.set("disable", [new Date])}
-        },
+        min: available_array[available_array.length - 1],
+        max: available_array[1],
 
         onClose: function() {
           Ember.$(document.activeElement).blur();
