@@ -33,7 +33,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     this.set("i18n.locale", language);
 
     Ember.onerror = window.onerror = error => this.handleError(error);
-
+    this.get("cordova").initiateSplunkMint();
     return this._loadDataStore();
   },
 

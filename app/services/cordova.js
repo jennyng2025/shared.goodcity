@@ -8,6 +8,10 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
 
+  isAndroid: function () {
+    return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
+  },
+
   appLoad: function () {
     if (!config.cordova.enabled) { return; }
 
@@ -51,13 +55,9 @@ export default Ember.Service.extend({
       return new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: handle, platform: platform});
     }
 
-    function isAndroid(){
-      return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
-    }
-
     function platformCode(){
       var platform;
-      if (isAndroid()) { platform = "gcm"; }
+      if (_this.isAndroid()) { platform = "gcm"; }
       else if (window.device.platform === "iOS") { platform = "aps"; }
       else if (window.device.platform === "windows") { platform = "wns"; }
       return platform;
@@ -91,5 +91,24 @@ export default Ember.Service.extend({
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
+  },
+
+  initiateSplunkMint: function() {
+
+    var _this = this;
+
+    function initSplunkMint() {
+      if (!config.cordova.enabled) { return; }
+
+      // Use it when available for iOS
+      // var key = _this.isAndroid() ? config.cordova.SplunkMintApiKeyAndroid : config.cordova.SplunkMintApiKeyIos;
+
+      var key;
+      if(_this.isAndroid()) { key = config.cordova.SplunkMintApiKeyAndroid }
+
+      if(key) { Splunkmint.initiate(key); }
+    }
+
+    document.addEventListener('deviceready', initSplunkMint, true);
   }
 });
