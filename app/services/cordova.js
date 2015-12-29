@@ -104,8 +104,7 @@ export default Ember.Service.extend({
       // var key = _this.isAndroid() ? config.cordova.SplunkMintApiKeyAndroid : config.cordova.SplunkMintApiKeyIos;
 
       var key;
-      if(_this.isAndroid()) { key = config.cordova.SplunkMintApiKeyAndroid }
-
+      if(_this.isAndroid()) { key = config.cordova.SplunkMintApiKey }
       if(key) { Splunkmint.initiate(key); }
     }
 
