@@ -93,21 +93,4 @@ export default Ember.Service.extend({
     document.addEventListener('deviceready', onDeviceReady, true);
   },
 
-  initiateSplunkMint: function() {
-
-    var _this = this;
-
-    function initSplunkMint() {
-      if (!config.cordova.enabled) { return; }
-
-      // Use it when available for iOS
-      // var key = _this.isAndroid() ? config.cordova.SplunkMintApiKeyAndroid : config.cordova.SplunkMintApiKeyIos;
-
-      var key;
-      if(_this.isAndroid()) { key = config.cordova.SplunkMintApiKey }
-      if(key) { Splunkmint.initiate(key); }
-    }
-
-    document.addEventListener('deviceready', initSplunkMint, true);
-  }
 });
