@@ -6,7 +6,16 @@ export default Ember.Controller.extend({
   sortAscending: true,
   messagesUtil: Ember.inject.service("messages"),
 
-  nextNotification: Ember.computed('[]', function(){
+  model: Ember.computed({
+    get() {
+      return [];
+    },
+    set(value) {
+      return value;
+    }
+  }),
+
+  nextNotification: Ember.computed('model.[]', function(){
     //retrieveNotification is not implemented here because it needs to call itself
     return this.retrieveNotification();
   }),

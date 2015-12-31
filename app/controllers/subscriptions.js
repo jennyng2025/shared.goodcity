@@ -122,7 +122,7 @@ export default Ember.Controller.extend({
 
   notification: function(data, success) {
     data.date = new Date(data.date);
-    this.get("notifications").pushObject(data);
+    this.get("notifications.model").pushObject(data);
     run(success);
   },
 
