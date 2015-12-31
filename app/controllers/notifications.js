@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
     var actionUrl = actionUrl.split("#").get("lastObject");
 
     if (currentUrl.indexOf(actionUrl) >= 0) {
-      this.removeObject(notification);
+      this.get("model").removeObject(notification);
       return this.retrieveNotification(index);
     }
 
@@ -83,7 +83,7 @@ export default Ember.Controller.extend({
   actions: {
     view() {
       var notification = this.get("nextNotification");
-      this.removeObject(notification);
+      this.get("model").removeObject(notification);
       if (notification.category === "incoming_call") {
         this.acceptCall(notification);
       }
