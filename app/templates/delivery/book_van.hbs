@@ -59,7 +59,7 @@
               </div>
               <div class="small-5 columns time_selector">
                 {{select-list
-                  content=controller.timeSlots
+                  content=timeSlots
                   on-change=(action (mut selectedTime))
                   selectedValue=selectedTime
                   prompt=timePrompt
