@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  templateName: 'components/confirm-box'
+  layoutName: 'components/confirm-box'
 });
