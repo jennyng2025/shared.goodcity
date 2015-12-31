@@ -42,7 +42,7 @@
         <a {{action "nextWithoutImage"}}>{{t "edit_images.cannot_provide_photo"}}</a>
       </li>
     {{else}}
-      {{#each image in images}}
+      {{#each images as |image|}}
         <li>
           <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
             <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
