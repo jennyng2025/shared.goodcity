@@ -4,6 +4,8 @@ import { ActiveModelSerializer } from 'active-model-adapter';
 // refer: https://github.com/emberjs/data/issues/1574
 
 export default ActiveModelSerializer.extend({
+  isNewSerializerAPI: true,
+
   keyForAttribute: function(attr, method) {
     if (attr === "addressable") {
       return "addressable_id";

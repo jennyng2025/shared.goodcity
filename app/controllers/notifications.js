@@ -1,7 +1,7 @@
 import Ember from "ember";
 import AjaxPromise from './../utils/ajax-promise';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   sortProperties: ["date"],
   sortAscending: true,
   messagesUtil: Ember.inject.service("messages"),
