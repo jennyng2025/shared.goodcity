@@ -1,7 +1,7 @@
 <div class="offer-status {{item.statusBarClass}}">
   <div class='status-message'>
     {{#if item.offer.isCancelled}}
-      {{t "item.cancelled_status" firstName=item.offer.createdBy.firstName lastName=item.offer.createdBy.lastName}} {{calender-date item.offer.cancelledAt}}
+      {{t "item.cancelled_status" firstName=item.offer.createdBy.firstName lastName=item.offer.createdBy.lastName}} {{display-datetime item.offer.cancelledAt format='YYYY-MM-DD'}}
     {{else if item.isSubmitted}}
       {{t "item.submitted_status"}}
     {{else if item.isUnderReview}}

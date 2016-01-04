@@ -14,7 +14,7 @@
       <div class="small-12 columns">
 
         <div class="row delivery-details">
-          {{display-date-time orderDetails.pickupTime}}<br/>
+          {{display-datetime orderDetails.pickupTime format='MMMM Do (dddd), h:mm a'}}<br/>
           {{districtName}} → {{t 'crossroads'}}<br/>
           {{#if orderDetails.needEnglish}}
             {{t "gogovan.confirm_van.speak_english"}},
