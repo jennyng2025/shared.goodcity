@@ -21,7 +21,7 @@
           <div class="small-8 columns left">
             <h3>{{t "plan_delivery.fastest.title"}} <i class="fa fa-check-circle"></i></h3>
             {{t "plan_delivery.fastest.info"}}<br/>
-            {{#view "online-button" action="startDelivery" actionArgs="Gogovan" classNames="button"}}{{t "plan_delivery.fastest.booking_button"}}{{/view}}
+            {{#online-button action="startDelivery" actionArgs="Gogovan" classNames="button"}}{{t "plan_delivery.fastest.booking_button"}}{{/online-button}}
           </div>
           <div class="small-4 columns right">
             {{#if gogovanPriceCalculated}}
@@ -41,7 +41,7 @@
           <div class="small-8 columns left">
             <h3>{{t "plan_delivery.alternate.title"}}</h3>
             {{t "plan_delivery.alternate.info"}}<br/>
-            {{#view "online-button" action="startDelivery" actionArgs="Alternate" classNames="button"}}{{t "plan_delivery.alternate.booking_button"}}{{/view}}
+            {{#online-button action="startDelivery" actionArgs="Alternate" classNames="button"}}{{t "plan_delivery.alternate.booking_button"}}{{/online-button}}
           </div>
           <div class="small-4 columns right">
             <div class="cost">{{t "plan_delivery.alternate.cost" cost=offer.crossroadsTruckCost}}</div>
@@ -56,7 +56,7 @@
         <div class="small-8 columns left">
           <h3>{{t "plan_delivery.crossroads.title"}}</h3>
           {{t "plan_delivery.crossroads.info"}}<br/>
-          {{#view "online-button" action="startDelivery" actionArgs="Drop Off" classNames="button"}}{{t "plan_delivery.crossroads.booking_button"}}{{/view}}
+          {{#online-button action="startDelivery" actionArgs="Drop Off" classNames="button"}}{{t "plan_delivery.crossroads.booking_button"}}{{/online-button}}
         </div>
         <div class="small-4 columns right">
           <div class="cost">{{t "plan_delivery.crossroads.free"}}</div>

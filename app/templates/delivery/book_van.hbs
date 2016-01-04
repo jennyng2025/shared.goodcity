@@ -59,7 +59,7 @@
               </div>
               <div class="small-5 columns time_selector">
                 {{select-list
-                  content=controller.timeSlots
+                  content=timeSlots
                   on-change=(action (mut selectedTime))
                   selectedValue=selectedTime
                   prompt=timePrompt
@@ -93,7 +93,7 @@
       <div class="btm sticky-bottom">
         <div class="row">
           <div class="small-10 small-offset-1 columns">
-            {{#view "online-button" classNames="button expand book_van"}}{{t "gogovan.book_van.get_quote"}}{{/view}}
+            {{#online-button classNames="button expand book_van"}}{{t "gogovan.book_van.get_quote"}}{{/online-button}}
           </div>
         </div>
       </div>

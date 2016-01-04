@@ -1,12 +1,21 @@
 import Ember from "ember";
 import AjaxPromise from './../utils/ajax-promise';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   sortProperties: ["date"],
   sortAscending: true,
   messagesUtil: Ember.inject.service("messages"),
 
-  nextNotification: Ember.computed('[]', function(){
+  model: Ember.computed({
+    get() {
+      return [];
+    },
+    set(value) {
+      return value;
+    }
+  }),
+
+  nextNotification: Ember.computed('model.[]', function(){
     //retrieveNotification is not implemented here because it needs to call itself
     return this.retrieveNotification();
   }),
@@ -20,16 +29,18 @@ export default Ember.ArrayController.extend({
 
     this.setRoute(notification);
 
-    // if current url matches notification view action url then dismiss notification
-    var router = this.get("target");
-    var currentUrl = window.location.href.split("#").get("lastObject");
+    if(notification.route) {
+      // if current url matches notification view action url then dismiss notification
+      var router = this.get("target");
+      var currentUrl = window.location.href.split("#").get("lastObject");
 
-    var actionUrl = router.generate.apply(router, notification.route);
-    var actionUrl = actionUrl.split("#").get("lastObject");
+      var actionUrl = router.generate.apply(router, notification.route);
+      var actionUrl = actionUrl.split("#").get("lastObject");
 
-    if (currentUrl.indexOf(actionUrl) >= 0) {
-      this.removeObject(notification);
-      return this.retrieveNotification(index);
+      if (currentUrl.indexOf(actionUrl) >= 0) {
+        this.get("model").removeObject(notification);
+        return this.retrieveNotification(index);
+      }
     }
 
     return notification;
@@ -74,7 +85,7 @@ export default Ember.ArrayController.extend({
   actions: {
     view() {
       var notification = this.get("nextNotification");
-      this.removeObject(notification);
+      this.get("model").removeObject(notification);
       if (notification.category === "incoming_call") {
         this.acceptCall(notification);
       }

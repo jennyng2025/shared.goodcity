@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  templateName: 'loading',
+  layoutName: 'loading',
   classNames: ["loading-indicator"],
   alert: Ember.inject.service(),
   logger: Ember.inject.service(),
