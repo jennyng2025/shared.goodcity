@@ -41,9 +41,9 @@ export default Ember.Controller.extend({
         this.get("model").removeObject(notification);
         return this.retrieveNotification(index);
       }
-    }
 
-    return notification;
+      return notification;
+    }
   },
 
   itemImageUrl: Ember.computed('nextNotification', function(){
