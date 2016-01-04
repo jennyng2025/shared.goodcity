@@ -19,7 +19,7 @@
           <li>
             {{radio-button name="timeslot" selection=isSelected value=item.id id=item.id}}
             <label for={{item.id}}>
-              <label class='schdule-date' for={{item.id}}>{{display-date item.scheduledAt}}</label><br/>
+              <label class='schdule-date' for={{item.id}}>{{display-datetime item.scheduledAt format='dddd, MMMM Do'}}</label><br/>
               {{item.slotName}}
             </label>
           </li>

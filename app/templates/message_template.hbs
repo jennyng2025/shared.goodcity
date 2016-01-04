@@ -17,14 +17,14 @@
                   {{message.sender.roleInitials}}
                 {{/if}}
                 →
-                {{display-message-time message.createdAt}}
+                {{display-datetime message.createdAt format="HH:mm"}}
               </div>
 
               {{{apply-line-break message.body}}}
             </div>
           {{else}}
             <div class="small-12 columns item_log">
-              {{display-message-time message.createdAt}} - {{message.displayMessage}}
+              {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
             </div>
           {{/if}}
         {{/each}}
