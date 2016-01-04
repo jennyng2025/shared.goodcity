@@ -29,16 +29,18 @@ export default Ember.Controller.extend({
 
     this.setRoute(notification);
 
-    // if current url matches notification view action url then dismiss notification
-    var router = this.get("target");
-    var currentUrl = window.location.href.split("#").get("lastObject");
+    if(notification.route) {
+      // if current url matches notification view action url then dismiss notification
+      var router = this.get("target");
+      var currentUrl = window.location.href.split("#").get("lastObject");
 
-    var actionUrl = router.generate.apply(router, notification.route);
-    var actionUrl = actionUrl.split("#").get("lastObject");
+      var actionUrl = router.generate.apply(router, notification.route);
+      var actionUrl = actionUrl.split("#").get("lastObject");
 
-    if (currentUrl.indexOf(actionUrl) >= 0) {
-      this.get("model").removeObject(notification);
-      return this.retrieveNotification(index);
+      if (currentUrl.indexOf(actionUrl) >= 0) {
+        this.get("model").removeObject(notification);
+        return this.retrieveNotification(index);
+      }
     }
 
     return notification;
