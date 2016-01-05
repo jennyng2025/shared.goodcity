@@ -21,6 +21,8 @@ export default Addressable.extend({
 
   i18n: Ember.inject.service(),
 
+  isSupervisor: Ember.computed.equal("permission.name", "Supervisor"),
+
   nameInitial: Ember.computed('firstName', function(){
     return this.get('firstName').charAt(0).capitalize();
   }),
