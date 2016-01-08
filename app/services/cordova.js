@@ -9,6 +9,7 @@ export default Ember.Service.extend({
   messagesUtil: Ember.inject.service("messages"),
 
   isAndroid: function () {
+    if (!config.cordova.enabled) { return; }
     return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
   },
 
