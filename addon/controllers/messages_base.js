@@ -19,11 +19,12 @@ export default Ember.Controller.extend({
     return this.groupBy(this.get("sortedElements"), "createdDate");
   }),
 
-  messagesAndVersions: Ember.computed("model.[]", "itemVersions", "packageVersions", function(){
+  messagesAndVersions: Ember.computed("model.[]", "itemVersions", "packageVersions", "offerVersions", function(){
     var messages = this.get("model").toArray();
     var itemVersions = this.get("itemVersions").toArray();
     var packageVersions = this.get("packageVersions").toArray();
-    return messages.concat(itemVersions, packageVersions);
+    var offerVersions = this.get("offerVersions").toArray();
+    return messages.concat(itemVersions, packageVersions, offerVersions);
   }),
 
   itemVersions: Ember.computed("item.id", "allVersions.[]", "isItemThread", function(){
@@ -43,6 +44,12 @@ export default Ember.Controller.extend({
 
   allVersions: Ember.computed(function(){
     return this.store.peekAll("version");
+  }),
+
+  offerVersions: Ember.computed("versions.[]", "offer.id", "isItemThread", function(){
+    if (this.get("isItemThread")) { return []; }
+    var offerId = parseInt(this.get("offer.id"));
+    return this.get('allVersions').filterBy('itemType', 'Offer').filterBy("itemId", offerId);
   }),
 
   groupBy: function(content, key) {
