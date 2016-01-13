@@ -72,6 +72,10 @@ export default Ember.Controller.extend({
         notification.route = [routeName, notification.offer_id];
         break;
 
+      case "offer_delivery":
+        notification.route = ["review_offer.logistics", notification.offer_id];
+        break;
+
       case "call_answered":
         notification.route = ["offer.donor_messages", notification.offer_id];
         break;
