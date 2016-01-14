@@ -23,9 +23,11 @@ export default DS.Model.extend({
   reviewCompletedAt: attr('date'),
   deliveredBy:    attr('string'),
   startReceivingAt: attr('date'),
+  cancelReason:   attr('string'),
 
   gogovanTransport:    belongsTo('gogovan_transport', { async: false }),
   crossroadsTransport: belongsTo('crossroads_transport', { async: false }),
+  cancellationReason:  belongsTo('cancellation_reason', { async: false }),
 
   // used for items of current-offer
   saleable:       attr('boolean'),
