@@ -18,6 +18,7 @@ I18nTranslationsEn =
   "back" : "Back"
   "end" : "End"
   "done": "Done"
+  "other": "Other"
   "error.message" : "Sorry, an error occurred!"
   "images" : "Images"
   "delete" : "Delete"
