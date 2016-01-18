@@ -18,6 +18,7 @@ I18nTranslationsZhTw =
   "back" : "回到上一頁"
   "end" : "結束"
   "done": "完成"
+  "other": "Other"
   "error.message" : "出錯了，請見諒！"
   "images" : "圖片"
   "delete" : "刪除"

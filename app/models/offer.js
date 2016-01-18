@@ -23,9 +23,11 @@ export default DS.Model.extend({
   reviewCompletedAt: attr('date'),
   deliveredBy:    attr('string'),
   startReceivingAt: attr('date'),
+  cancelReason:   attr('string'),
 
   gogovanTransport:    belongsTo('gogovan_transport', { async: false }),
   crossroadsTransport: belongsTo('crossroads_transport', { async: false }),
+  cancellationReason:  belongsTo('cancellation_reason', { async: false }),
 
   // used for items of current-offer
   saleable:       attr('boolean'),
@@ -71,6 +73,7 @@ export default DS.Model.extend({
   rejectedItems: Ember.computed.filterBy("items", "state", "rejected"),
   submittedItems: Ember.computed.filterBy("items", "state", "submitted"),
   isDraft: Ember.computed.equal("state", "draft"),
+  isInactive: Ember.computed.equal("state", "inactive"),
   isSubmitted: Ember.computed.equal("state", "submitted"),
   isScheduled: Ember.computed.equal("state", "scheduled"),
   isUnderReview: Ember.computed.equal("state", "under_review"),
@@ -84,13 +87,14 @@ export default DS.Model.extend({
   hasReceived: Ember.computed.or('isReceived', 'isReceiving'),
   isReviewing: Ember.computed.or('isUnderReview', 'isReviewed'),
   adminCurrentOffer: Ember.computed.or('isReviewing', 'isScheduled'),
+  nonSubmittedOffer: Ember.computed.or('isDraft', 'isInactive'),
 
   needReview: Ember.computed('isUnderReview', 'isSubmitted', 'isClosed', function(){
     return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
   }),
 
-  isFinished: Ember.computed('isClosed', 'isReceived', 'isCancelled', function(){
-    return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled');
+  isFinished: Ember.computed('isClosed', 'isReceived', 'isCancelled', 'isInactive', function(){
+    return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled') || this.get('isInactive');
   }),
 
   activeItems: Ember.computed('items.@each.state', function(){
@@ -140,6 +144,7 @@ export default DS.Model.extend({
       case 'closed' : return this.locale('offers.index.closed');
       case 'received' : return this.locale('offers.index.received');
       case 'receiving' : return this.locale('offers.index.receiving');
+      case 'inactive' : return this.locale('offers.index.inactive');
     }
     return status;
   }),
@@ -151,7 +156,7 @@ export default DS.Model.extend({
   },
 
   statusText: Ember.computed('status', 'itemCount', function(){
-    return this.get("isDraft") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
+    return this.get("nonSubmittedOffer") ? this.get("status") : (this.get("status") + " ("+ this.get("itemCount") + " "+ this.locale("items_text") +")")
   }),
 
   scheduledStatus: function(){
