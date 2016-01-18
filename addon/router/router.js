@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('authenticate');
   this.route('territories');
   this.route('districts');
+  this.route('ggv_orders', { path: '/ggv_orders/:ggv_id' });
 
   this.route('not-found', { path: '/*path' });
 });
