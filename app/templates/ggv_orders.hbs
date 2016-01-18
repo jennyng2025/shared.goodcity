@@ -1,0 +1,72 @@
+<nav class="tab-bar ggv_order">
+  <section class="middle tab-bar-section">
+    <h1 class="title">{{t "ggv_order.goodcity_job_summary"}}</h1>
+  </section>
+</nav>
+
+<section class="main-section ggv_order_details">
+  <div class="offer-status row">
+    <div class="small-1 medium-2 warning-icon">
+      <i class="fa fa-exclamation-triangle"></i>
+    </div>
+    <div class="small-11 medium-10 msg">
+      <div>{{t "ggv_order.message"}}</div>
+    </div>
+  </div>
+
+  <div class="row delivery-from">
+    <div class="small-12 columns address">
+      <h3>{{t "ggv_order.delivery_from"}}: {{districtName}}</h3>
+       {{userName}} - &nbsp;<a href="tel:{{userMobile}}" class="tel_link"><i class="fa fa-phone"></i> {{userMobile}}</a>
+    </div>
+    <hr>
+  </div>
+
+  <div class="row delivery-to">
+    <div class="small-10 medium-11 columns address">
+      <h3>{{t "ggv_order.delivery_to"}}</h3>
+      {{t "ggv_order.crossroads_foundation"}} - &nbsp;<a href="tel:{{22729345}}" class="tel_link"><i class="fa fa-phone"></i> 2272 9345</a>
+      <br/>
+      {{t "ggv_order.crossroads_address1"}}
+      <br/>
+      {{t "ggv_order.crossroads_address2"}}
+    </div>
+    <div class="small-2 medium-1 columns map_link">
+      <a href={{gmapUrl}} target="_blank">
+        <i class="fa fa-map-marker fa-3x"></i>
+        {{ t "ggv_order.map"}}
+      </a>
+    </div>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <ul class="list list-items">
+        {{#each model.approvedItems as |item|}}
+          <li>
+            <span class="list-image lightGallery">
+              {{item.displayImageUrl}}
+              <div data-src={{item.displayImage.imageUrl}} >
+                <img src={{item.displayImageUrl}} class="thumb" />
+              </div>
+              {{#each item.nonFavouriteImages as |image|}}
+                <div class="hidden" data-src={{image.imageUrl}} >
+                  <img src={{image.imageUrl}} />
+                </div >
+              {{/each}}
+            </span>
+            <span class="info">
+              <div class="row">
+                <div class="small-12 columns">
+                  <h3 class="ellipsis one-line-ellipsis">{{{item.itemType.name}}}</h3>
+                  <div class="ellipsis two-line-ellipsis">{{item.donorDescription}}</div>
+                </div>
+              </div>
+            </span>
+          </li>
+        {{/each}}
+      </ul>
+      <hr class="end_of_ul">
+    </div>
+  </div>
+</section>

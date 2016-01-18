@@ -1,0 +1,76 @@
+.tab-bar.ggv_order {
+  margin: 0;
+}
+
+.ggv_order_details {
+  .offer-status {
+    display: table;
+    background-color: $coral-red;
+    color: $white;
+    @media #{$small-only} {
+      padding: 0.2rem 0 0.2rem 0.3rem;
+      line-height: 1rem;
+      width: 105%;
+    }
+    @media #{$medium-only} {
+      padding: 0.2rem 0 0.2rem 0.3rem;
+      line-height: 1rem;
+    }
+    .warning-icon {
+      text-align: right;
+      display: table-cell;
+      vertical-align: middle;
+      padding-right: 0.5rem;
+      .fa-exclamation-triangle{
+        vertical-align: middle;
+        font-size: 1rem;
+      }
+    }
+    .msg {
+      display: table-cell;
+      text-align: left;
+    }
+  }
+
+  .list-items li span {
+    display: table-cell;
+  }
+
+  .end_of_ul{
+    margin-left: -1.25rem;
+    margin-right: 0.62rem;
+    @media #{$small-only} {
+      margin-right: -1rem;
+    }
+  }
+
+  .delivery-to, .delivery-from {
+    margin-bottom: 1rem;
+
+    .map_link{
+      text-align: left;
+       @media #{$small-only} {
+        text-align: center;
+        padding-left: 0.8rem;
+      }
+    }
+
+    .address {
+      color: $white;
+      margin-bottom: 1rem;
+    }
+    hr {
+      margin-bottom: 0;
+      @media #{$small-only} {
+        width: 110%;
+      }
+    }
+    i.fa-map-marker {
+      color: $coral-red;
+    }
+  }
+
+  .tel_link {
+    border-bottom: #fff 1px solid;
+  }
+}
