@@ -13,12 +13,31 @@ export default Ember.Service.extend({
     return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
   },
 
+  isIOS: function(){
+    if (!config.cordova.enabled) { return; }
+    return window.device.platform === "iOS";
+  },
+
+  verifyIosNotificationSetting: function(onEnabled, onDisabled) {
+    PushNotificationsStatus.isPushNotificationsEnabled(function(response) {
+      response === "true" ? onEnabled() : onDisabled();
+    }, function(error) {
+      onEnabled();
+    });
+  },
+
   appLoad: function () {
     if (!config.cordova.enabled) { return; }
+    var isAdminApp = this.get("session.isAdminApp");
+    if (!this.isIOS() || isAdminApp) { this.initiatePushNotifications(); }
+  },
+
+  initiatePushNotifications: function(){
 
     var pushNotification, _this = this;
 
     function onDeviceReady() {
+
       if (config.staging && typeof TestFairy != 'undefined') {
         TestFairy.begin('a362fd4ae199930a7a1a1b6daa6f729ac923b506');
       }
@@ -92,6 +111,7 @@ export default Ember.Service.extend({
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
-  },
+
+  }
 
 });
