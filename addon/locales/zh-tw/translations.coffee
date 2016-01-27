@@ -139,6 +139,8 @@ I18nTranslationsZhTw =
       "back": "回到上一頁"
       "cancel_booking": "取消預約"
       "confirm_ggv_cancel": "當GoGoVan確認預約取消，您就能取消預約"
+      "driver_mobile": "Driver's Mobile"
+      "ggv_office": "GoGoVan Office"
 
   "delivery_details":
     "name": "聯絡人姓名"

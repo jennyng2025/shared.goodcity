@@ -138,6 +138,8 @@ I18nTranslationsEn =
       "back": "Go Back"
       "cancel_booking": "Cancel Booking"
       "confirm_ggv_cancel": "Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking."
+      "driver_mobile": "Driver's Mobile"
+      "ggv_office": "GoGoVan Office"
 
   "delivery_details":
     "name": "Contact Name"
