@@ -26,4 +26,18 @@ export default ValidatableForm.extend({
 
     return false;
   },
+
+
+  // Overriding it to highlight all invalid fields in form
+  scrollToFirstError: function() {
+    var form = this.get('element');
+
+    for (var i = 0 ; i !== form.elements.length ; ++i) {
+      if (!form.elements[i].validity.valid) {
+        Ember.$(form.elements[i]).trigger("invalid");
+      }
+    }
+    return false;
+  }
+
 });
