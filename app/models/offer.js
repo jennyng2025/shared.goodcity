@@ -89,12 +89,12 @@ export default DS.Model.extend({
   adminCurrentOffer: Ember.computed.or('isReviewing', 'isScheduled'),
   nonSubmittedOffer: Ember.computed.or('isDraft', 'isInactive'),
 
-  needReview: Ember.computed('isUnderReview', 'isSubmitted', 'isClosed', function(){
-    return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isClosed");
+  needReview: Ember.computed('isUnderReview', 'isSubmitted', 'isCancelled', function(){
+    return this.get('isUnderReview') || this.get('isSubmitted') || this.get("isCancelled");
   }),
 
-  isFinished: Ember.computed('isClosed', 'isReceived', 'isCancelled', 'isInactive', function(){
-    return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled') || this.get('isInactive');
+  isFinished: Ember.computed('isReceived', 'isCancelled', 'isInactive', function(){
+    return this.get('isReceived') || this.get('isCancelled') || this.get('isInactive');
   }),
 
   activeItems: Ember.computed('items.@each.state', function(){
@@ -244,8 +244,8 @@ export default DS.Model.extend({
     return (this.get("delivery.gogovanOrder.status") || "") === "completed";
   }),
 
-  showOfferIcons: Ember.computed('hasCompleteGGVOrder','itemCount', 'isClosed', 'hasReceived', function(){
-    return this.get("itemCount") > 0 && !(this.get('isClosed') || this.get('hasReceived')) && !this.get("hasCompleteGGVOrder");
+  showOfferIcons: Ember.computed('hasCompleteGGVOrder','itemCount', 'isCancelled', 'hasReceived', function(){
+    return this.get("itemCount") > 0 && !(this.get('isCancelled') || this.get('hasReceived')) && !this.get("hasCompleteGGVOrder");
   }),
 
   statusBarClass: Ember.computed('state', function(){
