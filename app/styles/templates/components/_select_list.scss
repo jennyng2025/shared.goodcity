@@ -1,0 +1,14 @@
+label.select {
+  position:relative
+}
+
+label.select:after {
+  content: "\f078";
+  font-family: "FontAwesome";
+  font-size: 0.7rem;
+  color: #aaa;
+  right: 0.5rem;
+  top: 0.4rem;
+  position: absolute;
+  pointer-events: none;
+}
