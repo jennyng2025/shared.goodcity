@@ -64,11 +64,13 @@
     <div class="btm">
       <div class="row">
         <div class="small-10 small-offset-1 columns">
-          {{#view "online-button" classNames="button expand drop_off"}}{{t "drop-off.book_schedule"}}{{/view}}
+          {{#online-button classNames="button expand drop_off"}}{{t "drop-off.book_schedule"}}{{/online-button}}
         </div>
       </div>
     </div>
   {{/validatable-form}}
 {{else}}
-  {{partial 'loading'}}
+  <div class="loading_container">
+    {{partial 'loading'}}
+  </div>
 {{/if}}

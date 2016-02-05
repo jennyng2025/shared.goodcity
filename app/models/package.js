@@ -18,8 +18,10 @@ export default DS.Model.extend({
   updatedAt:       attr('date'),
   item:            belongsTo('item', { async: false }),
   packageType:     belongsTo('package_type', { async: false }),
+  location:        belongsTo('location', { async: false }),
   imageId:         attr('number'),
   offerId:         attr('number'),
+  inventoryNumber: attr('string'),
 
   isReceived: Ember.computed.equal("state", "received"),
 

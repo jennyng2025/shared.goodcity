@@ -8,9 +8,10 @@ export default Ember.Service.extend({
   isLoggedIn: Ember.computed.notEmpty("authToken"),
   language: Ember.computed.localStorage(),
   seenTour: Ember.computed.localStorage(),
+  store: Ember.inject.service(),
 
   currentUser: Ember.computed(function(){
-    var store = this.container.lookup('store:main');
+    var store = this.get('store');
     return store.peekAll('user_profile').get('firstObject') || null;
   }).volatile(),
 

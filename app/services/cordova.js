@@ -8,12 +8,36 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
 
+  isAndroid: function () {
+    if (!config.cordova.enabled) { return; }
+    return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
+  },
+
+  isIOS: function(){
+    if (!config.cordova.enabled) { return; }
+    return window.device.platform === "iOS";
+  },
+
+  verifyIosNotificationSetting: function(onEnabled, onDisabled) {
+    PushNotificationsStatus.isPushNotificationsEnabled(function(response) {
+      response === "true" ? onEnabled() : onDisabled();
+    }, function(error) {
+      onEnabled();
+    });
+  },
+
   appLoad: function () {
     if (!config.cordova.enabled) { return; }
+    var isAdminApp = this.get("session.isAdminApp");
+    if (!this.isIOS() || isAdminApp) { this.initiatePushNotifications(); }
+  },
+
+  initiatePushNotifications: function(){
 
     var pushNotification, _this = this;
 
     function onDeviceReady() {
+
       if (config.staging && typeof TestFairy != 'undefined') {
         TestFairy.begin('a362fd4ae199930a7a1a1b6daa6f729ac923b506');
       }
@@ -51,13 +75,9 @@ export default Ember.Service.extend({
       return new AjaxPromise("/auth/register_device", "POST", _this.get("session.authToken"), {handle: handle, platform: platform});
     }
 
-    function isAndroid(){
-      return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
-    }
-
     function platformCode(){
       var platform;
-      if (isAndroid()) { platform = "gcm"; }
+      if (_this.isAndroid()) { platform = "gcm"; }
       else if (window.device.platform === "iOS") { platform = "aps"; }
       else if (window.device.platform === "windows") { platform = "wns"; }
       return platform;
@@ -91,5 +111,7 @@ export default Ember.Service.extend({
     }
 
     document.addEventListener('deviceready', onDeviceReady, true);
+
   }
+
 });

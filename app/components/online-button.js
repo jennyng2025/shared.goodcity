@@ -1,14 +1,14 @@
 import Ember from "ember";
 
-/* {{#view "online-button" classNames="btn" action="submit" actionArgs=true}}
+/* {{#"online-button" classNames="btn" action="submit" actionArgs=true}}
  *   {{t "btn_label"}}
- * {{/view}}
+ * {{/online-button}}
  *
  * You can pass multiple arguments for actionArgs like this: actionArgs="[\"test\",true]"
  * Note actionArgs="['test']" causes json parse error, but this works actionArgs='["test"]'
  */
 
-export default Ember.View.extend(Ember.ViewTargetActionSupport, {
+export default Ember.Component.extend(Ember.ViewTargetActionSupport, {
   tagName: "button",
   attributeBindings: ["disabled"],
   disabled: false,

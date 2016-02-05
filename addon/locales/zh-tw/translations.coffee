@@ -18,6 +18,7 @@ I18nTranslationsZhTw =
   "back" : "回到上一頁"
   "end" : "結束"
   "done": "完成"
+  "other": "Other"
   "error.message" : "出錯了，請見諒！"
   "images" : "圖片"
   "delete" : "刪除"
@@ -138,6 +139,8 @@ I18nTranslationsZhTw =
       "back": "回到上一頁"
       "cancel_booking": "取消預約"
       "confirm_ggv_cancel": "當GoGoVan確認預約取消，您就能取消預約"
+      "driver_mobile": "Driver's Mobile"
+      "ggv_office": "GoGoVan Office"
 
   "delivery_details":
     "name": "聯絡人姓名"
@@ -317,5 +320,16 @@ I18nTranslationsZhTw =
     "add_another" : "加入另一張圖片"
   "upload-image":
     "upload_error" : "圖片上傳時出錯，請稍後再試一次。"
+
+  "ggv_order":
+    "message" : "您到達時，我們的職員會核對並確認下列資料"
+    "delivery_from" : "寄出地點"
+    "delivery_to" : "運送至：屯門"
+    "crossroads_foundation" : "十字路會"
+    "crossroads_address1" : "屯門青山公路2號"
+    "crossroads_address2" : "黃金海岸1期對面，並於40號大樓落貨"
+    "map" : "地圖"
+    "goodcity_job_summary" : "好人好市工作摘要"
+
 
 `export default I18nTranslationsZhTw`

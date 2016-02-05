@@ -17,14 +17,14 @@
                   {{message.sender.roleInitials}}
                 {{/if}}
                 →
-                {{display-message-time message.createdAt}}
+                {{display-datetime message.createdAt format="HH:mm"}}
               </div>
 
               {{{apply-line-break message.body}}}
             </div>
           {{else}}
             <div class="small-12 columns item_log">
-              {{display-message-time message.createdAt}} - {{message.displayMessage}}
+              {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
             </div>
           {{/if}}
         {{/each}}
@@ -54,7 +54,7 @@
               {{variable-height-textarea value=body name="body" required="true" disabled=disabled parentDiv="message-section"}}
             </div>
             <div class="small-3 large-2 medium-2 columns">
-              {{#view "online-button" disabledOverride=disabled disabled=inProgress}}{{t "send"}}{{/view}}
+              {{#online-button disabledOverride=disabled disabled=inProgress}}{{t "send"}}{{/online-button}}
             </div>
           </div>
         {{/validatable-form}}

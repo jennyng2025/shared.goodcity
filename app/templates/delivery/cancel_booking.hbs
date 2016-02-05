@@ -36,9 +36,9 @@
 
       <ul class='call_ggv'>
         {{#if driverContact}}
-          <li>{{phone-number number=driverContact}} or</li>
+          <li>{{phone-number number=driverContact}} ({{t 'delivery.cancel.driver_mobile'}}) or</li>
         {{/if}}
-        <li>{{phone-number number=gogovanContact}}</li>
+        <li>{{phone-number number=gogovanContact}} ({{t 'delivery.cancel.ggv_office'}})</li>
       </ul>
 
       <div>{{t 'delivery.cancel.confirm_ggv_cancel'}}</div>

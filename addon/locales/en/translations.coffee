@@ -18,6 +18,7 @@ I18nTranslationsEn =
   "back" : "Back"
   "end" : "End"
   "done": "Done"
+  "other": "Other"
   "error.message" : "Sorry, an error occurred!"
   "images" : "Images"
   "delete" : "Delete"
@@ -137,6 +138,8 @@ I18nTranslationsEn =
       "back": "Go Back"
       "cancel_booking": "Cancel Booking"
       "confirm_ggv_cancel": "Once GoGoVan confirms the order is cancelled you will be able to proceed to cancel your booking."
+      "driver_mobile": "Driver's Mobile"
+      "ggv_office": "GoGoVan Office"
 
   "delivery_details":
     "name": "Contact Name"
@@ -316,5 +319,15 @@ I18nTranslationsEn =
     "add_another" : "Add another image"
   "upload-image":
     "upload_error" : "There is an error with your image upload. Please try again after some time."
+
+  "ggv_order":
+    "message" : "Our Staff will confirm each item listed below when you arrive."
+    "delivery_from" : "Delivery from"
+    "delivery_to" : "Delivery to: Tuen Mun"
+    "crossroads_foundation" : "Crossroads Foundation"
+    "crossroads_address1" : "2 Castle Peak Road, Tuen Mun"
+    "crossroads_address2" : "Opposite Gold Coast Phase 1 Apartments Unload at Building 40"
+    "map" : "map"
+    "goodcity_job_summary" : "GoodCity Job Summary"
 
 `export default I18nTranslationsEn`

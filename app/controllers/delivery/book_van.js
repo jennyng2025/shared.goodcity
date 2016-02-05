@@ -24,6 +24,16 @@ export default addressDetails.extend({
     }
   }),
 
+  available_dates: Ember.computed('available_dates.[]', {
+    get: function() {
+      new AjaxPromise("/available_dates", "GET", this.get('session.authToken'), {schedule_days: 120})
+        .then(data => this.set("available_dates", data));
+    },
+    set: function(key, value) {
+      return value;
+    }
+  }),
+
   gogovanOptions: Ember.computed(function(){
     var allOptions = this.store.peekAll('gogovan_transport');
     return allOptions.rejectBy('disabled', true).sortBy('id');

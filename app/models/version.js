@@ -29,6 +29,7 @@ export default DS.Model.extend({
     }
 
     switch (this.get("event")) {
+      case 'admin_called':
       case 'donor_called': return this.get("i18n").t("offer_log.donor_called", {name: this.get("whodunnitName")});
       case 'call_accepted' : return this.get("i18n").t("offer_log.call_accepted", {name: this.get("whodunnitName")});
     }

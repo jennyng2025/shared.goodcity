@@ -33,7 +33,6 @@ export default Ember.Route.extend(preloadDataMixin, {
     this.set("i18n.locale", language);
 
     Ember.onerror = window.onerror = error => this.handleError(error);
-
     return this._loadDataStore();
   },
 

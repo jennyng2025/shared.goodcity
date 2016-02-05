@@ -12,6 +12,7 @@
     "ember-qunit": "0.4.9",
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.18.0",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "active-model-adapter": "~2.0.3"
   }
 }
