@@ -117,7 +117,6 @@ I18nTranslationsZhTw =
     "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
-    "text" : "{{text}}"
     "view": "查看"
 
   "delivery":
