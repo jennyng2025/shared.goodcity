@@ -1,34 +1,36 @@
 <section class="message-section">
   <div class="row">
     <div class="small-12 columns">
-      {{#each groupedElements as |messages|}}
-        <div class="small-12 columns day_seperator">
-          <span>{{display-messages-date messages.firstObject.createdDate (t 'day.today')}}</span>
-        </div>
-        {{#each messages as |message|}}
-          {{#if message.isMessage}}
-            <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
-              <div class='message_details'>
-                {{#if message.myMessage}}
-                  {{t "messages.owner" }}
-                {{else}}
-                  {{custom-img-tag src=message.sender.displayImageUrl class="user-avatar"}}
-                  {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
-                  {{message.sender.roleInitials}}
-                {{/if}}
-                →
-                {{display-datetime message.createdAt format="HH:mm"}}
-              </div>
+      {{#href-to-link-to}}
+        {{#each groupedElements as |messages|}}
+          <div class="small-12 columns day_seperator">
+            <span>{{display-messages-date messages.firstObject.createdDate (t 'day.today')}}</span>
+          </div>
+          {{#each messages as |message|}}
+            {{#if message.isMessage}}
+              <div class="{{message.state}} {{if message.myMessage 'my_message' 'received_message'}}" id={{message.id}}>
+                <div class='message_details'>
+                  {{#if message.myMessage}}
+                    {{t "messages.owner" }}
+                  {{else}}
+                    {{custom-img-tag src=message.sender.displayImageUrl class="user-avatar"}}
+                    {{t "full_name" firstName=message.sender.firstName lastName=message.sender.lastName}}
+                    {{message.sender.roleInitials}}
+                  {{/if}}
+                  →
+                  {{display-datetime message.createdAt format="HH:mm"}}
+                </div>
 
-              {{{apply-line-break message.body}}}
-            </div>
-          {{else}}
-            <div class="small-12 columns item_log">
-              {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
-            </div>
-          {{/if}}
+                {{{apply-line-break message.body}}}
+              </div>
+            {{else}}
+              <div class="small-12 columns item_log">
+                {{display-datetime message.createdAt format="HH:mm"}} - {{message.displayMessage}}
+              </div>
+            {{/if}}
+          {{/each}}
         {{/each}}
-      {{/each}}
+      {{/href-to-link-to}}
     </div>
   </div>
 </section>

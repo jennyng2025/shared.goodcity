@@ -116,7 +116,6 @@ I18nTranslationsEn =
     "chat_note": "Chat about this item with our reviewers"
 
   "notifications":
-    "text" : "{{text}}"
     "view": "View"
 
   "delivery":
