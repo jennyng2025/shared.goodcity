@@ -135,9 +135,13 @@ ul.off-canvas-list li a:hover  {
   padding-right: 15px !important;
   font-size: rem-calc(15);
 
+  @media #{$medium-up} {
+    font-size: 0.8rem;
+  }
+
   a,
   label {
-    padding: 10px 20px !important;
+    padding: 0.8rem 0.9rem !important;
   }
 
   label {
