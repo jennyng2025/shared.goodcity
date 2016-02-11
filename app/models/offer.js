@@ -97,6 +97,14 @@ export default DS.Model.extend({
     return this.get('isClosed') || this.get('isReceived') || this.get('isCancelled') || this.get('isInactive');
   }),
 
+  canMerged: Ember.computed('isSubmitted', 'isUnderReview', 'isReviewed', function(){
+    return this.get('isSubmitted') || this.get('isUnderReview') || this.get('isReviewed');
+  }),
+
+  baseForMerge: Ember.computed('isSubmitted', 'isUnderReview', 'isReviewed', 'isScheduled', function(){
+    return this.get('isSubmitted') || this.get('isUnderReview') || this.get('isReviewed') || this.get('isScheduled');
+  }),
+
   activeItems: Ember.computed('items.@each.state', function(){
     return this.get('items').rejectBy("state", "draft");
   }),
