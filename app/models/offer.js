@@ -273,6 +273,14 @@ export default DS.Model.extend({
     var session = this.container.lookup("service:session");
     return !session.get('isAdminApp') && this.get("delivery.isGogovan")
     && this.get("delivery.gogovanOrder.isCompleted");
-  })
+  }),
+
+  allPackagesMissing: Ember.computed("state", "items.@each.state", "packages.@each.state", function(){
+    return !this.get("allItemsRejected") &&
+      this.get("allItemsReviewed") &&
+      this.get("state") !== "received" &&
+      this.get("packages.length") > 0 &&
+      this.get("packages").filter(p => !p.get("item.isRejected") && p.get("state") === "missing").get("length") === this.get("packages.length");
+  }),
 
 });
