@@ -16,6 +16,10 @@ export default Addressable.extend({
   isReviewer: Ember.computed.equal("permission.name", "Reviewer"),
   isSupervisor: Ember.computed.equal("permission.name", "Supervisor"),
 
+  mobileWithCountryCode: Ember.computed('mobile', function(){
+    return this.get('mobile') ? ("+852" + this.get('mobile')) : "";
+  }),
+
   fullName: Ember.computed('firstName', 'lastName', function(){
     return (this.get('firstName') + " " + this.get('lastName'));
   })
