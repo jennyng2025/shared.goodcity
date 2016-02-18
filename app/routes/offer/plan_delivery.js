@@ -11,7 +11,7 @@ export default AuthorizeRoute.extend({
     var offer = this.store.peekRecord('offer', offerId);
 
     if(offer) {
-      if (offer.get('isScheduled') && !params.queryParams.modify) {
+      if ((offer.get('isScheduled') && !params.queryParams.modify) || !(offer.get("isReviewed") || offer.get('isScheduled')) ) {
         if(this.get('session.isAdminApp')) {
           this.transitionTo('review_offer.logistics', offer);
         } else {
