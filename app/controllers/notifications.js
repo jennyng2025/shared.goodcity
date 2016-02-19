@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     get() {
       return [];
     },
-    set(value) {
+    set(key, value) {
       return value;
     }
   }),
@@ -94,6 +94,10 @@ export default Ember.Controller.extend({
         this.acceptCall(notification);
       }
       this.transitionToRoute.apply(this, notification.route);
+    },
+
+    unloadNotifications() {
+      this.set('model', []);
     }
   }
 });

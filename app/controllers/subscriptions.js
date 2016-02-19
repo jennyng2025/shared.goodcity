@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
     },
 
     unloadNotifications() {
-      this.set('notifications.model', []);
+      this.get("notifications").send("unloadNotifications")
     }
   },
 
