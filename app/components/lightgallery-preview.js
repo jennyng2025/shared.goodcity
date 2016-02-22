@@ -8,18 +8,16 @@ export default Ember.Component.extend({
     var _this = this;
 
     Ember.$().ready(function(){
-      var lightGallery = Ember.$("#imageGallery").lightGallery({
+      var lightGallery = Ember.$("#lightGallery, .lightGallery").lightGallery({
         thumbnail: false,
         hideControlOnEnd: true,
         closable: false,
         counter: true,
         swipeThreshold : 50,
         enableTouch : true,
-        selector: '.preview_image'
       });
 
-    _this.set("lightGallery", lightGallery);
-
+      _this.set("lightGallery", lightGallery);
     });
   },
 

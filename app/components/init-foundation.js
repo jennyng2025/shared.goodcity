@@ -2,7 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  foundation: null,
+
+  currentClassName: Ember.computed("className", function(){
+    return this.get("className") ? ("." + this.get("className")) :document;
+  }),
+
   didInsertElement() {
+    var className = this.get("currentClassName");
+    var _this = this;
 
     Ember.run.debounce(this, function(){
       var clientHeight = $( window ).height();
@@ -10,19 +18,16 @@ export default Ember.Component.extend({
     }, 1000);
 
     Ember.$().ready(function(){
-      Ember.$(document).foundation({
+      console.log(className);
+      var initFoundation = Ember.$(className).foundation({
         offcanvas: { close_on_click: true }
       });
+      _this.set("foundation", initFoundation);
     });
+  },
 
-    Ember.$("#lightGallery, .lightGallery").lightGallery({
-      thumbnail: false,
-      hideControlOnEnd: true,
-      closable: false,
-      counter: true,
-      swipeThreshold : 50,
-      enableTouch : true,
-    });
+  willDestroyElement() {
+    this.get("foundation").foundation("destroy");
   }
 
 });

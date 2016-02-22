@@ -42,29 +42,31 @@
   <div class="row">
     <div class="small-12 columns">
       <ul class="list list-items">
-        {{#each model.approvedItems as |item|}}
-          <li>
-            <span class="list-image lightGallery">
-              {{item.displayImageUrl}}
-              <div data-src={{item.displayImage.imageUrl}} >
-                <img src={{item.displayImageUrl}} class="thumb" />
-              </div>
-              {{#each item.nonFavouriteImages as |image|}}
-                <div class="hidden" data-src={{image.imageUrl}} >
-                  <img src={{image.imageUrl}} />
-                </div >
-              {{/each}}
-            </span>
-            <span class="info">
-              <div class="row">
-                <div class="small-12 columns">
-                  <h3 class="ellipsis one-line-ellipsis">{{{item.itemType.name}}}</h3>
-                  <div class="ellipsis two-line-ellipsis">{{item.donorDescription}}</div>
+        {{#lightgallery-preview}}
+          {{#each model.approvedItems as |item|}}
+            <li>
+              <span class="list-image lightGallery">
+                {{item.displayImageUrl}}
+                <div data-src={{item.displayImage.imageUrl}} >
+                  <img src={{item.displayImageUrl}} class="thumb" />
                 </div>
-              </div>
-            </span>
-          </li>
-        {{/each}}
+                {{#each item.nonFavouriteImages as |image|}}
+                  <div class="hidden" data-src={{image.imageUrl}} >
+                    <img src={{image.imageUrl}} />
+                  </div >
+                {{/each}}
+              </span>
+              <span class="info">
+                <div class="row">
+                  <div class="small-12 columns">
+                    <h3 class="ellipsis one-line-ellipsis">{{{item.itemType.name}}}</h3>
+                    <div class="ellipsis two-line-ellipsis">{{item.donorDescription}}</div>
+                  </div>
+                </div>
+              </span>
+            </li>
+          {{/each}}
+        {{/lightgallery-preview}}
       </ul>
       <hr class="end_of_ul">
     </div>
