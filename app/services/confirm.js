@@ -29,6 +29,7 @@ export default Ember.Service.extend({
   closeModal: function(confirmView) {
     Ember.run.next(function() {
       Ember.$("#confirmModal").foundation("reveal", "close");
+      Ember.$("#confirmModal *").unbind('click');
       confirmView.destroy();
     })
   }
