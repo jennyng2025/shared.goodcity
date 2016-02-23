@@ -18,7 +18,6 @@ export default Ember.Component.extend({
     }, 1000);
 
     Ember.$().ready(function(){
-      console.log(className);
       var initFoundation = Ember.$(className).foundation({
         offcanvas: { close_on_click: true }
       });
@@ -26,8 +25,9 @@ export default Ember.Component.extend({
     });
   },
 
-  willDestroyElement() {
-    this.get("foundation").foundation("destroy");
-  }
+  // TODO: Breaks sometime on menu-bar
+  // willDestroyElement() {
+  //   this.get("foundation").foundation("destroy");
+  // }
 
 });
