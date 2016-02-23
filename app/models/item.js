@@ -106,5 +106,9 @@ export default DS.Model.extend({
     else if(this.get("isUnderReview")) { return "is-under-review"; }
     else if(this.get("isAccepted")) { return "is-accepted"; }
     else if(this.get("isRejected")) { return "is-rejected"; }
-  })
+  }),
+
+  pageLink: Ember.computed("state", function(){
+     return this.get("isRejected") ? 'review_item.reject' : 'review_item.accept';
+  }),
 });
