@@ -310,6 +310,9 @@ I18nTranslationsEn =
 
   "offer":
     "disable": "Disable"
+    "closed_by": "Closed by {{firstName}} {{lastName}}"
+    "cancelled_by": "Cancelled by {{firstName}} {{lastName}}"
+    "received_by": "Received by {{firstName}} {{lastName}}"
 
   # Components
   "upload-images":

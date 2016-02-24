@@ -311,6 +311,9 @@ I18nTranslationsZhTw =
 
   "offer":
     "disable": "關閉"
+    "closed_by": "Closed by {{lastName}} {{firstName}}"
+    "cancelled_by": "Cancelled by {{lastName}} {{firstName}}"
+    "received_by": "Received by {{lastName}} {{firstName}}"
 
   # Components
   "upload-images":

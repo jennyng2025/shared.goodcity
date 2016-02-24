@@ -283,4 +283,93 @@ export default DS.Model.extend({
       this.get("packages").filter(p => !p.get("item.isRejected") && p.get("state") === "missing").get("length") === this.get("packages.length");
   }),
 
+  timeDetail: Ember.computed("state", "delivery", function(){
+    var prefix = "", suffix = "", date;
+
+    if(this.get("isSubmitted")) {
+      prefix = this.locale("submitted");
+      date = this.get("submittedAt");
+
+    } else if(this.get("isUnderReview")) {
+      prefix = this.get("i18n").t("review_offer.review_started_by",
+        { firstName: this.get("reviewedBy.firstName"),
+          lastName: this.get("reviewedBy.lastName") }
+      );
+      date = this.get("reviewedAt");
+
+    } else if(this.get("isReviewed")) {
+      prefix = this.locale("review_offer.reviewed");
+      date = this.get("reviewCompletedAt");
+      suffix = this.locale("review_offer.plan_transport");
+
+    } else if(this.get("isClosed")) {
+      prefix = this.get("i18n").t("offer.closed_by",
+        { firstName: this.get("closedBy.firstName"),
+          lastName: this.get("closedBy.lastName") }
+      );
+      date = this.get("reviewCompletedAt");
+
+    } else if(this.get("isCancelled")) {
+      prefix = this.get("i18n").t("offer.cancelled_by",
+        { firstName: this.get("createdBy.firstName"),
+          lastName: this.get("createdBy.lastName") }
+      );
+      date = this.get("cancelledAt");
+
+    } else if(this.get("isReceived")) {
+      prefix = this.get("i18n").t("offer.received_by",
+        { firstName: this.get("createdBy.firstName"),
+          lastName: this.get("createdBy.lastName") }
+      );
+      date = this.get("receivedAt");
+
+    } else if(this.get("isReceiving")) {
+      prefix = this.get("i18n").t("offer.offer_details.start_receiving_by",
+        { firstName: this.get("receivedBy.firstName"),
+          lastName: this.get("receivedBy.lastName") }
+      );
+      date = this.get("startReceivingAt");
+
+    } else if(this.get("isScheduled")) {
+      if(this.get("delivery.isAlternate")) {
+        prefix = this.locale('offer.offer_details.is_collection');
+      } else if (this.get("delivery.isDropOff")) {
+        prefix = this.locale('offer.offer_details.is_drop_off');
+      } else if (this.get("delivery.isGogovan")){
+        prefix = this.get("delivery.gogovanOrder.ggvOrderStatus");
+      }
+
+      if (this.get("delivery.isGogovan")) {
+        if (this.get("delivery.completedWithGogovan")) {
+          date = this.get("delivery.gogovanOrder.completedAt");
+        } else {
+          prefix = prefix + " " + this.get("delivery.schedule.slotName");
+          date = this.get("delivery.schedule.scheduledAt");
+        }
+      } else {
+        date = this.get("delivery.schedule.scheduledAt");
+        suffix = this.get("delivery.schedule.dayTime");
+      }
+    }
+    return { prefix: prefix, date: date, suffix: suffix };
+  }),
+
+  itemStatus: Ember.computed("state", "items.@each.state", "packages.@each.state", function(){
+    if (this.get("hasReceived")) {
+      return this.get("receivedCount") + " " +
+        this.locale("offer.offer_details.received") + ", " +
+        this.get("missingCount") + " " +
+        this.locale("offer.offer_details.missing") + ", " +
+        this.get("rejectedItems.length") + " " +
+        this.locale("offer.offer_details.rejected");
+    } else {
+      return this.get("approvedItems.length") + " " +
+        this.locale("offer.offer_details.accepted") + ", " +
+        this.get("rejectedItems.length") + " " +
+        this.locale("offer.offer_details.rejected") + ", " +
+        this.get("submittedItems.length") + " " +
+        this.locale("offer.offer_details.pending");
+    }
+  }),
+
 });
