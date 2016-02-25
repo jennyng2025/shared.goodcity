@@ -8,6 +8,15 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   messagesUtil: Ember.inject.service("messages"),
 
+  iOSDevice: Ember.computed({
+    get() {
+      return false;
+    },
+    set(key, value) {
+      return value;
+    }
+  }),
+
   isAndroid: function () {
     if (!config.cordova.enabled) { return; }
     return ["android", "Android", "amazon-fireos"].indexOf(window.device.platform) >= 0;
@@ -38,9 +47,9 @@ export default Ember.Service.extend({
 
     function onDeviceReady() {
 
-      if(verifyIOS && _this.isIOS()) {
-        return false;
-      }
+      _this.set("iOSDevice", _this.isIOS());
+
+      if(verifyIOS && _this.isIOS()) { return false; }
 
       if (config.staging && typeof TestFairy != 'undefined') {
         TestFairy.begin('a362fd4ae199930a7a1a1b6daa6f729ac923b506');
