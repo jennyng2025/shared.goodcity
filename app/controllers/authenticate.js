@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
           Ember.$('#pin').closest('div').addClass('error');
           _this.setProperties({pin: null});
           if (jqXHR.status === 422 && jqXHR.responseJSON.errors && jqXHR.responseJSON.errors.pin) {
-            _this.get("alert").show(jqXHR.responseJSON.errors.pin);
+            _this.send("openAlertModal", jqXHR.responseJSON.errors.pin);
           }
           console.log("Unable to authenticate");
         })

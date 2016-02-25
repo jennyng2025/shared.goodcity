@@ -70,14 +70,14 @@ export default Ember.Route.extend(preloadDataMixin, {
         }
       } else if ([403, 404].indexOf(status) >= 0) {
         this.get("logger").error(reason);
-        this.get("alert").show(this.get("i18n").t(status+"_error"));
+        this.send("openAlertModal", this.get("i18n").t(status+"_error"));
       } else if (status === 0) {
         // status 0 means request was aborted, this could be due to connection failure
         // but can also mean request was manually cancelled
-        this.get("alert").show(this.get("i18n").t("offline_error"));
+        this.send("openAlertModal", this.get("i18n").t("offline_error"));
       } else {
         this.get("logger").error(reason);
-        this.get("alert").show(this.get("i18n").t("unexpected_error"));
+        this.send("openAlertModal", this.get("i18n").t("unexpected_error"));
       }
     } catch (err) {}
   },
@@ -88,6 +88,17 @@ export default Ember.Route.extend(preloadDataMixin, {
         into: 'application',
         outlet: 'modal',
         controller: controller
+      });
+    },
+
+    openAlertModal(message, callback) {
+      this.controllerFor("alert_modal").set("alertMessage", message);
+      this.controllerFor("alert_modal").set("callback", callback);
+
+      return this.render("alert_modal", {
+        into: 'application',
+        outlet: 'modal',
+        controller: "alert_modal"
       });
     },
 
@@ -115,7 +126,7 @@ export default Ember.Route.extend(preloadDataMixin, {
       try {
         var errorStatus = parseInt(reason.status || reason.errors && reason.errors[0].status)
         if ([403, 404].indexOf(errorStatus) >= 0) {
-          this.get("alert").show(this.get("i18n").t(errorStatus+"_error"), () => this.transitionTo("/"));
+          this.send("openAlertModal", this.get("i18n").t(errorStatus+"_error"), () => this.transitionTo("/"));
         } else {
           this.handleError(reason);
         }

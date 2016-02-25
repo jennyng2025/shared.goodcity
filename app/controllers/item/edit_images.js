@@ -209,7 +209,7 @@ export default Ember.Controller.extend({
   },
 
   cannotRemoveImageAlert: function(){
-    this.get("alert").show(this.locale("edit_images.cant_delete_last_image"));
+    this.send("openAlertModal", this.locale("edit_images.cant_delete_last_image"));
   },
 
   actions: {
