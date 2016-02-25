@@ -83,15 +83,32 @@ export default Ember.Route.extend(preloadDataMixin, {
   },
 
   actions: {
+    openModal(template, controller) {
+      return this.render(template, {
+        into: 'application',
+        outlet: 'modal',
+        controller: controller
+      });
+    },
+
+    closeModal() {
+      return this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
+    },
+
     setLang(language) {
       this.session.set("language", language);
       window.location.reload();
     },
+
     loading() {
       Ember.$(".loading-indicator").remove();
       var view = this.container.lookup('component:loading').append();
       this.router.one('didTransition', view, 'destroy');
     },
+
     // this is hopefully only triggered from promises from routes
     // so in this scenario redirect to home for 404
     error(reason) {
@@ -106,7 +123,11 @@ export default Ember.Route.extend(preloadDataMixin, {
     },
 
     willTransition(transition) {
+      var _this = this;
+
       Ember.run.next(function() {
+        _this.send("closeModal");
+
         // before transitioning close all foundation-dialog box
         Ember.$(".reveal-modal").foundation("reveal", "close");
 
