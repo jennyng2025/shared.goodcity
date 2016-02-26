@@ -9,9 +9,7 @@ export default Ember.Controller.extend({
 
   session: Ember.inject.service(),
   store: Ember.inject.service(),
-  alert: Ember.inject.service(),
-  customConfirm: Ember.inject.service(),
-  confirm: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
   cordova: Ember.inject.service(),
   offerId: null,
@@ -163,7 +161,7 @@ export default Ember.Controller.extend({
     if(offer.get('itemCount') === 1){
       var delivery = offer.get("delivery");
       if(delivery)
-        this.get("confirm").show(this.locale("edit_images.cancelling_item_will_cancel_offer"),
+        this.get("messageBox").confirm(this.locale("edit_images.cancelling_item_will_cancel_offer"),
           () =>{
             var gogovanOrder = offer.get("delivery.gogovanOrder");
             if(gogovanOrder && gogovanOrder.get("isActive")){
@@ -201,15 +199,15 @@ export default Ember.Controller.extend({
 
   confirmRemoveLastImage: function() {
     var item = this.get("item");
-    this.get("customConfirm").show(this.locale("edit_images.last_image_with_item"),
-      this.locale("edit_images.remove_image"), this.locale("edit_images.cancel_item"),
-      () => this.cancelItem(this, item),
-      () => this.removeImage(this, item)
+    this.get("messageBox").custom(
+      this.locale("edit_images.last_image_with_item"),
+      this.locale("edit_images.remove_image"), () => this.removeImage(this, item),
+      this.locale("edit_images.cancel_item"), () => this.cancelItem(this, item)
     );
   },
 
   cannotRemoveImageAlert: function(){
-    this.get("alert").show(this.locale("edit_images.cant_delete_last_image"));
+    this.get("messageBox").alert(this.locale("edit_images.cant_delete_last_image"));
   },
 
   actions: {
@@ -283,7 +281,7 @@ export default Ember.Controller.extend({
         return;
       }
       else {
-        this.get("confirm").show(this.get("i18n").t("edit_images.delete_confirm"), () => {
+        this.get("messageBox").confirm(this.get("i18n").t("edit_images.delete_confirm"), () => {
           var loadingView = this.container.lookup('component:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();

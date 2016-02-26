@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   delivery: Ember.computed.alias('model.delivery'),
   contact: Ember.computed.alias('delivery.contact'),
   hasActiveGGVOrder: Ember.computed.alias('delivery.gogovanOrder.isActive'),
-  confirm: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
   isDonorApp: Ember.computed.alias("session.isDonorApp"),
 
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
 
     removeDelivery(delivery) {
       var _this = this;
-      this.get("confirm").show(this.get("i18n").t("delete_confirm"), () => {
+      this.get("messageBox").confirm(this.get("i18n").t("delete_confirm"), () => {
         var loadingView = _this.container.lookup('component:loading').append();
         var offer = delivery.get('offer');
 

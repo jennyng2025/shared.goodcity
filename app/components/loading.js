@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   layoutName: 'loading',
   classNames: ["loading-indicator"],
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   logger: Ember.inject.service(),
   i18n: Ember.inject.service(),
   timer: null,
@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     var timer = Ember.run.later(() => {
       this.get("logger").error(new Error(this.get("i18n").t("loading_timeout_error")));
-      this.get("alert").show(this.get("i18n").t("loading_timeout"), () => {
+      this.get("messageBox").alert(this.get("i18n").t("loading_timeout"), () => {
         this.destroy();
         window.location.reload();
       });
