@@ -1,0 +1,11 @@
+<div class="reveal-modal-bg">
+</div>
+
+<div id="messageBox" class="small reveal-modal">
+  <p id="messageBoxText">{{message}}</p>
+  {{#if btn2Text}}
+  <a id="btn2" class="right button" {{action "btn2Click"}}>{{btn2Text}}</a>
+  {{/if}}
+  <a id="btn1" class="right button" {{action "btn1Click"}}>{{btn1Text}}</a>
+  <div style="clear:both;"></div>
+</div>

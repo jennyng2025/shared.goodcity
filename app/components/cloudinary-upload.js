@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   disabled: true,
   offerId: null,
 
-  alert: Ember.inject.service(),
+  messageBox: Ember.inject.service(),
   i18n: Ember.inject.service(),
 
   didInsertElement() {
@@ -32,7 +32,7 @@ export default Ember.Component.extend({
 
       fail: function(e, data) {
         if(data.errorThrown === "timeout") {
-          _this.get("alert").show(_this.get("i18n").t('upload-image.upload_error'));
+          _this.get("messageBox").alert(_this.get("i18n").t('upload-image.upload_error'));
         }
       }
     };

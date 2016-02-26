@@ -1,0 +1,13 @@
+.reveal-modal-bg {
+  display: block;
+}
+
+#messageBox {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  top: 112px;
+  .button {
+    margin-left: 10px;
+  }
+}
