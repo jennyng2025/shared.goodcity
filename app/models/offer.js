@@ -355,21 +355,27 @@ export default DS.Model.extend({
   }),
 
   itemStatus: Ember.computed("state", "items.@each.state", "packages.@each.state", function(){
-    if (this.get("hasReceived")) {
-      return this.get("receivedCount") + " " +
-        this.locale("offer.offer_details.received") + ", " +
-        this.get("missingCount") + " " +
-        this.locale("offer.offer_details.missing") + ", " +
-        this.get("rejectedItems.length") + " " +
-        this.locale("offer.offer_details.rejected");
-    } else {
-      return this.get("approvedItems.length") + " " +
-        this.locale("offer.offer_details.accepted") + ", " +
-        this.get("rejectedItems.length") + " " +
-        this.locale("offer.offer_details.rejected") + ", " +
-        this.get("submittedItems.length") + " " +
-        this.locale("offer.offer_details.pending");
-    }
+    // delay retrieval of item status due to performance cost on offer list page
+    Ember.run.later(() => {
+      let val;
+      if (this.get("hasReceived")) {
+        val = this.get("receivedCount") + " " +
+          this.locale("offer.offer_details.received") + ", " +
+          this.get("missingCount") + " " +
+          this.locale("offer.offer_details.missing") + ", " +
+          this.get("rejectedItems.length") + " " +
+          this.locale("offer.offer_details.rejected");
+      } else {
+        val = this.get("approvedItems.length") + " " +
+          this.locale("offer.offer_details.accepted") + ", " +
+          this.get("rejectedItems.length") + " " +
+          this.locale("offer.offer_details.rejected") + ", " +
+          this.get("submittedItems.length") + " " +
+          this.locale("offer.offer_details.pending");
+      }
+      this.set("itemStatus", val);
+    });
+    return "";
   }),
 
 });
