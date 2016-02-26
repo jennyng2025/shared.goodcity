@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Helper.helper(function(value) {
-  var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+  var _MS_PER_DAY = 86400000;
   var message_time = Date.parse(value);
   var current_time = Date.now();
 
