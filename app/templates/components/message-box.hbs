@@ -1,11 +1,15 @@
 <div class="reveal-modal-bg">
 </div>
 
-<div id="confirmModal" class="small reveal-modal">
-  <p id="messageBoxText">{{message}}</p>
-  {{#if btn2Text}}
-  <a class="right button" {{action "btn2Click"}}>{{btn2Text}}</a>
+<div id="messageBox" class="small reveal-modal">
+  {{#if messageComponent}}
+    {{component messageComponent modal=messageModal}}
+  {{else}}
+    <p id="messageBoxText">{{message}}</p>
   {{/if}}
-  <a class="right button" {{action "btn1Click"}}>{{btn1Text}}</a>
+  {{#if btn2Text}}
+    <a id="btn1" class="right button" {{action "btn2Click"}}>{{btn2Text}}</a>
+  {{/if}}
+  <a id="btn2" class="right button" {{action "btn1Click"}}>{{btn1Text}}</a>
   <div style="clear:both;"></div>
 </div>
