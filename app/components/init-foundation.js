@@ -12,12 +12,14 @@ export default Ember.Component.extend({
     var className = this.get("currentClassName");
     var _this = this;
 
+    this._super();
+
     Ember.run.debounce(this, function(){
       var clientHeight = $( window ).height();
       $('.inner-wrap').css('min-height', clientHeight);
     }, 1000);
 
-    Ember.$().ready(function(){
+    Ember.run.scheduleOnce('afterRender', this, function(){
       var initFoundation = Ember.$(className).foundation({
         offcanvas: { close_on_click: true }
       });

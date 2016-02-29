@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   didInsertElement() {
-    Ember.$().ready(function(){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       validateInputs();
       validateForm();
     });

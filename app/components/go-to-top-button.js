@@ -3,7 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   didInsertElement() {
-    Ember.$().ready(function(){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       var offset = 300;
       var duration = 300;
 

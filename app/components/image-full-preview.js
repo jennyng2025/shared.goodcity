@@ -7,7 +7,9 @@ export default Ember.Component.extend({
   didInsertElement(){
     var _this = this;
 
-    Ember.$().ready(function(){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       var lightGallery = Ember.$("#imageGallery").lightGallery({
         thumbnail: false,
         hideControlOnEnd: true,
@@ -18,7 +20,7 @@ export default Ember.Component.extend({
         selector: '.preview_image'
       });
 
-    _this.set("lightGallery", lightGallery);
+      _this.set("lightGallery", lightGallery);
 
     });
   },

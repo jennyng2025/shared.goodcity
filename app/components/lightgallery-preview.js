@@ -7,7 +7,9 @@ export default Ember.Component.extend({
   didInsertElement(){
     var _this = this;
 
-    Ember.$().ready(function(){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       var lightGallery = Ember.$("#lightGallery, .lightGallery").lightGallery({
         thumbnail: false,
         hideControlOnEnd: true,

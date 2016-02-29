@@ -18,7 +18,9 @@ export default Ember.Component.extend({
     var _this = this;
     var router = this.container.lookup("router:main");
 
-    Ember.$().ready(function (){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       Ember.$(".received_message, .my_message").on('click', 'a', function(e) {
         var $target = Ember.$(e.currentTarget);
         var handleClick = (e.which === 1 && !e.ctrlKey && !e.metaKey);

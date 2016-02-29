@@ -86,8 +86,7 @@ export default Ember.TextField.extend({
       if(_this.currentMinutes() === 960 && isTodayListed) { available_array.pop(); }
     }
 
-
-    Ember.$().ready(function(){
+    Ember.run.scheduleOnce('afterRender', this, function(){
       Ember.$('.pickadate').pickadate({
         format: 'ddd mmm d',
         monthsFull: moment.months(),

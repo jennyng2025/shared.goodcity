@@ -53,7 +53,7 @@ export default Ember.TextArea.extend({
 
       var msgTextbox = Ember.$(Ember.$(_this.element).closest(".message-textbar"));
 
-      Ember.$().ready(function(){
+      Ember.run.scheduleOnce('afterRender', this, function(){
         Ember.$(_this.element).focus(function(){
           msgTextbox.css({'position':'absolute'});
           window.scrollTo(0, Ember.$(document).height());

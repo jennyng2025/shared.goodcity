@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     var _this = this;
     this._super();
 
-    Ember.$().ready(function(){
+    Ember.run.scheduleOnce('afterRender', this, function(){
 
       // Scroll back to page-top on back-click
       Ember.$('.sticky_title_bar').on('click', '.back', function(){

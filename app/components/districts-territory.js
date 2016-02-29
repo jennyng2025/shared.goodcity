@@ -39,7 +39,9 @@ export default Ember.Component.extend({
   },
 
   didInsertElement(){
-    Ember.$().ready(function (){
+    this._super();
+
+    Ember.run.scheduleOnce('afterRender', this, function(){
       Ember.$(".radio").click(function(){
         Ember.$(".radio").removeClass('active');
         Ember.$(this).addClass('active');
