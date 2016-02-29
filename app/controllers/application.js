@@ -12,6 +12,10 @@ export default Ember.Controller.extend({
     }
   }),
 
+  supportGCLink: Ember.computed('session.language', function(){
+    return this.get('session.language') === 'zh-tw' ? "https://www.goodcity.hk/get_involved_zh.html" : "https://www.goodcity.hk/get_involved.html";
+  }),
+
   appVersion: Ember.computed(function(){
     return config.cordova.enabled ? config.APP.VERSION : null;
   }),
