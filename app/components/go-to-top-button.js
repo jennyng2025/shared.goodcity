@@ -9,6 +9,10 @@ export default Ember.Component.extend({
       var offset = 300;
       var duration = 300;
 
+      Ember.$('.sticky_title_bar').on('click', '.back', function(){
+        window.scrollTo(0, 0);
+      });
+
       Ember.$(window).scroll(function() {
         if (Ember.$(this).scrollTop() > offset) {
           Ember.$('.back-to-top').fadeIn(duration);
