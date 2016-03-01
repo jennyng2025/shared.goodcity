@@ -1,0 +1,26 @@
+.faq_list {
+
+  p, li {
+    @media #{$small-only} {
+      font-size: 0.8rem;
+      line-height: 1.4rem;
+      margin-bottom: 0.7rem;
+      margin-top: 0.7rem;
+    }
+  }
+
+  p b {
+    color: $white;
+  }
+
+  .question_list {
+    margin-left: 0.5rem;
+
+    li {
+      list-style: none;
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,6 +1,14 @@
-{{#if appVersion}}
-  <div class="app_version">
-    <div>{{t "version"}} {{appVersion}}</div>
-    <div>{{t "crossroads_foundation"}}</div>
+<div class="bottom_menu_list">
+  {{language-switcher action="setLang"}}
+
+  <div class="links">
+    {{#link-to 'terms_and_conditions'}}{{t "menu.terms"}}{{/link-to}}, {{#link-to 'pics'}}{{t "menu.policy"}}{{/link-to}}
   </div>
-{{/if}}
+
+  <div class="version">
+    {{t "crossroads_foundation"}}
+    {{#if appVersion}}
+       ({{t "menu.version_short"}} {{appVersion}})
+    {{/if}}
+  </div>
+</div>

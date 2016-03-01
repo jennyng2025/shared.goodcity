@@ -13,6 +13,8 @@ Router.map(function() {
   this.route('territories');
   this.route('districts');
   this.route('ggv_orders', { path: '/ggv_orders/:ggv_id' });
+  this.route('pics');
+  this.route('terms_and_conditions');
 
   this.route('not-found', { path: '/*path' });
 });
