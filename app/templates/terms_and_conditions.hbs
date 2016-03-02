@@ -1,84 +1,97 @@
-<nav class="tab-bar sticky_title_bar">
-  <section class="left-small">
-    {{#if session.isLoggedIn}}
-      {{link-to (t "back") 'offers' classNames='back'}}
-    {{else}}
-      {{link-to (t "back") 'register' classNames='back'}}
-    {{/if}}
-  </section>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    {{outlet "appMenuList"}}
 
-  <section class="middle tab-bar-section">
-    <h1 class="title">{{t "terms.title"}}</h1>
-  </section>
-</nav>
+    {{#init-foundation}}
+      <nav class="tab-bar {{unless session.isAdminApp 'sticky_title_bar'}}">
+        <section class="left-small">
+          {{#if session.isAdminApp}}
+            <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+          {{else}}
+            {{#if session.isLoggedIn}}
+              {{link-to (t "back") 'offers' classNames='back'}}
+            {{else}}
+              {{link-to (t "back") 'register' classNames='back'}}
+            {{/if}}
+          {{/if}}
+        </section>
 
-<section class="main-section faq_list offer_messages_section">
-  <div class="row">
-    <div class="small-12 columns">
-      <p>{{t "terms.info"}}</p>
+        <section class="middle tab-bar-section">
+          <h1 class="title">{{t "terms.title"}}</h1>
+        </section>
+      </nav>
+    {{/init-foundation}}
 
-      <p><b>{{t "terms.agreement.title"}}</b></p>
-      <ul>
-        <li>{{t "terms.agreement.terms_of_use"}}</li>
-        <li>{{t "terms.agreement.use_authority"}}</li>
-        <li>{{t "terms.agreement.lawful_use"}}</li>
-        <li>{{t "terms.agreement.security"}}</li>
-        <li>{{t "terms.agreement.access_attempt"}}</li>
-        <li>{{t "terms.agreement.website_rights"}}</li>
-      </ul>
+    <section class="main-section faq_list {{unless session.isAdminApp 'offer_messages_section'}}">
+      <div class="row">
+        <div class="small-12 columns">
+          <p>{{t "terms.info"}}</p>
 
-      <p><b>{{t "terms.changes.title"}}</b></p>
-      <p>{{t "terms.changes.info"}}</p>
-      <p>{{t "terms.changes.contact_us"}} <a href='mailto:privacy@crossroads.org.hk'>privacy@crossroads.org.hk</a></p>
+          <p><b>{{t "terms.agreement.title"}}</b></p>
+          <ul>
+            <li>{{t "terms.agreement.terms_of_use"}}</li>
+            <li>{{t "terms.agreement.use_authority"}}</li>
+            <li>{{t "terms.agreement.lawful_use"}}</li>
+            <li>{{t "terms.agreement.security"}}</li>
+            <li>{{t "terms.agreement.access_attempt"}}</li>
+            <li>{{t "terms.agreement.website_rights"}}</li>
+          </ul>
 
-      <p><b>{{t "terms.account.title"}}</b></p>
-      <p>{{t "terms.account.info"}}</p>
+          <p><b>{{t "terms.changes.title"}}</b></p>
+          <p>{{t "terms.changes.info"}}</p>
+          <p>{{t "terms.changes.contact_us"}} <a href='mailto:privacy@crossroads.org.hk'>privacy@crossroads.org.hk</a></p>
 
-      <p><b>{{t "terms.privacy.title"}}</b></p>
-      <p>{{t "terms.privacy.info"}} {{t "terms.privacy.pics"}} {{link-to (t "terms.privacy.here") "pics"}}. {{t "terms.privacy.privacy_link"}}
+          <p><b>{{t "terms.account.title"}}</b></p>
+          <p>{{t "terms.account.info"}}</p>
 
-      {{#external-link linkUrl="https://www.crossroads.org.hk/home/contact/privacy/"}}
-        {{t "terms.privacy.here"}}
-      {{/external-link}}.
+          <p><b>{{t "terms.privacy.title"}}</b></p>
+          <p>{{t "terms.privacy.info"}} {{t "terms.privacy.pics"}} {{link-to (t "terms.privacy.here") "pics"}}. {{t "terms.privacy.privacy_link"}}
 
-      {{t "terms.privacy.use"}}</p>
+          {{#external-link linkUrl="https://www.crossroads.org.hk/home/contact/privacy/"}}
+            {{t "terms.privacy.here"}}
+          {{/external-link}}.
 
-      <p><b>{{t "terms.intellectual.title"}}</b></p>
-      <p>{{t "terms.intellectual.info"}}</p>
-      <p>{{t "terms.intellectual.grant"}}</p>
-      <p>{{t "terms.intellectual.unauthorised_access"}}</p>
+          {{t "terms.privacy.use"}}</p>
 
-      <p><b>{{t "terms.content.title"}}</b></p>
-      <p>{{t "terms.content.info"}}</p>
-      <ul>
-        <li>{{t "terms.content.responsible"}}</li>
-        <li>{{t "terms.content.no_sell"}}</li>
-        <li>{{t "terms.content.privacy_policy"}}</li>
-        <li>{{t "terms.content.right_to_use"}}</li>
-        <li>{{t "terms.content.share"}}</li>
-        <li>{{t "terms.content.suggestions"}}</li>
-      </ul>
+          <p><b>{{t "terms.intellectual.title"}}</b></p>
+          <p>{{t "terms.intellectual.info"}}</p>
+          <p>{{t "terms.intellectual.grant"}}</p>
+          <p>{{t "terms.intellectual.unauthorised_access"}}</p>
 
-      <p><b>{{t "terms.warranty.title"}}</b></p>
-      <p>{{t "terms.warranty.info"}}</p>
+          <p><b>{{t "terms.content.title"}}</b></p>
+          <p>{{t "terms.content.info"}}</p>
+          <ul>
+            <li>{{t "terms.content.responsible"}}</li>
+            <li>{{t "terms.content.no_sell"}}</li>
+            <li>{{t "terms.content.privacy_policy"}}</li>
+            <li>{{t "terms.content.right_to_use"}}</li>
+            <li>{{t "terms.content.share"}}</li>
+            <li>{{t "terms.content.suggestions"}}</li>
+          </ul>
 
-      <p><b>{{t "terms.liability.title"}}</b></p>
-      <p>{{t "terms.liability.info"}}</p>
-      <p>{{t "terms.liability.exclude"}}</p>
-      <p>{{t "terms.liability.indemnify_us"}}</p>
+          <p><b>{{t "terms.warranty.title"}}</b></p>
+          <p>{{t "terms.warranty.info"}}</p>
 
-      <p><b>{{t "terms.policy_to_children.title"}}</b></p>
-      <p>{{t "terms.policy_to_children.info"}}</p>
+          <p><b>{{t "terms.liability.title"}}</b></p>
+          <p>{{t "terms.liability.info"}}</p>
+          <p>{{t "terms.liability.exclude"}}</p>
+          <p>{{t "terms.liability.indemnify_us"}}</p>
 
-      <p><b>{{t "terms.general.title"}}</b></p>
-      <p>{{t "terms.general.info"}}</p>
-      <p>{{t "terms.general.hk_law"}}</p>
-      <p>{{t "terms.general.language"}}</p>
+          <p><b>{{t "terms.policy_to_children.title"}}</b></p>
+          <p>{{t "terms.policy_to_children.info"}}</p>
 
-      <p><b>{{t "terms.contact.title"}}</b></p>
-      <p>{{t "terms.contact.info"}} <a href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> </p>
+          <p><b>{{t "terms.general.title"}}</b></p>
+          <p>{{t "terms.general.info"}}</p>
+          <p>{{t "terms.general.hk_law"}}</p>
+          <p>{{t "terms.general.language"}}</p>
 
-    </div>
+          <p><b>{{t "terms.contact.title"}}</b></p>
+          <p>{{t "terms.contact.info"}} <a href='mailto:contact@goodcity.hk'>contact@goodcity.hk</a> </p>
+
+        </div>
+      </div>
+      {{go-to-top-button}}
+    </section>
+
   </div>
-  {{go-to-top-button}}
-</section>
+</div>
