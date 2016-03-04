@@ -22,6 +22,10 @@ export default DS.Model.extend({
   imageId:         attr('number'),
   offerId:         attr('number'),
   inventoryNumber: attr('string'),
+  grade:           attr('string'),
+
+  donorCondition:   belongsTo('donor_condition', { async: false }),
+  donorConditionId: Ember.computed.foreignKey('donorCondition.id'),
 
   isReceived: Ember.computed.equal("state", "received"),
 
