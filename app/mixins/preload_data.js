@@ -17,7 +17,7 @@ export default Ember.Mixin.create({
         new AjaxPromise("/auth/current_user_profile", "GET", this.session.get("authToken"))
           .then(data => {
             this.store.pushPayload(data);
-            this.store.push('user', data.user_profile);
+            this.store.pushPayload({ user: data.user_profile });
             this.notifyPropertyChange("session.currentUser");
           })
       );

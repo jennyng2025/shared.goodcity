@@ -92,18 +92,20 @@ export default Ember.Controller.extend({
     if (!this.get("previewImage")) {
       return css;
     }
-    return css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
-      "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";";
+    return new Ember.Handlebars.SafeString(
+      css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
+      "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";"
+    );
   }),
 
   instructionBoxCss: Ember.computed("previewImage", "isExpanded", function(){
     var height = Ember.$(window).height() * 0.6;
-    return "min-height:" + height + "px;";
+    return new Ember.Handlebars.SafeString("min-height:" + height + "px;");
   }),
 
   thumbImageCss: Ember.computed(function(){
     var imgWidth = Math.min(120, Ember.$(window).width() / 4 - 14);
-    return "width:" + imgWidth + "px; height:" + imgWidth + "px;";
+    return new Ember.Handlebars.SafeString("width:" + imgWidth + "px; height:" + imgWidth + "px;");
   }),
 
   noImageLink: Ember.computed("noImage", function(){
@@ -265,7 +267,8 @@ export default Ember.Controller.extend({
           .catch(error => { pkg.rollback(); throw error; });
       } else {
         this.get("item.images").setEach("favourite", false);
-        this.get("previewImage").set("favourite", true).save()
+        this.get("previewImage").set("favourite", true);
+        this.get("previewImage").save()
           .catch(error => {
             this.get("item.images").forEach(img => img.rollback());
             throw error;

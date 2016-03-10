@@ -2,7 +2,7 @@
 
   <div id="main-image" class="{{if isExpanded 'is-expanded'}}">
     {{#unless noImage}}
-      <div style={{{previewImageBgCss}}}>
+      <div style={{previewImageBgCss}}>
         <div id="main-image-controls">
           <a {{action "deleteImage"}} title={{t "edit_images.delete_tooltip"}}>
             <i class="fa fa-trash"></i>
@@ -16,7 +16,7 @@
         </div>
       </div>
     {{else}}
-    <div class="center-box" style={{{instructionBoxCss}}}>
+    <div class="center-box" style={{instructionBoxCss}}>
       <span class="center-item">
         <h3>{{t "edit_images.donating_what"}}</h3>
         <p>{{t "edit_images.take_photos"}}</p>
@@ -27,7 +27,7 @@
 
   <ul id="photo-list" class="{{if isExpanded 'hidden'}}">
     <li>
-      <a id="add-photo" {{action "triggerUpload"}} class="center-box {{unless isReady 'disabled'}}" style={{{thumbImageCss}}}>
+      <a id="add-photo" {{action "triggerUpload"}} class="center-box {{unless isReady 'disabled'}}" style={{thumbImageCss}}>
         <span class="center-item">
           <i class="fa fa-camera"></i>
           {{addPhotoLabel}}
@@ -45,7 +45,7 @@
       {{#each images as |image|}}
         <li>
           <a {{action "setPreview" image}} class="{{if image.selected 'selected'}}">
-            <img src="{{image.thumbImageUrl}}" style={{{thumbImageCss}}} class="thumb" />
+            <img src="{{image.thumbImageUrl}}" style={{thumbImageCss}} class="thumb" />
             <i class="fa fa-star {{if (js-x 'p0 == p1' image.id favouriteImage.id) '' 'hidden'}}"></i>
           </a>
         </li>
