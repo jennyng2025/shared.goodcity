@@ -1,6 +1,6 @@
 {{#if session.isLoggedIn}}
   {{#init-foundation className="notification"}}
-    {{#notification-bar}}
+    {{#notification-bar currentController=this}}
       <div class="contain-to-grid sticky notification">
         <nav class="top-bar" data-topbar role="navigation">
           <div class="row">
