@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import addressDetails from './address_details';
 import AjaxPromise from './../../utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default addressDetails.extend({
   deliveryController: Ember.inject.controller('delivery'),
@@ -21,7 +22,7 @@ export default addressDetails.extend({
       var offer      = delivery.get('offer');
       var schedule   = delivery.get('schedule');
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var handleError = error => { loadingView.destroy(); throw error; };
 
       contactProperties.addressAttributes = addressProperties;

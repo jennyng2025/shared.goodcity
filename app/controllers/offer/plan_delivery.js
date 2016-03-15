@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AjaxPromise from '../../utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -32,7 +33,7 @@ export default Ember.Controller.extend({
 
   actions: {
     startDelivery(delivery_type) {
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       var offerId = this.get('offerController.model.id');
       var offer = this.store.peekRecord('offer', offerId);
       var delivery = offer.get("delivery");

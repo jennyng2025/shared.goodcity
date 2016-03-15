@@ -1,6 +1,7 @@
 import Ember from "ember";
 import config from '../config/environment';
 import AjaxPromise from '../utils/ajax-promise';
+const { getOwner } = Ember;
 
 export default Ember.Service.extend({
   session: Ember.inject.service(),
@@ -97,7 +98,7 @@ export default Ember.Service.extend({
     }
 
     function processTappedNotification(payload) {
-      var notifications = _this.container.lookup("controller:notifications");
+      var notifications = getOwner(_this).lookup("controller:notifications");
       if (payload.category === "incoming_call") {
         notifications.acceptCall(payload);
       }
@@ -109,7 +110,7 @@ export default Ember.Service.extend({
         if(hasMessage) {
           notifications.transitionToRoute.apply(notifications, payload.route);
         } else {
-          var loadingView = _this.container.lookup('component:loading').append();
+          var loadingView = getOwner(_this).lookup('component:loading').append();
           var messageUrl = payload.item_id ? `/messages?item_id=${payload.item_id}` : `/messages?offer_id=${payload.offer_id}`
           new AjaxPromise(messageUrl, "GET", _this.get("session.authToken"), {})
             .then(function(data) {

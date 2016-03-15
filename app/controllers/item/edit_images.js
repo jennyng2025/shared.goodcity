@@ -1,6 +1,7 @@
 import Ember from "ember";
 import { translationMacro as t } from "ember-i18n";
 import config from '../../config/environment';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   offerController: Ember.inject.controller('offer'),
@@ -118,7 +119,7 @@ export default Ember.Controller.extend({
 
   createItem: function(donorCondition, withoutImage, identifier) {
     var _this = this;
-    var loadingView = this.container.lookup('component:loading').append();
+    var loadingView = getOwner(this).lookup('component:loading').append();
     var offer = this.get("offer");
     var item = this.get("store").createRecord("item", {
       offer: offer,
@@ -285,7 +286,7 @@ export default Ember.Controller.extend({
       }
       else {
         this.get("messageBox").confirm(this.get("i18n").t("edit_images.delete_confirm"), () => {
-          var loadingView = this.container.lookup('component:loading').append();
+          var loadingView = getOwner(this).lookup('component:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
           img.save()

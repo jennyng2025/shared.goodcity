@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+const { getOwner } = Ember;
 
 var attr = DS.attr,
     hasMany = DS.hasMany,
@@ -270,7 +271,7 @@ export default DS.Model.extend({
   }),
 
   hideBookingModification: Ember.computed("delivery.gogovanOrder", "delivery.gogovanOrder.status", function(){
-    var session = this.container.lookup("service:session");
+    var session = getOwner(this).lookup("service:session");
     return !session.get('isAdminApp') && this.get("delivery.isGogovan")
     && this.get("delivery.gogovanOrder.isCompleted");
   }),

@@ -3,6 +3,7 @@
 // Ex: <a href="/offers/1/plan_delivery"></a> will be trated as route "offers.plan_delivery"
 
 import Ember from 'ember';
+const { getOwner } = Ember;
 
 export default Ember.Component.extend({
 
@@ -16,7 +17,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     var _this = this;
-    var router = this.container.lookup("router:main");
+    var router = getOwner(this).lookup("router:main");
 
     this._super();
 
