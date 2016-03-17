@@ -1,6 +1,7 @@
 import AjaxPromise from './../../utils/ajax-promise';
 import addressDetails from './address_details';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default addressDetails.extend({
   deliveryController: Ember.inject.controller('delivery'),
@@ -66,7 +67,7 @@ export default addressDetails.extend({
   actions: {
     bookVan() {
       var controller = this;
-      var loadingView = controller.container.lookup('component:loading').append();
+      var loadingView = getOwner(controller).lookup('component:loading').append();
       var selectedDate = controller.get('selectedDate');
       var deliveryId = controller.get('deliveryController.model.id');
       var delivery = controller.store.peekRecord('delivery', deliveryId);

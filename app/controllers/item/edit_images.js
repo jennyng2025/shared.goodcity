@@ -159,7 +159,7 @@ export default Ember.Controller.extend({
 
   cancelItem: function(controller, item) {
     var offer = item.get('offer');
-    var loadingView = controller.container.lookup('component:loading').append();
+    var loadingView = getOwner(controller).lookup('component:loading').append();
 
     if(offer.get('itemCount') === 1){
       var delivery = offer.get("delivery");
@@ -190,7 +190,7 @@ export default Ember.Controller.extend({
   removeImage: function(controller, item) {
     var _this = this;
     var img = item.get("images.firstObject");
-    var loadingView = controller.container.lookup('component:loading').append();
+    var loadingView = getOwner(controller).lookup('component:loading').append();
     img.deleteRecord();
     img.save()
       .then(i => {
