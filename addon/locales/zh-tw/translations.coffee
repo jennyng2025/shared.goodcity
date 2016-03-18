@@ -18,7 +18,7 @@ I18nTranslationsZhTw =
   "back" : "回到上一頁"
   "end" : "結束"
   "done": "完成"
-  "other": "Other"
+  "other": "其他"
   "error.message" : "出錯了，請見諒！"
   "images" : "圖片"
   "delete" : "刪除"
@@ -47,15 +47,15 @@ I18nTranslationsZhTw =
   "thank_you": "多謝"
   "go_to_top": "回到頁面頂端"
   "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
-  "loading_timeout_error": "Loading view timeout reached."
+  "loading_timeout_error": "Loading view timeout reached.時限而過"
   "items_text": "項目"
-  "version": "Version"
-  "crossroads_foundation": "Crossroads Foundation"
+  "version": "版本"
+  "crossroads_foundation": "十字路會"
 
   "menu":
-    "terms": "Terms of Use"
-    "policy": "Privacy Policy"
-    "version_short": "ver."
+    "terms": "使用條款"
+    "policy": "個人私隱政策"
+    "version_short": "版本"
 
   "day":
     "today": "今天"
@@ -118,7 +118,7 @@ I18nTranslationsZhTw =
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
     "today_with_time": "今天, {{time}}"
-    "chat_note": "Chat about this item with our reviewers"
+    "chat_note": "與審查員討論此項物資"
 
   "notifications":
     "view": "查看"
@@ -142,8 +142,8 @@ I18nTranslationsZhTw =
       "back": "回到上一頁"
       "cancel_booking": "取消預約"
       "confirm_ggv_cancel": "當GoGoVan確認預約取消，您就能取消預約"
-      "driver_mobile": "Driver's Mobile"
-      "ggv_office": "GoGoVan Office"
+      "driver_mobile": "司機電話號碼"
+      "ggv_office": "GoGoVan辦公室"
 
   "delivery_details":
     "name": "聯絡人姓名"
@@ -185,13 +185,13 @@ I18nTranslationsZhTw =
     "missing": "{{name}} 將此物的狀況改為'失蹤'"
 
   "offer_log":
-    "donor_called": "{{name}} called"
-    "call_accepted": "{{name}} answered call"
+    "donor_called": "{{name}} 曾來電"
+    "call_accepted": "{{name}} 接聽來電"
 
   "edit_images":
-    "upload": "Choose Image"
-    "camera": "Take Photo"
-    "cancel": "Cancel"
+    "upload": "選擇圖片"
+    "camera": "拍照"
+    "cancel": "取消"
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"
     "cant_delete_last_image" : "最少需要一張圖片"
@@ -203,8 +203,8 @@ I18nTranslationsZhTw =
     "image_uploading": "圖片上載中"
     "remove_image": "移除圖片"
     "cancel_item": "取消項目"
-    "cannot_provide_photo": "Cannot provide photo"
-    "last_image_with_item": "This is the only image associated with this item"
+    "cannot_provide_photo": "沒有照片提供"
+    "last_image_with_item": "此項物資只有一張圖片"
     "cancelling_item_will_cancel_offer" : "刪除最後一項物品即會刪除此捐獻及已預約的運輸。"
 
   "plan_delivery":
@@ -304,7 +304,7 @@ I18nTranslationsZhTw =
   "drop-off":
     "select_schedule": "選擇時間"
     "expect_delivery": "物資大約何時到達？"
-    "find_crossroads": "Find Crossroads on Google Maps"
+    "find_crossroads": "在Google地圖上尋找十字路會位置"
     "open_new_tab": "將在新視窗打開"
     "arrive_on_time": "煩請於我們的辦公時間內到達，以確保我們能順利接收您的物資。"
     "book_schedule": "預約時間"
@@ -314,10 +314,10 @@ I18nTranslationsZhTw =
         "show_more": "更多"
 
   "offer":
-    "disable": "關閉"
-    "closed_by": "Closed by {{lastName}} {{firstName}}"
-    "cancelled_by": "Cancelled by {{lastName}} {{firstName}}"
-    "received_by": "Received by {{lastName}} {{firstName}}"
+    "disable": "暫停"
+    "closed_by": "{{lastName}} {{firstName}} 封存"
+    "cancelled_by": "{{lastName}} {{firstName}} 取消"
+    "received_by": "{{lastName}} {{firstName}} 接收"
 
   # Components
   "upload-images":
@@ -398,7 +398,7 @@ I18nTranslationsZhTw =
     "last_updated": "本聲明最後更新日期為2014年8月。"
 
   "terms":
-    "title": "Terms and Conditions"
+    "title": "條款及細則"
     "info": "GoodCity.hk is part of the Crossroads Foundation network. By using the GoodCity.hk website http://www.goodcity.hk (\"GoodCity Website\") you are agreeing to be bound by these terms of use between you and the Crossroads Foundation and its affiliates (\"Crossroads\", \"us\", \"we\" and \"our\")."
 
     "agreement":
