@@ -3,16 +3,12 @@
     {{outlet "appMenuList"}}
 
     {{#init-foundation}}
-      <nav class="tab-bar {{unless session.isAdminApp 'sticky_title_bar'}}">
+      <nav class="tab-bar">
         <section class="left-small">
-          {{#if session.isAdminApp}}
+          {{#if session.isLoggedIn}}
             <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
           {{else}}
-            {{#if session.isLoggedIn}}
-              {{link-to (t "back") 'offers' classNames='back'}}
-            {{else}}
-              {{link-to (t "back") 'register' classNames='back'}}
-            {{/if}}
+            {{link-to (t "back") 'register' classNames='back'}}
           {{/if}}
         </section>
 
@@ -22,7 +18,7 @@
       </nav>
     {{/init-foundation}}
 
-    <section class="main-section faq_list {{unless session.isAdminApp 'offer_messages_section'}}">
+    <section class="main-section faq_list">
       {{#visit-page-start}}
         <div class="row">
           <div class="small-12 columns">
