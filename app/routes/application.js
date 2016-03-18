@@ -2,6 +2,7 @@ import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
 import preloadDataMixin from '../mixins/preload_data';
+const { getOwner } = Ember;
 
 export default Ember.Route.extend(preloadDataMixin, {
   cordova: Ember.inject.service(),
@@ -89,7 +90,7 @@ export default Ember.Route.extend(preloadDataMixin, {
     },
     loading() {
       Ember.$(".loading-indicator").remove();
-      var view = this.container.lookup('component:loading').append();
+      var view = getOwner(this).lookup('component:loading').append();
       this.router.one('didTransition', view, 'destroy');
     },
     // this is hopefully only triggered from promises from routes

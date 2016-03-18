@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+const { getOwner } = Ember;
 
 var attr = DS.attr,
     belongsTo = DS.belongsTo;
@@ -16,7 +17,7 @@ export default DS.Model.extend({
   offer:       belongsTo('offer', { async: false }),
 
   myMessage: Ember.computed(function(){
-    var session = this.container.lookup("service:session");
+    var session = getOwner(this).lookup("service:session");
     return this.get("sender.id") === session.get("currentUser.id");
   }),
 

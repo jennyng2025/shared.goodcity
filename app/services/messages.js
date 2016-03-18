@@ -1,4 +1,5 @@
 import Ember from "ember";
+const { getOwner } = Ember;
 
 export default Ember.Service.extend({
   logger: Ember.inject.service(),
@@ -6,10 +7,10 @@ export default Ember.Service.extend({
 
   markRead: function(message) {
     if(message.get("isUnread")) {
-      var adapter = this.container.lookup("adapter:application");
+      var adapter = getOwner(this).lookup("adapter:application");
       var url = adapter.buildURL("message", message.id) + "/mark_read";
       adapter.ajax(url, "PUT")
-        .then(data => message.setProperties(data.message))
+        .then(data => { delete data.message.id; message.setProperties(data.message); })
         .catch(error => this.get("logger").error(error));
     }
   },

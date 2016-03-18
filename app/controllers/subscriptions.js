@@ -1,5 +1,6 @@
 import Ember from "ember";
 import config from "../config/environment";
+const { getOwner } = Ember;
 
 function run(func) {
   if (func) {
@@ -33,7 +34,7 @@ export default Ember.Controller.extend({
     this.set("status", {"online": online, "hidden": hidden, "text": text});
 
     if(!this.session.get("currentUser.fullName") && online) {
-      var currentUrl = this.container.lookup("router:main").get("url");
+      var currentUrl = getOwner(this).lookup("router:main").get("url");
       if (currentUrl == "/offline") {
         this.transitionTo("/");
       } else {
@@ -150,7 +151,9 @@ export default Ember.Controller.extend({
     if (data.operation === "update" && !existingItem) {
       this.store.findRecord(type, item.id);
     } else if (["create","update"].contains(data.operation)) {
-        this.store.push(type, item);
+        var payload = {};
+        payload[type] = item;
+        this.store.pushPayload(payload);
     } else if (existingItem) { //delete
       this.store.unloadRecord(existingItem);
     }

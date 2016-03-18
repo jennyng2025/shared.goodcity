@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from './../../utils/ajax-promise';
 import { translationMacro as t } from "ember-i18n";
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -29,7 +30,7 @@ export default Ember.Controller.extend({
   actions: {
     bookSchedule() {
       var controller   = this;
-      var loadingView  = this.container.lookup('component:loading').append();
+      var loadingView  = getOwner(this).lookup('component:loading').append();
       var selectedSlot = controller.get('selectedId');
       var slotName     = controller.get('slots').filterBy('id', selectedSlot.get('id')).get('firstObject.name');
 

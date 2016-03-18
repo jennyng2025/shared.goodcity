@@ -5,7 +5,7 @@ export default {
   name: 'timeago',
 
   initialize: function(app) {
-    var i18n = app.container.lookup("service:i18n");
+    var i18n = app.lookup("service:i18n");
     var loc = str => i18n.t("time_ago." + str).string;
 
     moment.locale('en', {

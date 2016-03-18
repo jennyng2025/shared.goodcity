@@ -1,6 +1,7 @@
 import Ember from "ember";
 import { translationMacro as t } from "ember-i18n";
 import config from '../../config/environment';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
   offerController: Ember.inject.controller('offer'),
@@ -92,18 +93,20 @@ export default Ember.Controller.extend({
     if (!this.get("previewImage")) {
       return css;
     }
-    return css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
-      "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";";
+    return new Ember.Handlebars.SafeString(
+      css + "background-image:url(" + this.get("previewImage.imageUrl") + ");" +
+      "background-size: " + (this.get("isExpanded") ? "contain" : "cover") + ";"
+    );
   }),
 
   instructionBoxCss: Ember.computed("previewImage", "isExpanded", function(){
     var height = Ember.$(window).height() * 0.6;
-    return "min-height:" + height + "px;";
+    return new Ember.Handlebars.SafeString("min-height:" + height + "px;");
   }),
 
   thumbImageCss: Ember.computed(function(){
     var imgWidth = Math.min(120, Ember.$(window).width() / 4 - 14);
-    return "width:" + imgWidth + "px; height:" + imgWidth + "px;";
+    return new Ember.Handlebars.SafeString("width:" + imgWidth + "px; height:" + imgWidth + "px;");
   }),
 
   noImageLink: Ember.computed("noImage", function(){
@@ -116,7 +119,7 @@ export default Ember.Controller.extend({
 
   createItem: function(donorCondition, withoutImage, identifier) {
     var _this = this;
-    var loadingView = this.container.lookup('component:loading').append();
+    var loadingView = getOwner(this).lookup('component:loading').append();
     var offer = this.get("offer");
     var item = this.get("store").createRecord("item", {
       offer: offer,
@@ -156,7 +159,7 @@ export default Ember.Controller.extend({
 
   cancelItem: function(controller, item) {
     var offer = item.get('offer');
-    var loadingView = controller.container.lookup('component:loading').append();
+    var loadingView = getOwner(controller).lookup('component:loading').append();
 
     if(offer.get('itemCount') === 1){
       var delivery = offer.get("delivery");
@@ -187,7 +190,7 @@ export default Ember.Controller.extend({
   removeImage: function(controller, item) {
     var _this = this;
     var img = item.get("images.firstObject");
-    var loadingView = controller.container.lookup('component:loading').append();
+    var loadingView = getOwner(controller).lookup('component:loading').append();
     img.deleteRecord();
     img.save()
       .then(i => {
@@ -265,7 +268,8 @@ export default Ember.Controller.extend({
           .catch(error => { pkg.rollback(); throw error; });
       } else {
         this.get("item.images").setEach("favourite", false);
-        this.get("previewImage").set("favourite", true).save()
+        this.get("previewImage").set("favourite", true);
+        this.get("previewImage").save()
           .catch(error => {
             this.get("item.images").forEach(img => img.rollback());
             throw error;
@@ -282,7 +286,7 @@ export default Ember.Controller.extend({
       }
       else {
         this.get("messageBox").confirm(this.get("i18n").t("edit_images.delete_confirm"), () => {
-          var loadingView = this.container.lookup('component:loading').append();
+          var loadingView = getOwner(this).lookup('component:loading').append();
           var img = this.get("previewImage");
           img.deleteRecord();
           img.save()

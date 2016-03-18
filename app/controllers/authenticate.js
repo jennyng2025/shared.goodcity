@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AjaxPromise from '../utils/ajax-promise';
 import config from '../config/environment';
+const { getOwner } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -20,7 +21,7 @@ export default Ember.Controller.extend({
       var otp_auth_key = this.get('session.otpAuthKey');
       var _this = this;
 
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
       new AjaxPromise("/auth/verify", "POST", null, {pin: pin, otp_auth_key: otp_auth_key})
         .then(function(data) {
           _this.setProperties({pin:null});
@@ -43,7 +44,7 @@ export default Ember.Controller.extend({
 
     resendPin() {
       var mobile = this.get('mobile');
-      var loadingView = this.container.lookup('component:loading').append();
+      var loadingView = getOwner(this).lookup('component:loading').append();
 
       new AjaxPromise("/auth/send_pin", "POST", null, {mobile: mobile})
         .then(data => {

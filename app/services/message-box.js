@@ -1,3 +1,5 @@
+const { getOwner } = Ember;
+
 export default Ember.Service.extend({
   i18n: Ember.inject.service(),
 
@@ -13,7 +15,7 @@ export default Ember.Service.extend({
     $(document).trigger("cancel-loading-timer");
     Ember.$(".loading-indicator").remove();
 
-    var view = this.container.lookup("component:message-box").append();
+    var view = getOwner(this).lookup("component:message-box").append();
     view.set("btn1Text", btn1Text);
     view.set("btn1Callback", btn1Callback);
     view.set("btn2Text", btn2Text);

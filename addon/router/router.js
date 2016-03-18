@@ -3,8 +3,8 @@ import Ember from 'ember';
 var Router = Ember.Router.extend();
 
 Router.map(function() {
-  this.resource('i18n', { path: '/i18n' });
-  this.resource('logout', { path: '/logout' });
+  this.route('i18n', { path: '/i18n' });
+  this.route('logout', { path: '/logout' });
   this.route('login');
   this.route('post_login');
   this.route('resend');
