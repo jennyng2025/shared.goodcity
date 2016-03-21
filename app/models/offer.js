@@ -54,13 +54,15 @@ export default DS.Model.extend({
     return this.get("items").rejectBy("state", "draft").length;
   }),
 
-  packages: Ember.computed(function(){
-    return this.store.filter("package", p => p.get("offerId") === parseInt(this.get("id")));
+  allPackages: Ember.computed(function(){
+    return this.store.peekAll("package");
   }),
 
-  itemPackages: Ember.computed(function(){
-    return this.store.peekAll("package").filterBy("offerId", parseInt(this.get("id")));
+  packages: Ember.computed("allPackages.@each.offerId", function(){
+    return this.get("allPackages").filterBy("offerId", parseInt(this.get("id")));
   }),
+
+  itemPackages: Ember.computed.alias("packages"),
 
   receivedCount: Ember.computed("packages.@each.state", function(){
     return this.get('packages').filterBy("state", "received").length;
