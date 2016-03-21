@@ -3,7 +3,7 @@ import VerifyOfferStateRoute from './verify_offer_state';
 export default VerifyOfferStateRoute.extend({
 
   setupController(controller, model) {
-    controller.set('model', model);
+    this._super(controller, model);
 
     if(model.get('schedule') && model.get("wasDropOff")){
       var selectedSlot = model.get('schedule.slot').toString();
