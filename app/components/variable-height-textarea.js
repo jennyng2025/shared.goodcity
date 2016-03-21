@@ -5,6 +5,7 @@ export default Ember.TextArea.extend({
   tagName: "textarea",
   attributeBindings: ["disabled"],
   disabled: false,
+  cordova: Ember.inject.service(),
 
   valueChanged: Ember.observer('value', function () {
     var _this = this;
@@ -55,8 +56,10 @@ export default Ember.TextArea.extend({
 
       Ember.run.scheduleOnce('afterRender', this, function(){
         Ember.$(_this.element).focus(function(){
-          msgTextbox.css({'position':'absolute'});
           window.scrollTo(0, Ember.$(document).height());
+          if(_this.get("cordova").isIOS()) {
+            msgTextbox.css({'position':'absolute'});
+          }
         });
 
         Ember.$(_this.element).blur(function(){
