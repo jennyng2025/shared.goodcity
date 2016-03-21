@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
     var messages = this.get("allMessages");
     messages = this.get("isItemThread") ?
       messages.filterBy("item.id", this.get("item.id")) :
-      messages.filterBy("offer.id", this.get("offer.id"));
+      messages.filterBy("offer.id", this.get("offer.id")).filterBy("item", null);
     return messages.filterBy("isPrivate", this.get("isPrivate"));
   }),
 
