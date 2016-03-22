@@ -11,14 +11,14 @@ I18nTranslationsZhTw =
   "language": "繁體中文"
   "loading": "正在加載..."
   "loading_timeout": "需時太久了！點擊可以重新加載"
-  "goodcity.hk" : "GoodCity.HK"
+  "goodcity.hk" : "好人好市.HK"
   "skip_intro" : "跳過簡介"
   "next" : "下一步"
   "prev" : "上一步"
   "back" : "回到上一頁"
   "end" : "結束"
   "done": "完成"
-  "other": "Other"
+  "other": "其他"
   "error.message" : "出錯了，請見諒！"
   "images" : "圖片"
   "delete" : "刪除"
@@ -47,15 +47,15 @@ I18nTranslationsZhTw =
   "thank_you": "多謝"
   "go_to_top": "回到頁面頂端"
   "input_length_error_message" : "InputWithCounter doesn\'t work without a maxlength attribute'"
-  "loading_timeout_error": "Loading view timeout reached."
+  "loading_timeout_error": "讀取時限已過"
   "items_text": "項目"
-  "version": "Version"
-  "crossroads_foundation": "Crossroads Foundation"
+  "version": "版本"
+  "crossroads_foundation": "十字路會"
 
   "menu":
-    "terms": "Terms of Use"
-    "policy": "Privacy Policy"
-    "version_short": "ver."
+    "terms": "使用條款"
+    "policy": "私隱政策"
+    "version_short": "版本"
 
   "day":
     "today": "今天"
@@ -118,7 +118,7 @@ I18nTranslationsZhTw =
     "unread" : "({{unreadCount}}) 條未讀信息"
     "owner" : "你"
     "today_with_time": "今天, {{time}}"
-    "chat_note": "Chat about this item with our reviewers"
+    "chat_note": "與審查員討論這項物資狀況"
 
   "notifications":
     "view": "查看"
@@ -142,8 +142,8 @@ I18nTranslationsZhTw =
       "back": "回到上一頁"
       "cancel_booking": "取消預約"
       "confirm_ggv_cancel": "當GoGoVan確認預約取消，您就能取消預約"
-      "driver_mobile": "Driver's Mobile"
-      "ggv_office": "GoGoVan Office"
+      "driver_mobile": "司機電話號碼"
+      "ggv_office": "GoGoVan辦公室"
 
   "delivery_details":
     "name": "聯絡人姓名"
@@ -185,13 +185,13 @@ I18nTranslationsZhTw =
     "missing": "{{name}} 將此物的狀況改為'失蹤'"
 
   "offer_log":
-    "donor_called": "{{name}} called"
-    "call_accepted": "{{name}} answered call"
+    "donor_called": "{{name}} 曾經來電"
+    "call_accepted": "{{name}} 接通電話"
 
   "edit_images":
-    "upload": "Choose Image"
-    "camera": "Take Photo"
-    "cancel": "Cancel"
+    "upload": "選擇圖片"
+    "camera": "拍照"
+    "cancel": "取消"
     "add_photo" : "加入圖片"
     "delete_confirm" : "確定要刪除圖片嗎？"
     "cant_delete_last_image" : "最少需要一張圖片"
@@ -203,8 +203,8 @@ I18nTranslationsZhTw =
     "image_uploading": "圖片上載中"
     "remove_image": "移除圖片"
     "cancel_item": "取消項目"
-    "cannot_provide_photo": "Cannot provide photo"
-    "last_image_with_item": "This is the only image associated with this item"
+    "cannot_provide_photo": "未能提供照片"
+    "last_image_with_item": "此為這項物資的唯一圖片"
     "cancelling_item_will_cancel_offer" : "刪除最後一項物品即會刪除此捐獻及已預約的運輸。"
 
   "plan_delivery":
@@ -304,7 +304,7 @@ I18nTranslationsZhTw =
   "drop-off":
     "select_schedule": "選擇時間"
     "expect_delivery": "物資大約何時到達？"
-    "find_crossroads": "Find Crossroads on Google Maps"
+    "find_crossroads": "在Google地圖上尋找十字路會"
     "open_new_tab": "將在新視窗打開"
     "arrive_on_time": "煩請於我們的辦公時間內到達，以確保我們能順利接收您的物資。"
     "book_schedule": "預約時間"
@@ -315,9 +315,9 @@ I18nTranslationsZhTw =
 
   "offer":
     "disable": "關閉"
-    "closed_by": "Closed by {{lastName}} {{firstName}}"
-    "cancelled_by": "Cancelled by {{lastName}} {{firstName}}"
-    "received_by": "Received by {{lastName}} {{firstName}}"
+    "closed_by": "由 {{lastName}} {{firstName}} 關閉"
+    "cancelled_by": "由 {{lastName}} {{firstName}} 取消"
+    "received_by": "由 {{lastName}} {{firstName}} 接收"
 
   # Components
   "upload-images":
@@ -398,67 +398,67 @@ I18nTranslationsZhTw =
     "last_updated": "本聲明最後更新日期為2014年8月。"
 
   "terms":
-    "title": "Terms and Conditions"
-    "info": "GoodCity.hk is part of the Crossroads Foundation network. By using the GoodCity.hk website http://www.goodcity.hk (\"GoodCity Website\") you are agreeing to be bound by these terms of use between you and the Crossroads Foundation and its affiliates (\"Crossroads\", \"us\", \"we\" and \"our\")."
+    "title": "使用條款及細則"
+    "info": "好人好市.hk為十字路會聯網的一部分。使用好人好市.hk網頁http://www.goodcity.hk (\"好人好市網站\")，即表示閣下同意閣下與十字路會及其旗下所屬部門 (\"十字路會\", \"我們\" and \"我們的\")之間的使用條款。"
 
     "agreement":
-      "title": "Your Agreement"
-      "terms_of_use": "You agree to use the GoodCity Website in accordance with these terms of use."
-      "use_authority": "You agree to use the GoodCity Website only for your personal use. If you are using the GoodCity Website on behalf of a company, partnership, association, government or other organisation, you represent and warrant that you are authorised to do so and that you are authorised to bind your organisation to these terms of use."
-      "lawful_use": "You agree to use the GoodCity Website only for lawful purposes."
-      "security": "You agree not to take any action that might compromise the security of the GoodCity Website, render the GoodCity Website inaccessible to others or otherwise cause damage to the GoodCity Website or its content."
-      "access_attempt": "You agree not to attempt to access any parts of the GoodCity Website that are not intended for you;"
-      "website_rights": "You agree not to use the GoodCity Website in any manner that might interfere with the rights of third parties."
+      "title": "閣下的同意書"
+      "terms_of_use": "閣下同意跟從下列使用條款使用好人好市網站。"
+      "use_authority": "閣下同意僅以個人身份使用好人好市網站。假如閣下代表公司、合作夥伴、聯會、政府或其他機構使用好人好市網頁，閣下必須代表並保證已經得到貴機構之授權，並代表其遵從下列使用條款。"
+      "lawful_use": "閣下同意僅為合法目的使用好人好市網站。"
+      "security": "閣下同意不會採取任何可能損害好人好市網站保安之手段，導致他人無法讀取好人好市網站及其內容，並/或對之造成損害。"
+      "access_attempt": "閣下同意不會企圖讀取好人好市網站上，任何不對閣下開放的內容；"
+      "website_rights": "閣下同意不會以任何可能損害第三方權益的方式使用好人好市網站。"
     "changes":
-      "title": "Changes to these Terms of Use"
-      "info": "We may from time to time issue, revise or add specific instructions, policies and terms applicable to your use of the GoodCity Website and these instructions, policies and terms form part of these terms of use. Please read the GoodCity Website terms of use carefully and come back to review them from time to time. By continuing to use the GoodCity Website after any amendment to the terms of use you are agreeing to these terms of use as amended."
-      "contact_us": "If you have any questions about the GoodCity Website terms of use, please contact us at"
+      "title": "使用條款的更改"
+      "info": "我們或會間中發布、修正或增加有關閣下使用好人好市網站的特定指引、政策及條款，而這些指引、政策及條款為使用條款的一部份。請細閱好人好市網站上的使用條款，並間中重閱。使用條款經過修正後繼續使用好人好市網站，即表示閣下同意經改正後的條款。"
+      "contact_us": "如閣下對好人好市網站上的使用條款有任何疑問，請與我們聯絡"
     "account":
-      "title": "Account Details"
-      "info": "Your GoodCity account name remains our property and we can reclaim and reuse the account name once your account is terminated or deactivated for whatever reason by either you or us. You are responsible for safeguarding any passwords used to access your account and the GoodCity Website. You will promptly notify us at privacy@crossroads.org.hk if you believe that your password or account has been compromised."
+      "title": "帳戶資料"
+      "info": "閣下的帳戶名稱為我們的資產。不論任何原因或肇事者，一旦閣下的帳戶終止使用或遭暫停，我們能夠收回該帳戶名稱，並重新使用。閣下有責任保障登入帳戶及好人好市網站的密碼。假如閣下認為密碼或帳戶遭入侵，必須儘快電郵至privacy@crossroads.org.hk通知我們。"
     "privacy":
-      "title": "Privacy Policy"
-      "info": "Your privacy is very important to us. We have prepared a Personal Information Collection Statement (PICS) which outlines our policies and practices with respect to the personal data you may be asked to provide when registering to receive items through GoodCity.HK."
-      "pics": "The PICS is available to view"
-      "privacy_link": "The full Crossroads privacy policy is available to view"
-      "use": "These policies are incorporated into and form part of these GoodCity Website terms of use."
-      "here": "here"
+      "title": "私隱政策"
+      "info": "我們十分重視閣下的私隱。當閣下登記，經由好人好市接收物資時，我們或回查詢閣下的個人資料，我們已經準備收集個人資料聲名（PICS），詳列我們有關個人資料的私隱政策及執行細節。"
+      "pics": "閣下可以隨時翻閱PICS"
+      "privacy_link": "十字路會完整的私隱政策亦可供查詢"
+      "use": "這些政策為好人好市網站使用條款的一部分。"
+      "here": "這裏"
     "intellectual":
-      "title": "Intellectual Property"
-      "info": "All intellectual property rights in the GoodCity Website (including any future updates, upgrades and new versions) and any connected or related applications, systems and services shall continue to belong to us and our licensors. You have no right to use our intellectual property rights except to the extent expressly permitted by us. In particular, you have no right to use our trade marks or product names, logos, domain names or other distinctive brand features without our prior written consent."
-      "grant": "We grant you a personal, non-exclusive, non-sublicensable, non-transferrable, royalty-free and revocable licence to use the GoodCity Website only in accordance with these terms of use."
-      "unauthorised_access": "You may not copy, modify, reverse engineer or extract any information, source codes or underlying HTML from the GoodCity Website or any connected or related applications, systems or services, except to the extent that we may not prohibit you from doing so under applicable law or you have our prior written consent to do so. You will not use the GoodCity Website in conjunction with any application or other technology that attempts to do any of the foregoing or which otherwise causes the GoodCity Website to operate in an unauthorised manner."
+      "title": "知識產權"
+      "info": "好人好市網站包含的一切知識產權（包括將來一切的資料更新、系統更新及新版本）及任何相聯或相關的程式、系統及服務將一直屬於我們及我們的發牌人。除了在得到我們明確授權外，閣下並無權利使用我們的知識產權。特別指出，如事前未得到我們的書面同意，閣下並無權使用我們的商標或產品名稱，標誌，網域名稱或其他明顯的品牌細節。"
+      "grant": "僅在合乎使用條款的情況下，我們給予閣下使用好人好市網站的使用權利，該使用權利供閣下個人，但不限於閣下一人使用，授權不得二次授權，不得轉讓，並不需專利費用，我們保留撤回的權利。"
+      "unauthorised_access": "除了在現行法例導致我們或不會禁止閣下，或閣下事前得到書面同意的情況下，閣下不能從好人好市網站或任何相聯或相關程式、系統或服務中複製、更改、進行逆向工程或提取任何資料，程式源代碼或基礎HTML。在使用好人好市網站時，閣下不能同時使用任何可能導致或嘗試引致上列或其他令好人好市網站以未經授權的方式運行的程式或其他技術。"
 
     "content":
-      "title": "Your Content"
-      "info": "When you submit, upload, transmit or display any photographs, data, information, media or other content in connection with your use of the GoodCity Website (“Your Content”), you understand and agree that:"
-      "responsible": "You will continue to own and be responsible for Your Content."
-      "no_sell": "We will not sell Your Content to any third party."
-      "privacy_policy": "Our use of Your Content will be subject to our Privacy Policy."
-      "right_to_use": "You are giving us and our affiliate companies the right to use Your Content (with no fees or charges payable by us to you) to provide our services and for the purposes of promoting, developing and trying to improve our services, including new services that we may provide in the future."
-      "share": "We may share Your Content with third parties that we work with to help provide, promote, develop and improve our services, but these third parties (other than our affiliate companies) will not make any separate use of Your Content for their own purposes (i.e. for any purposes that are not related to our services) and"
-      "suggestions": "Any comments or suggestions you may provide regarding the GoodCity Website are entirely voluntary and we will be free to use such comments and suggestions in our discretion without any obligation to you."
+      "title": "閣下的內容"
+      "info": "當閣下使用好人好市網站時提交、上載、傳輸或展示任何照片、數據、資料、媒介或其他內容（閣下的內容），即表示閣下明白並同意："
+      "responsible": "閣下將繼續擁有閣下的內容，並對其負責。""
+      "no_sell": "我們不會將閣下的內容銷售給第三方。"
+      "privacy_policy": "我們將跟隨我們的私隱政策使用閣下的內容。"
+      "right_to_use": "閣下給予我們及與我們相關的公司使用閣下的內容的權利（我們不須向閣下支付任何費用），用以提供我們的服務，並進行宣傳、發展和改善我們的服務的目的，包括我們於將來新增的服務。"
+      "share": "我們或會向與我們合作的第三方分享閣下的內容，以提供、宣傳、發展及改善我們的服務，但該第三方（非與我們相關的公司）將不會以私人目的單獨使用閣下的內容（意指任何與我們的服務無關的目的），並且"
+      "suggestions": "閣下提供任何有關好人好事網站的意見或建議均屬自願性質，我們將能夠免費使用，而不須向閣下進行任何義務。"
     "warranty":
-      "title": "Warranty and Disclaimer"
-      "info": "We warrant that we will provide the GoodCity Website and the services relating to it using reasonable care and skill. However, apart from this warranty, we make no representation or warranty and give no undertaking in relation to our services, our software or any content submitted, transmitted or displayed by our services, including any representation, warranty or undertaking that the GoodCity Website or any software, content or information provided to you by it will be secure or error-free or that the GoodCity Website will be compatible with your device or any software operating on it or fit for a particular purpose. The GoodCity Website is provided on an “as is” and “as available” basis."
+      "title": "擔保及免責聲明"
+      "info": "我們保證為好人好市網站及其相關服務提供合理保養及技術。然而，除此擔保外，對於我們的服務、軟件或任何已提交、傳輸或展示的內容，我們並不表示或擔保以及承諾會完全安全或不出錯、或好人好市會和閣下使用的裝置或任何安裝在裝置上的軟件兼容，這包括我們服務中，任何在好人好市網站或其他任何軟件、內容或資料中的顯示、擔保或承諾。好人好市網站僅提供現有、可用的版本。"
     "liability":
-      "title": "Liability"
-      "info": "The total aggregate liability of us and our affiliated companies in connection with the GoodCity Website, arising out of any circumstances, shall be limited to USD100."
-      "exclude": "Nothing in these terms of use shall limit or exclude any liability for any loss arising from death or personal injury caused by negligence, for fraudulent misrepresentation or for any other liability, to the extent that any such liability cannot be limited or excluded by law."
-      "indemnify_us": "You agree to indemnify us and hold us harmless against any liability or loss incurred by us arising in connection with your breach of these terms of use."
+      "title": "責任"
+      "info": "無論因為任何情況，好人好市網站及與其相關的公司的整體責任僅限至總計100美元。"
+      "exclude": "使用條款中沒有任何情況可免除任何由疏忽導致的死亡或人身傷害所造成的一切損失，欺詐誤導或任何其他責任均不能受限於或免除法律責任。"
+      "indemnify_us": "假如閣下違反任何使用條款，即閣下同意對我們作出賠償，並不能追究我們因此而造成的任何責任或損失。"
 
     "policy_to_children":
-      "title": "Our Policy Towards Children"
-      "info": "The GoodCity Website is not intended for use by children. Unfortunately, we cannot always determine the age of users to our site. Please do not use the GoodCity Website if you are under 18 years of age."
+      "title": "對兒童政策"
+      "info": "好人好市網站的使用對象並不包括兒童。然而，我們並無法完全斷定使用者的年齡。假如閣下的年齡為18歲或以下，請勿使用好人好市網站。"
 
     "general":
-      "title": "General"
-      "info": "These GoodCity Website terms of use are the entire agreement between you and us in relation to the GoodCity Website. You agree that you will have no claim against us for any statement which is not explicitly set out in these terms of use. No delay in enforcing any provision of these terms of use shall be construed to be a waiver of any rights under that provision. Any rights and obligations under these terms of use which by their nature should survive, including but not limited to any obligations in relation to the liability of the respective parties, will remain in effect after termination or expiration of these terms of use."
-      "hk_law": "These terms of use and any dispute or claim arising out of or in connection with them shall be governed by the laws of the Hong Kong Special Administrative Region. All legal proceedings arising out or in connection with these terms of use shall be non-exclusively brought in the courts of the Hong Kong Special Administrative Region."
-      "language": "Where there is any inconsistency between the English and any other language versions of these terms of use, the English language version will prevail."
+      "title": "一般"
+      "info": "這些好人好市網站使用條款完全是閣下和我們之間有關好人好市網站的合約。閣下同意不會就任何並未在這些使用條款中明確列明的條例向我們追究。如使用條款的實施有所延誤，不能將之視為放棄規定下的任何權利。根據其原意，在使用條款遭終止或過期前，使用條款中的任何權利及義務均有效並應得以保存，包括但不限於任何對相關方面責任的義務。"
+      "hk_law": "使用條款及與其相關或衍生的任何紛爭或索償均受香港特別行政區法律的監管。使用條款衍生出的或相關的任何法律程序皆由，並不限於香港特別行政區法院處理。"
+      "language": "如使用條款的英文版本與其他語言版本有出入，皆以英文版本為凖。"
 
     "contact":
-      "title": "Contact Us"
-      "info": "If you have any questions or concerns regarding the GoodCity Website or these terms of use please contact us at"
+      "title": "聯絡我們"
+      "info": "假如閣下對好人好市網站或這些使用條款有任何問題或疑問，請聯絡我們"
 
 `export default I18nTranslationsZhTw`
